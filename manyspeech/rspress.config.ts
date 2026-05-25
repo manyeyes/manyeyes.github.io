@@ -5,10 +5,10 @@ export default defineConfig({
   root: path.join(__dirname, 'docs'),
   base: '/manyspeech/',
   // 顶层配置：所有语言共用
-  icon: '/manyspeech/manyspeech-icon.png',      // ✅ 提到顶层
+  icon: '/manyspeech-icon.png',      // ✅ 提到顶层
   logo: {
-    light: '/manyspeech/manyspeech-light-logo.png',
-    dark: '/manyspeech/manyspeech-dark-logo.png',
+    light: '/manyspeech-light-logo.png',
+    dark: '/manyspeech-dark-logo.png',
   },
   
   themeConfig: {
@@ -27,14 +27,14 @@ export default defineConfig({
       lang: 'en',
       label: 'English',
       title: 'ManySpeech',
-      description: 'A site built with Rspress',
+      description: 'Lightweight Local Speech Recognition Tool',
       // icon 不能放这里
     },
     {
       lang: 'zh',
       label: '简体中文',
       title: 'ManySpeech',
-      description: '使用 Rspress 构建的网站',
+      description: '轻量化本地语音识别工具',
       // icon 不能放这里
     },
   ],
