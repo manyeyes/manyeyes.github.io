@@ -4,7 +4,6 @@ on:
   push:
     branches: [main]
 
-# 添加这一块：授予写入内容的权限
 permissions:
   contents: write
 
@@ -14,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      # 构建 manyspeech
+      # 构建 manyspeech 项目
       - name: Build manyspeech
         run: |
           cd manyspeech
@@ -22,6 +21,45 @@ jobs:
           npm run build
           mkdir -p ../docs/manyspeech
           cp -r doc_build/* ../docs/manyspeech/
+      
+      # 创建根目录导航页
+      - name: Create landing page
+        run: |
+          cat > docs/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html lang="zh-CN">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>文档中心</title>
+              <style>
+                  body {
+                      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+                      max-width: 800px;
+                      margin: 0 auto;
+                      padding: 2rem;
+                      line-height: 1.5;
+                  }
+                  h1 { margin-bottom: 1rem; }
+                  ul { list-style: none; padding: 0; }
+                  li { margin: 1rem 0; }
+                  a { font-size: 1.2rem; text-decoration: none; color: #0366d6; }
+                  a:hover { text-decoration: underline; }
+                  .desc { color: #586069; margin-top: 0.25rem; font-size: 0.9rem; }
+              </style>
+          </head>
+          <body>
+              <h1>📚 文档中心</h1>
+              <p>欢迎访问，请选择项目：</p>
+              <ul>
+                  <li>
+                      <a href="/manyspeech/">ManySpeech-CLI</a>
+                      <div class="desc">轻量化本地语音识别工具，支持离线识别、实时流式识别。</div>
+                  </li>
+              </ul>
+          </body>
+          </html>
+          EOF
       
       # 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
