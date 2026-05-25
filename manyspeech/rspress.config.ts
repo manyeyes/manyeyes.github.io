@@ -1,5 +1,6 @@
 import * as path from 'node:path';
 import { defineConfig } from '@rspress/core';
+import { normalizeImagePath } from '@rspress/core/runtime';  // 导入工具函数
 
 export default defineConfig({
   root: path.join(__dirname, 'docs'),
