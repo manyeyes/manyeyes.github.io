@@ -1,38 +1,45 @@
-name: Deploy manyspeech to GitHub Pages
+name: Deploy multiple projects
 
 on:
   push:
     branches: [main]
-  workflow_dispatch:
-
-permissions:
-  contents: write
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install dependencies
-        working-directory: ./manyspeech
-        run: npm ci
-
-      - name: Build Rspress site
-        working-directory: ./manyspeech
-        run: npm run build
-
+      - uses: actions/checkout@v4
+      
+      # 构建项目（manyspeech）
+      - name: Build project A
+        run: |
+          cd manyspeech
+          npm ci
+          npm run build
+          mkdir -p ../docs/manyspeech
+          cp -r doc_build/* ../docs/manyspeech/
+      
+      # 可选：创建根目录导航页
+      - name: Create landing page
+        run: |
+          cat > docs/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html>
+          <head><title>文档中心</title></head>
+          <body>
+            <h1>文档中心</h1>
+            <ul>
+              <li><a href="/manyspeech/">ManySpeech-CLI</a></li>
+              <li><a href="/other-tool/">Other Tool</a></li>
+            </ul>
+          </body>
+          </html>
+          EOF
+      
+      # 部署到 gh-pages 分支
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./manyspeech/doc_build   # 直接指向构建输出目录
+          publish_dir: ./docs
           publish_branch: gh-pages
-          destination_dir: manyspeech           # 关键：将所有文件放入 manyspeech/ 子目录
-          keep_files: false                     # 清空旧文件，确保全新部署
