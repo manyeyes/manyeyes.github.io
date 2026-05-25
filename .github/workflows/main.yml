@@ -4,14 +4,18 @@ on:
   push:
     branches: [main]
 
+# 添加这一块：授予写入内容的权限
+permissions:
+  contents: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       
-      # 构建项目（manyspeech）
-      - name: Build project A
+      # 构建 manyspeech
+      - name: Build manyspeech
         run: |
           cd manyspeech
           npm ci
@@ -19,24 +23,7 @@ jobs:
           mkdir -p ../docs/manyspeech
           cp -r doc_build/* ../docs/manyspeech/
       
-      # 可选：创建根目录导航页
-      - name: Create landing page
-        run: |
-          cat > docs/index.html << 'EOF'
-          <!DOCTYPE html>
-          <html>
-          <head><title>文档中心</title></head>
-          <body>
-            <h1>文档中心</h1>
-            <ul>
-              <li><a href="/manyspeech/">ManySpeech-CLI</a></li>
-              <li><a href="/other-tool/">Other Tool</a></li>
-            </ul>
-          </body>
-          </html>
-          EOF
-      
-      # 部署到 gh-pages 分支
+      # 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
