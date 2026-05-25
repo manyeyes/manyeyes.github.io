@@ -1,14 +1,16 @@
 import * as path from 'node:path';
+// rspress.config.ts
 import { defineConfig } from '@rspress/core';
+import { normalizeImagePath } from '@rspress/core/runtime'; // [reference:10]
 
 export default defineConfig({
   root: path.join(__dirname, 'docs'),
   base: '/manyspeech/',
   // 顶层配置：所有语言共用
-  icon: '/manyspeech/manyspeech-icon.png',      // ✅ 提到顶层
+  icon: normalizeImagePath('/manyspeech/manyspeech-icon.png'),      // ✅ 提到顶层
   logo: {
-    light: '/manyspeech-light-logo.png',
-    dark: '/manyspeech-dark-logo.png',
+    light: normalizeImagePath('/manyspeech-light-logo.png'),
+    dark: normalizeImagePath('/manyspeech-dark-logo.png'),
   },
   
   themeConfig: {
