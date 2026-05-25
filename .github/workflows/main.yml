@@ -19,24 +19,20 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          # 不配置 cache
 
       - name: Install dependencies
         working-directory: ./manyspeech
-        run: npm ci   # 如果项目没有 package-lock.json 则用 npm install
+        run: npm ci
 
-      - name: Build
+      - name: Build Rspress site
         working-directory: ./manyspeech
         run: npm run build
-
-      - name: Prepare deploy folder
-        run: |
-          mkdir -p docs/manyspeech
-          cp -r manyspeech/doc_build/* docs/manyspeech/
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
+          publish_dir: ./manyspeech/doc_build   # 直接指向构建输出目录
           publish_branch: gh-pages
+          destination_dir: manyspeech           # 关键：将所有文件放入 manyspeech/ 子目录
+          keep_files: false                     # 清空旧文件，确保全新部署
