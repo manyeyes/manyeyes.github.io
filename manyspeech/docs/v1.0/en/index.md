@@ -13,7 +13,7 @@ hero:
       text: GitHub
       link: https://github.com/manyeyes/ManySpeech
   image:
-    src: /manyspeech/manyspeech-icon-512.png
+    src: /manyspeech/manyspeech-icon-512.webp
     alt: ManySpeech
 
 features:

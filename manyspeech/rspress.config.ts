@@ -6,10 +6,10 @@ export default defineConfig({
   root: path.join(__dirname, 'docs'),
   base: '/manyspeech/',
   // 顶层配置：所有语言共用
-  icon: '/manyspeech/manyspeech-icon.png',
+  icon: '/manyspeech/manyspeech-icon.webp',
   logo: {
-    light: '/manyspeech/manyspeech-light-logo.png',
-    dark: '/manyspeech/manyspeech-dark-logo.png',
+    light: '/manyspeech/manyspeech-light-logo.webp',
+    dark: '/manyspeech/manyspeech-dark-logo.webp',
   },
   
   themeConfig: {
