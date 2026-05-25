@@ -1,0 +1,73 @@
+[
+  {
+    "type": "dir",
+    "name": "getting-started",
+    "label": "快速开始",
+    "collapsible": true,
+    "items": [
+      "index",
+      "installation",
+      "first-use"
+    ]
+  },
+  {
+    "type": "dir",
+    "name": "usage",
+    "label": "使用指南",
+    "collapsible": true,
+    "items": [
+      "index",
+      "cli-modes",
+      "commands",
+      "examples",
+      "debugging"
+    ]
+  },
+  {
+    "type": "dir",
+    "name": "configuration",
+    "label": "配置管理",
+    "collapsible": true,
+    "items": [
+      "index",
+      "file-location",
+      "fields",
+      "commands"
+    ]
+  },
+  {
+    "type": "dir",
+    "name": "models",
+    "label": "模型管理",
+    "collapsible": true,
+    "items": [
+      "index",
+      "supported-models",
+      "auto-download",
+      "manual-specify"
+    ]
+  },
+  {
+    "type": "dir",
+    "name": "advanced",
+    "label": "高级用法",
+    "collapsible": true,
+    "items": [
+      "index",
+      "environment-vars",
+      "batch-processing",
+      "performance"
+    ]
+  },
+  {
+    "type": "dir",
+    "name": "reference",
+    "label": "参考资料",
+    "collapsible": true,
+    "items": [
+      "index",
+      "parameters",
+      "changelog"
+    ]
+  }
+]

@@ -1,5 +1,0 @@
-theme: jekyll-theme-minimal
-title: ManySpeech-CLI
-description: 轻量化本地离线语音识别命令行工具 | 支持麦克风实时识别、音频转写、字幕生成、VAD、标点恢复
-author: ManyEyes
-github_username: manyeyes
