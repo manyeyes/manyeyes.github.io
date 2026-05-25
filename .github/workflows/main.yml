@@ -53,7 +53,7 @@ jobs:
               <p>欢迎访问，请选择项目：</p>
               <ul>
                   <li>
-                      <a href="/manyspeech/">ManySpeech-CLI</a>
+                      <a href="/manyspeech/">ManySpeech</a>
                       <div class="desc">轻量化本地语音识别工具，支持离线识别、实时流式识别。</div>
                   </li>
               </ul>
