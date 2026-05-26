@@ -6,6 +6,9 @@ export default defineConfig({
   root: path.join(__dirname, 'docs'),
   base: '/manyspeech/',
   llms: true, // 开启 SSG-MD
+  llmsUI: {
+    placement: 'outline', // 将按钮显示在右侧大纲面板中
+  },
   // 顶层配置：所有语言共用
   icon: '/manyspeech/manyspeech-icon.webp',
   logo: {
