@@ -19,8 +19,10 @@ jobs:
           cd manyspeech
           npm ci
           npm run build
+          npm run export:docs
           mkdir -p ../docs/manyspeech
           cp -r doc_build/* ../docs/manyspeech/
+          cp -r exports ../docs/manyspeech/exports
       
       # 创建根目录导航页
       - name: Create landing page
