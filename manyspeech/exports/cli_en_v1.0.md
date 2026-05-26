@@ -1,0 +1,1056 @@
+## v1.0/en/cli/getting-started/index.md
+
+# Getting Started
+
+Welcome to ManySpeech-CLI! This guide will help you get up and running quickly.
+
+## Distribution Options
+
+| Version Type | Features | Use Case |
+|---------|---------|---------|
+| **Portable** | Run directly after extraction, no registry leftovers | Temporary use, portable deployment |
+| **Installer** | Wizard-based installation, auto PATH config | Daily long-term use |
+
+> 💡 **Recommendation**: Use the installer. After installation, you can run `manyspeech` directly from any terminal.
+
+## Usage Modes
+
+| Mode | How to Start | Use Case |
+|------|----------|----------|
+| **Interactive** | Double click exe or run `manyspeech` | Manual testing, exploration |
+| **CLI** | `manyspeech <subcommand> [args]` | Scripting, automation |
+
+## Next Steps
+
+- [Installation](./installation) - Detailed installation instructions
+- [First Use](./first-use) - Your first recognition example
+
+
+---
+
+## v1.0/en/cli/getting-started/installation.md
+
+# Installation
+
+## System Requirements
+
+- Windows 10 / 11 (64-bit)
+- 4GB+ RAM recommended
+- Microphone (for real-time recognition)
+
+## Method 1: Installer (Recommended)
+
+1. Download the latest `.exe` installer.
+2. Run the installer.
+3. Follow the wizard to complete installation.
+4. Open CMD or PowerShell and verify:
+
+```bash
+manyspeech --help
+```
+
+## Method 2: Portable Version
+
+1. Download the portable zip archive.
+2. Extract to any directory (e.g., `D:\Tools\ManySpeech`).
+3. Enter the directory and run `manyspeech-cli.exe`.
+
+> 💡 **Tip**: To use globally, add the directory to your system PATH environment variable.
+
+## Verify Installation
+
+```bash
+manyspeech --help
+```
+
+If help information is displayed, installation is successful.
+
+
+---
+
+## v1.0/en/cli/getting-started/first-use.md
+
+# First Use
+
+## Interactive Mode (Recommended for Beginners)
+
+Double-click `manyspeech-cli.exe` to enter interactive mode:
+
+```cmd
+=====================================
+Enter command (type 'exit' to quit, enter for help):
+
+# 1. Select Language (First run)
+Select Language: 1. Chinese; 2. English;
+2
+
+# 2. Enter Recognition Command
+> asr -t offline -f D:\test.wav
+
+# The program will automatically download models and start recognition
+```
+
+## CLI Mode
+
+```bash
+# Open CMD or PowerShell
+cd D:\Tools\ManySpeech
+
+# Recognize a single file
+manyspeech asr -t offline -f test.wav
+
+# Real-time microphone recognition (Press ESC to exit)
+manyspeech asr -t online -i mic
+```
+
+## First Run Notes
+
+- The configuration file `manyspeech.json` is generated automatically on first run.
+- Models are downloaded automatically when first used.
+- Models are large; please wait for the download to complete.
+
+## Simplest Commands
+
+```bash
+# Use default test audio
+manyspeech asr -t offline
+
+# Real-time microphone recognition
+manyspeech asr -t online -i mic
+```
+
+
+---
+
+## v1.0/en/cli/usage/index.md
+
+# Usage Guide
+
+ManySpeech-CLI provides three core subcommands:
+
+## Subcommands Overview
+
+| Subcommand | Function | Supported Types |
+|--------|------|----------|
+| `asr` | Speech Recognition | online / offline / 2pass |
+| `vad` | Voice Activity Detection | online / offline |
+| `punc` | Punctuation Restoration | - |
+
+## Command Structure
+
+```bash
+manyspeech <subcommand> [options...]
+```
+
+> 💡 **Tip**: Global options (`--base`, `--vad`, `--output`, `--debug`, etc.) can be placed **anywhere** in the command line.
+
+## Quick Examples
+
+```bash
+# Speech Recognition
+manyspeech asr -t offline -f audio.wav
+
+# VAD Detection
+manyspeech vad -t online -i mic
+
+# Punctuation Restoration
+manyspeech punc --text "hello world"
+```
+
+## Navigation
+
+- [CLI vs Interactive Mode](./cli-modes)
+- [Subcommand Details](./commands)
+- [Typical Examples](./examples)
+- [Debugging](./debugging)
+
+
+---
+
+## v1.0/en/cli/usage/cli-modes.md
+
+# CLI Mode vs Interactive Mode
+
+## Interactive Mode
+
+Provides a command prompt for entering commands one by one. Ideal for manual testing.
+
+```bash
+# Start
+manyspeech
+```
+
+Inside:
+```cmd
+> asr -t offline -f test.wav
+> vad -t online -i mic
+> exit
+```
+
+**Pros**:
+- No need to type `manyspeech` every time
+- Command history (Up/Down arrows)
+- Tab completion
+
+## CLI Mode
+
+Ideal for scripting and automation.
+
+```bash
+manyspeech asr -t offline -f test.wav
+manyspeech vad -t online -i mic
+```
+
+**Pros**:
+- Embeddable in Batch/PowerShell scripts
+- Supports piping and redirection
+- Easy CI/CD integration
+
+## Quick Switch
+
+In interactive mode, use `!` to execute system commands temporarily:
+
+```cmd
+> !dir
+> !manyspeech asr -t offline -f other.wav
+```
+
+
+---
+
+## v1.0/en/cli/usage/commands.md
+
+# Subcommand Details
+
+## asr - Speech Recognition
+
+### Recognition Types
+
+| Type | Description | Use Case |
+|------|------|----------|
+| `online` | Real-time streaming, output as you speak | Microphone, live, low latency |
+| `offline` | Non-streaming, processes full audio | File recognition, long audio |
+| `2pass` | Dual-stream fusion, real-time + refinement | Balance of speed and accuracy |
+
+### Basic Usage
+
+```bash
+# File recognition (Offline)
+manyspeech asr -t offline -f audio.wav
+
+# Microphone recognition (Online)
+manyspeech asr -t online -i mic
+
+# 2pass recognition
+manyspeech asr -t 2pass -i mic
+```
+
+### Output Formats
+
+| Format | Description |
+|------|------|
+| `text` | Plain text (Default) |
+| `json` | JSON format with timestamps |
+| `srt` | SubRip Subtitles |
+| `vtt` | WebVTT Subtitles |
+
+```bash
+manyspeech asr -t offline --format srt -f audio.wav
+```
+
+---
+
+## vad - Voice Activity Detection
+
+### Basic Usage
+
+```bash
+# Microphone online detection
+manyspeech vad -t online -i mic
+
+# Audio file offline detection
+manyspeech vad -t offline -f audio.wav
+
+# Specify output format
+manyspeech vad -t offline --format wav -f audio.wav
+```
+
+---
+
+## punc - Punctuation Restoration
+
+### Basic Usage
+
+```bash
+# Direct text input
+manyspeech punc --text "hello world how are you"
+
+# Read from file
+manyspeech punc -f text.txt
+```
+
+
+---
+
+## v1.0/en/cli/usage/examples.md
+
+# Typical Examples
+
+## Long Audio Offline Recognition · Generate Subtitles
+
+```cmd
+# FireRedASR Large Model (Best for Chinese, High Accuracy)
+manyspeech asr -t offline -m chunk --format srt --threads 4 -f "D:\audio\0.wav" --model fireredasr2-aed-large-zh-en-int8-onnx-selfcrosskv-offline-20260212
+
+# FunASR Light Model (Fast, Low Resource)
+manyspeech asr -t offline -m chunk --format srt --threads 2 -f "D:\audio\0.wav" --model Fun-ASR-Nano-2512-LLM-int8-onnx
+```
+
+## Real-time Microphone Recognition
+
+```cmd
+# Streaming model + Mic (Lowest Latency)
+manyspeech asr -t online -i mic
+
+# Offline model + Mic (Higher Accuracy)
+manyspeech asr -t offline -m chunk -i mic
+
+# 2pass Mode + Mic (Balance)
+manyspeech asr -t 2pass -i mic
+```
+
+## 2pass Dual-Stream Fusion
+
+```cmd
+# Paraformer 2pass
+manyspeech asr -t 2pass -i mic --model paraformer-large-zh-en-int8-onnx-online --model2 paraformer-seaco-large-zh-timestamp-int8-onnx-offline
+
+# K2Transducer 2pass
+manyspeech asr -t 2pass -i mic --model k2transducer-zipformer-ctc-large-zh-onnx-online-yuekai-20250630 --model2 k2transducer-zipformer-ctc-small-zh-int8-onnx-offline-20250716
+```
+
+## VAD Voice Activity Detection
+
+```cmd
+# Microphone online detection
+manyspeech vad -t online -i mic
+
+# Audio file offline detection (Remove silence)
+manyspeech vad -t offline -f meeting.wav
+
+# Specify output format
+manyspeech vad -t offline --format wav -f noisy_speech.wav
+```
+
+## Punctuation Restoration
+
+```cmd
+# Direct text input
+manyspeech punc --text "hello world how are you today"
+
+# Read from file
+manyspeech punc -f transcript.txt
+
+# Output as JSON
+manyspeech punc --text "hello world" --format json
+```
+
+
+---
+
+## v1.0/en/cli/usage/debugging.md
+
+# Debugging Mode
+
+## Enable Debug Mode
+
+```bash
+# CLI Mode
+manyspeech --debug asr -t online -i mic
+
+# Interactive Mode
+> --debug
+```
+
+## Debug Output Example
+
+```
+[DEBUG] Debug mode enabled via subcommand
+[DEBUG] Executing command: asr
+[DEBUG] Global Params - basePath: D:\Tools\ManySpeech, outputDir: D:\Tools\ManySpeech\output
+[DEBUG] Global Params - threads: 2, accuracy: int8, saveAsDefault: False
+[DEBUG] ASR Params - method: one, model: , model2: , vad: alifsmnvad-onnx, punc: alicttransformerpunc-zh-en-mge-int8-onnx, format: text
+[DEBUG] Using model directory specified by CLI: D:\Tools\ManySpeech
+[DEBUG] Preparing executor...
+...
+```
+
+## Use Cases
+
+- Troubleshooting parameter parsing
+- Viewing execution flow
+- Debugging config loading
+- Analyzing model path resolution
+- Verifying environment variables
+
+> 💡 **Tip**: Debug output contains sensitive path info. Sanitize logs before sharing.
+
+
+---
+
+## v1.0/en/cli/configuration/index.md
+
+# Configuration Management
+
+ManySpeech-CLI supports multi-level configuration files to persist common parameters.
+
+## Configuration Priority
+
+```
+CLI Arguments (Highest)
+        ↓
+    Parameters saved via --save-default
+        ↓
+    Local Config (Program Dir/manyspeech.json)
+        ↓
+    User Config (%USERPROFILE%\.manyspeech\manyspeech.json)
+        ↓
+    System Config (%PROGRAMDATA%\ManySpeech\manyspeech.json)
+        ↓
+    Environment Variables (MANYSPEECH_*)
+        ↓
+    Built-in Defaults (Lowest)
+```
+
+## Quick Usage
+
+```bash
+# View current config
+manyspeech --show-config
+
+# Save current params as default
+manyspeech asr -t offline --threads 4 --save-default
+
+# Reset config
+manyspeech --reset-config
+```
+
+## Next Steps
+
+- [Config File Locations](./file-location)
+- [Config Fields](./fields)
+- [Config Commands](./commands)
+
+
+---
+
+## v1.0/en/cli/configuration/file-location.md
+
+# Config File Locations
+
+Config files are automatically generated at first run:
+
+| Type | Windows Path | Priority | Description |
+|------|-------------|--------|------|
+| **Local** | Program Dir `manyspeech.json` | **Highest** | Portable config, moves with app |
+| **User** | `%USERPROFILE%\.manyspeech\manyspeech.json` | Medium | User-specific settings |
+| **System** | `%PROGRAMDATA%\ManySpeech\manyspeech.json` | Low | System-wide defaults |
+
+## Examples
+
+```cmd
+# View local config (if exists)
+type "D:\Tools\ManySpeech\manyspeech.json"
+
+# View user config
+type "%USERPROFILE%\.manyspeech\manyspeech.json"
+
+# View system config
+type "%PROGRAMDATA%\ManySpeech\manyspeech.json"
+```
+
+> 💡 **Tip**: Higher priority files override identical fields in lower priority files.
+
+
+---
+
+## v1.0/en/cli/configuration/fields.md
+
+# Config Fields
+
+Example `manyspeech.json`:
+
+```json
+{
+  "version": "1.0.0",
+  "defaults": {
+    "method": "chunk",
+    "input": "file",
+    "format": "text",
+    "threads": 2,
+    "accuracy": "int8",
+    "model": "",
+    "model2": "",
+    "vad": "alifsmnvad-onnx",
+    "punc": "alicttransformerpunc-zh-en-mge-int8-onnx",
+    "base": "",
+    "output": ""
+  }
+}
+```
+
+## Field Descriptions
+
+| Field | Description | CLI Arg | Default |
+|------|------|----------------|--------|
+| `method` | Processing method | `-m, --method` | `chunk` |
+| `input` | Input source | `-i, --input` | `file` |
+| `format` | Output format | `--format` | `text` |
+| `threads` | Thread count (0=Auto) | `--threads` | `2` |
+| `accuracy` | Model precision | `--accuracy` | `int8` |
+| `model` | Main model name | `-md, --model` | `""` (Auto) |
+| `model2` | 2pass secondary model | `--model2` | `""` (Auto) |
+| `vad` | VAD model name | `--vad` | `alifsmnvad-onnx` |
+| `punc` | Punctuation model | `--punc` | `alicttransformerpunc-zh-en-mge-int8-onnx` |
+| `base` | Model root dir | `-b, --base` | `""` (Program Dir) |
+| `output` | Working dir | `-o, --output` | `""` (Current Dir) |
+
+
+---
+
+## v1.0/en/cli/configuration/commands.md
+
+# Config Management Commands
+
+## View Config
+
+```bash
+manyspeech --show-config
+```
+
+Output:
+```
+Current Configuration:
+  version: 1.0.0
+  defaults:
+    method: chunk
+    input: file
+    format: text
+    threads: 2
+    accuracy: int8
+    ...
+```
+
+## Save Default Config
+
+```bash
+# Save current arguments as defaults
+manyspeech asr -t offline -m chunk --threads 4 --save-default
+
+# Run later without args, uses saved defaults
+manyspeech asr -f test.wav
+```
+
+## Reset Config
+
+```bash
+manyspeech --reset-config
+```
+
+Output:
+```
+✅ Configuration reset to defaults
+```
+
+## Priority Demo
+
+```bash
+# CLI args override config
+manyspeech asr -t offline --threads 8 -f test.wav
+
+# Use saved defaults
+manyspeech asr -t offline --save-default
+manyspeech asr -f test.wav   # Uses saved --threads value
+```
+
+
+---
+
+## v1.0/en/cli/models/index.md
+
+# Model Management
+
+ManySpeech-CLI features intelligent model management, auto-detecting and downloading required models.
+
+## Auto-Download
+
+When using a missing model, it downloads automatically from ModelScope:
+
+```bash
+manyspeech asr -t offline --model paraformer-large-zh-en-int8-onnx-offline -f test.wav
+# Downloads if not present
+```
+
+## Model Storage
+
+Default root is `models/` in the program directory.
+
+Specify via `--base`:
+
+```bash
+manyspeech --base D:\MyModels asr -t offline -f test.wav
+```
+
+## Next Steps
+
+- [Supported Models](./supported-models)
+- [Auto-Download Mechanism](./auto-download)
+- [Manual Specification](./manual-specify)
+
+
+---
+
+## v1.0/en/cli/models/supported-models.md
+
+# Supported Models
+
+## ASR Models
+
+| Series | Description | Types |
+|---------|------|----------|
+| **AliParaformerAsr** | DAMO Academy Paraformer | online/offline/2pass |
+| **FireRedAsr** | FireRed Large Model, Best for Chinese | offline |
+| **K2TransducerAsr** | K2 Transducer Series | online/offline/2pass |
+| **WhisperAsr** | OpenAI Whisper Series | offline |
+| **MoonshineAsr** | Lightweight English Model | offline |
+| **WenetAsr** | Open Source Self-developed | online/offline |
+| **DolphinAsr** | Dolphin Series | offline |
+| **OmniAsr** | Omni Series | online |
+| **Fun-ASR-Nano-2512** | Latest Nano Model | offline |
+
+## VAD Models
+
+| Name | Description |
+|---------|------|
+| `alifsmnvad-onnx` | FSMN-VAD (Default, General) |
+| `silero-vad-v6-onnx` | Silero-VAD (Better for Noise) |
+
+## Punctuation Models
+
+| Name | Description |
+|---------|------|
+| `alicttransformerpunc-zh-en-mge-int8-onnx` | CT-Transformer (Default) |
+
+## More Models
+
+Visit [manyeyes ModelScope Profile](https://modelscope.cn/profile/manyeyes?tab=model)
+
+
+---
+
+## v1.0/en/cli/models/auto-download.md
+
+# Auto-Download Mechanism
+
+## Trigger
+
+Downloads start automatically if the specified model is missing locally.
+
+```bash
+manyspeech asr -t offline --model fireredasr2-aed-large-zh-en-int8-onnx-selfcrosskv-offline-20260212 -f test.wav
+```
+
+## Process
+
+1. Check local model directory.
+2. If missing, download from ModelScope.
+3. Extract to model directory.
+4. Proceed with recognition.
+
+## Progress
+
+```
+Downloading model: fireredasr2-aed-large-zh-en-int8-onnx-selfcrosskv-offline-20260212
+[===============>       ] 65%  128MB/197MB
+Download complete, loading model...
+```
+
+## Resume Support
+
+Supports resume from break. If network fails, it continues from where it left off next time.
+
+## Manual Download
+
+If network is poor, manually download and place in `models/`.
+
+
+---
+
+## v1.0/en/cli/models/manual-specify.md
+
+# Manual Model Specification
+
+## Specify Main Model
+
+```bash
+# Use FireRedASR Large
+manyspeech asr -t offline --model fireredasr2-aed-large-zh-en-int8-onnx-selfcrosskv-offline-20260212 -f meeting.wav
+
+# Use Whisper tiny
+manyspeech asr -t offline --model whisper-tiny-en-onnx -f english.wav
+```
+
+## Specify VAD Model
+
+```bash
+# Switch to Silero VAD
+manyspeech --vad silero-vad-v6-onnx asr -t online -i mic
+
+# Disable VAD
+manyspeech --vad "" asr -t offline -f audio.wav
+```
+
+## Specify Punctuation Model
+
+```bash
+# Use default
+manyspeech --punc alicttransformerpunc-zh-en-mge-int8-onnx asr -t offline -f audio.wav
+
+# Disable Punctuation
+manyspeech --punc "" asr -t offline -f audio.wav
+```
+
+## 2pass Secondary Model
+
+```bash
+manyspeech asr -t 2pass -i mic --model paraformer-large-zh-en-int8-onnx-online --model2 paraformer-seaco-large-zh-timestamp-int8-onnx-offline
+```
+
+
+---
+
+## v1.0/en/cli/advanced/index.md
+
+# Advanced Usage
+
+This section covers advanced configuration and integration techniques.
+
+## Contents
+
+- [Environment Variables](./environment-vars)
+- [Batch Processing Scripts](./batch-processing)
+- [Performance Optimization](./performance)
+
+## Use Cases
+
+- CI/CD Integration
+- Large-scale Audio Transcription
+- Server Deployment
+- Custom Workflows
+
+
+---
+
+## v1.0/en/cli/advanced/environment-vars.md
+
+# Environment Variables
+
+Pre-set global parameters via environment variables.
+
+## Windows (cmd)
+
+```cmd
+set MANYSPEECH_TYPE=online
+set MANYSPEECH_METHOD=chunk
+set MANYSPEECH_THREADS=4
+set MANYSPEECH_FORMAT=srt
+manyspeech asr -i mic
+```
+
+## Windows (PowerShell)
+
+```powershell
+$env:MANYSPEECH_TYPE="online"
+$env:MANYSPEECH_METHOD="chunk"
+$env:MANYSPEECH_THREADS="4"
+$env:MANYSPEECH_FORMAT="srt"
+manyspeech asr -i mic
+```
+
+## Linux/macOS
+
+```bash
+export MANYSPEECH_TYPE=online
+export MANYSPEECH_METHOD=chunk
+export MANYSPEECH_THREADS=4
+manyspeech asr -i mic
+```
+
+## Supported Variables
+
+| Variable | CLI Arg | Description |
+|--------|----------|------|
+| `MANYSPEECH_BASE` | `--base` | Model root dir |
+| `MANYSPEECH_OUTPUT` | `--output` | Output dir |
+| `MANYSPEECH_THREADS` | `--threads` | Thread count |
+| `MANYSPEECH_ACCURACY` | `--accuracy` | Precision |
+| `MANYSPEECH_TYPE` | `-t, --type` | Recognition type |
+| `MANYSPEECH_METHOD` | `-m, --method` | Processing method |
+| `MANYSPEECH_INPUT` | `-i, --input` | Input source |
+| `MANYSPEECH_FORMAT` | `--format` | Output format |
+| `MANYSPEECH_MODEL` | `-md, --model` | Main model |
+| `MANYSPEECH_MODEL2` | `--model2` | Secondary model |
+| `MANYSPEECH_VAD` | `--vad` | VAD model |
+| `MANYSPEECH_PUNC` | `--punc` | Punctuation model |
+
+> 💡 **Priority**: CLI Args > Env Vars > Config Files
+
+
+---
+
+## v1.0/en/cli/advanced/batch-processing.md
+
+# Batch Processing Scripts
+
+## Windows Batch
+
+```batch
+@echo off
+set INPUT_DIR=D:\audio
+set OUTPUT_DIR=D:\output
+
+for %%f in ("%INPUT_DIR%\*.wav") do (
+    echo Processing %%f...
+    manyspeech --output "%OUTPUT_DIR%" asr -t offline -m chunk --format srt --threads 4 -f "%%f"
+)
+echo Done!
+pause
+```
+
+## PowerShell
+
+```powershell
+# batch-process.ps1
+param(
+    [string]$inputDir = "D:\audio",
+    [string]$outputDir = "D:\output"
+)
+
+Get-ChildItem $inputDir -Filter *.wav | ForEach-Object {
+    Write-Host "Processing $($_.Name)..." -ForegroundColor Green
+    & manyspeech --output $outputDir asr -t offline -m chunk --format srt --threads 4 -f $_.FullName
+}
+
+Write-Host "All files processed!" -ForegroundColor Green
+```
+
+## Concurrent Processing (Advanced)
+
+```powershell
+$files = Get-ChildItem "D:\audio" -Filter *.wav
+$files | ForEach-Object -Parallel {
+    & manyspeech asr -t offline -f $_.FullName
+} -ThrottleLimit 4
+```
+
+## With ffmpeg Pre-processing
+
+```batch
+for %%f in ("*.mp4") do (
+    ffmpeg -i "%%f" -vn -acodec pcm_s16le -ar 16000 -ac 1 "temp.wav"
+    manyspeech asr -t offline -f temp.wav --format srt > "%%~nf.srt"
+    del temp.wav
+)
+```
+
+
+---
+
+## v1.0/en/cli/advanced/performance.md
+
+# Performance Optimization
+
+## Thread Tuning
+
+```bash
+# Auto-detect CPU cores (Recommended)
+manyspeech --threads 0 asr -t offline -f audio.wav
+
+# Manual set (e.g., 8 cores)
+manyspeech --threads 8 asr -t offline -f audio.wav
+```
+
+## Model Precision
+
+| Precision | Speed | Accuracy | Memory |
+|------|------|------|------|
+| `int8` | Fast | High | Low |
+| `fp32` | Slow | Highest | High |
+
+```bash
+# Use int8 (Default, Recommended)
+manyspeech asr -t offline --accuracy int8 -f audio.wav
+
+# Use fp32 (Higher Accuracy)
+manyspeech asr -t offline --accuracy fp32 -f audio.wav
+```
+
+## Processing Method
+
+| Method | Memory | Latency | Use Case |
+|------|----------|------|------|
+| `one` | High | High (Wait for end) | Short audio (<30s) |
+| `chunk` | Low | Low (Streaming) | Long audio, Real-time |
+
+```bash
+# Chunk recommended for long audio
+manyspeech asr -t offline -m chunk -f long_audio.wav
+```
+
+## VAD Optimization
+
+Use Silero-VAD in noisy environments:
+
+```bash
+manyspeech --vad silero-vad-v6-onnx asr -t online -i mic
+```
+
+## Testing Tips
+
+- Use `--debug` for timing details.
+- Increase `--threads` to find optimal value (usually = CPU cores).
+- `chunk` saves more memory than `one` for long audio.
+
+
+---
+
+## v1.0/en/cli/reference/index.md
+
+# Reference
+
+Complete command reference and changelog.
+
+## Contents
+
+- [Full Parameter List](./parameters)
+- [Changelog](./changelog)
+
+## Quick Help
+
+```bash
+manyspeech --help
+manyspeech asr --help
+manyspeech vad --help
+manyspeech punc --help
+```
+
+
+---
+
+## v1.0/en/cli/reference/parameters.md
+
+# Full Parameter Reference
+
+## Global Options
+
+| Option | Description | Default | Env Var |
+|------|------|--------|----------|
+| `-b, --base <path>` | Model root dir | Program Dir | `MANYSPEECH_BASE` |
+| `-o, --output <dir>` | Working dir | Current Dir | `MANYSPEECH_OUTPUT` |
+| `--accuracy <fp32/int8>` | Model precision | `int8` | `MANYSPEECH_ACCURACY` |
+| `--threads <num>` | Inference threads, 0=Auto | `2` | `MANYSPEECH_THREADS` |
+| `--debug` | Enable debug output | — | — |
+| `--save-default` | Save params as default | — | — |
+| `--show-config` | Show current config | — | — |
+| `--reset-config` | Reset config to defaults | — | — |
+
+## asr Subcommand Options
+
+| Option | Description | Default | Env Var |
+|------|------|--------|----------|
+| `-t, --type <online/offline/2pass>` | Recognition type (Required) | — | `MANYSPEECH_TYPE` |
+| `-m, --method <one/batch/chunk>` | Processing method | `chunk` | `MANYSPEECH_METHOD` |
+| `-i, --input <file/mic>` | Input source | `file` | `MANYSPEECH_INPUT` |
+| `--format <json/text/srt/vtt>` | Output format | `text` | `MANYSPEECH_FORMAT` |
+| `-f, --files <files...>` | Audio files (Multi-support) | — | — |
+| `-md, --model <name>` | Main model name | Auto | `MANYSPEECH_MODEL` |
+| `--model2 <name>` | 2pass secondary model | Auto | `MANYSPEECH_MODEL2` |
+| `--vad <name>` | VAD model name | `alifsmnvad-onnx` | `MANYSPEECH_VAD` |
+| `--punc <name>` | Punctuation model | `alicttransformerpunc-zh-en-mge-int8-onnx` | `MANYSPEECH_PUNC` |
+
+## vad Subcommand Options
+
+| Option | Description | Default |
+|------|------|--------|
+| `-t, --type <online/offline>` | Detection type (Required) | — |
+| `-m, --method <one/batch/chunk>` | Processing method | `chunk` |
+| `-i, --input <file/mic>` | Input source | `file` |
+| `--format <wav/pcm/raw>` | Output format | `wav` |
+| `-f, --files <files...>` | Input audio files | — |
+| `--vad <name>` | VAD model name | `alifsmnvad-onnx` |
+
+## punc Subcommand Options
+
+| Option | Description | Default |
+|------|------|--------|
+| `--text <text>` | Text to punctuate | — |
+| `-f, --files <files...>` | Input text files | — |
+| `--split <num>` | Text split size | `15` |
+| `--format <json/text>` | Output format | `text` |
+| `--punc <name>` | Punctuation model | `alicttransformerpunc-zh-en-mge-int8-onnx` |
+
+
+---
+
+## v1.0/en/cli/reference/changelog.md
+
+# Changelog
+
+## 2026-05-23
+
+- Refactored CLI architecture to subcommand mode
+  - `asr` - Speech Recognition (online/offline/2pass)
+  - `vad` - Voice Activity Detection
+  - `punc` - Punctuation Restoration
+- Added `--debug` mode
+
+## 2026-05-21
+
+- Added standalone VAD command: `vad`
+
+## 2026-05-19
+
+- Added standalone Punctuation command: `punc`
+
+## 2026-05-12
+
+- Added config file management for persistence
+
+## 2026-05-11
+
+- Refactored CLI parsing with smart completion
+
+## 2026-05-08
+
+- Added more model support
+- Optimized terminal output
+
+## 2025-09-22
+
+- Support for `fsmn-vad` / `silero-vad` switching
+
+## 2025-09-09
+
+- Added `2pass` recognition mode for better timestamps
+
+## 2025-09-05
+
+- Support for SRT, JSON, Text outputs
+
+## 2025-08-29
+
+- Initial release of `manyspeech-cli`
+
+
+---
+
