@@ -40,6 +40,13 @@ manyspeech asr -t offline --format srt -f audio.wav
 
 ## vad - 语音端点检测
 
+### 检测类型
+
+| 类型 | 说明 | 适用场景 |
+|------|------|----------|
+| online	| 实时流式检测，边录边检测	| 麦克风实时VAD | 
+| offline	| 非流式检测，处理完整音频	| 音频文件静音剔除 | 
+
 ### 基本用法
 
 ```bash
@@ -53,6 +60,14 @@ manyspeech vad -t offline -f audio.wav
 manyspeech vad -t offline --format wav -f audio.wav
 ```
 
+### 输出格式
+
+| 格式 | 说明 |
+|------|------|
+| `wav` | 音频格式（默认） |
+| `pcm` | 音频格式 |
+| `raw` | 音频格式 |
+
 ---
 
 ## punc - 标点符号恢复
@@ -65,4 +80,13 @@ manyspeech punc --text "今天天气不错一起去郊游吧"
 
 # 从文件读取
 manyspeech punc -f text.txt
+
+# 交互模式
+manyspeech punc
+> 输入文本
 ```
+### 输出格式
+
+| 格式 | 说明 |
+|------|------|
+| `txt` | 文本（默认） |

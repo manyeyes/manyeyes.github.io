@@ -29,6 +29,11 @@ features:
     details: 交互模式 + 命令行模式，灵活适配不同场景
   - title: 📦 零配置开箱
     details: 解压即用，无需复杂的环境配置
+
+    # SEO 核心配置（Rspress 自动生效）
+head:
+  - [meta, { name: keywords, content: "ManySpeech,离线语音识别,本地ASR,实时语音转文字,语音转文字工具,麦克风识别,视频字幕生成,开源语音识别,流式ASR,大模型语音工具,Agent语音插件" }]
+  - [meta, { name: description, content: "ManySpeech 是一款免费开源的本地离线语音识别CLI工具，支持实时麦克风识别、音频文件转文字、自动生成SRT字幕，可直接被大模型、AI Agent调用，零配置开箱即用。" }]
 ---
 
 ## ✨ 功能亮点

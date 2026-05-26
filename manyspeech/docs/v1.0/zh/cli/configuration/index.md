@@ -27,7 +27,11 @@ ManySpeech-CLI 支持多级配置文件管理，让你可以持久化常用参�
 manyspeech --show-config
 
 # 保存当前参数为默认配置
-manyspeech asr -t offline --threads 4 --save-default
+manyspeech asr -t offline -m chunk --format srt --threads 4 --save-default
+✅ 当前参数已保存为默认配置
+
+# 之后直接运行，自动使用保存的默认值（-m chunk --format srt --threads 4）
+manyspeech asr -t offline -f test.wav
 
 # 重置配置
 manyspeech --reset-config

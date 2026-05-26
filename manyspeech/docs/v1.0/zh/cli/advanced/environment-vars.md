@@ -9,6 +9,7 @@ set MANYSPEECH_TYPE=online
 set MANYSPEECH_METHOD=chunk
 set MANYSPEECH_THREADS=4
 set MANYSPEECH_FORMAT=srt
+set MANYSPEECH_OUTPUT=D:\Output
 manyspeech asr -i mic
 ```
 
@@ -19,6 +20,7 @@ $env:MANYSPEECH_TYPE="online"
 $env:MANYSPEECH_METHOD="chunk"
 $env:MANYSPEECH_THREADS="4"
 $env:MANYSPEECH_FORMAT="srt"
+$env:MANYSPEECH_OUTPUT="D:\Output"
 manyspeech asr -i mic
 ```
 
