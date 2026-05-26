@@ -26,7 +26,7 @@ export default defineConfig({
     // 全局页脚
     footer: {
       message:
-        '© 2026 ManySpeech, Powered by Rspress<br/>Site last updated 2026-05-26,',
+        '© 2026 ManySpeech, Powered by Rspress<br/>Site last updated 2026-05-26',
     },
   },
   
