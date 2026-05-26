@@ -60,16 +60,9 @@ export default defineConfig({
       tags: [
         {
           tag: 'script',
-          children: `
-            var _hmt = _hmt || [];
-            (function() {
-              var hm = document.createElement("script");
-              hm.src = "https://hm.baidu.com/hm.js?c5cc9be664702972dd979661253d614b";
-              var s = document.getElementsByTagName("script")[0];
-              s.parentNode.insertBefore(hm, s);
-            })();
-          `,
-          head: true,
+          attrs: { src: '/scripts/analytics.js' }, 
+          head: true, 
+          append: false
         },
       ],
     },
