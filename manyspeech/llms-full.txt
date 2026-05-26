@@ -1,0 +1,1160 @@
+---
+url: /manyspeech/api/commands.md
+---
+
+# Commands
+
+## dev
+
+## build
+
+## preview
+
+
+
+---
+url: /manyspeech/api/index.md
+---
+
+# API Overview
+
+## Commands
+
+### [Commands](/manyspeech/api/commands.md)
+
+- [dev](/manyspeech/api/commands.md#dev)
+- [build](/manyspeech/api/commands.md#build)
+- [preview](/manyspeech/api/commands.md#preview)
+
+
+
+---
+url: /manyspeech/cli/advanced/batch-processing.md
+---
+
+# 批量处理脚本
+
+## Windows 批处理
+
+```batch
+@echo off
+set INPUT_DIR=D:\audio
+set OUTPUT_DIR=D:\output
+
+for %%f in ("%INPUT_DIR%\*.wav") do (
+    echo Processing %%f...
+    manyspeech --output "%OUTPUT_DIR%" asr -t offline -m chunk --format srt --threads 4 -f "%%f"
+)
+echo Done!
+pause
+```
+
+## PowerShell 脚本
+
+```powershell
+# batch-process.ps1
+param(
+    [string]$inputDir = "D:\audio",
+    [string]$outputDir = "D:\output"
+)
+
+Get-ChildItem $inputDir -Filter *.wav | ForEach-Object {
+    Write-Host "Processing $($_.Name)..." -ForegroundColor Green
+    & manyspeech --output $outputDir asr -t offline -m chunk --format srt --threads 4 -f $_.FullName
+}
+
+Write-Host "All files processed!" -ForegroundColor Green
+```
+
+## 并发处理（高级）
+
+使用 PowerShell 并行处理：
+
+```powershell
+$files = Get-ChildItem "D:\audio" -Filter *.wav
+$files | ForEach-Object -Parallel {
+    & manyspeech asr -t offline -f $_.FullName
+} -ThrottleLimit 4
+```
+
+## 配合 ffmpeg 预处理
+
+```batch
+for %%f in ("*.mp4") do (
+    ffmpeg -i "%%f" -vn -acodec pcm_s16le -ar 16000 -ac 1 "temp.wav"
+    manyspeech asr -t offline -f temp.wav --format srt > "%%~nf.srt"
+    del temp.wav
+)
+```
+
+
+
+---
+url: /manyspeech/cli/advanced/environment-vars.md
+---
+
+# 环境变量配置
+
+通过环境变量可以预设全局参数，避免每次输入。
+
+## Windows (cmd)
+
+```cmd
+set MANYSPEECH_TYPE=online
+set MANYSPEECH_METHOD=chunk
+set MANYSPEECH_THREADS=4
+set MANYSPEECH_FORMAT=srt
+manyspeech asr -i mic
+```
+
+## Windows (PowerShell)
+
+```powershell
+$env:MANYSPEECH_TYPE="online"
+$env:MANYSPEECH_METHOD="chunk"
+$env:MANYSPEECH_THREADS="4"
+$env:MANYSPEECH_FORMAT="srt"
+manyspeech asr -i mic
+```
+
+## Linux/macOS
+
+```bash
+export MANYSPEECH_TYPE=online
+export MANYSPEECH_METHOD=chunk
+export MANYSPEECH_THREADS=4
+manyspeech asr -i mic
+```
+
+## 支持的环境变量
+
+| 变量名                   | 对应参数           | 说明    |
+| --------------------- | -------------- | ----- |
+| `MANYSPEECH_BASE`     | `--base`       | 模型根目录 |
+| `MANYSPEECH_OUTPUT`   | `--output`     | 输出目录  |
+| `MANYSPEECH_THREADS`  | `--threads`    | 线程数   |
+| `MANYSPEECH_ACCURACY` | `--accuracy`   | 精度    |
+| `MANYSPEECH_TYPE`     | `-t, --type`   | 识别类型  |
+| `MANYSPEECH_METHOD`   | `-m, --method` | 处理方式  |
+| `MANYSPEECH_INPUT`    | `-i, --input`  | 输入源   |
+| `MANYSPEECH_FORMAT`   | `--format`     | 输出格式  |
+| `MANYSPEECH_MODEL`    | `-md, --model` | 主模型   |
+| `MANYSPEECH_MODEL2`   | `--model2`     | 副模型   |
+| `MANYSPEECH_VAD`      | `--vad`        | VAD模型 |
+| `MANYSPEECH_PUNC`     | `--punc`       | 标点模型  |
+
+> 💡 **优先级**：命令行参数 > 环境变量 > 配置文件
+
+
+
+---
+url: /manyspeech/cli/advanced/index.md
+---
+
+# 高级用法
+
+本章节介绍 ManySpeech-CLI 的高级配置和集成技巧。
+
+## 内容概览
+
+- [环境变量配置](/manyspeech/cli/advanced/environment-vars.md) - 通过环境变量预设参数
+- [批量处理脚本](/manyspeech/cli/advanced/batch-processing.md) - 自动化批量识别
+- [性能优化](/manyspeech/cli/advanced/performance.md) - 调优推理速度和精度
+
+## 适用场景
+
+- CI/CD 集成
+- 大规模音频转写
+- 服务端部署
+- 自定义工作流
+
+
+
+---
+url: /manyspeech/cli/advanced/performance.md
+---
+
+# 性能优化
+
+## 线程数调优
+
+```bash
+# 自动检测CPU核心数（推荐）
+manyspeech --threads 0 asr -t offline -f audio.wav
+
+# 手动设置（例如8核）
+manyspeech --threads 8 asr -t offline -f audio.wav
+```
+
+## 模型精度选择
+
+| 精度     | 速度 | 精度 | 内存 |
+| ------ | -- | -- | -- |
+| `int8` | 快  | 较高 | 低  |
+| `fp32` | 慢  | 最高 | 高  |
+
+```bash
+# 使用 int8（默认，推荐）
+manyspeech asr -t offline --accuracy int8 -f audio.wav
+
+# 使用 fp32（更高精度）
+manyspeech asr -t offline --accuracy fp32 -f audio.wav
+```
+
+## 处理方式选择
+
+| 方式      | 内存占用 | 延迟       | 适用         |
+| ------- | ---- | -------- | ---------- |
+| `one`   | 高    | 高（等整体结束） | 短音频（\<30秒） |
+| `chunk` | 低    | 低（流式输出）  | 长音频、实时     |
+
+```bash
+# 长音频推荐 chunk
+manyspeech asr -t offline -m chunk -f long_audio.wav
+```
+
+## VAD 优化
+
+嘈杂环境使用 Silero-VAD：
+
+```bash
+manyspeech --vad silero-vad-v6-onnx asr -t online -i mic
+```
+
+## 性能测试建议
+
+- 使用 `--debug` 查看详细耗时
+- 逐步增加 `--threads` 找到最佳值（通常 = CPU核心数）
+- 对于长音频，`chunk` 方式比 `one` 更省内存
+
+
+
+---
+url: /manyspeech/cli/configuration/commands.md
+---
+
+# 配置管理命令
+
+## 查看配置
+
+```bash
+manyspeech --show-config
+```
+
+输出示例：
+
+```
+当前配置信息:
+  version: 1.0.0
+  defaults:
+    method: chunk
+    input: file
+    format: text
+    threads: 2
+    accuracy: int8
+    model: 
+    model2: 
+    vad: alifsmnvad-onnx
+    punc: alicttransformerpunc-zh-en-mge-int8-onnx
+    base: D:\Tools\ManySpeech
+    output: D:\Tools\ManySpeech\output
+```
+
+## 保存默认配置
+
+```bash
+# 将当前命令的参数保存为默认值
+manyspeech asr -t offline -m chunk --threads 4 --save-default
+
+# 之后直接运行，自动使用保存的默认值
+manyspeech asr -f test.wav
+```
+
+## 重置配置
+
+```bash
+manyspeech --reset-config
+```
+
+输出：
+
+```
+✅ 配置已重置为默认值
+```
+
+## 配置优先级演示
+
+```bash
+# 命令行参数覆盖配置文件
+manyspeech asr -t offline --threads 8 -f test.wav
+
+# 使用保存的默认配置
+manyspeech asr -t offline --save-default
+manyspeech asr -f test.wav   # 会使用之前保存的 --threads 值
+```
+
+
+
+---
+url: /manyspeech/cli/configuration/fields.md
+---
+
+# 配置字段说明
+
+配置文件 `manyspeech.json` 内容示例：
+
+```json
+{
+  "version": "1.0.0",
+  "defaults": {
+    "method": "chunk",
+    "input": "file",
+    "format": "text",
+    "threads": 2,
+    "accuracy": "int8",
+    "model": "",
+    "model2": "",
+    "vad": "alifsmnvad-onnx",
+    "punc": "alicttransformerpunc-zh-en-mge-int8-onnx",
+    "base": "",
+    "output": ""
+  }
+}
+```
+
+## 字段说明
+
+| 字段         | 说明          | 对应命令行参数        | 默认值                                        |
+| ---------- | ----------- | -------------- | ------------------------------------------ |
+| `method`   | 处理方式        | `-m, --method` | `chunk`                                    |
+| `input`    | 输入源         | `-i, --input`  | `file`                                     |
+| `format`   | 输出格式        | `--format`     | `text`                                     |
+| `threads`  | 线程数（0=自动检测） | `--threads`    | `2`                                        |
+| `accuracy` | 模型精度        | `--accuracy`   | `int8`                                     |
+| `model`    | 主模型名称       | `-md, --model` | `""`（自动匹配）                                 |
+| `model2`   | 2pass副模型    | `--model2`     | `""`（自动匹配）                                 |
+| `vad`      | VAD模型名称     | `--vad`        | `alifsmnvad-onnx`                          |
+| `punc`     | 标点模型名称      | `--punc`       | `alicttransformerpunc-zh-en-mge-int8-onnx` |
+| `base`     | 模型根目录       | `-b, --base`   | `""`（程序目录）                                 |
+| `output`   | 工作目录        | `-o, --output` | `""`（当前目录）                                 |
+
+
+
+---
+url: /manyspeech/cli/configuration/file-location.md
+---
+
+# 配置文件位置
+
+首次运行程序时，会在以下位置自动生成配置文件：
+
+| 类型       | Windows 路径                                  | 优先级    | 说明          |
+| -------- | ------------------------------------------- | ------ | ----------- |
+| **本地配置** | 程序目录 `manyspeech.json`                      | **最高** | 便携版配置，随程序移动 |
+| **用户配置** | `%USERPROFILE%\.manyspeech\manyspeech.json` | 中      | 用户个性化设置     |
+| **系统配置** | `%PROGRAMDATA%\ManySpeech\manyspeech.json`  | 低      | 系统级默认配置     |
+
+## 示例
+
+```cmd
+# 查看本地配置（如果存在）
+type "D:\Tools\ManySpeech\manyspeech.json"
+
+# 查看用户配置
+type "%USERPROFILE%\.manyspeech\manyspeech.json"
+
+# 查看系统配置
+type "%PROGRAMDATA%\ManySpeech\manyspeech.json"
+```
+
+> 💡 **提示**：配置优先级高的文件会覆盖优先级低的文件中的相同字段。
+
+
+
+---
+url: /manyspeech/cli/configuration/index.md
+---
+
+# 配置管理
+
+ManySpeech-CLI 支持多级配置文件管理，让你可以持久化常用参数。
+
+## 配置文件优先级
+
+```
+命令行参数（最高优先级）
+        ↓
+    --save-default 保存的参数
+        ↓
+    本地配置文件（程序目录/manyspeech.json）
+        ↓
+    用户配置文件（%USERPROFILE%\.manyspeech\manyspeech.json）
+        ↓
+    系统配置文件（%PROGRAMDATA%\ManySpeech\manyspeech.json）
+        ↓
+    环境变量（MANYSPEECH_*）
+        ↓
+    程序内置默认值（最低优先级）
+```
+
+## 快速使用
+
+```bash
+# 查看当前配置
+manyspeech --show-config
+
+# 保存当前参数为默认配置
+manyspeech asr -t offline --threads 4 --save-default
+
+# 重置配置
+manyspeech --reset-config
+```
+
+## 下一步
+
+- [配置文件位置详解](/manyspeech/cli/configuration/file-location.md)
+- [配置字段说明](/manyspeech/cli/configuration/fields.md)
+- [配置管理命令](/manyspeech/cli/configuration/commands.md)
+
+
+
+---
+url: /manyspeech/cli/getting-started/first-use.md
+---
+
+# 第一次使用
+
+## 交互模式（推荐新手）
+
+双击运行 `manyspeech-cli.exe`，进入交互模式：
+
+```cmd
+=====================================
+请输入命令 (输入 'exit' 退出，直接回车显示帮助):
+
+# 1. 选择语言（首次运行）
+请选择语言: 1. 中文; 2. English;
+1
+
+# 2. 输入识别命令
+> asr -t offline -f D:\test.wav
+
+# 程序自动下载模型并开始识别
+```
+
+## 命令行模式
+
+```bash
+# 打开 cmd 或 PowerShell
+cd D:\Tools\ManySpeech
+
+# 识别单个文件
+manyspeech asr -t offline -f test.wav
+
+# 麦克风实时识别（按 ESC 退出）
+manyspeech asr -t online -i mic
+```
+
+## 首次运行说明
+
+- 首次运行会自动生成配置文件 `manyspeech.json`
+- 首次使用某模型时，程序会自动下载
+- 模型较大，请耐心等待下载完成
+
+## 最简命令体验
+
+```bash
+# 使用默认测试音频
+manyspeech asr -t offline
+
+# 麦克风实时识别
+manyspeech asr -t online -i mic
+```
+
+
+
+---
+url: /manyspeech/cli/getting-started/index.md
+---
+
+# 快速开始
+
+欢迎使用 ManySpeech-CLI！本指南将帮助你快速上手。
+
+## 两种分发方案
+
+| 版本类型       | 使用特点           | 适用场景      |
+| ---------- | -------------- | --------- |
+| **免安装绿色版** | 解压即可运行，无注册表残留  | 临时使用、便携部署 |
+| **一键安装包**  | 向导式安装，自动配置环境变量 | 长期日常使用    |
+
+> 💡 **推荐**：使用一键安装包，安装完成后可在终端直接输入 `manyspeech` 调用。
+
+## 两种使用模式
+
+| 模式        | 启动方式                      | 适用场景      |
+| --------- | ------------------------- | --------- |
+| **交互模式**  | 直接双击 exe 或运行 `manyspeech` | 手动测试、探索功能 |
+| **命令行模式** | `manyspeech <子命令> [参数]`   | 脚本调用、自动化  |
+
+## 下一步
+
+- [安装指南](/manyspeech/cli/getting-started/installation.md) - 详细的安装说明
+- [第一次使用](/manyspeech/cli/getting-started/first-use.md) - 首个识别示例
+
+
+
+---
+url: /manyspeech/cli/getting-started/installation.md
+---
+
+# 安装指南
+
+## 系统要求
+
+| 平台      | 版本要求          | 其他                      |
+| ------- | ------------- | ----------------------- |
+| Windows | 10 / 11 (64位) | 建议 4GB 以上内存，麦克风（如需实时识别） |
+
+## Windows 安装指南
+
+### 方式一：一键安装包（推荐）
+
+1. 下载最新安装包：\
+   [manyspeech-cli-1.0.0-preview.9.17-win-x64-setup.exe](https://modelscope.cn/models/manyeyes/manyspeech-cli/resolve/master/manyspeech-cli-1.0.0-preview.9.17-win-x64-setup.exe)
+
+2. 双击运行安装程序，按向导提示完成安装。
+
+3. 安装完成后，打开 **命令提示符(cmd)** 或 **PowerShell**，输入以下命令验证：
+
+   ```bash
+   manyspeech --help
+   ```
+
+### 方式二：免安装绿色版
+
+1. 下载绿色版压缩包：\
+   [manyspeech-cli-1.0.0-preview.9.17-win-x64.zip](https://modelscope.cn/models/manyeyes/manyspeech-cli/file/view/master/manyspeech-cli-1.0.0-preview.9.17-win-x64.zip)
+
+2. 解压到任意目录（例如 `D:\Tools\ManySpeech`）。
+
+3. 进入该目录，双击 `manyspeech-cli.exe` 即可运行。
+
+   > 💡 **提示**：如需在任意位置打开 cmd 后直接调用 `manyspeech`，请将解压目录添加到系统 **PATH** 环境变量中（双击运行目录中的 install.bat 即可自动完成此操作）。如需干净卸载，运行 uninstall.bat 即可。
+
+4. 验证安装
+
+   ```bash
+   manyspeech --help
+   ```
+
+   如果显示帮助信息，说明安装成功。
+
+***
+
+
+
+---
+url: /manyspeech/cli/models/auto-download.md
+---
+
+# 自动下载机制
+
+## 下载触发条件
+
+当执行识别命令时，如果指定的模型不存在于本地，程序会自动开始下载。
+
+```bash
+manyspeech asr -t offline --model fireredasr2-aed-large-zh-en-int8-onnx-selfcrosskv-offline-20260212 -f test.wav
+```
+
+## 下载流程
+
+1. 检查本地模型目录是否存在模型文件
+2. 若不存在，从 ModelScope 下载模型包
+3. 解压到模型目录
+4. 继续执行识别任务
+
+## 下载进度
+
+```
+正在下载模型: fireredasr2-aed-large-zh-en-int8-onnx-selfcrosskv-offline-20260212
+[===============>       ] 65%  128MB/197MB
+下载完成，开始加载模型...
+```
+
+## 断点续传
+
+支持断点续传，如果网络中断，下次运行会从上次中断处继续。
+
+## 手动下载
+
+如果网络环境不佳，也可以手动下载模型包并放置到 `models/` 目录下。
+
+
+
+---
+url: /manyspeech/cli/models/index.md
+---
+
+# 模型管理
+
+ManySpeech-CLI 内置智能模型管理机制，自动检测并下载所需模型，无需手动配置。
+
+## 模型自动下载
+
+当使用未下载的模型时，程序会自动从 ModelScope 下载：
+
+```bash
+manyspeech asr -t offline --model paraformer-large-zh-en-int8-onnx-offline -f test.wav
+# 如果模型不存在，自动下载
+```
+
+## 模型存储位置
+
+默认模型根目录为程序所在目录下的 `models/` 文件夹。
+
+可通过 `--base` 参数指定：
+
+```bash
+manyspeech --base D:\MyModels asr -t offline -f test.wav
+```
+
+## 下一步
+
+- [支持的模型列表](/manyspeech/cli/models/supported-models.md) - 所有可用模型
+- [自动下载机制](/manyspeech/cli/models/auto-download.md) - 下载流程详解
+- [手动指定模型](/manyspeech/cli/models/manual-specify.md) - 高级用法
+
+
+
+---
+url: /manyspeech/cli/models/manual-specify.md
+---
+
+# 手动指定模型
+
+## 指定主模型
+
+```bash
+# 使用 FireRedASR 大模型
+manyspeech asr -t offline --model fireredasr2-aed-large-zh-en-int8-onnx-selfcrosskv-offline-20260212 -f meeting.wav
+
+# 使用 Whisper tiny
+manyspeech asr -t offline --model whisper-tiny-en-onnx -f english.wav
+```
+
+## 指定 VAD 模型
+
+```bash
+# 切换 Silero VAD
+manyspeech --vad silero-vad-v6-onnx asr -t online -i mic
+
+# 禁用 VAD
+manyspeech --vad "" asr -t offline -f audio.wav
+```
+
+## 指定标点模型
+
+```bash
+# 使用默认标点模型
+manyspeech --punc alicttransformerpunc-zh-en-mge-int8-onnx asr -t offline -f audio.wav
+
+# 禁用标点
+manyspeech --punc "" asr -t offline -f audio.wav
+```
+
+## 2pass 模式指定副模型
+
+```bash
+manyspeech asr -t 2pass -i mic --model paraformer-large-zh-en-int8-onnx-online --model2 paraformer-seaco-large-zh-timestamp-int8-onnx-offline
+```
+
+
+
+---
+url: /manyspeech/cli/models/supported-models.md
+---
+
+# 支持的模型列表
+
+## ASR 模型
+
+| 模型系列                  | 说明               | 支持类型                 |
+| --------------------- | ---------------- | -------------------- |
+| **AliParaformerAsr**  | 达摩院Paraformer系列  | online/offline/2pass |
+| **FireRedAsr**        | FireRed大模型，中文最佳  | offline              |
+| **K2TransducerAsr**   | K2转ducer系列       | online/offline/2pass |
+| **WhisperAsr**        | OpenAI Whisper系列 | offline              |
+| **MoonshineAsr**      | 轻量级英文模型          | offline              |
+| **WenetAsr**          | 开源自研模型           | online/offline       |
+| **DolphinAsr**        | 海豚系列             | offline              |
+| **OmniAsr**           | 全能系列             | online               |
+| **Fun-ASR-Nano-2512** | 最新纳米模型           | offline              |
+
+## VAD 模型
+
+| 模型名称                 | 说明                 |
+| -------------------- | ------------------ |
+| `alifsmnvad-onnx`    | FSMN-VAD（默认，通用）    |
+| `silero-vad-v6-onnx` | Silero-VAD（嘈杂环境更佳） |
+
+## 标点恢复模型
+
+| 模型名称                                       | 说明                 |
+| ------------------------------------------ | ------------------ |
+| `alicttransformerpunc-zh-en-mge-int8-onnx` | CT-Transformer（默认） |
+
+## 详细文档
+
+- [AliParaformerAsr](https://github.com/manyeyes/ManySpeech/blob/master/docs/readme/AliParaformerAsr/README.zh_CN.md)
+- [FireRedAsr](https://github.com/manyeyes/ManySpeech/blob/master/docs/readme/FireRedAsr/README.zh_CN.md)
+- [K2TransducerAsr](https://github.com/manyeyes/ManySpeech/blob/master/docs/readme/K2TransducerAsr/README.zh_CN.md)
+
+## 更多模型
+
+请访问 [manyeyes ModelScope主页](https://modelscope.cn/profile/manyeyes?tab=model)
+
+
+
+---
+url: /manyspeech/cli/reference/changelog.md
+---
+
+# 更新日志
+
+## 2026-05-23
+
+- 重构命令行架构，采用子命令模式
+  - `asr` - 语音识别（支持 online/offline/2pass）
+  - `vad` - 语音端点检测
+  - `punc` - 标点符号恢复
+- 新增 `--debug` 调试模式
+
+## 2026-05-21
+
+- 新增独立语音端点检测命令：`vad`
+
+## 2026-05-19
+
+- 新增独立标点恢复命令：`punc`
+
+## 2026-05-12
+
+- 新增配置文件管理，支持参数持久化
+
+## 2026-05-11
+
+- 重构命令行解析，支持参数智能补全
+
+## 2026-05-08
+
+- 新增更多模型支持
+- 优化终端输出格式
+
+## 2025-09-22
+
+- 支持 `fsmn-vad` / `silero-vad` 双VAD模型切换
+
+## 2025-09-09
+
+- 新增 `2pass` 识别模式，优化时间戳精度
+
+## 2025-09-05
+
+- 支持 SRT字幕、JSON、纯文本等多格式输出
+
+## 2025-08-29
+
+- 首发 `manyspeech-cli`
+
+
+
+---
+url: /manyspeech/cli/reference/index.md
+---
+
+# 参考资料
+
+本章节提供完整的命令参考和更新历史。
+
+## 内容
+
+- [完整参数说明](/manyspeech/cli/reference/parameters.md) - 所有命令行参数的详细说明
+- [更新日志](/manyspeech/cli/reference/changelog.md) - 版本迭代记录
+
+## 快速查找
+
+如需快速查找某个参数，可以使用：
+
+```bash
+manyspeech --help
+manyspeech asr --help
+manyspeech vad --help
+manyspeech punc --help
+```
+
+
+
+---
+url: /manyspeech/cli/reference/parameters.md
+---
+
+# 完整参数说明
+
+## 全局选项
+
+| 参数                       | 说明           | 默认值    | 环境变量                  |
+| ------------------------ | ------------ | ------ | --------------------- |
+| `-b, --base <路径>`        | 模型根目录        | 程序目录   | `MANYSPEECH_BASE`     |
+| `-o, --output <目录>`      | 工作目录         | 当前目录   | `MANYSPEECH_OUTPUT`   |
+| `--accuracy <fp32/int8>` | 模型推理精度       | `int8` | `MANYSPEECH_ACCURACY` |
+| `--threads <数量>`         | 推理线程数，0=自动检测 | `2`    | `MANYSPEECH_THREADS`  |
+| `--debug`                | 启用调试输出模式     | —      | —                     |
+| `--save-default`         | 保存当前参数为默认配置  | —      | —                     |
+| `--show-config`          | 显示当前配置信息     | —      | —                     |
+| `--reset-config`         | 重置配置为默认值     | —      | —                     |
+
+## asr 子命令选项
+
+| 参数                                  | 说明             | 默认值                                        | 环境变量                |
+| ----------------------------------- | -------------- | ------------------------------------------ | ------------------- |
+| `-t, --type <online/offline/2pass>` | 识别类型（必选）       | —                                          | `MANYSPEECH_TYPE`   |
+| `-m, --method <one/batch/chunk>`    | 处理方式           | `chunk`                                    | `MANYSPEECH_METHOD` |
+| `-i, --input <file/mic>`            | 输入源            | `file`                                     | `MANYSPEECH_INPUT`  |
+| `--format <json/text/srt/vtt>`      | 输出格式           | `text`                                     | `MANYSPEECH_FORMAT` |
+| `-f, --files <文件...>`               | 待识别音频文件（支持多文件） | —                                          | —                   |
+| `-md, --model <名称>`                 | 主模型名称          | 自动匹配                                       | `MANYSPEECH_MODEL`  |
+| `--model2 <名称>`                     | 2pass 副模型名称    | 自动匹配                                       | `MANYSPEECH_MODEL2` |
+| `--vad <名称>`                        | VAD模型名称        | `alifsmnvad-onnx`                          | `MANYSPEECH_VAD`    |
+| `--punc <名称>`                       | 标点模型名称         | `alicttransformerpunc-zh-en-mge-int8-onnx` | `MANYSPEECH_PUNC`   |
+
+## vad 子命令选项
+
+| 参数                               | 说明       | 默认值               |
+| -------------------------------- | -------- | ----------------- |
+| `-t, --type <online/offline>`    | 检测类型（必选） | —                 |
+| `-m, --method <one/batch/chunk>` | 处理方式     | `chunk`           |
+| `-i, --input <file/mic>`         | 输入源      | `file`            |
+| `--format <wav/pcm/raw>`         | 输出格式     | `wav`             |
+| `-f, --files <文件...>`            | 输入音频文件列表 | —                 |
+| `--vad <名称>`                     | VAD模型名称  | `alifsmnvad-onnx` |
+
+## punc 子命令选项
+
+| 参数                     | 说明        | 默认值                                        |
+| ---------------------- | --------- | ------------------------------------------ |
+| `--text <文本>`          | 需要添加标点的文本 | —                                          |
+| `-f, --files <文件...>`  | 输入文件列表    | —                                          |
+| `--split <数量>`         | 文本分片大小    | `15`                                       |
+| `--format <json/text>` | 输出格式      | `text`                                     |
+| `--punc <名称>`          | 标点模型名称    | `alicttransformerpunc-zh-en-mge-int8-onnx` |
+
+
+
+---
+url: /manyspeech/cli/usage/cli-modes.md
+---
+
+# 命令行模式 vs 交互模式
+
+## 交互模式
+
+启动交互模式后，程序会提供一个命令行提示符，可以逐条输入命令，适合手动测试和探索功能。
+
+```bash
+# 启动
+manyspeech
+```
+
+进入后：
+
+```cmd
+> asr -t offline -f test.wav
+> vad -t online -i mic
+> exit
+```
+
+**优点**：
+
+- 无需每次输入 `manyspeech`
+- 支持命令历史（方向键上下）
+- 参数补全（Tab键）
+
+## 命令行模式
+
+适合脚本调用、自动化流程。
+
+```bash
+manyspeech asr -t offline -f test.wav
+manyspeech vad -t online -i mic
+```
+
+**优点**：
+
+- 可嵌入批处理、PowerShell 脚本
+- 支持管道和重定向
+- 便于集成到 CI/CD 流程
+
+## 快速切换
+
+在交互模式下，也可以临时使用 `!` 执行系统命令：
+
+```cmd
+> !dir
+> !manyspeech asr -t offline -f other.wav
+```
+
+
+
+---
+url: /manyspeech/cli/usage/commands.md
+---
+
+# 子命令详解
+
+## asr - 语音识别
+
+### 识别类型
+
+| 类型        | 说明           | 适用场景       |
+| --------- | ------------ | ---------- |
+| `online`  | 实时流式识别，边录边出字 | 麦克风、直播、低延迟 |
+| `offline` | 非流式识别，处理完整音频 | 文件识别、长音频   |
+| `2pass`   | 双流融合，实时+精修   | 兼顾实时与精度    |
+
+### 基本用法
+
+```bash
+# 文件识别（离线）
+manyspeech asr -t offline -f audio.wav
+
+# 麦克风识别（在线）
+manyspeech asr -t online -i mic
+
+# 2pass 识别
+manyspeech asr -t 2pass -i mic
+```
+
+### 输出格式
+
+| 格式     | 说明          |
+| ------ | ----------- |
+| `text` | 纯文本（默认）     |
+| `json` | JSON格式，含时间戳 |
+| `srt`  | SubRip字幕    |
+| `vtt`  | WebVTT字幕    |
+
+```bash
+manyspeech asr -t offline --format srt -f audio.wav
+```
+
+***
+
+## vad - 语音端点检测
+
+### 基本用法
+
+```bash
+# 麦克风在线检测
+manyspeech vad -t online -i mic
+
+# 音频文件离线检测
+manyspeech vad -t offline -f audio.wav
+
+# 指定输出格式
+manyspeech vad -t offline --format wav -f audio.wav
+```
+
+***
+
+## punc - 标点符号恢复
+
+### 基本用法
+
+```bash
+# 直接输入文本
+manyspeech punc --text "今天天气不错一起去郊游吧"
+
+# 从文件读取
+manyspeech punc -f text.txt
+```
+
+
+
+---
+url: /manyspeech/cli/usage/debugging.md
+---
+
+# 调试模式
+
+## 启用调试模式
+
+```bash
+# 命令行模式
+manyspeech --debug asr -t online -i mic
+
+# 交互模式
+> --debug
+```
+
+## 调试输出示例
+
+```
+[DEBUG] 调试模式已通过子命令启用
+[DEBUG] 执行命令: asr
+[DEBUG] 全局参数 - basePath: D:\Tools\ManySpeech, outputDir: D:\Tools\ManySpeech\output
+[DEBUG] 全局参数 - threads: 2, accuracy: int8, saveAsDefault: False
+[DEBUG] ASR 参数 - method: one, model: , model2: , vad: alifsmnvad-onnx, punc: alicttransformerpunc-zh-en-mge-int8-onnx, format: text
+[DEBUG] 使用命令行指定的模型目录: D:\Tools\ManySpeech
+[DEBUG] 准备执行处理器
+...
+```
+
+## 适用场景
+
+- 排查参数解析问题
+- 查看程序执行流程
+- 调试配置文件加载
+- 分析模型路径解析
+- 验证环境变量是否生效
+
+> 💡 **提示**：调试输出会包含敏感路径信息，分享日志时请注意脱敏。
+
+
+
+---
+url: /manyspeech/cli/usage/examples.md
+---
+
+# 典型使用示例
+
+## 长音频离线流式识别 · 生成字幕
+
+```cmd
+# FireRedASR 大模型（中文最佳，高精度）
+manyspeech asr -t offline -m chunk --format srt --threads 4 -f "D:\audio\0.wav" --model fireredasr2-aed-large-zh-en-int8-onnx-selfcrosskv-offline-20260212
+
+# FunASR 轻量模型（速度快，资源占用低）
+manyspeech asr -t offline -m chunk --format srt --threads 2 -f "D:\audio\0.wav" --model Fun-ASR-Nano-2512-LLM-int8-onnx
+```
+
+## 麦克风实时识别
+
+```cmd
+# 流式模型 + 麦克风（延迟最低）
+manyspeech asr -t online -i mic
+
+# 离线模型 + 麦克风（精度更高）
+manyspeech asr -t offline -m chunk -i mic
+
+# 2pass 模式 + 麦克风（兼顾实时与精度）
+manyspeech asr -t 2pass -i mic
+```
+
+## 2pass 双流融合识别
+
+```cmd
+# Paraformer 2pass
+manyspeech asr -t 2pass -i mic --model paraformer-large-zh-en-int8-onnx-online --model2 paraformer-seaco-large-zh-timestamp-int8-onnx-offline
+
+# K2Transducer 2pass
+manyspeech asr -t 2pass -i mic --model k2transducer-zipformer-ctc-large-zh-onnx-online-yuekai-20250630 --model2 k2transducer-zipformer-ctc-small-zh-int8-onnx-offline-20250716
+```
+
+## VAD 语音端点检测
+
+```cmd
+# 麦克风在线检测
+manyspeech vad -t online -i mic
+
+# 音频文件离线检测（剔除静音）
+manyspeech vad -t offline -f meeting.wav
+
+# 指定输出格式
+manyspeech vad -t offline --format wav -f noisy_speech.wav
+```
+
+## 标点符号恢复
+
+```cmd
+# 直接输入文本
+manyspeech punc --text "今天天气不错一起去郊游吧"
+
+# 从文件读取
+manyspeech punc -f transcript.txt
+
+# 指定输出JSON格式
+manyspeech punc --text "hello world" --format json
+```
+
+
+
+---
+url: /manyspeech/cli/usage/index.md
+---
+
+# 使用指南
+
+ManySpeech-CLI 提供了三种核心子命令：
+
+## 子命令概览
+
+| 子命令    | 功能     | 支持类型                     |
+| ------ | ------ | ------------------------ |
+| `asr`  | 语音识别   | online / offline / 2pass |
+| `vad`  | 语音端点检测 | online / offline         |
+| `punc` | 标点符号恢复 | -                        |
+
+## 命令结构
+
+```bash
+manyspeech <子命令> [参数...]
+```
+
+> 💡 **提示**：全局选项（`--base`、`--vad`、`--output`、`--debug` 等）可放在命令行的**任意位置**。
+
+## 快速示例
+
+```bash
+# 语音识别
+manyspeech asr -t offline -f audio.wav
+
+# VAD 检测
+manyspeech vad -t online -i mic
+
+# 标点恢复
+manyspeech punc --text "你好世界"
+```
+
+## 导航
+
+- [命令行模式 vs 交互模式](/manyspeech/cli/usage/cli-modes.md)
+- [子命令详解](/manyspeech/cli/usage/commands.md)
+- [典型使用示例](/manyspeech/cli/usage/examples.md)
+- [调试模式](/manyspeech/cli/usage/debugging.md)
+
+
+
+---
+url: /manyspeech/index.md
+---
+
+# ManySpeech
+
+轻量化本地语音识别工具
+
+> 原生支持离线识别、实时流式识别，无需云端、无需额外配置
+
+[快速开始](/cli/getting-started/) | [GitHub](https://github.com/manyeyes/ManySpeech)
+
+## Features
+
+- **🎯 双核驱动**: 离线音频识别 + 麦克风实时流式识别，覆盖全场景
+- **🤖 智能模型管理**: 自动检测并下载所需模型，全程离线本地推理
+- **📝 多格式输出**: 支持 SRT字幕、JSON、纯文本等多种输出格式
+- **⚡ 高性能**: 支持多线程推理，自动检测CPU核心数智能适配
+- **🔧 双模式使用**: 交互模式 + 命令行模式，灵活适配不同场景
+- **📦 零配置开箱**: 解压即用，无需复杂的环境配置
+
+

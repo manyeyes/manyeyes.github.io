@@ -1,0 +1,27 @@
+## Others
+
+- [Commands](/manyspeech/api/commands.md)
+- [API Overview](/manyspeech/api/index.md)
+- [批量处理脚本](/manyspeech/cli/advanced/batch-processing.md)
+- [环境变量配置](/manyspeech/cli/advanced/environment-vars.md): 通过环境变量可以预设全局参数，避免每次输入。
+- [高级用法](/manyspeech/cli/advanced/index.md): 本章节介绍 ManySpeech-CLI 的高级配置和集成技巧。
+- [性能优化](/manyspeech/cli/advanced/performance.md)
+- [配置管理命令](/manyspeech/cli/configuration/commands.md)
+- [配置字段说明](/manyspeech/cli/configuration/fields.md): 配置文件 manyspeech.json 内容示例：
+- [配置文件位置](/manyspeech/cli/configuration/file-location.md): 首次运行程序时，会在以下位置自动生成配置文件：
+- [配置管理](/manyspeech/cli/configuration/index.md): ManySpeech-CLI 支持多级配置文件管理，让你可以持久化常用参数。
+- [第一次使用](/manyspeech/cli/getting-started/first-use.md)
+- [快速开始](/manyspeech/cli/getting-started/index.md): 欢迎使用 ManySpeech-CLI！本指南将帮助你快速上手。
+- [安装指南](/manyspeech/cli/getting-started/installation.md)
+- [自动下载机制](/manyspeech/cli/models/auto-download.md)
+- [模型管理](/manyspeech/cli/models/index.md): ManySpeech-CLI 内置智能模型管理机制，自动检测并下载所需模型，无需手动配置。
+- [手动指定模型](/manyspeech/cli/models/manual-specify.md)
+- [支持的模型列表](/manyspeech/cli/models/supported-models.md)
+- [更新日志](/manyspeech/cli/reference/changelog.md)
+- [参考资料](/manyspeech/cli/reference/index.md): 本章节提供完整的命令参考和更新历史。
+- [完整参数说明](/manyspeech/cli/reference/parameters.md)
+- [命令行模式 vs 交互模式](/manyspeech/cli/usage/cli-modes.md)
+- [子命令详解](/manyspeech/cli/usage/commands.md)
+- [调试模式](/manyspeech/cli/usage/debugging.md)
+- [典型使用示例](/manyspeech/cli/usage/examples.md)
+- [使用指南](/manyspeech/cli/usage/index.md): ManySpeech-CLI 提供了三种核心子命令：

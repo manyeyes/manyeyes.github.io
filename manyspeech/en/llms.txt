@@ -1,0 +1,27 @@
+## Others
+
+- [Commands](/manyspeech/en/api/commands.md)
+- [API Overview](/manyspeech/en/api/index.md)
+- [Batch Processing Scripts](/manyspeech/en/cli/advanced/batch-processing.md)
+- [Environment Variables](/manyspeech/en/cli/advanced/environment-vars.md): Pre-set global parameters via environment variables.
+- [Advanced Usage](/manyspeech/en/cli/advanced/index.md): This section covers advanced configuration and integration techniques.
+- [Performance Optimization](/manyspeech/en/cli/advanced/performance.md)
+- [Config Management Commands](/manyspeech/en/cli/configuration/commands.md)
+- [Config Fields](/manyspeech/en/cli/configuration/fields.md): Example manyspeech.json:
+- [Config File Locations](/manyspeech/en/cli/configuration/file-location.md): Config files are automatically generated at first run:
+- [Configuration Management](/manyspeech/en/cli/configuration/index.md): ManySpeech-CLI supports multi-level configuration files to persist common parameters.
+- [First Use](/manyspeech/en/cli/getting-started/first-use.md)
+- [Getting Started](/manyspeech/en/cli/getting-started/index.md): Welcome to ManySpeech-CLI! This guide will help you get up and running quickly.
+- [Installation](/manyspeech/en/cli/getting-started/installation.md)
+- [Auto-Download Mechanism](/manyspeech/en/cli/models/auto-download.md)
+- [Model Management](/manyspeech/en/cli/models/index.md): ManySpeech-CLI features intelligent model management, auto-detecting and downloading required models.
+- [Manual Model Specification](/manyspeech/en/cli/models/manual-specify.md)
+- [Supported Models](/manyspeech/en/cli/models/supported-models.md)
+- [Changelog](/manyspeech/en/cli/reference/changelog.md)
+- [Reference](/manyspeech/en/cli/reference/index.md): Complete command reference and changelog.
+- [Full Parameter Reference](/manyspeech/en/cli/reference/parameters.md)
+- [CLI Mode vs Interactive Mode](/manyspeech/en/cli/usage/cli-modes.md)
+- [Subcommand Details](/manyspeech/en/cli/usage/commands.md)
+- [Debugging Mode](/manyspeech/en/cli/usage/debugging.md)
+- [Typical Examples](/manyspeech/en/cli/usage/examples.md)
+- [Usage Guide](/manyspeech/en/cli/usage/index.md): ManySpeech-CLI provides three core subcommands:
