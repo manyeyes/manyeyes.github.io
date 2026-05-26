@@ -55,23 +55,5 @@ export default defineConfig({
     default: 'v1.0',        // 默认项目（可省略前缀）
     versions: ['v1.0'], // 所有项目列表
   },
-  builderConfig: {
-    html: {
-      tags: [
-        {
-          tag: 'script',
-          children: `
-            var _hmt = _hmt || [];
-            (function() {
-              var hm = document.createElement("script");
-              hm.src = "https://hm.baidu.com/hm.js?c5cc9be664702972dd979661253d614b";
-              var s = document.getElementsByTagName("script")[0];
-              s.parentNode.insertBefore(hm, s);
-            })();
-          `,
-          head: true,
-        },
-      ],
-    },
-  },
+  
 });
