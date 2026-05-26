@@ -1,5 +1,4 @@
 import * as path from 'node:path';
-// rspress.config.ts
 import { defineConfig } from '@rspress/core';
 
 export default defineConfig({
@@ -24,7 +23,7 @@ export default defineConfig({
         content: 'https://github.com/manyeyes/manyspeech',  
       },
     ],
-    // 3. 全局页脚（版权 + Powered by + Sitemap链接）
+    // 全局页脚
     footer: {
       message:
         '© 2026 ManySpeech, Powered by Rspress<br/>Site last updated 2026-05-26,',
@@ -38,21 +37,19 @@ export default defineConfig({
       label: 'English',
       title: 'ManySpeech',
       description: 'Lightweight Local Speech Recognition Tool',
-      // icon 不能放这里
     },
     {
       lang: 'zh',
       label: '简体中文',
       title: 'ManySpeech',
       description: '轻量化本地语音识别工具',
-      // icon 不能放这里
     },
   ],
   
   lang: 'zh',  // 默认语言
 
   multiVersion: {
-    default: 'v1.0',        // 默认项目（可省略前缀）
+    default: 'v1.0',    // 默认项目（可省略前缀）
     versions: ['v1.0'], // 所有项目列表
   },
   builderConfig: {
@@ -60,9 +57,8 @@ export default defineConfig({
       tags: [
         {
           tag: 'script',
-          attrs: { src: '/scripts/analytics.js' }, 
-          head: true, 
-          append: false
+          children: `var _hmt=_hmt||[];(function(){var h=document.createElement("script");h.src="https://hm.baidu.com/hm.js?c5cc9be664702972dd979661253d614b";var d=document.getElementsByTagName("script")[0];d.parentNode.insertBefore(h,d);})();`,
+          head: true,
         },
       ],
     },
