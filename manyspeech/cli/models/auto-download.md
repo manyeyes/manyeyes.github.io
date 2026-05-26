@@ -25,7 +25,7 @@ manyspeech asr -t offline --model fireredasr2-aed-large-zh-en-int8-onnx-selfcros
 
 ## 断点续传
 
-支持断点续传，如果网络中断，下次运行会从上次中断处继续。
+不支持断点续传，如果网络中断，需要删除模型文件，再次执行命令重新下载。
 
 ## 手动下载
 

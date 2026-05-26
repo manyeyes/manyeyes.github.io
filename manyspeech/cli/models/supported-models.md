@@ -6,13 +6,13 @@
 | --------------------- | ---------------- | -------------------- |
 | **AliParaformerAsr**  | 达摩院Paraformer系列  | online/offline/2pass |
 | **FireRedAsr**        | FireRed大模型，中文最佳  | offline              |
-| **K2TransducerAsr**   | K2转ducer系列       | online/offline/2pass |
+| **K2TransducerAsr**   | K2系列             | online/offline/2pass |
 | **WhisperAsr**        | OpenAI Whisper系列 | offline              |
 | **MoonshineAsr**      | 轻量级英文模型          | offline              |
-| **WenetAsr**          | 开源自研模型           | online/offline       |
+| **WenetAsr**          | Wenet模型          | online/offline       |
 | **DolphinAsr**        | 海豚系列             | offline              |
 | **OmniAsr**           | 全能系列             | online               |
-| **Fun-ASR-Nano-2512** | 最新纳米模型           | offline              |
+| **Fun-ASR-Nano-2512** | Fun-ASR-Nano模型   | offline              |
 
 ## VAD 模型
 

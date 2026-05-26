@@ -104,6 +104,7 @@ set MANYSPEECH_TYPE=online
 set MANYSPEECH_METHOD=chunk
 set MANYSPEECH_THREADS=4
 set MANYSPEECH_FORMAT=srt
+set MANYSPEECH_OUTPUT=D:\Output
 manyspeech asr -i mic
 ```
 
@@ -114,6 +115,7 @@ $env:MANYSPEECH_TYPE="online"
 $env:MANYSPEECH_METHOD="chunk"
 $env:MANYSPEECH_THREADS="4"
 $env:MANYSPEECH_FORMAT="srt"
+$env:MANYSPEECH_OUTPUT="D:\Output"
 manyspeech asr -i mic
 ```
 
@@ -404,7 +406,11 @@ ManySpeech-CLI 支持多级配置文件管理，让你可以持久化常用参�
 manyspeech --show-config
 
 # 保存当前参数为默认配置
-manyspeech asr -t offline --threads 4 --save-default
+manyspeech asr -t offline -m chunk --format srt --threads 4 --save-default
+✅ 当前参数已保存为默认配置
+
+# 之后直接运行，自动使用保存的默认值（-m chunk --format srt --threads 4）
+manyspeech asr -t offline -f test.wav
 
 # 重置配置
 manyspeech --reset-config
@@ -590,7 +596,7 @@ manyspeech asr -t offline --model fireredasr2-aed-large-zh-en-int8-onnx-selfcros
 
 ## 断点续传
 
-支持断点续传，如果网络中断，下次运行会从上次中断处继续。
+不支持断点续传，如果网络中断，需要删除模型文件，再次执行命令重新下载。
 
 ## 手动下载
 
@@ -689,13 +695,13 @@ url: /manyspeech/cli/models/supported-models.md
 | --------------------- | ---------------- | -------------------- |
 | **AliParaformerAsr**  | 达摩院Paraformer系列  | online/offline/2pass |
 | **FireRedAsr**        | FireRed大模型，中文最佳  | offline              |
-| **K2TransducerAsr**   | K2转ducer系列       | online/offline/2pass |
+| **K2TransducerAsr**   | K2系列             | online/offline/2pass |
 | **WhisperAsr**        | OpenAI Whisper系列 | offline              |
 | **MoonshineAsr**      | 轻量级英文模型          | offline              |
-| **WenetAsr**          | 开源自研模型           | online/offline       |
+| **WenetAsr**          | Wenet模型          | online/offline       |
 | **DolphinAsr**        | 海豚系列             | offline              |
 | **OmniAsr**           | 全能系列             | online               |
-| **Fun-ASR-Nano-2512** | 最新纳米模型           | offline              |
+| **Fun-ASR-Nano-2512** | Fun-ASR-Nano模型   | offline              |
 
 ## VAD 模型
 
@@ -958,6 +964,13 @@ manyspeech asr -t offline --format srt -f audio.wav
 
 ## vad - 语音端点检测
 
+### 检测类型
+
+| 类型      | 说明           | 适用场景     |
+| ------- | ------------ | -------- |
+| online  | 实时流式检测，边录边检测 | 麦克风实时VAD |
+| offline | 非流式检测，处理完整音频 | 音频文件静音剔除 |
+
 ### 基本用法
 
 ```bash
@@ -971,6 +984,14 @@ manyspeech vad -t offline -f audio.wav
 manyspeech vad -t offline --format wav -f audio.wav
 ```
 
+### 输出格式
+
+| 格式    | 说明       |
+| ----- | -------- |
+| `wav` | 音频格式（默认） |
+| `pcm` | 音频格式     |
+| `raw` | 音频格式     |
+
 ***
 
 ## punc - 标点符号恢复
@@ -983,7 +1004,17 @@ manyspeech punc --text "今天天气不错一起去郊游吧"
 
 # 从文件读取
 manyspeech punc -f text.txt
+
+# 交互模式
+manyspeech punc
+> 输入文本
 ```
+
+### 输出格式
+
+| 格式    | 说明     |
+| ----- | ------ |
+| `txt` | 文本（默认） |
 
 
 
