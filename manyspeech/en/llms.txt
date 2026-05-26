@@ -12,7 +12,7 @@
 - [Configuration Management](/manyspeech/en/cli/configuration/index.md): ManySpeech-CLI supports multi-level configuration files to persist common parameters.
 - [First Use](/manyspeech/en/cli/getting-started/first-use.md)
 - [Getting Started](/manyspeech/en/cli/getting-started/index.md): Welcome to ManySpeech-CLI! This guide will help you get up and running quickly.
-- [Installation](/manyspeech/en/cli/getting-started/installation.md)
+- [Installation Guide](/manyspeech/en/cli/getting-started/installation.md)
 - [Auto-Download Mechanism](/manyspeech/en/cli/models/auto-download.md)
 - [Model Management](/manyspeech/en/cli/models/index.md): ManySpeech-CLI features intelligent model management, auto-detecting and downloading required models.
 - [Manual Model Specification](/manyspeech/en/cli/models/manual-specify.md)
