@@ -13,7 +13,7 @@ Select Language: 1. Chinese; 2. English;
 2
 
 # 2. Enter Recognition Command
-> asr -t offline -f D:\test.wav
+> asr -t offline -i file -f D:\test.wav
 
 # The program will automatically download models and start recognition
 ```
@@ -25,7 +25,7 @@ Select Language: 1. Chinese; 2. English;
 cd D:\Tools\ManySpeech
 
 # Recognize a single file
-manyspeech asr -t offline -f test.wav
+manyspeech asr -t offline -i file -f test.wav
 
 # Real-time microphone recognition (Press ESC to exit)
 manyspeech asr -t online -i mic
@@ -41,7 +41,7 @@ manyspeech asr -t online -i mic
 
 ```bash
 # Use default test audio
-manyspeech asr -t offline
+manyspeech asr -t offline -i file
 
 # Real-time microphone recognition
 manyspeech asr -t online -i mic

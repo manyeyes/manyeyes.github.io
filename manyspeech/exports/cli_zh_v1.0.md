@@ -96,7 +96,7 @@
 1
 
 # 2. 输入识别命令
-> asr -t offline -f D:\test.wav
+> asr -t offline -i file -f D:\test.wav
 
 # 程序自动下载模型并开始识别
 ```
@@ -108,7 +108,7 @@
 cd D:\Tools\ManySpeech
 
 # 识别单个文件
-manyspeech asr -t offline -f test.wav
+manyspeech asr -t offline -i file -f test.wav
 
 # 麦克风实时识别（按 ESC 退出）
 manyspeech asr -t online -i mic
@@ -124,7 +124,7 @@ manyspeech asr -t online -i mic
 
 ```bash
 # 使用默认测试音频
-manyspeech asr -t offline
+manyspeech asr -t offline -i file
 
 # 麦克风实时识别
 manyspeech asr -t online -i mic
