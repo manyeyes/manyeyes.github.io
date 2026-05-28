@@ -3,7 +3,7 @@ pageType: home
 
 hero:
   name: "ManySpeech"
-  text: "軽量ローカル音声認識ツール"
+  text: "軽量型ローカル音声 AI"
   tagline: ネイティブでオフライン＆リアルタイムのストリーミング認識をサポート、クラウド不要・追加設定不要
   actions:
     - theme: brand
