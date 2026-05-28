@@ -44,6 +44,12 @@ export default defineConfig({
       title: 'ManySpeech',
       description: '轻量化本地语音识别工具',
     },
+    {
+      lang: 'ja',
+      label: '日本語',
+      title: 'ManySpeech',
+      description: '軽量なローカル音声認識ツール',
+    },
   ],
   
   lang: 'zh',  // 默认语言

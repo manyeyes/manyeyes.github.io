@@ -2,7 +2,7 @@
   {
     "type": "dir",
     "name": "getting-started",
-    "label": "快速开始",
+    "label": "クイックスタート",
     "collapsible": true,
     "items": [
       "index",
@@ -13,7 +13,7 @@
   {
     "type": "dir",
     "name": "usage",
-    "label": "使用指南",
+    "label": "使用ガイド",
     "collapsible": true,
     "items": [
       "index",
@@ -26,7 +26,7 @@
   {
     "type": "dir",
     "name": "configuration",
-    "label": "配置管理",
+    "label": "設定管理",
     "collapsible": true,
     "items": [
       "index",
@@ -38,42 +38,19 @@
   {
     "type": "dir",
     "name": "models",
-    "label": "模型管理",
+    "label": "モデル管理",
     "collapsible": true,
     "items": [
       "index",
+      "supported-models",
       "auto-download",
-      "manual-specify",
-      {
-        "type": "dir",
-        "name": "supported-models",
-        "label": "支持的模型列表",
-        "collapsible": true,
-        "items": [
-          "index",
-          "asr",
-          "vad",
-          "punc"
-        ]
-      },
-      {
-        "type": "dir",
-        "name": "selection-guide",
-        "label": "模型选型指南",
-        "collapsible": true,
-        "items": [
-          "index",
-          "asr",
-          "vad",
-          "punc"
-        ]
-      }
+      "manual-specify"
     ]
   },
   {
     "type": "dir",
     "name": "advanced",
-    "label": "高级用法",
+    "label": "高度な使い方",
     "collapsible": true,
     "items": [
       "index",
@@ -85,7 +62,7 @@
   {
     "type": "dir",
     "name": "reference",
-    "label": "参考资料",
+    "label": "参考資料",
     "collapsible": true,
     "items": [
       "index",
