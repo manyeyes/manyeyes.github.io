@@ -13,7 +13,7 @@ manyspeech-cli.exe をダブルクリックしてインタラクティブモー�
 1
 
 # 2. 認識コマンドを入力
-> asr -t offline -f D:\test.wav
+> asr -t offline -i file -f D:\test.wav
 
 # プログラムが自動でモデルをダウンロードして認識を開始します
 ```
@@ -25,7 +25,7 @@ manyspeech-cli.exe をダブルクリックしてインタラクティブモー�
 cd D:\Tools\ManySpeech
 
 # ファイル1件を認識
-manyspeech asr -t offline -f test.wav
+manyspeech asr -t offline -i file -f test.wav
 
 # マイクのリアルタイム認識（ESC で終了）
 manyspeech asr -t online -i mic
@@ -40,7 +40,7 @@ manyspeech asr -t online -i mic
 
 ```bash
 # テスト用デフォルト音声を使う
-manyspeech asr -t offline
+manyspeech asr -t offline -i file
 
 # マイクでリアルタイム
 manyspeech asr -t online -i mic
