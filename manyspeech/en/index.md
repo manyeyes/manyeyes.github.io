@@ -1,6 +1,6 @@
 # ManySpeech
 
-Lightweight Local Speech Recognition Tool
+Lightweight Local Speech AI
 
 > Native offline recognition, real-time streaming, no cloud required.
 

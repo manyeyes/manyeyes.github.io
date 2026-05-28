@@ -16,7 +16,10 @@
 - [自动下载机制](/manyspeech/cli/models/auto-download.md)
 - [模型管理](/manyspeech/cli/models/index.md): ManySpeech-CLI 内置智能模型管理机制，自动检测并下载所需模型，无需手动配置。
 - [手动指定模型](/manyspeech/cli/models/manual-specify.md)
-- [支持的模型列表](/manyspeech/cli/models/supported-models.md)
+- [ASR 模型](/manyspeech/cli/models/selection-guide/asr.md)
+- [模型选型指南](/manyspeech/cli/models/selection-guide/index.md): 面对不断更新的模型列表，记不住具体名字没关系。本文教你看懂每个模型的关键指标，然后根据自己的需求去匹配——语言、实时性、硬件、时间戳……筛一圈，能用的模型就那几个。 📌 所有模型都是 ONNX 格式，在 manyspeech 中首次使用时会自动下载。
+- [Punc 模型](/manyspeech/cli/models/selection-guide/punc.md)
+- [VAD 模型](/manyspeech/cli/models/selection-guide/vad.md)
 - [更新日志](/manyspeech/cli/reference/changelog.md)
 - [参考资料](/manyspeech/cli/reference/index.md): 本章节提供完整的命令参考和更新历史。
 - [完整参数说明](/manyspeech/cli/reference/parameters.md)

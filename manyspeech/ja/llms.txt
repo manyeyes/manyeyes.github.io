@@ -1,0 +1,27 @@
+## Others
+
+- [コマンド](/manyspeech/ja/api/commands.md)
+- [API 概要](/manyspeech/ja/api/index.md)
+- [バッチ処理スクリプト](/manyspeech/ja/cli/advanced/batch-processing.md)
+- [環境変数の設定](/manyspeech/ja/cli/advanced/environment-vars.md): 環境変数でグローバルパラメータを事前設定できます。
+- [高度な使い方](/manyspeech/ja/cli/advanced/index.md): この章では ManySpeech-CLI の高度な設定や統合テクニックを紹介します。 内容: 環境変数設定 - 環境変数でパラメータを事前設定バッチ処理スクリプト - 大量ファイルの自動処理パフォーマンス最適化 - 推論速度と精度のチューニング 適用シーン: CI/CD 統合大規模文字起こしサーバー運用カスタムワークフロー
+- [パフォーマンス最適化](/manyspeech/ja/cli/advanced/performance.md)
+- [設定管理コマンド](/manyspeech/ja/cli/configuration/commands.md)
+- [設定フィールド説明](/manyspeech/ja/cli/configuration/fields.md): 設定ファイル manyspeech.json の例:
+- [設定ファイルの配置](/manyspeech/ja/cli/configuration/file-location.md): 初回実行時、以下の場所に自動で設定ファイルが生成されます: 例: 💡 ヒント：優先度が高い設定が低い設定の同名フィールドを上書きします。
+- [設定管理](/manyspeech/ja/cli/configuration/index.md): ManySpeech-CLI は多階層の設定ファイルをサポートし、よく使うパラメータを永続化できます。
+- [初回の使い方](/manyspeech/ja/cli/getting-started/first-use.md)
+- [クイックスタート](/manyspeech/ja/cli/getting-started/index.md): ManySpeech-CLI へようこそ！このガイドで素早く始められます。
+- [インストールガイド](/manyspeech/ja/cli/getting-started/installation.md)
+- [自動ダウンロードの仕組み](/manyspeech/ja/cli/models/auto-download.md)
+- [モデル管理](/manyspeech/ja/cli/models/index.md): ManySpeech-CLI はスマートなモデル管理を内蔵し、必要なモデルを自動検出・ダウンロードしてローカルで推論します。
+- [手動でモデルを指定する](/manyspeech/ja/cli/models/manual-specify.md)
+- [サポートモデル一覧](/manyspeech/ja/cli/models/supported-models.md)
+- [更新ログ](/manyspeech/ja/cli/reference/changelog.md)
+- [参考資料](/manyspeech/ja/cli/reference/index.md): この章はコマンドリファレンスと更新履歴を提供します。 内容: 全パラメータ説明 - 全ての CLI 引数の詳細更新ログ - バージョン履歴 クイック検索:
+- [全パラメータ説明](/manyspeech/ja/cli/reference/parameters.md)
+- [コマンドラインモード 対 インタラクティブモード](/manyspeech/ja/cli/usage/cli-modes.md)
+- [サブコマンド詳細](/manyspeech/ja/cli/usage/commands.md)
+- [デバッグモード](/manyspeech/ja/cli/usage/debugging.md)
+- [典型的な使用例](/manyspeech/ja/cli/usage/examples.md)
+- [使用ガイド](/manyspeech/ja/cli/usage/index.md): ManySpeech-CLI は以下の主要なサブコマンドを提供します：

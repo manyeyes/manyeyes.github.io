@@ -23,6 +23,6 @@ manyspeech --base D:\MyModels asr -t offline -f test.wav
 
 ## 下一步
 
-- [支持的模型列表](/manyspeech/cli/models/supported-models.md) - 所有可用模型
 - [自动下载机制](/manyspeech/cli/models/auto-download.md) - 下载流程详解
 - [手动指定模型](/manyspeech/cli/models/manual-specify.md) - 高级用法
+- [支持的模型列表](/manyspeech/cli/models/selection-guide.md) - 模型选型指南
