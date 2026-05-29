@@ -621,44 +621,6 @@ manyspeech --base D:\MyModels asr -t offline -f test.wav
 
 ---
 
-## v1.0/en/cli/models/supported-models.md
-
-# Supported Models
-
-## ASR Models
-
-| Series | Description | Types |
-|---------|------|----------|
-| **AliParaformerAsr** | DAMO Academy Paraformer | online/offline/2pass |
-| **FireRedAsr** | FireRed Large Model, Best for Chinese | offline |
-| **K2TransducerAsr** | K2 Transducer Series | online/offline/2pass |
-| **WhisperAsr** | OpenAI Whisper Series | offline |
-| **MoonshineAsr** | Lightweight English Model | offline |
-| **WenetAsr** | Open Source Self-developed | online/offline |
-| **DolphinAsr** | Dolphin Series | offline |
-| **OmniAsr** | Omni Series | online |
-| **Fun-ASR-Nano-2512** | Latest Nano Model | offline |
-
-## VAD Models
-
-| Name | Description |
-|---------|------|
-| `alifsmnvad-onnx` | FSMN-VAD (Default, General) |
-| `silero-vad-v6-onnx` | Silero-VAD (Better for Noise) |
-
-## Punctuation Models
-
-| Name | Description |
-|---------|------|
-| `alicttransformerpunc-zh-en-mge-int8-onnx` | CT-Transformer (Default) |
-
-## More Models
-
-Visit [manyeyes ModelScope Profile](https://modelscope.cn/profile/manyeyes?tab=model)
-
-
----
-
 ## v1.0/en/cli/models/auto-download.md
 
 # Auto-Download Mechanism
@@ -736,6 +698,744 @@ manyspeech --punc "" asr -t offline -f audio.wav
 ```bash
 manyspeech asr -t 2pass -i mic --model paraformer-large-zh-en-int8-onnx-online --model2 paraformer-seaco-large-zh-timestamp-int8-onnx-offline
 ```
+
+
+---
+
+## v1.0/en/cli/models/selection-guide/index.md
+
+# Model Selection Guide
+
+Faced with an ever‑growing list of models, you don't need to memorise every name. This guide teaches you **how to read the key metrics of each model**, then match them to your own needs – language, real‑time requirement, hardware, timestamps … filter step by step, and only a handful of models will remain.
+
+> 📌 All models are in ONNX format. When you use them for the first time in `manyspeech`, they are downloaded automatically.
+
+## I. ASR (Speech Recognition) Models
+
+### 1. Six Key Metrics: Understand the Model, Then Write the Command
+
+Every model table contains these columns. Once you understand them, you'll know what to choose and how to write the command.
+
+| Metric | Values | Meaning | CLI Argument | How to Use This Metric |
+|--------|--------|---------|--------------|------------------------|
+| **Type** | `Streaming` / `Non‑streaming` | Can it produce words in real time? | `-t online` / `-t offline` | Microphone → `online`, file → `offline` |
+| **Languages** | Chinese, English, Cantonese, multilingual … | Which languages the model specialises in | via `--model` | The better the match, the higher the accuracy |
+| **Punctuation** | `Yes` / `No` | Does the output include punctuation? | Not important because `--punc` restores it | Ignore this metric – the program adds punctuation automatically |
+| **Timestamps** | `Yes` / `No` | Does it include time information? | `--format srt` / `--format vtt` | Must be `Yes` if you need subtitles |
+| **KV** | `✅` / `❌` | Does it have inference acceleration? | Enabled automatically | Prefer `✅` – decoding is 20‑50% faster |
+| **Precision suffix** | `int8` / `fp32` | Is it a quantised version? | `--accuracy int8` | Choose `int8` – smaller size, faster speed |
+
+**Why can you ignore punctuation?** (for Chinese/English scenarios)  
+- Because regardless of whether the model natively outputs punctuation, `manyspeech` by default calls a punctuation restoration model (`--punc`) to add punctuation to the output. You don't need to worry about `Punctuation = No`.
+
+**Microphone → `online`, file → `offline`**  
+This is the recommended configuration in most cases. You can also mix them:
+
+```bash
+# Use an online model on a file – benefits: low resource usage, what you see is what you get.
+# Drawback: accuracy may be slightly lower than using a dedicated offline model under the same conditions.
+manyspeech asr -t online -m chunk -i file --files file1.wav file2.wav file3.wav
+
+# Use an offline model on a microphone – benefit: better accuracy.
+# Drawback: you must wait until the end of an utterance to see the result, and resource usage is slightly higher than with an online model.
+manyspeech asr -t offline -m chunk -i mic
+```
+
+**A very basic command example** (assuming you have already chosen a model called `some-model`):
+
+```bash
+# Recognise a file (note that `-i file` cannot be omitted)
+manyspeech asr -t offline -i file --files "meeting.wav" --model some-model
+
+# Real‑time microphone recognition
+manyspeech asr -t online -i mic --model some-model
+```
+
+> ⚠️ The `asr` subcommand must include `-i`, either `-i file` or `-i mic`. It cannot be omitted. If you omit `--model`, the program uses a built‑in default model, which may not be suitable for your scenario – we recommend always specifying a model.
+
+---
+
+### 2. More Information Is Encoded in the Model Name
+
+The model name itself is a “mini spec sheet”. Besides the metrics in the table, the name reveals additional details.
+
+| Name Fragment | Meaning |
+|---------------|---------|
+| `online` / `offline` | Streaming / non‑streaming |
+| `zh` / `en` / `yue` / `ja` / `ko` / `multi` | Languages supported (Chinese / English / Cantonese / Japanese / Korean / multilingual) |
+| `tiny` / `small` / `base` / `large` / `xlarge` | Model size (bigger = more accurate, but slower and more resource‑hungry) |
+| `int8` / `fp32` | Quantised version / high‑precision version |
+| `timestamp` | Supports output timestamps (for subtitles) |
+| `kv` / `selfcrosskv` | Enables KV‑cache acceleration |
+| `ctc` | Uses the CTC decoding architecture (usually faster) |
+| `turbo` | Accelerated distilled version from the Whisper family |
+| `distil` | Distilled version (Distil‑Whisper), smaller and faster than the original |
+| `finetune` / specific suffixes (e.g. `-belle`, `-wenetspeech`) | Fine‑tuned on a particular dataset; may perform better on specific domains (dialects, conversations, etc.) |
+| `seaco` | Supports hotword customisation |
+| `llm` | Enhanced with a large language model |
+| `opt` | Optimised version (preferred when available) |
+
+> When you see `distil-whisper-xxx`, it is faster and smaller than a `whisper-xxx` of the same size – ideal for resource‑constrained scenarios.  
+> When you see `xxx-cantonese-onnx` or `xxx-wenetspeech-yue`, it has been fine‑tuned for Cantonese and will be more accurate than a general model.  
+> When you see `xxx-onnx-opt`, it usually performs better than `xxx-onnx`.
+
+---
+
+### 3. Four‑Step Selection: Filter According to Your Needs
+
+#### Step 1: What language(s) do you mainly speak?
+
+Look at the `Languages` column in the tables and filter for models that include your required language(s).
+
+- **Mandarin**: Prefer models tagged with `zh` or `Chinese`
+- **Code‑switching Chinese/English**: Look for `zh-en` or `Chinese/English`
+- **Cantonese**: Look for `yue` or `Cantonese` (or names containing `cantonese` / `yue`)
+- **English**: Look for `en` or `English`, or `distil-whisper-*-en` etc.
+- **Japanese/Korean/Thai/Russian etc.**: Find models with the corresponding language tags (e.g. `ja`, `ko`, `th`, `ru`)
+- **Many languages worldwide**: Look for `multilingual`, `multi`, or models supporting many languages (e.g. Whisper series supports 99‑106 languages)
+
+> A model that is specifically designed for a given language will usually achieve higher accuracy on that language. Multilingual models are convenient but may be slightly less accurate than dedicated ones.  
+> If you see `finetune` or a specific suffix like `-belle` or `-wenetspeech`, it means the model has been fine‑tuned for a vertical domain (medical, conversation, dialect). If your scenario matches, give it priority.
+
+#### Step 2: Real‑time or offline?
+
+Check the `Type` column:
+
+| Your need | Choose type | `-t` argument |
+|-----------|-------------|----------------|
+| Real‑time conversation, live subtitles, microphone input | Streaming | `-t online` |
+| Processing audio files, no real‑time requirement | Non‑streaming | `-t offline` |
+| Real‑time preview plus final refinement | Both | `-t 2pass` (you need a primary online model and a secondary offline model) |
+
+#### Step 3: What is your hardware level?
+
+Look at the `Precision suffix` and the `size` encoded in the model name:
+
+| Hardware situation | Prefer | Command suggestion |
+|--------------------|--------|--------------------|
+| Server (8+ cores, 8+ GB RAM) | `fp32` or non‑quantised, size `large`/`xlarge` | default or `--accuracy fp32` |
+| Ordinary PC (4 cores, 4 GB RAM) | `int8` quantised, size `base`/`large` | `--accuracy int8` |
+| Raspberry Pi, old laptop, embedded device | `int8` quantised, size `tiny`/`small` | Pick a model with `tiny` and `int8` in its name, e.g. `moonshine-tiny-*-int8` or `distil-whisper-small-*-int8` |
+| Speed is top priority, accuracy can be traded | `int8` + `ctc`, size `small` | Choose a model containing `ctc` and `int8` |
+
+> `int8` quantised versions reduce size by 50‑75%, increase speed by 2‑4x, and typically lose less than 1% accuracy – strongly recommended.  
+> `distil-*` models are faster and smaller than the original of the same size – also good for resource‑constrained scenarios.
+
+#### Step 4: Do you need to generate subtitles?
+
+**Without using a VAD model**:
+- **Need SRT/VTT subtitles** → You must select a model with `Timestamps = Yes` (the column marked `Yes`, or a name containing `timestamp`)
+- **No subtitles needed** → Ignore the timestamp metric; any model works
+
+**When using a VAD model**:
+- The model's timestamp metric is not required. You can even use only an online model and still generate subtitles with timestamps.
+
+> You don't need to worry about punctuation – the program adds it automatically. So the `Punctuation` column can be completely ignored.
+
+**Extra requirement: Hotword customisation**  
+If you want to improve recognition of specific terms (brand names, person names, technical terms), look for models with `seaco` in their name (SeACo‑Paraformer). They support hotword boosting.
+
+---
+
+### 4. Common Command Templates (just fill in the model you selected)
+
+```bash
+# Offline file recognition
+manyspeech asr -t offline -i file --files "your_audio.wav" --model your_chosen_model
+
+# Real‑time microphone
+manyspeech asr -t online -i mic --model your_chosen_model
+
+# 2‑pass mode
+manyspeech asr -t 2pass -i mic \
+  --model streaming_model_name \
+  --model2 offline_model_name
+
+# Output subtitles (only if the model supports timestamps)
+manyspeech asr -t offline -i file --files "audio.wav" \
+  --format srt --model model_name
+
+# Force use of int8 quantisation (if the model has an int8 version)
+manyspeech asr -t offline -i file --files "audio.wav" \
+  --accuracy int8 --model model_name
+
+# Low‑end device: limit threads + lightweight model
+manyspeech --threads 1 asr -t offline -i file --files "audio.wav" \
+  --model lightweight_model_name
+
+# Switch VAD (use silero in noisy environments)
+manyspeech --vad silero-vad-v6-onnx asr -t online -i mic --model your_chosen_model
+```
+
+---
+
+## II. VAD (Voice Activity Detection) Models
+
+### 1. Available Models
+
+| Model Name | Characteristics | Use Case | CLI |
+|------------|----------------|----------|-----|
+| `alifsmnvad-onnx` (default) | Balanced accuracy and speed | Meeting rooms, quiet recordings | `--vad alifsmnvad-onnx` |
+| `silero-vad-v6-onnx` | More robust in noisy environments | Phone calls, outdoors, far‑field | `--vad silero-vad-v6-onnx` |
+
+### 2. Selection Advice
+
+- **Quiet environment**: Use the default `alifsmnvad-onnx`.
+- **Noisy environment** (fan, traffic, multiple people chatting): Switch to `silero-vad-v6-onnx`.
+
+### 3. Common Commands
+
+```bash
+# Specify a VAD model during ASR
+manyspeech --vad silero-vad-v6-onnx asr -t online -i mic --model your_model
+
+# Use the vad subcommand alone to detect speech segments
+manyspeech vad -t offline -i file --files "recording.wav" --vad silero-vad-v6-onnx
+```
+
+---
+
+## III. Punctuation Restoration Models
+
+### 1. Available Model
+
+| Model Name | Description |
+|------------|-------------|
+| `alicttransformerpunc-zh-en-mge-int8-onnx` | Chinese‑English punctuation, INT8 quantised, lightweight and fast |
+
+### 2. Notes
+
+- By default, ASR automatically enables this model to add punctuation to recognition results. Usually no manual intervention is needed.
+- If you want to call it manually or test it, you can use the `punc` subcommand.
+
+### 3. Common Commands
+
+```bash
+# Manually restore punctuation for a text without punctuation
+manyspeech punc --text "today is a nice day lets go for a picnic"
+
+# Disable punctuation restoration in ASR (to test the model's native output)
+manyspeech --punc "" asr -t offline -i file --files "audio.wav" --model model_name
+```
+
+---
+
+## IV. AudioSep Audio Separation Models (planned)
+
+> This feature is under development. No models are available yet. The following is a preview of selection dimensions.
+
+### 4.1 Future Available Models (example)
+
+- Vocals separation models (e.g. ONNX versions of Demucs, Spleeter)
+- Accompaniment / instrument separation models
+
+### 4.2 Selection Dimensions (planned)
+
+| Dimension | Options | Description |
+|-----------|---------|-------------|
+| Separation target | Vocals / accompaniment / drums / bass etc. | Choose the output stem according to your need |
+| Model size | Lightweight / high‑precision | Lightweight for real‑time, high‑precision for offline processing |
+| Output format | Separate audio files / masks | Separate files are immediately usable; masks require post‑processing |
+
+### 4.3 Placeholder Command (future implementation)
+
+```bash
+# Example (future)
+manyspeech audiosep -i file --files "mix.wav" --target vocals --output vocals.wav
+```
+
+---
+
+## V. Frequently Asked Questions
+
+**Q: In the ASR table, Punctuation says “No”. Will the output have punctuation?**  
+A: Yes. Because the program by default calls punctuation restoration (`--punc`). You don't need to worry about whether the model itself outputs punctuation.
+
+**Q: Can KV acceleration and int8 be used together?**  
+A: Yes. Models whose names contain both `int8` and `kv`/`selfcrosskv` support that combination.
+
+**Q: What is the difference between distil‑whisper and regular whisper?**  
+A: distil‑whisper is a distilled version – smaller, faster, slightly lower accuracy but usually sufficient. It is suitable for resource‑constrained scenarios.
+
+**Q: How can I tell whether a model supports my language?**  
+A: Look at the `Languages` column in the table, or infer from language codes in the model name (zh / yue / en / ja / ko etc.).
+
+**Q: What if downloading is too slow?**  
+A: Download manually from [ModelScope](https://modelscope.cn/profile/manyeyes?tab=model) and place the files in your `--base` directory (by default, `models/` under the program directory).
+
+---
+
+## VI. Summary: Selecting a Model Means Selecting Metrics
+
+| Model Type | Core Selection Dimensions | Advice |
+|------------|---------------------------|--------|
+| **ASR** | Language → real‑time requirement → hardware → subtitle need → hotwords | Prefer `int8` + `kv` versions; ignore punctuation |
+| **VAD** | Ambient noise level | Quiet → default; noisy → `silero-vad` |
+| **Punc** | No selection needed | Default works; can also be called manually |
+| **AudioSep** | Separation target, precision (planned) | To be supported in a future release |
+
+Follow this order to filter models in the list, put the resulting model name after `--model`, and run the command. If the result is not satisfactory, adjust the filters and try another batch of models.
+
+
+---
+
+## v1.0/en/cli/models/selection-guide/asr.md
+
+# ASR Models
+## DolphinAsr Series
+
+> **Notes**  
+> - License: Apache 2.0
+> - `opt`: Optimized version, moves audio feature extraction module out of the model to reduce inference overhead  
+> - Full language and region code mapping:
+> ```
+> zh-CN: Chinese (Mandarin), zh-TW: Chinese (Taiwan), zh-WU: Chinese (Wu), zh-SICHUAN: Chinese (Sichuan), zh-SHANXI: Chinese (Shanxi), zh-ANHUI: Chinese (Anhui), zh-TIANJIN: Chinese (Tianjin), zh-NINGXIA: Chinese (Ningxia), zh-SHAANXI: Chinese (Shaanxi), zh-HEBEI: Chinese (Hebei), zh-SHANDONG: Chinese (Shandong), zh-GUANGDONG: Chinese (Guangdong), zh-SHANGHAI: Chinese (Shanghai), zh-HUBEI: Chinese (Hubei), zh-LIAONING: Chinese (Liaoning), zh-GANSU: Chinese (Gansu), zh-FUJIAN: Chinese (Fujian), zh-HUNAN: Chinese (Hunan), zh-HENAN: Chinese (Henan), zh-YUNNAN: Chinese (Yunnan), zh-MINNAN: Chinese (Minnan), zh-WENZHOU: Chinese (Wenzhou)
+> ja-JP: Japanese, th-TH: Thai, ru-RU: Russian, ko-KR: Korean, id-ID: Indonesian, vi-VN: Vietnamese
+> ct-NULL: Cantonese, ct-HK: Cantonese (Hong Kong), ct-GZ: Cantonese (Guangdong)
+> hi-IN: Hindi, ur-IN: Urdu (India), ur-PK: Urdu, ms-MY: Malay, uz-UZ: Uzbek
+> ar-MA: Arabic (Morocco), ar-GLA: Arabic, ar-SA: Arabic (Saudi Arabia), ar-EG: Arabic (Egypt), ar-KW: Arabic (Kuwait), ar-LY: Arabic (Libya), ar-JO: Arabic (Jordan), ar-AE: Arabic (UAE), ar-LVT: Arabic (Levant)
+> fa-IR: Persian, bn-BD: Bengali
+> ta-SG: Tamil (Singapore), ta-LK: Tamil (Sri Lanka), ta-IN: Tamil (India), ta-MY: Tamil (Malaysia)
+> te-IN: Telugu, ug-NULL: Uyghur, ug-CN: Uyghur, gu-IN: Gujarati
+> my-MM: Burmese, tl-PH: Tagalog, kk-KZ: Kazakh, or-IN: Odia, ne-NP: Nepali
+> mn-MN: Mongolian, km-KH: Khmer, jv-ID: Javanese, lo-LA: Lao, si-LK: Sinhala
+> fil-PH: Filipino, ps-AF: Pashto, pa-IN: Punjabi, kab-NULL: Kabyle
+> ba-NULL: Bashkir, ks-IN: Kashmiri, tg-TJ: Tajik, su-ID: Sundanese
+> mr-IN: Marathi, ky-KG: Kyrgyz, az-AZ: Azerbaijani
+> ```
+
+### DolphinAsr-base Models
+
+| Model Name | Type | Languages | Punctuation | Timestamps | Download Link |
+| ---- | ---- | ---- | ---- | ---- | ---- |
+| DolphinAsr-base-onnx | Non-streaming | Multilingual | No | Yes | [modelscope](https://www.modelscope.cn/models/manyeyes/DolphinAsr-base-onnx) |
+| DolphinAsr-base-int8-onnx | Non-streaming | Multilingual | No | Yes | [modelscope](https://www.modelscope.cn/models/manyeyes/DolphinAsr-base-int8-onnx) |
+| DolphinAsr-base-onnx-opt | Non-streaming | Multilingual | No | Yes | [modelscope](https://www.modelscope.cn/models/manyeyes/DolphinAsr-base-onnx-opt) |
+| DolphinAsr-base-int8-onnx-opt | Non-streaming | Multilingual | No | Yes | [modelscope](https://www.modelscope.cn/models/manyeyes/DolphinAsr-base-int8-onnx-opt) |
+
+### DolphinAsr-small Models
+
+| Model Name | Type | Languages | Punctuation | Timestamps | Download Link |
+| ---- | ---- | ---- | ---- | ---- | ---- |
+| DolphinAsr-small-onnx | Non-streaming | Multilingual | No | Yes | [modelscope](https://www.modelscope.cn/models/manyeyes/DolphinAsr-small-onnx) |
+| DolphinAsr-small-int8-onnx | Non-streaming | Multilingual | No | Yes | [modelscope](https://www.modelscope.cn/models/manyeyes/DolphinAsr-small-int8-onnx) |
+| DolphinAsr-small-onnx-opt | Non-streaming | Multilingual | No | Yes | [modelscope](https://www.modelscope.cn/models/manyeyes/DolphinAsr-small-onnx-opt) |
+| DolphinAsr-small-int8-onnx-opt | Non-streaming | Multilingual | No | Yes | [modelscope](https://www.modelscope.cn/models/manyeyes/DolphinAsr-small-int8-onnx-opt) |
+
+---
+
+## FireRedAsr Series
+
+### FireRedAsr-AED Chinese-English Model (v1)
+
+| Model Name | Type | Languages | Punctuation | Timestamps | Download Link |
+| ---- | ---- | ---- | ---- | ---- | ---- |
+| fireredasr-aed-large-zh-en-onnx-offline-20250124 | Non-streaming | Chinese, English | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/fireredasr-aed-large-zh-en-onnx-offline-20250124) |
+
+### FireRedAsr2-AED Chinese-English Model (v2)
+
+| Model Name | Type | Languages | Punctuation | Timestamps | Download Link |
+| ---- | ---- | ---- | ---- | ---- | ---- |
+| fireredasr2-aed-large-zh-en-onnx-offline-20260212 | Non-streaming | Chinese, English | No | Yes | [modelscope](https://www.modelscope.cn/models/manyeyes/fireredasr2-aed-large-zh-en-onnx-offline-20260212) |
+| fireredasr2-aed-large-zh-en-int8-onnx-offline-20260212 | Non-streaming | Chinese, English | No | Yes | [modelscope](https://www.modelscope.cn/models/manyeyes/fireredasr2-aed-large-zh-en-int8-onnx-offline-20260212) |
+| fireredasr2-aed-large-zh-en-onnx-selfcrosskv-offline-20260212 | Non-streaming | Chinese, English | No | Yes | [modelscope](https://www.modelscope.cn/models/manyeyes/fireredasr2-aed-large-zh-en-onnx-selfcrosskv-offline-20260212) |
+| fireredasr2-aed-large-zh-en-int8-onnx-selfcrosskv-offline-20260212 | Non-streaming | Chinese, English | No | Yes | [modelscope](https://www.modelscope.cn/models/manyeyes/fireredasr2-aed-large-zh-en-int8-onnx-selfcrosskv-offline-20260212) |
+| fireredasr2-aed-large-zh-en-int8-onnx-selfcrosskvstack-offline-20260212 | Non-streaming | Chinese, English | No | Yes | [modelscope](https://www.modelscope.cn/models/manyeyes/fireredasr2-aed-large-zh-en-int8-onnx-selfcrosskvstack-offline-20260212) |
+
+---
+
+## Fun-ASR Series
+
+> **Notes**  
+> - Model background: **End-to-end speech recognition foundation model** released by Tongyi Lab. Pre-trained on tens of millions of hours of real speech data, featuring strong contextual understanding and domain adaptability  
+> - Features: All models are **non-streaming**, support **punctuation**, support **timestamps**. Support low-latency real-time transcription, with recognition accuracy reaching 93% in far-field, high-noise environments  
+> - Version identifier meanings:  
+>   - `int8`: INT8 quantized version, smaller size, faster inference, suitable for edge deployment  
+>   - `LLM`: Large model enhanced version, stronger context understanding, suppresses recognition hallucinations  
+>   - `CTC`: Lightweight classic CTC architecture version, lightweight inference  
+>   - `MLT`: Multilingual general-purpose version, covers 31 languages  
+>   - `split-adaptor`: Version with feature adaptation module deployed separately  
+> - Language and capability notes:  
+>   - **Fun-ASR-Nano**: Supports Chinese, English, Japanese; 7 dialects (Wu, Cantonese, Min, Hakka, Gan, Xiang, Jin); 26 regional accents (Henan, Shanxi, Hubei, Sichuan, Chongqing, Yunnan, Guizhou, Guangdong, Guangxi, Shaanxi, Hebei, Shandong, Anhui, Tianjin, Ningxia, Liaoning, Gansu, Hunan, Heilongjiang, Jilin, Inner Mongolia, Jiangsu, Zhejiang, Fujian, Jiangxi, Hainan); additionally supports lyrics recognition and rap speech recognition  
+>   - **Fun-ASR-MLT-Nano**: Supports 31 languages total: Chinese, English, Cantonese, Japanese, Korean, Vietnamese, Indonesian, Thai, Malay, Filipino, Arabic, Hindi, Bulgarian, Croatian, Czech, Danish, Dutch, Estonian, Finnish, Greek, Hungarian, Irish, Latvian, Lithuanian, Maltese, Polish, Portuguese, Romanian, Slovak, Slovenian, Swedish  
+> - Domain advantages: Excellent performance in vertical fields such as education and finance, accurately recognizes domain-specific terminology, effectively suppresses hallucinations and language confusion
+
+### Fun-ASR-Nano Models
+
+| Model Name | Type | Languages | Punctuation | Timestamps | Download Link |
+| ---- | ---- | ---- | ---- | ---- | ---- |
+| Fun-ASR-Nano-2512-LLM-onnx | Non-streaming | Chinese, English, Japanese; 7 dialects + 26 regional accents, lyrics/rap recognition | Yes | Yes | [modelscope](https://www.modelscope.cn/models/manyeyes/Fun-ASR-Nano-2512-LLM-onnx) |
+| Fun-ASR-Nano-2512-LLM-int8-onnx | Non-streaming | Same as above | Yes | Yes | [modelscope](https://www.modelscope.cn/models/manyeyes/Fun-ASR-Nano-2512-LLM-int8-onnx) |
+| Fun-ASR-Nano-2512-LLM-split-adaptor-onnx | Non-streaming | Same as above | Yes | Yes | [modelscope](https://www.modelscope.cn/models/manyeyes/Fun-ASR-Nano-2512-LLM-split-adaptor-onnx) |
+| Fun-ASR-Nano-2512-LLM-split-adaptor-int8-onnx | Non-streaming | Same as above | Yes | Yes | [modelscope](https://www.modelscope.cn/models/manyeyes/Fun-ASR-Nano-2512-LLM-split-adaptor-int8-onnx) |
+| Fun-ASR-Nano-2512-CTC-onnx | Non-streaming | Same as above | Yes | Yes | [modelscope](https://www.modelscope.cn/models/manyeyes/Fun-ASR-Nano-2512-CTC-onnx) |
+| Fun-ASR-Nano-2512-CTC-int8-onnx | Non-streaming | Same as above | Yes | Yes | [modelscope](https://www.modelscope.cn/models/manyeyes/Fun-ASR-Nano-2512-CTC-int8-onnx) |
+
+### Fun-ASR-MLT-Nano Models
+
+| Model Name | Type | Languages | Punctuation | Timestamps | Download Link |
+| ---- | ---- | ---- | ---- | ---- | ---- |
+| Fun-ASR-MLT-Nano-2512-onnx | Non-streaming | 31 languages | Yes | Yes | [modelscope](https://www.modelscope.cn/models/manyeyes/Fun-ASR-MLT-Nano-2512-onnx) |
+| Fun-ASR-MLT-Nano-2512-int8-onnx | Non-streaming | 31 languages | Yes | Yes | [modelscope](https://www.modelscope.cn/models/manyeyes/Fun-ASR-MLT-Nano-2512-int8-onnx) |
+
+---
+
+## FunASR Series
+
+### Paraformer Chinese-English Models
+
+| Model Name | Type | Languages | Punctuation | Timestamps | Download Link |
+| ---- | ---- | ---- | ---- | ---- | ---- |
+| paraformer-large-zh-en-onnx-offline | Non-streaming | Chinese (zh), English (en) | No | No | [huggingface](https://huggingface.co/manyeyes/speech_paraformer-large_asr_nat-zh-cn-16k-common-vocab8404-onnx), [modelscope](https://www.modelscope.cn/models/manyeyes/paraformer-large-zh-en-onnx-offline) |
+| paraformer-large-zh-en-timestamp-onnx-offline | Non-streaming | Chinese, English | No | Yes | [modelscope](https://www.modelscope.cn/models/manyeyes/paraformer-large-zh-en-timestamp-onnx-offline) |
+| paraformer-large-en-onnx-offline | Non-streaming | English | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/paraformer-large-en-onnx-offline) |
+| paraformer-large-zh-en-onnx-online | Streaming | Chinese, English | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/paraformer-large-zh-en-onnx-online) |
+
+### Paraformer Cantonese/Chinese/English Multilingual Models
+
+| Model Name | Type | Languages | Punctuation | Timestamps | Download Link |
+| ---- | ---- | ---- | ---- | ---- | ---- |
+| paraformer-large-zh-yue-en-timestamp-onnx-offline-dengcunqin-20240805 | Non-streaming | Chinese, Cantonese, English | No | Yes | [modelscope](https://www.modelscope.cn/models/manyeyes/paraformer-large-zh-yue-en-timestamp-onnx-offline-dengcunqin-20240805) |
+| paraformer-large-zh-yue-en-onnx-offline-dengcunqin-20240805 | Non-streaming | Chinese, Cantonese, English | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/paraformer-large-zh-yue-en-onnx-offline-dengcunqin-20240805) |
+| paraformer-large-zh-yue-en-onnx-online-dengcunqin-20240208 | Streaming | Chinese, Cantonese, English | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/paraformer-large-zh-yue-en-onnx-online-dengcunqin-20240208) |
+
+### SeACo-Paraformer Hotword Customization Model
+
+SeACoParaformer is a next-generation non-autoregressive speech recognition model with hotword customization, proposed by Alibaba Speech Lab. Compared to the previous CLAS-based hotword customization solution, SeACoParaformer decouples the hotword module from the ASR model and performs hotword boosting via posterior probability fusion, making the boosting process visible and controllable, while significantly improving hotword recall.
+
+| Model Name | Type | Languages | Punctuation | Timestamps | Download Link |
+| ---- | ---- | ---- | ---- | ---- | ---- |
+| paraformer-seaco-large-zh-timestamp-onnx-offline | Non-streaming | Chinese, supports hotword customization | No | Yes | [modelscope](https://www.modelscope.cn/models/manyeyes/paraformer-seaco-large-zh-timestamp-onnx-offline) |
+
+### SenseVoice Models
+
+| Model Name | Type | Languages | Punctuation | Timestamps | Download Link |
+| ---- | ---- | ---- | ---- | ---- | ---- |
+| sensevoice-small-onnx | Non-streaming | Chinese, Cantonese, English, Japanese, Korean | Yes | No | [modelscope](https://www.modelscope.cn/models/manyeyes/sensevoice-small-onnx) |
+| sensevoice-small-int8-onnx | Non-streaming | Chinese, Cantonese, English, Japanese, Korean | Yes | No | [modelscope](https://www.modelscope.cn/models/manyeyes/sensevoice-small-int8-onnx) |
+| sensevoice-small-wenetspeech-yue-onnx | Non-streaming | Cantonese, Chinese, English, Japanese, Korean | Yes | No | [modelscope](https://www.modelscope.cn/models/manyeyes/sensevoice-small-wenetspeech-yue-onnx) |
+| sensevoice-small-wenetspeech-yue-int8-onnx | Non-streaming | Cantonese, Chinese, English, Japanese, Korean | Yes | No | [modelscope](https://www.modelscope.cn/models/manyeyes/sensevoice-small-wenetspeech-yue-int8-onnx) |
+| sensevoice-small-split-embed-onnx | Non-streaming | Chinese, Cantonese, English, Japanese, Korean | Yes | No | [modelscope](https://www.modelscope.cn/models/manyeyes/sensevoice-small-split-embed-onnx) |
+
+---
+
+## K2TransducerAsr Series
+
+### Streaming Models
+
+| Model Name | Type | Languages | Punctuation | Timestamps | Download Link |
+| ---- | ---- | ---- | ---- | ---- | ---- |
+| k2transducer-lstm-en-onnx-online-csukuangfj-20220903 | Streaming | English | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-lstm-en-onnx-online-csukuangfj-20220903) |
+| k2transducer-lstm-zh-onnx-online-csukuangfj-20221014 | Streaming | Chinese | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-lstm-zh-onnx-online-csukuangfj-20221014) |
+| k2transducer-zipformer-en-onnx-online-weijizhuang-20221202 | Streaming | English | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-en-onnx-online-weijizhuang-20221202) |
+| k2transducer-zipformer-en-onnx-online-zengwei-20230517 | Streaming | English | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-en-onnx-online-zengwei-20230517) |
+| k2transducer-zipformer-multi-zh-hans-onnx-online-20231212 | Streaming | Chinese | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-multi-zh-hans-onnx-online-20231212) |
+| k2transducer-zipformer-ko-onnx-online-johnbamma-20240612 | Streaming | Korean | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-ko-onnx-online-johnbamma-20240612) |
+| k2transducer-zipformer-ctc-small-zh-onnx-online-20250401 | Streaming | Chinese | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-ctc-small-zh-onnx-online-20250401) |
+| k2transducer-zipformer-large-zh-onnx-online-yuekai-20250630 | Streaming | Chinese | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-large-zh-onnx-online-yuekai-20250630) |
+| k2transducer-zipformer-xlarge-zh-onnx-online-yuekai-20250630 | Streaming | Chinese | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-xlarge-zh-onnx-online-yuekai-20250630) |
+| k2transducer-zipformer-ctc-large-zh-onnx-online-yuekai-20250630 | Streaming | Chinese | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-ctc-large-zh-onnx-online-yuekai-20250630) |
+| k2transducer-zipformer-ctc-xlarge-zh-onnx-online-yuekai-20250630 | Streaming | Chinese | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-ctc-xlarge-zh-onnx-online-yuekai-20250630) |
+
+### Non-streaming Models
+
+| Model Name | Type | Languages | Punctuation | Timestamps | Download Link |
+| ---- | ---- | ---- | ---- | ---- | ---- |
+| k2transducer-conformer-en-onnx-offline-csukuangfj-20220513 | Non-streaming | English | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-conformer-en-onnx-offline-csukuangfj-20220513) |
+| k2transducer-conformer-zh-onnx-offline-luomingshuang-20220727 | Non-streaming | Chinese | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-conformer-zh-onnx-offline-luomingshuang-20220727) |
+| k2transducer-zipformer-en-onnx-offline-yfyeung-20230417 | Non-streaming | English | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-en-onnx-offline-yfyeung-20230417) |
+| k2transducer-zipformer-large-en-onnx-offline-zengwei-20230516 | Non-streaming | English | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-large-en-onnx-offline-zengwei-20230516) |
+| k2transducer-zipformer-small-en-onnx-offline-zengwei-20230516 | Non-streaming | English | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-small-en-onnx-offline-zengwei-20230516) |
+| k2transducer-zipformer-zh-onnx-offline-wenetspeech-20230615 | Non-streaming | Chinese | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-zh-onnx-offline-wenetspeech-20230615) |
+| k2transducer-zipformer-zh-onnx-offline-multi-zh-hans-20230902 | Non-streaming | Chinese | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-zh-onnx-offline-multi-zh-hans-20230902) |
+| k2transducer-zipformer-zh-en-onnx-offline-20231122 | Non-streaming | Chinese, English | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-zh-en-onnx-offline-20231122) |
+| k2transducer-zipformer-cantonese-onnx-offline-20240313 | Non-streaming | Cantonese | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-cantonese-onnx-offline-20240313) |
+| k2transducer-zipformer-th-onnx-offline-yfyeung-20240620 | Non-streaming | Thai | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-th-onnx-offline-yfyeung-20240620) |
+| k2transducer-zipformer-ja-onnx-offline-reazonspeech-20240801 | Non-streaming | Japanese | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-ja-onnx-offline-reazonspeech-20240801) |
+| k2transducer-zipformer-ru-onnx-offline-20240918 | Non-streaming | Russian | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-ru-onnx-offline-20240918) |
+| k2transducer-zipformer-vi-onnx-offline-20250420 | Non-streaming | Vietnamese | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-vi-onnx-offline-20250420) |
+| k2transducer-zipformer-ctc-zh-onnx-offline-20250703 | Non-streaming | Chinese | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-ctc-zh-onnx-offline-20250703) [github](https://github.moeyy.xyz/https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/sherpa-onnx-zipformer-ctc-zh-int8-2025-07-03.tar.bz2) |
+| k2transducer-zipformer-ctc-small-zh-onnx-offline-20250716 | Non-streaming | Chinese | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-ctc-small-zh-onnx-offline-20250716) |
+
+---
+
+## MedAsr Series
+
+> **Notes**  
+> - Model architecture: Based on **Conformer**, a medical-domain speech recognition model released by Google Health  
+> - Application scenarios: Suitable for radiology dictation, doctor-patient dialogue, medical transcription, etc.  
+> - Supported languages: **English only** (primarily American English)  
+> - Model characteristics: Pre-trained on approximately 5,000 hours of medical speech data, strong recognition of medical terminology. Performance on non-standard drug names and structured data such as dates/times may vary, suitable for fine-tuning to adapt to specific business scenarios
+
+| Model Name | Type | Languages | Punctuation | Timestamps | Download Link |
+| ---- | ---- | ---- | ---- | ---- | ---- |
+| medasr-onnx | Non-streaming | English | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/medasr-onnx) |
+
+---
+
+## moonshine Series
+
+### moonshine-tiny Models
+
+| Model Name | Type | Languages | Punctuation | Timestamps | Download Link |
+| ---- | ---- | ---- | ---- | ---- | ---- |
+| moonshine-tiny-onnx | Non-streaming | English | Yes | No | [modelscope](https://modelscope.cn/models/manyeyes/moonshine-tiny-onnx) |
+| moonshine-tiny-int8-onnx | Non-streaming | English | Yes | No | [modelscope](https://modelscope.cn/models/manyeyes/moonshine-tiny-int8-onnx) |
+| moonshine-tiny-en-onnx | Non-streaming | English | Yes | No | [modelscope](https://modelscope.cn/models/manyeyes/moonshine-tiny-en-onnx) |
+| moonshine-tiny-zh-onnx | Non-streaming | Chinese | Yes | No | [modelscope](https://modelscope.cn/models/manyeyes/moonshine-tiny-zh-onnx) |
+| moonshine-tiny-zh-int8-onnx | Non-streaming | Chinese | Yes | No | [modelscope](https://modelscope.cn/models/manyeyes/moonshine-tiny-zh-int8-onnx) |
+| moonshine-tiny-vi-onnx | Non-streaming | Vietnamese | Yes | No | [modelscope](https://modelscope.cn/models/manyeyes/moonshine-tiny-vi-onnx) |
+| moonshine-tiny-vi-int8-onnx | Non-streaming | Vietnamese | Yes | No | [modelscope](https://modelscope.cn/models/manyeyes/moonshine-tiny-vi-int8-onnx) |
+| moonshine-tiny-uk-onnx | Non-streaming | Ukrainian | Yes | No | [modelscope](https://modelscope.cn/models/manyeyes/moonshine-tiny-uk-onnx) |
+| moonshine-tiny-uk-int8-onnx | Non-streaming | Ukrainian | Yes | No | [modelscope](https://modelscope.cn/models/manyeyes/moonshine-tiny-uk-int8-onnx) |
+| moonshine-tiny-ko-onnx | Non-streaming | Korean | Yes | No | [modelscope](https://modelscope.cn/models/manyeyes/moonshine-tiny-ko-onnx) |
+| moonshine-tiny-ko-int8-onnx | Non-streaming | Korean | Yes | No | [modelscope](https://modelscope.cn/models/manyeyes/moonshine-tiny-ko-int8-onnx) |
+| moonshine-tiny-ja-onnx | Non-streaming | Japanese | Yes | No | [modelscope](https://modelscope.cn/models/manyeyes/moonshine-tiny-ja-onnx) |
+| moonshine-tiny-ja-int8-onnx | Non-streaming | Japanese | Yes | No | [modelscope](https://modelscope.cn/models/manyeyes/moonshine-tiny-ja-int8-onnx) |
+| moonshine-tiny-ar-onnx | Non-streaming | Arabic | Yes | No | [modelscope](https://modelscope.cn/models/manyeyes/moonshine-tiny-ar-onnx) |
+| moonshine-tiny-ar-int8-onnx | Non-streaming | Arabic | Yes | No | [modelscope](https://modelscope.cn/models/manyeyes/moonshine-tiny-ar-int8-onnx) |
+| moonshine-tiny-fr-onnx | Non-streaming | French | Yes | No | [modelscope](https://modelscope.cn/models/manyeyes/moonshine-tiny-fr-onnx) |
+| moonshine-tiny-fr-int8-onnx | Non-streaming | French | Yes | No | [modelscope](https://modelscope.cn/models/manyeyes/moonshine-tiny-fr-int8-onnx) |
+
+### moonshine-base Models
+
+| Model Name | Type | Languages | Punctuation | Timestamps | Download Link |
+| ---- | ---- | ---- | ---- | ---- | ---- |
+| moonshine-base-onnx | Non-streaming | English | Yes | No | [modelscope](https://www.modelscope.cn/models/manyeyes/moonshine-base-onnx) |
+| moonshine-base-int8-onnx | Non-streaming | English | Yes | No | [modelscope](https://www.modelscope.cn/models/manyeyes/moonshine-base-int8-onnx) |
+| moonshine-base-en-onnx | Non-streaming | English | Yes | No | [modelscope](https://modelscope.cn/models/manyeyes/moonshine-base-en-onnx) |
+| moonshine-base-zh-onnx | Non-streaming | Chinese | Yes | No | [modelscope](https://modelscope.cn/models/manyeyes/moonshine-base-zh-onnx) |
+| moonshine-base-zh-int8-onnx | Non-streaming | Chinese | Yes | No | [modelscope](https://modelscope.cn/models/manyeyes/moonshine-base-zh-int8-onnx) |
+| moonshine-base-vi-onnx | Non-streaming | Vietnamese | Yes | No | [modelscope](https://www.modelscope.cn/models/manyeyes/moonshine-base-vi-onnx) |
+| moonshine-base-vi-int8-onnx | Non-streaming | Vietnamese | Yes | No | [modelscope](https://modelscope.cn/models/manyeyes/moonshine-base-vi-int8-onnx) |
+| moonshine-base-uk-onnx | Non-streaming | Ukrainian | Yes | No | [modelscope](https://modelscope.cn/models/manyeyes/moonshine-base-uk-onnx) |
+| moonshine-base-uk-int8-onnx | Non-streaming | Ukrainian | Yes | No | [modelscope](https://modelscope.cn/models/manyeyes/moonshine-base-uk-int8-onnx) |
+| moonshine-base-ko-onnx | Non-streaming | Korean | Yes | No | [modelscope](https://modelscope.cn/models/manyeyes/moonshine-base-ko-onnx) |
+| moonshine-base-ko-int8-onnx | Non-streaming | Korean | Yes | No | [modelscope](https://modelscope.cn/models/manyeyes/moonshine-base-ko-int8-onnx) |
+| moonshine-base-ja-onnx | Non-streaming | Japanese | Yes | No | [modelscope](https://modelscope.cn/models/manyeyes/moonshine-base-ja-onnx) |
+| moonshine-base-ja-int8-onnx | Non-streaming | Japanese | Yes | No | [modelscope](https://modelscope.cn/models/manyeyes/moonshine-base-ja-int8-onnx) |
+| moonshine-base-ar-onnx | Non-streaming | Arabic | Yes | No | [modelscope](https://modelscope.cn/models/manyeyes/moonshine-base-ar-onnx) |
+| moonshine-base-ar-int8-onnx | Non-streaming | Arabic | Yes | No | [modelscope](https://modelscope.cn/models/manyeyes/moonshine-base-ar-int8-onnx) |
+
+---
+
+## WeNet Series
+
+### Streaming Models
+
+| Model Name | Type | Languages | Punctuation | Timestamps | Download Link |
+| ---- | ---- | ---- | ---- | ---- | ---- |
+| wenet-u2pp-conformer-aishell-onnx-online-20210601 | Streaming | Chinese | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/wenet-u2pp-conformer-aishell-onnx-online-20210601) |
+| wenet-u2pp-conformer-wenetspeech-onnx-online-20220506 | Streaming | Chinese | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/wenet-u2pp-conformer-wenetspeech-onnx-online-20220506) |
+| wenet-u2pp-conformer-wenetspeech-int8-onnx-online-20220506 | Streaming | Chinese | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/wenet-u2pp-conformer-wenetspeech-int8-onnx-online-20220506) |
+| wenet-u2pp-conformer-gigaspeech-onnx-online-20210728 | Streaming | English | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/wenet-u2pp-conformer-gigaspeech-onnx-online-20210728) |
+
+### Non-streaming Models
+
+| Model Name | Type | Languages | Punctuation | Timestamps | Download Link |
+| ---- | ---- | ---- | ---- | ---- | ---- |
+| wenet-u2pp-conformer-aishell-onnx-offline-20210601 | Non-streaming | Chinese | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/wenet-u2pp-conformer-aishell-onnx-offline-20210601) |
+| wenet-u2pp-conformer-wenetspeech-onnx-offline-20220506 | Non-streaming | Chinese | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/wenet-u2pp-conformer-wenetspeech-onnx-offline-20220506) |
+| wenet-u2pp-conformer-wenetspeech-int8-onnx-offline-20220506 | Non-streaming | Chinese | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/wenet-u2pp-conformer-wenetspeech-int8-onnx-offline-20220506) |
+| wenet-u2pp-conformer-gigaspeech-onnx-offline-20210728 | Non-streaming | English | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/wenet-u2pp-conformer-gigaspeech-onnx-offline-20210728) |
+
+---
+
+## Whisper Series
+
+> **Notes**  
+> 1. Models with `-kv` suffix have KV Cache inference acceleration enabled  
+> 2. All models support **punctuation** and **timestamps**. Output paragraph-level timestamps by default, can enable word-level timestamps via parameters  
+> 3. Language coverage:  
+>    - Standard multilingual versions (tiny/small/medium/large-v1/large-v2): Support **99 languages** (including Chinese, Cantonese, English, Japanese, Korean, Russian, Arabic, Vietnamese, Ukrainian, and other major world languages)  
+>    - large-v3 / large-v3-turbo series: Extend low-resource languages beyond the 99, total approximately **106 languages**. New additions include **Zulu (zu), Maori (mi), Swahili (sw), Hausa (ha)**, etc., with significantly improved language identification  
+>    - Full language list and codes:
+> ```
+> af(Afrikaans), am(Amharic), ar(Arabic), as(Assamese), az(Azerbaijani), 
+> ba(Bashkir), be(Belarusian), bg(Bulgarian), bn(Bengali), bo(Tibetan), br(Breton), bs(Bosnian), 
+> ca(Catalan), cs(Czech), cy(Welsh), 
+> da(Danish), de(German), 
+> el(Greek), en(English), es(Spanish), et(Estonian), eu(Basque), 
+> fa(Persian), fi(Finnish), fo(Faroese), fr(French), 
+> ga(Irish), gl(Galician), gu(Gujarati), 
+> ha(Hausa), haw(Hawaiian), he(Hebrew), hi(Hindi), hr(Croatian), hu(Hungarian), hy(Armenian), 
+> id(Indonesian), ig(Igbo), is(Icelandic), it(Italian), 
+> ja(Japanese), jv(Javanese), 
+> ka(Georgian), kk(Kazakh), km(Khmer), kn(Kannada), ko(Korean), ku(Kurdish), ky(Kyrgyz), 
+> la(Latin), lb(Luxembourgish), lg(Ganda), lt(Lithuanian), lv(Latvian), 
+> mai(Maithili), mg(Malagasy), mi(Maori), mk(Macedonian), ml(Malayalam), mn(Mongolian), mr(Marathi), ms(Malay), mt(Maltese), my(Burmese), 
+> ne(Nepali), nl(Dutch), no(Norwegian), nso(Northern Sotho), ny(Chichewa), 
+> oc(Occitan), om(Oromo), or(Odia), 
+> pa(Punjabi), pl(Polish), ps(Pashto), pt(Portuguese), 
+> ro(Romanian), ru(Russian), rw(Kinyarwanda), 
+> sa(Sanskrit), sd(Sindhi), si(Sinhala), sk(Slovak), sl(Slovenian), sm(Samoan), sn(Shona), so(Somali), sq(Albanian), sr(Serbian), ss(Swati), st(Southern Sotho), su(Sundanese), sv(Swedish), sw(Swahili), 
+> ta(Tamil), te(Telugu), tg(Tajik), th(Thai), ti(Tigrinya), tk(Turkmen), tl(Tagalog), tn(Tswana), to(Tongan), tr(Turkish), ts(Tsonga), tt(Tatar), tw(Twi), 
+> ug(Uyghur), uk(Ukrainian), ur(Urdu), uz(Uzbek), 
+> ve(Venda), vi(Vietnamese), vo(Volapük), 
+> wa(Walloon), wo(Wolof), 
+> xh(Xhosa), 
+> yi(Yiddish), yo(Yoruba), 
+> zh(Chinese), yue(Cantonese), zu(Zulu)
+> ```
+>    - Language code short form:
+> ```
+> af, am, ar, as, az,
+> ba, be, bg, bn, bo, br, bs,
+> ca, cs, cy,
+> da, de, el, en, es, et, eu,
+> fa, fi, fo, fr, ga, gl, gu,
+> ha, haw, he, hi, hr, hu, hy,
+> id, ig, is, it,
+> ja, jv,
+> ka, kk, km, kn, ko, ku, ky,
+> la, lb, lg, lt, lv,
+> mai, mg, mi, mk, ml, mn, mr, ms, mt, my,
+> ne, nl, no, nso, ny,
+> oc, om, or,
+> pa, pl, ps, pt,
+> ro, ru, rw,
+> sa, sd, si, sk, sl, sm, sn, so, sq, sr, ss, st, su, sv, sw,
+> ta, te, tg, th, ti, tk, tl, tn, to, tr, ts, tt, tw,
+> ug, uk, ur, uz,
+> ve, vi, vo,
+> wa, wo, xh,
+> yi, yo,
+> zh, yue, zu
+> ```
+
+### whisper-tiny Models
+
+| Model Name | Type | Languages | Punctuation | Timestamps | KV | Download Link |
+| ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+| whisper-tiny-onnx | Non-streaming | 99 multilingual | Yes | Yes | No | [modelscope](https://www.modelscope.cn/models/manyeyes/whisper-tiny-onnx) |
+| whisper-tiny-onnx-kv | Non-streaming | 99 multilingual | Yes | Yes | Yes | [modelscope](https://www.modelscope.cn/models/manyeyes/whisper-tiny-onnx-kv) |
+| whisper-tiny-en-onnx | Non-streaming | English | Yes | Yes | No | [modelscope](https://www.modelscope.cn/models/manyeyes/whisper-tiny-en-onnx) |
+
+### whisper-small Models
+
+| Model Name | Type | Languages | Punctuation | Timestamps | KV | Download Link |
+| ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+| whisper-small-onnx | Non-streaming | 99 multilingual | Yes | Yes | No | [modelscope](https://www.modelscope.cn/models/manyeyes/whisper-small-onnx) |
+| whisper-small-en-onnx | Non-streaming | English | Yes | Yes | No | [modelscope](https://www.modelscope.cn/models/manyeyes/whisper-small-en-onnx) |
+| whisper-small-cantonese-onnx | Non-streaming | Cantonese, Chinese, English | Yes | Yes | No | [modelscope](https://www.modelscope.cn/models/manyeyes/whisper-small-cantonese-onnx) |
+
+### whisper-medium Models
+
+| Model Name | Type | Languages | Punctuation | Timestamps | KV | Download Link |
+| ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+| whisper-medium-onnx | Non-streaming | 99 multilingual | Yes | Yes | No | [modelscope](https://www.modelscope.cn/models/manyeyes/whisper-medium-onnx) |
+| whisper-medium-int8-onnx-kv | Non-streaming | 99 multilingual | Yes | Yes | Yes | [modelscope](https://www.modelscope.cn/models/manyeyes/whisper-medium-int8-onnx-kv) |
+| whisper-medium-en-onnx | Non-streaming | English | Yes | Yes | No | [modelscope](https://www.modelscope.cn/models/manyeyes/whisper-medium-en-onnx) |
+| whisper-medium-yue-onnx-kv | Non-streaming | Cantonese | Yes | Yes | Yes | [modelscope](https://www.modelscope.cn/models/manyeyes/whisper-medium-yue-onnx-kv) |
+| whisper-medium-yue-int8-onnx-kv | Non-streaming | Cantonese | Yes | Yes | Yes | [modelscope](https://www.modelscope.cn/models/manyeyes/whisper-medium-yue-int8-onnx-kv) |
+
+### whisper-large Models
+
+| Model Name | Type | Languages | Punctuation | Timestamps | KV | Download Link |
+| ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+| whisper-large-v1-onnx | Non-streaming | 99 multilingual | Yes | Yes | No | [modelscope](https://www.modelscope.cn/models/manyeyes/whisper-large-v1-onnx) |
+| whisper-large-v2-onnx | Non-streaming | 99 multilingual | Yes | Yes | No | [modelscope](https://www.modelscope.cn/models/manyeyes/whisper-large-v2-onnx) |
+| whisper-large-v3-onnx | Non-streaming | ~106 multilingual | Yes | Yes | No | [modelscope](https://www.modelscope.cn/models/manyeyes/whisper-large-v3-onnx) |
+| whisper-large-v3-turbo-onnx | Non-streaming | ~106 multilingual | Yes | Yes | No | [modelscope](https://www.modelscope.cn/models/manyeyes/whisper-large-v3-turbo-onnx) |
+| whisper-large-v3-turbo-zh-onnx | Non-streaming | Chinese | Yes | Yes | No | [modelscope](https://www.modelscope.cn/models/manyeyes/whisper-large-v3-turbo-zh-onnx) |
+| whisper-large-v3-turbo-zh-int8-onnx-kv-belle-20241016 | Non-streaming | Chinese | Yes | Yes | Yes | [modelscope](https://www.modelscope.cn/models/manyeyes/whisper-large-v3-turbo-zh-int8-onnx-kv-belle-20241016) |
+
+### Distil-Whisper Models
+
+| Model Name | Type | Languages | Punctuation | Timestamps | KV | Download Link |
+| ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+| distil-whisper-small-en-onnx | Non-streaming | English | Yes | Yes | No | [modelscope](https://www.modelscope.cn/models/manyeyes/distil-whisper-small-en-onnx) |
+| distil-whisper-medium-en-onnx | Non-streaming | English | Yes | Yes | No | [modelscope](https://www.modelscope.cn/models/manyeyes/distil-whisper-medium-en-onnx) |
+| distil-whisper-large-v2-en-onnx | Non-streaming | English | Yes | Yes | No | [modelscope](https://www.modelscope.cn/models/manyeyes/distil-whisper-large-v2-en-onnx) |
+| distil-whisper-large-v3-en-onnx | Non-streaming | English | Yes | Yes | No | [modelscope](https://www.modelscope.cn/models/manyeyes/distil-whisper-large-v3-en-onnx) |
+| distil-whipser-large-v3.5-en-onnx | Non-streaming | English | Yes | Yes | No | [modelscope](https://www.modelscope.cn/models/manyeyes/distil-whipser-large-v3.5-en-onnx) |
+| distil-whisper-large-v2-multi-hans-onnx | Non-streaming | Chinese (compatible with 99 languages) | Yes | Yes | No | [modelscope](https://www.modelscope.cn/models/manyeyes/distil-whisper-large-v2-multi-hans-onnx) |
+| distil-whisper-small-cantonese-onnx-alvanlii-20240404 | Non-streaming | Cantonese, Chinese, English | Yes | Yes | No | [modelscope](https://www.modelscope.cn/models/manyeyes/distil-whisper-small-cantonese-onnx-alvanlii-20240404) |
+
+---
+
+
+> **General Notes**  
+> - `int8` = quantized version, smaller size, faster speed  
+> - `kv` / `selfcrosskv` / `selfcrosskvstack` / `opt` = inference optimization versions  
+> - Some models provide HuggingFace or GitHub sources; see each table
+
+
+---
+
+## v1.0/en/cli/models/selection-guide/vad.md
+
+# VAD Models
+## FSMN-VAD Series
+
+> **Notes**  
+> - Model background: An industrial‑grade Voice Activity Detection (VAD) model developed by Alibaba DAMO Academy. Built on the FSMN‑Monophone architecture, it is a 16k general‑purpose Chinese VAD model, natively compatible with the FunASR framework and Paraformer‑large for long‑audio scenarios.
+> - Features: Leverages the FSMN structure to fully utilise contextual information, providing fast inference and controllable latency. Uses Monophone fine‑grained modelling units to improve feature discrimination and reduce recognition errors. Supports various inputs: audio files, URLs, binary streams, audio arrays, wav.scp lists, etc. Allows customisation of tail silence duration, voice/noise thresholds, and other parameters. Fully compatible with Linux‑x86_64, macOS, and Windows. Can be freely combined with ASR and punctuation modules.
+> - Open source repository: https://github.com/modelscope/FunASR
+
+### Model List
+
+| Model Name | Description | Download Link |
+| ---- | ---- | ---- |
+| alifsmnvad-onnx | General standard version, well‑balanced performance, default recommendation | [modelscope](https://modelscope.cn/models/manyeyes/alifsmnvad-onnx) |
+
+---
+
+## Silero-VAD Series
+
+> **Notes**  
+> - Model background: A deep learning‑based VAD model released by the open‑source community `snakers4`. A mainstream open‑source VAD solution, designed for 16kHz audio input.
+> - Features: Applies pre‑processing steps (pre‑emphasis, framing, windowing) to the audio, then learns voice features through a neural network to accurately distinguish speech from non‑speech segments. Adaptively adjusts detection thresholds based on the noise environment, performing particularly well in noisy scenes. Iterative versions continuously improve noise robustness.
+> - Open source repository: https://github.com/snakers4/silero-vad
+
+### Model List
+
+| Model Name | Description | Download Link |
+| ---- | ---- | ---- |
+| silero-vad-onnx | Base version, suitable for general‑purpose scenarios | [modelscope](https://modelscope.cn/models/manyeyes/silero-vad-onnx) |
+| silero-vad-v5-onnx | V5 iterative version, optimised for noisy environments | [modelscope](https://modelscope.cn/models/manyeyes/silero-vad-v5-onnx) |
+| silero-vad-v6-onnx | V6 latest version, best detection performance in noisy scenes | [modelscope](https://modelscope.cn/models/manyeyes/silero-vad-v6-onnx) |
+
+
+---
+
+## v1.0/en/cli/models/selection-guide/punc.md
+
+# Punc Models
+## CT-Transformer Series
+
+> **Notes**  
+> - Model background: Punctuation model open-sourced by Alibaba DAMO Academy, built on the **Controllable Time-delay Transformer (CT-Transformer)** architecture. Designed primarily for post-processing of ASR results to predict and restore punctuation in text.
+> - Features: The model consists of three parts: **Embedding, Encoder, Predictor**. Embedding fuses word vectors and positional vectors; Encoder supports various network structures such as Transformer and Conformer; Predictor predicts punctuation type per token. To address the issues of high inference latency and frequent punctuation flickering in traditional Transformers, CT-Transformer achieves **controllable inference latency** while maintaining accuracy, making it suitable for real‑time business scenarios. Test results on general domain business datasets: Precision 53.8%, Recall 60.0%, F1 score 56.5%. Total training samples: approximately 33 million.
+> - Open source repository: https://github.com/modelscope/FunASR
+
+**Terminology explanations**
+- `int8`: INT8 quantised version, reduces model size and speeds up inference, with a small loss in accuracy
+- `mge`: Targeted quantisation optimisation for core layers (MatMul, Gather, Embed). Further reduces model size, improves loading and inference speed; accuracy may degrade slightly
+
+### Model List
+| Model Name | Vocabulary Size | Description | Download Link |
+| ---- | ---- | ---- | ---- |
+| alicttransformerpunc-zh-en-onnx | 272,727 | Standard original version, general Chinese‑English punctuation model | [modelscope](https://modelscope.cn/models/manyeyes/alicttransformerpunc-zh-en-onnx) |
+| alicttransformerpunc-zh-en-int8-onnx | 272,727 | Standard version INT8 quantised, smaller size, faster inference | [modelscope](https://modelscope.cn/models/manyeyes/alicttransformerpunc-zh-en-int8-onnx) |
+| alicttransformerpunc-zh-en-mge-int8-onnx | 272,727 | Standard version + core‑layer MGE optimisation + INT8 quantisation, further improved loading and inference speed, slightly lower accuracy | [modelscope](https://modelscope.cn/models/manyeyes/alicttransformerpunc-zh-en-mge-int8-onnx) |
+| alicttransformerpunc-large-zh-en-onnx | 471,067 | Large‑parameter original version, higher punctuation recognition accuracy | [modelscope](https://modelscope.cn/models/manyeyes/alicttransformerpunc-large-zh-en-onnx) |
+| alicttransformerpunc-large-zh-en-int8-onnx | 471,067 | Large‑parameter version INT8 quantised, balancing accuracy and inference speed | [modelscope](https://modelscope.cn/models/manyeyes/alicttransformerpunc-large-zh-en-int8-onnx) |
+| alicttransformerpunc-large-zh-en-mge-int8-onnx | 471,067 | Large‑parameter version + core‑layer MGE optimisation + INT8 quantisation, best overall runtime efficiency, slightly lower accuracy | [modelscope](https://modelscope.cn/models/manyeyes/alicttransformerpunc-large-zh-en-mge-int8-onnx) |
+
+---
+
+## FireRedPunc Series
+
+> **Notes**  
+> - Model background: FireRedPunc is an independent punctuation prediction module within the **FireRedASR2S** integrated speech system. Built on the BERT architecture, it is designed for ASR post‑processing scenarios and supports Chinese‑English bilingual punctuation restoration.
+> - Features: The model achieves SOTA performance in the industry, with an **average F1 score of 78.90%**. It performs excellently across multiple domains for both Chinese and English datasets, adapting to various offline and real‑time transcription tasks.
+> - Open source repository: https://github.com/FireRedTeam/FireRedASR2S
+
+### Model List
+| Model Name | Description | Download Link |
+| ---- | ---- | ---- |
+| FireRedPunc-zh-en-onnx | General Chinese‑English punctuation prediction model, excellent overall accuracy, SOTA‑level performance | [modelscope](https://modelscope.cn/models/manyeyes/FireRedPunc-zh-en-onnx) |
 
 
 ---
@@ -1061,6 +1761,44 @@ manyspeech punc --help
 ## 2025-08-29
 
 - Initial release of `manyspeech-cli`
+
+
+---
+
+## v1.0/en/cli/models/supported-models.md
+
+# Supported Models
+
+## ASR Models
+
+| Series | Description | Types |
+|---------|------|----------|
+| **AliParaformerAsr** | DAMO Academy Paraformer | online/offline/2pass |
+| **FireRedAsr** | FireRed Large Model, Best for Chinese | offline |
+| **K2TransducerAsr** | K2 Transducer Series | online/offline/2pass |
+| **WhisperAsr** | OpenAI Whisper Series | offline |
+| **MoonshineAsr** | Lightweight English Model | offline |
+| **WenetAsr** | Open Source Self-developed | online/offline |
+| **DolphinAsr** | Dolphin Series | offline |
+| **OmniAsr** | Omni Series | online |
+| **Fun-ASR-Nano-2512** | Latest Nano Model | offline |
+
+## VAD Models
+
+| Name | Description |
+|---------|------|
+| `alifsmnvad-onnx` | FSMN-VAD (Default, General) |
+| `silero-vad-v6-onnx` | Silero-VAD (Better for Noise) |
+
+## Punctuation Models
+
+| Name | Description |
+|---------|------|
+| `alicttransformerpunc-zh-en-mge-int8-onnx` | CT-Transformer (Default) |
+
+## More Models
+
+Visit [manyeyes ModelScope Profile](https://modelscope.cn/profile/manyeyes?tab=model)
 
 
 ---

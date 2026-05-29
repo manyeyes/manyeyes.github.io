@@ -16,6 +16,10 @@
 - [Auto-Download Mechanism](/manyspeech/en/cli/models/auto-download.md)
 - [Model Management](/manyspeech/en/cli/models/index.md): ManySpeech-CLI features intelligent model management, auto-detecting and downloading required models.
 - [Manual Model Specification](/manyspeech/en/cli/models/manual-specify.md)
+- [ASR Models](/manyspeech/en/cli/models/selection-guide/asr.md)
+- [Model Selection Guide](/manyspeech/en/cli/models/selection-guide/index.md): Faced with an ever‑growing list of models, you don't need to memorise every name. This guide teaches you how to read the key metrics of each model, then match them to your own needs – language, real‑time requirement, hardware, timestamps … filter step by step, and only a handful of models will remain. 📌 All models are in ONNX format. When you use them for the first time in manyspeech, they are downloaded automatically.
+- [Punc Models](/manyspeech/en/cli/models/selection-guide/punc.md)
+- [VAD Models](/manyspeech/en/cli/models/selection-guide/vad.md)
 - [Supported Models](/manyspeech/en/cli/models/supported-models.md)
 - [Changelog](/manyspeech/en/cli/reference/changelog.md)
 - [Reference](/manyspeech/en/cli/reference/index.md): Complete command reference and changelog.

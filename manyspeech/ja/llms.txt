@@ -16,6 +16,10 @@
 - [自動ダウンロードの仕組み](/manyspeech/ja/cli/models/auto-download.md)
 - [モデル管理](/manyspeech/ja/cli/models/index.md): ManySpeech-CLI はスマートなモデル管理を内蔵し、必要なモデルを自動検出・ダウンロードしてローカルで推論します。
 - [手動でモデルを指定する](/manyspeech/ja/cli/models/manual-specify.md)
+- [ASR モデル](/manyspeech/ja/cli/models/selection-guide/asr.md)
+- [モデル選定ガイド](/manyspeech/ja/cli/models/selection-guide/index.md): 更新が続くモデルリストについて、すべての名称を暗記する必要はありません。本ガイドでは各モデルの主要指標の読み方を解説し、使用言語・リアルタイム性・動作環境・タイムスタンプなどの要件に基づいて適切なモデルを選定する方法を紹介します。 📌 すべてのモデルはONNX形式です。manyspeech 初回利用時に自動でダウンロードされます。
+- [Punc モデル](/manyspeech/ja/cli/models/selection-guide/punc.md)
+- [VAD モデル](/manyspeech/ja/cli/models/selection-guide/vad.md)
 - [サポートモデル一覧](/manyspeech/ja/cli/models/supported-models.md)
 - [更新ログ](/manyspeech/ja/cli/reference/changelog.md)
 - [参考資料](/manyspeech/ja/cli/reference/index.md): この章はコマンドリファレンスと更新履歴を提供します。 内容: 全パラメータ説明 - 全ての CLI 引数の詳細更新ログ - バージョン履歴 クイック検索:
