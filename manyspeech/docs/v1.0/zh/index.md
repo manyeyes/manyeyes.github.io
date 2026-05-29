@@ -3,7 +3,7 @@ pageType: home
 
 hero:
   name: "ManySpeech"
-  text: "轻量化本地语音AI"
+  text: "轻量本地语音AI"
   tagline: 原生支持离线识别、实时流式识别，无需云端、无需额外配置
   actions:
     - theme: brand
