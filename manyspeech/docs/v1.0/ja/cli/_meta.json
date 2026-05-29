@@ -42,9 +42,20 @@
     "collapsible": true,
     "items": [
       "index",
-      "supported-models",
       "auto-download",
-      "manual-specify"
+      "manual-specify",
+      {
+        "type": "dir",
+        "name": "selection-guide",
+        "label": "モデル選定ガイド",
+        "collapsible": true,
+        "items": [
+          "index",
+          "asr",
+          "vad",
+          "punc"
+        ]
+      }
     ]
   },
   {
