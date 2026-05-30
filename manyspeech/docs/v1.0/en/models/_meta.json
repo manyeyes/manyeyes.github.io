@@ -1,0 +1,74 @@
+[
+  {
+    "type": "dir",
+    "name": "getting-started",
+    "label": "Getting Started",
+    "collapsible": true,
+    "items": [
+      "index"
+    ]
+  },
+  {
+    "type": "dir",
+    "name": "asr",
+    "label": "Speech Recognition",
+    "collapsible": true,
+    "items": [
+      "index",
+      "dolphin",
+      "funasr",
+      "fun-asr",
+      "k2",
+      "fireredasr",
+      "medasr",
+      "moonshine",
+      "wenet",
+      "whisper"
+    ]
+  },
+  {
+    "type": "dir",
+    "name": "vad",
+    "label": "Voice Activity Detection",
+    "collapsible": true,
+    "items": [
+      "index",
+      "fsmn-vad",
+      "silero-vad"
+    ]
+  },
+  {
+    "type": "dir",
+    "name": "punc",
+    "label": "Punctuation Processing",
+    "collapsible": true,
+    "items": [
+      "index",
+      "firered-punc",
+      "ct-transformer-punc"
+    ]
+  },
+  {
+    "type": "dir",
+    "name": "tts",
+    "label": "Speech Synthesis",
+    "collapsible": true,
+    "items": [
+      "index",
+      "kokoro",
+      "vits",
+      "indextts"
+    ]
+  },
+  {
+    "type": "dir",
+    "name": "audio-sep",
+    "label": "Audio Separation & Enhancement",
+    "collapsible": true,
+    "items": [
+      "index",
+      "mossformer",
+      "splitter-voiceprint-sep"
+    ]
+  }
+]

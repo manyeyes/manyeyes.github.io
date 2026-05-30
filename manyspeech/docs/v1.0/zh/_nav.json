@@ -2,5 +2,9 @@
   {
     "text": "命令行工具",
     "link": "/cli/getting-started/"
+  },
+  {
+    "text": "模型库",
+    "link": "/models/getting-started/"
   }
 ]

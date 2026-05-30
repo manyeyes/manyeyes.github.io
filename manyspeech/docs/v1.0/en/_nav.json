@@ -2,5 +2,9 @@
   {
     "text": "CLI Tool",
     "link": "/cli/getting-started/"
+  },
+  {
+    "text": "Models Library",
+    "link": "/models/getting-started/"
   }
 ]

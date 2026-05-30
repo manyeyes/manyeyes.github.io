@@ -1,0 +1,74 @@
+[
+  {
+    "type": "dir",
+    "name": "getting-started",
+    "label": "快速开始",
+    "collapsible": true,
+    "items": [
+      "index"
+    ]
+  },
+  {
+    "type": "dir",
+    "name": "asr",
+    "label": "语音识别",
+    "collapsible": true,
+    "items": [ 
+      "index",
+      "dolphin", 
+      "funasr", 
+      "fun-asr", 
+      "k2", 
+      "fireredasr", 
+      "medasr", 
+      "moonshine", 
+      "wenet", 
+      "whisper"
+    ]
+  },
+  {
+    "type": "dir",
+    "name": "vad",
+    "label": "语音端点检测",
+    "collapsible": true,
+    "items": [
+      "index",
+      "fsmn-vad",
+      "silero-vad"
+    ]
+  },
+  {
+    "type": "dir",
+    "name": "punc",
+    "label": "标点符号处理",
+    "collapsible": true,
+    "items": [
+      "index",
+      "firered-punc",
+      "ct-transformer-punc"
+    ]
+  },
+  {
+    "type": "dir",
+    "name": "tts",
+    "label": "语音生成",
+    "collapsible": true,
+    "items": [
+      "index",
+      "kokoro",
+      "vits",
+      "indextts"
+    ]
+  },
+  {
+    "type": "dir",
+    "name": "audio-sep",
+    "label": "音频分离与增强",
+    "collapsible": true,
+    "items": [
+      "index",
+      "mossformer",
+      "splitter-voiceprint-sep"
+    ]
+  }
+]
