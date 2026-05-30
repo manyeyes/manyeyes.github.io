@@ -269,3 +269,7 @@ manyspeech audiosep -i file --files "混合音频.wav" --target vocals --output 
 | **AudioSep** | 分离目标、精度（规划中）              | 待后续版本支持                   |
 
 按这个顺序在模型列表里筛选，把筛选出的模型名填到 `--model` 后面，运行命令。如果效果不满意，再调整筛选条件换一批模型试。
+
+## 下一步
+
+- [模型库](/manyspeech/models/getting-started.md) - 详细的模型说明

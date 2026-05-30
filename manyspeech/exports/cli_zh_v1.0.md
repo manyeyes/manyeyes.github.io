@@ -1000,6 +1000,10 @@ manyspeech audiosep -i file --files "混合音频.wav" --target vocals --output 
 
 按这个顺序在模型列表里筛选，把筛选出的模型名填到 `--model` 后面，运行命令。如果效果不满意，再调整筛选条件换一批模型试。
 
+## 下一步
+
+- [模型库](/models/getting-started) - 详细的模型说明
+
 ---
 
 ## v1.0/zh/cli/models/selection-guide/asr.md

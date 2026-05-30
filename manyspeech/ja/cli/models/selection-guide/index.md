@@ -256,3 +256,7 @@ A：[ModelScope](https://modelscope.cn/profile/manyeyes?tab=model) から手動�
 
 上記の順序でモデルを絞り込み、選定したモデル名を `--model` 引数に指定してコマンドを実行してください。
 動作結果が想定通りでない場合は、選定条件を調整し別のモデルを試してください。
+
+## 次のステップ
+
+- [モデルライブラリ](/manyspeech/ja/models/getting-started.md) - モデルの詳細説明

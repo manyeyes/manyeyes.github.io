@@ -976,6 +976,10 @@ A: Download manually from [ModelScope](https://modelscope.cn/profile/manyeyes?ta
 
 Follow this order to filter models in the list, put the resulting model name after `--model`, and run the command. If the result is not satisfactory, adjust the filters and try another batch of models.
 
+## Next Steps
+- [Model Library](/models/getting-started) - Detailed model documentation
+
+
 
 ---
 
