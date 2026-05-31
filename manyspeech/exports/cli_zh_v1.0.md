@@ -44,8 +44,8 @@
 
 **下载安装包**（任选一个源）：
 
-- **ModelScope 镜像**：[manyspeech-cli-1.0.0-preview.9.17-win-x64-setup.exe](https://modelscope.cn/models/manyeyes/manyspeech-cli/resolve/master/manyspeech-cli-1.0.0-preview.9.17-win-x64-setup.exe)
-- **GitHub Releases**：[manyspeech-cli-1.0.0-preview.9.17-win-x64-setup.exe](https://github.com/manyeyes/manyeyes.github.io/releases/download/v1.0.0-preview.9.17/manyspeech-cli-1.0.0-preview.9.17-win-x64-setup.exe)
+- **ModelScope 镜像**：[manyspeech-cli-1.0.0-preview.9.19-win-x64-setup.exe](https://modelscope.cn/models/manyeyes/manyspeech-cli/resolve/master/manyspeech-cli-1.0.0-preview.9.19-win-x64-setup.exe)
+- **GitHub Releases**：[manyspeech-cli-1.0.0-preview.9.19-win-x64-setup.exe](https://github.com/manyeyes/manyeyes.github.io/releases/download/v1.0.0-preview.9.19/manyspeech-cli-1.0.0-preview.9.19-win-x64-setup.exe)
 
 **安装步骤**：
 
@@ -60,8 +60,8 @@
 
 **下载压缩包**（任选一个源）：
 
-- **ModelScope 镜像**：[manyspeech-cli-1.0.0-preview.9.17-win-x64.zip](https://modelscope.cn/models/manyeyes/manyspeech-cli/file/view/master/manyspeech-cli-1.0.0-preview.9.17-win-x64.zip)
-- **GitHub Releases**：[manyspeech-cli-1.0.0-preview.9.17-win-x64.zip](https://github.com/manyeyes/manyeyes.github.io/releases/download/v1.0.0-preview.9.17/manyspeech-cli-1.0.0-preview.9.17-win-x64.zip)
+- **ModelScope 镜像**：[manyspeech-cli-1.0.0-preview.9.19-win-x64.zip](https://modelscope.cn/models/manyeyes/manyspeech-cli/file/view/master/manyspeech-cli-1.0.0-preview.9.19-win-x64.zip)
+- **GitHub Releases**：[manyspeech-cli-1.0.0-preview.9.19-win-x64.zip](https://github.com/manyeyes/manyeyes.github.io/releases/download/v1.0.0-preview.9.19/manyspeech-cli-1.0.0-preview.9.19-win-x64.zip)
 
 **安装步骤**：
 

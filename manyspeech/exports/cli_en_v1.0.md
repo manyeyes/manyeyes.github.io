@@ -44,8 +44,8 @@ Welcome to ManySpeech-CLI! This guide will help you get up and running quickly.
 
 **Download the installer** (choose either source):
 
-- **ModelScope Mirror**: [manyspeech-cli-1.0.0-preview.9.17-win-x64-setup.exe](https://modelscope.cn/models/manyeyes/manyspeech-cli/resolve/master/manyspeech-cli-1.0.0-preview.9.17-win-x64-setup.exe)
-- **GitHub Releases**: [manyspeech-cli-1.0.0-preview.9.17-win-x64-setup.exe](https://github.com/manyeyes/manyeyes.github.io/releases/download/v1.0.0-preview.9.17/manyspeech-cli-1.0.0-preview.9.17-win-x64-setup.exe)
+- **ModelScope Mirror**: [manyspeech-cli-1.0.0-preview.9.19-win-x64-setup.exe](https://modelscope.cn/models/manyeyes/manyspeech-cli/resolve/master/manyspeech-cli-1.0.0-preview.9.19-win-x64-setup.exe)
+- **GitHub Releases**: [manyspeech-cli-1.0.0-preview.9.19-win-x64-setup.exe](https://github.com/manyeyes/manyeyes.github.io/releases/download/v1.0.0-preview.9.19/manyspeech-cli-1.0.0-preview.9.19-win-x64-setup.exe)
 
 **Installation steps**:
 
@@ -60,8 +60,8 @@ Welcome to ManySpeech-CLI! This guide will help you get up and running quickly.
 
 **Download the archive** (choose either source):
 
-- **ModelScope Mirror**: [manyspeech-cli-1.0.0-preview.9.17-win-x64.zip](https://modelscope.cn/models/manyeyes/manyspeech-cli/file/view/master/manyspeech-cli-1.0.0-preview.9.17-win-x64.zip)
-- **GitHub Releases**: [manyspeech-cli-1.0.0-preview.9.17-win-x64.zip](https://github.com/manyeyes/manyeyes.github.io/releases/download/v1.0.0-preview.9.17/manyspeech-cli-1.0.0-preview.9.17-win-x64.zip)
+- **ModelScope Mirror**: [manyspeech-cli-1.0.0-preview.9.19-win-x64.zip](https://modelscope.cn/models/manyeyes/manyspeech-cli/file/view/master/manyspeech-cli-1.0.0-preview.9.19-win-x64.zip)
+- **GitHub Releases**: [manyspeech-cli-1.0.0-preview.9.19-win-x64.zip](https://github.com/manyeyes/manyeyes.github.io/releases/download/v1.0.0-preview.9.19/manyspeech-cli-1.0.0-preview.9.19-win-x64.zip)
 
 **Installation steps**:
 
