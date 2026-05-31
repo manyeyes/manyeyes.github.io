@@ -37,6 +37,7 @@
 - [K2TransducerAsr シリーズ](/manyspeech/ja/models/asr/k2.md)
 - [MedAsr シリーズ](/manyspeech/ja/models/asr/medasr.md): 説明モデルアーキテクチャ：Conformer ベース。Google Health が発表した医療シーン向け音声認識モデル適用シーン：放射線科の口述、医師と患者の対話、医学文書の書き起こしなど、医療向けディクテーションタスクに適合対応言語：英語のみ（主に米国英語）モデル特徴：約5000時間の医療音声データで事前学習され、医学専門用語の認識に強い。非標準的な薬品名や日時といった構造化データの認識にはばらつきがあるため、業務シーンに合わせた追加のファインチューニングを推奨
 - [moonshine シリーズ](/manyspeech/ja/models/asr/moonshine.md)
+- [Parakeet Series](/manyspeech/ja/models/asr/parakeet.md): General Notesint8 = quantized version, smaller size, faster inferenceselfcrosskv / selfcrosskvstack = inference optimization variants (not applicable to Parakeet series)Some models provide HuggingFace or GitHub download sources; refer to each table
 - [WeNet シリーズ](/manyspeech/ja/models/asr/wenet.md)
 - [Whisper シリーズ](/manyspeech/ja/models/asr/whisper.md): 説明末尾に -kv が付くものは、KV Cache推論高速化を有効にしたバージョン全シリーズ句読点対応、タイムスタンプ対応。デフォルトで段落レベルのタイムスタンプを出力し、パラメータで単語レベルのタイムスタンプも有効化可能言語範囲：標準多言語版（tiny/small/medium/large-v1/large-v2）：合計 99言語（中国語、広東語、英語、日本語、韓国語、ロシア語、アラビア語、ベトナム語、ウクライナ語など世界の主要言語を含む）large-v3 / large-v3-turbo シリーズ：99言語に加え低リソース言語を拡張し、合計約 106言語。新たに追加されたもの：ズールー語（zu）、マオリ語（mi）、スワヒリ語（sw）、ハウサ語（ha） など。言語識別効果が顕著に向上
 - [音声分離と強調](/manyspeech/ja/models/audio-sep/index.md): このセクションは準備中です。近日中にコンテンツを追加します。
