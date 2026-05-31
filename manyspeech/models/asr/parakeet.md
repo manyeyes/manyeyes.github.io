@@ -84,17 +84,16 @@
 >   - TDT（Token-and-Duration Transducer）：通过联合预测 token 和 duration，可跳过大部分 blank 预测（该模型 duration 最大 4 帧），显著提升推理速度
 > - **支持语言**：日语（Japanese）
 > - **标点**：✅ 支持标点符号（Punctuations）
-> - **时间戳**：❌ 未明确支持（默认 TDT 解码器可能输出时间戳，但官方描述仅提及输出文本字符串，暂标记为不支持）
+> - **时间戳**：默认使用 TDT 解码器可输出时间戳；
 > - **长音频**：未明确说明处理时长
 > - **输入**：16kHz 单声道 .wav 或 .flac
 > - **输出**：带标点的文本字符串
-> - **使用方式**：可通过 NeMo 工具包加载或使用 `transcribe_speech.py` 脚本；默认使用 TDT 解码器，可通过 `decoding_type='ctc'` 切换
 > - **许可**：Apache License 2.0
 
 | 模型名称                                | 类型  | 支持语言 | 标点    | 时间戳 | 下载地址                                                                                       |
 | ----------------------------------- | --- | ---- | ----- | --- | ------------------------------------------------------------------------------------------ |
-| parakeet-tdt\_ctc-0.6b-ja-onnx      | 非流式 | 日语   | **是** | 否   | [modelscope](https://www.modelscope.cn/models/manyeyes/parakeet-tdt_ctc-0.6b-ja-onnx)      |
-| parakeet-tdt\_ctc-0.6b-ja-int8-onnx | 非流式 | 日语   | **是** | 否   | [modelscope](https://www.modelscope.cn/models/manyeyes/parakeet-tdt_ctc-0.6b-ja-int8-onnx) |
+| parakeet-tdt\_ctc-0.6b-ja-onnx      | 非流式 | 日语   | **是** | 是   | [modelscope](https://www.modelscope.cn/models/manyeyes/parakeet-tdt_ctc-0.6b-ja-onnx)      |
+| parakeet-tdt\_ctc-0.6b-ja-int8-onnx | 非流式 | 日语   | **是** | 是   | [modelscope](https://www.modelscope.cn/models/manyeyes/parakeet-tdt_ctc-0.6b-ja-int8-onnx) |
 
 ***
 
