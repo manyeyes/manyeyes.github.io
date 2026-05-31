@@ -1,117 +1,117 @@
-# Parakeet Series
+# Parakeet シリーズ
 
-> **General Notes**
+> **一般注記**
 >
-> - `int8` = quantized version, smaller size, faster inference
-> - `selfcrosskv` / `selfcrosskvstack` = inference optimization variants (not applicable to Parakeet series)
-> - Some models provide HuggingFace or GitHub download sources; refer to each table
+> - `int8` = 量子化版、サイズが小さく推論が高速
+> - `selfcrosskv` / `selfcrosskvstack` = 推論最適化バリアント（Parakeetシリーズには該当なし）
+> - 一部モデルは HuggingFace または GitHub のダウンロードソースを提供、各表を参照
 
-## Parakeet Series
+## Parakeet シリーズ
 
-> **Notes**
+> **注記**
 >
-> - Model architecture: NVIDIA **FastConformer-TDT-CTC** (Hybrid architecture)
-> - Series composition:
->   - `tdt-0.6b`: standard TDT model, 0.6B parameters, supports punctuation, capitalization, timestamps
->   - `tdt_ctc`: CTC‑combined TDT models (110M / 0.6B parameters); the 110M English and 0.6B Japanese models support punctuation
-> - Version identifiers:
->   - `v2`: English model, supports punctuation, capitalization, timestamps
->   - `v3` / `multilingual`: multilingual model, supports 25 European languages, automatic language detection, punctuation, capitalization, timestamps
-> - License: v2 and v3 models use **CC-BY-4.0**; CTC models mostly use Apache License 2.0 (check each model page)
-> - Use cases: high‑throughput speech transcription, multilingual conversational AI, subtitle generation, voice analytics, etc.
+> - モデルアーキテクチャ：NVIDIA **FastConformer-TDT-CTC**（ハイブリッドアーキテクチャ）
+> - シリーズ構成：
+>   - `tdt-0.6b`：標準 TDT モデル、0.6B パラメータ、句読点・大文字・タイムスタンプをサポート
+>   - `tdt_ctc`：CTC を組み合わせた TDT モデル（110M / 0.6B パラメータ）。110M 英語モデルと 0.6B 日本語モデルは句読点をサポート
+> - バージョン識別子：
+>   - `v2`：英語モデル、句読点・大文字・タイムスタンプをサポート
+>   - `v3` / `multilingual`：多言語モデル、欧州 25 言語をサポート、自動言語検出、句読点・大文字・タイムスタンプをサポート
+> - ライセンス：v2 および v3 モデルは **CC-BY-4.0** を使用。CTC シリーズは主に Apache License 2.0（各モデルページを確認）
+> - ユースケース：高スループットの音声文字起こし、多言語会話 AI、字幕生成、音声分析など
 
-### 1. Parakeet-TDT English Model (v2)
+### 1. Parakeet-TDT 英語モデル（v2）
 
-> **Detailed Features**
+> **詳細特徴**
 >
-> - **Supported language**: English
-> - **Punctuation & Capitalization**: outputs punctuation and correct capitalization
-> - **Timestamps**: supports accurate word‑level, character‑level, and segment‑level timestamp prediction
-> - **Long audio**: full attention allows single‑pass transcription of up to 24 minutes of audio
-> - **Architecture**: FastConformer encoder + TDT decoder, 600M parameters
-> - **Input**: 16 kHz mono‑channel .wav or .flac
-> - **Output**: text string with punctuation and capitalization
-> - **Performance**: RTFx of 3380 on the Hugging Face ASR leaderboard
-> - **Release**: 2025-05-01
-> - **License**: CC-BY-4.0, commercial and non‑commercial use allowed
+> - **サポート言語**：英語
+> - **句読点と大文字**：句読点と正しい大文字小文字を出力
+> - **タイムスタンプ**：単語レベル、文字レベル、セグメントレベルの正確なタイムスタンプ予測をサポート
+> - **長音声**：フルアテンションにより、最大 24 分の音声を一度に文字起こし可能
+> - **アーキテクチャ**：FastConformer エンコーダ + TDT デコーダ、600M パラメータ
+> - **入力**：16 kHz モノラル .wav または .flac
+> - **出力**：句読点と大文字を含むテキスト文字列
+> - **パフォーマンス**：Hugging Face ASR リーダーボードで RTFx 3380
+> - **リリース日**：2025-05-01
+> - **ライセンス**：CC-BY-4.0、商用・非商用利用可能
 
-| Model Name                        | Type    | Supported Language | Punctuation | Timestamp | Download Link                                                                             |
-| --------------------------------- | ------- | ------------------ | ----------- | --------- | ----------------------------------------------------------------------------------------- |
-| parakeet-tdt-0.6b-v2-en-onnx      | offline | English            | Yes         | Yes       | [modelscope](https://www.modelscope.cn/models/manyeyes/parakeet-tdt-0.6b-v2-en-onnx)      |
-| parakeet-tdt-0.6b-v2-en-int8-onnx | offline | English            | Yes         | Yes       | [modelscope](https://www.modelscope.cn/models/manyeyes/parakeet-tdt-0.6b-v2-en-int8-onnx) |
+| モデル名                              | タイプ      | サポート言語 | 句読点 | タイムスタンプ | ダウンロード先                                                                                   |
+| --------------------------------- | -------- | ------ | --- | ------- | ----------------------------------------------------------------------------------------- |
+| parakeet-tdt-0.6b-v2-en-onnx      | 非ストリーミング | 英語     | あり  | あり      | [modelscope](https://www.modelscope.cn/models/manyeyes/parakeet-tdt-0.6b-v2-en-onnx)      |
+| parakeet-tdt-0.6b-v2-en-int8-onnx | 非ストリーミング | 英語     | あり  | あり      | [modelscope](https://www.modelscope.cn/models/manyeyes/parakeet-tdt-0.6b-v2-en-int8-onnx) |
 
-### 2. Parakeet-TDT Multilingual Model (v3)
+### 2. Parakeet-TDT 多言語モデル（v3）
 
-> **Detailed Features**
+> **詳細特徴**
 >
-> - **Supported languages** (25 European languages): Bulgarian (bg), Croatian (hr), Czech (cs), Danish (da), Dutch (nl), English (en), Estonian (et), Finnish (fi), French (fr), German (de), Greek (el), Hungarian (hu), Italian (it), Latvian (lv), Lithuanian (lt), Maltese (mt), Polish (pl), Portuguese (pt), Romanian (ro), Slovak (sk), Slovenian (sl), Spanish (es), Swedish (sv), Russian (ru), Ukrainian (uk)
-> - **Automatic language detection**: no extra prompt needed, the model automatically identifies the audio language
-> - **Punctuation & Capitalization**: outputs punctuation and correct capitalization
-> - **Timestamps**: supports accurate word‑level and segment‑level timestamps
-> - **Long audio**: on A100 80GB, full attention handles up to 24 minutes; local attention handles up to 3 hours
-> - **Architecture**: FastConformer encoder + TDT decoder, 600M parameters, trained on Granary dataset (670k+ hours)
-> - **Input**: 16 kHz mono‑channel .wav or .flac
-> - **Output**: text string with punctuation and capitalization
-> - **Release**: 2025-08-14 (Hugging Face)
-> - **License**: CC-BY-4.0, commercial and non‑commercial use allowed
+> - **サポート言語**（欧州 25 言語）：ブルガリア語 (bg)、クロアチア語 (hr)、チェコ語 (cs)、デンマーク語 (da)、オランダ語 (nl)、英語 (en)、エストニア語 (et)、フィンランド語 (fi)、フランス語 (fr)、ドイツ語 (de)、ギリシャ語 (el)、ハンガリー語 (hu)、イタリア語 (it)、ラトビア語 (lv)、リトアニア語 (lt)、マルタ語 (mt)、ポーランド語 (pl)、ポルトガル語 (pt)、ルーマニア語 (ro)、スロバキア語 (sk)、スロベニア語 (sl)、スペイン語 (es)、スウェーデン語 (sv)、ロシア語 (ru)、ウクライナ語 (uk)
+> - **自動言語検出**：追加プロンプト不要、モデルが音声の言語を自動識別
+> - **句読点と大文字**：句読点と正しい大文字小文字を出力
+> - **タイムスタンプ**：正確な単語レベルおよびセグメントレベルのタイムスタンプをサポート
+> - **長音声**：A100 80GB でフルアテンション使用時 24 分まで、ローカルアテンション使用時 3 時間まで処理可能
+> - **アーキテクチャ**：FastConformer エンコーダ + TDT デコーダ、600M パラメータ、Granary データセット（670,000+ 時間）で学習
+> - **入力**：16 kHz モノラル .wav または .flac
+> - **出力**：句読点と大文字を含むテキスト文字列
+> - **リリース日**：2025-08-14（Hugging Face）
+> - **ライセンス**：CC-BY-4.0、商用・非商用利用可能
 
-| Model Name                                  | Type    | Supported Language                | Punctuation | Timestamp | Download Link                                                                                       |
-| ------------------------------------------- | ------- | --------------------------------- | ----------- | --------- | --------------------------------------------------------------------------------------------------- |
-| parakeet-tdt-0.6b-v3-multilingual-onnx      | offline | 25 European languages (see above) | Yes         | Yes       | [modelscope](https://www.modelscope.cn/models/manyeyes/parakeet-tdt-0.6b-v3-multilingual-onnx)      |
-| parakeet-tdt-0.6b-v3-multilingual-int8-onnx | offline | 25 European languages (see above) | Yes         | Yes       | [modelscope](https://www.modelscope.cn/models/manyeyes/parakeet-tdt-0.6b-v3-multilingual-int8-onnx) |
+| モデル名                                        | タイプ      | サポート言語         | 句読点 | タイムスタンプ | ダウンロード先                                                                                             |
+| ------------------------------------------- | -------- | -------------- | --- | ------- | --------------------------------------------------------------------------------------------------- |
+| parakeet-tdt-0.6b-v3-multilingual-onnx      | 非ストリーミング | 欧州 25 言語（上記参照） | あり  | あり      | [modelscope](https://www.modelscope.cn/models/manyeyes/parakeet-tdt-0.6b-v3-multilingual-onnx)      |
+| parakeet-tdt-0.6b-v3-multilingual-int8-onnx | 非ストリーミング | 欧州 25 言語（上記参照） | あり  | あり      | [modelscope](https://www.modelscope.cn/models/manyeyes/parakeet-tdt-0.6b-v3-multilingual-int8-onnx) |
 
-### 3. Parakeet-TDT-CTC English Model (110M)
+### 3. Parakeet-TDT-CTC 英語モデル（110M）
 
-> **Detailed Features**
+> **詳細特徴**
 >
-> - **Model development**: jointly developed by NVIDIA NeMo and Suno.ai teams
-> - **Architecture**: Hybrid FastConformer-TDT-CTC, approx. **114M parameters**
-> - **Supported language**: English
-> - **Punctuation & Capitalization**: ✅ supports Punctuations and Capitalizations (PnC)
-> - **Timestamps**: default TDT decoder outputs timestamps; switching to CTC decoder outputs text only (no timestamps)
-> - **Long audio**: full attention, up to **20 minutes** in a single pass
-> - **Performance**: average RTFx \~5300 on Hugging Face ASR evaluation sets (A100)
-> - **Input**: 16 kHz mono‑channel .wav or .flac
-> - **Output**: text string with punctuation and capitalization
-> - **License**: Apache License 2.0
+> - **モデル開発**：NVIDIA NeMo と Suno.ai チームの共同開発
+> - **アーキテクチャ**：ハイブリッド FastConformer-TDT-CTC、約 **114M パラメータ**
+> - **サポート言語**：英語
+> - **句読点と大文字**：✅ 句読点と大文字（PnC）をサポート
+> - **タイムスタンプ**：デフォルトの TDT デコーダでタイムスタンプ出力可能。CTC デコーダに切り替えるとテキストのみ（タイムスタンプなし）
+> - **長音声**：フルアテンション、1 パスで最大 **20 分**
+> - **パフォーマンス**：Hugging Face ASR 評価セットでの平均 RTFx \~5300（A100）
+> - **入力**：16 kHz モノラル .wav または .flac
+> - **出力**：句読点と大文字を含むテキスト文字列
+> - **ライセンス**：Apache License 2.0
 
-| Model Name                          | Type    | Supported Language | Punctuation | Timestamp         | Download Link                                                                              |
-| ----------------------------------- | ------- | ------------------ | ----------- | ----------------- | ------------------------------------------------------------------------------------------ |
-| parakeet-tdt\_ctc-110m-en-onnx      | offline | English            | Yes         | Yes (TDT decoder) | [modelscope](https://www.modelscope.cn/models/manyeyes/parakeet-tdt_ctc-110m-en-onnx)      |
-| parakeet-tdt\_ctc-110m-en-int8-onnx | offline | English            | Yes         | Yes (TDT decoder) | [modelscope](https://www.modelscope.cn/models/manyeyes/parakeet-tdt_ctc-110m-en-int8-onnx) |
+| モデル名                                | タイプ      | サポート言語 | 句読点 | タイムスタンプ     | ダウンロード先                                                                                    |
+| ----------------------------------- | -------- | ------ | --- | ----------- | ------------------------------------------------------------------------------------------ |
+| parakeet-tdt\_ctc-110m-en-onnx      | 非ストリーミング | 英語     | あり  | あり（TDTデコーダ） | [modelscope](https://www.modelscope.cn/models/manyeyes/parakeet-tdt_ctc-110m-en-onnx)      |
+| parakeet-tdt\_ctc-110m-en-int8-onnx | 非ストリーミング | 英語     | あり  | あり（TDTデコーダ） | [modelscope](https://www.modelscope.cn/models/manyeyes/parakeet-tdt_ctc-110m-en-int8-onnx) |
 
-> **Note**: ONNX exported versions may default to the TDT decoder, hence timestamps are supported. To switch to CTC decoder, refer to the native NeMo model usage instructions.
+> **注記**：ONNX エクスポート版はデフォルトで TDT デコーダを使用するため、タイムスタンプをサポートします。CTC デコーダに切り替える場合は、ネイティブの NeMo モデルの使用説明を参照してください。
 
-### 4. Parakeet-TDT-CTC Japanese Model (0.6B)
+### 4. Parakeet-TDT-CTC 日本語モデル（0.6B）
 
-> **Detailed Features**
+> **詳細特徴**
 >
-> - **Model development**: developed by NVIDIA NeMo team
-> - **Architecture**: Hybrid FastConformer-TDT-CTC, **approx. 0.6B (600M) parameters**
->   - FastConformer: 8× depthwise‑separable convolution downsampling for faster inference
->   - TDT (Token‑and‑Duration Transducer): jointly predicts tokens and durations, skipping most blank predictions (duration up to 4 frames for this model), significantly speeding up inference
-> - **Supported language**: Japanese
-> - **Punctuation**: ✅ supports punctuation
-> - **Timestamps**: default TDT decoder outputs timestamps
-> - **Long audio**: not explicitly specified
-> - **Input**: 16 kHz mono‑channel .wav or .flac
-> - **Output**: text string with punctuation
-> - **License**: Apache License 2.0
+> - **モデル開発**：NVIDIA NeMo チームによる開発
+> - **アーキテクチャ**：ハイブリッド FastConformer-TDT-CTC、**約 0.6B（600M）パラメータ**
+>   - FastConformer：8 倍の depthwise 分離可能な畳み込みダウンサンプリングを使用し、推論を高速化
+>   - TDT（Token-and-Duration Transducer）：トークンと duration を同時予測することで、ほとんどの blank 予測をスキップ（本モデルの duration 最大 4 フレーム）、推論を大幅に高速化
+> - **サポート言語**：日本語
+> - **句読点**：✅ 句読点をサポート
+> - **タイムスタンプ**：デフォルトの TDT デコーダでタイムスタンプ出力可能
+> - **長音声**：明確な指定なし
+> - **入力**：16 kHz モノラル .wav または .flac
+> - **出力**：句読点を含むテキスト文字列
+> - **ライセンス**：Apache License 2.0
 
-| Model Name                          | Type    | Supported Language | Punctuation | Timestamp | Download Link                                                                              |
-| ----------------------------------- | ------- | ------------------ | ----------- | --------- | ------------------------------------------------------------------------------------------ |
-| parakeet-tdt\_ctc-0.6b-ja-onnx      | offline | Japanese           | Yes         | Yes       | [modelscope](https://www.modelscope.cn/models/manyeyes/parakeet-tdt_ctc-0.6b-ja-onnx)      |
-| parakeet-tdt\_ctc-0.6b-ja-int8-onnx | offline | Japanese           | Yes         | Yes       | [modelscope](https://www.modelscope.cn/models/manyeyes/parakeet-tdt_ctc-0.6b-ja-int8-onnx) |
+| モデル名                                | タイプ      | サポート言語 | 句読点 | タイムスタンプ | ダウンロード先                                                                                    |
+| ----------------------------------- | -------- | ------ | --- | ------- | ------------------------------------------------------------------------------------------ |
+| parakeet-tdt\_ctc-0.6b-ja-onnx      | 非ストリーミング | 日本語    | あり  | あり      | [modelscope](https://www.modelscope.cn/models/manyeyes/parakeet-tdt_ctc-0.6b-ja-onnx)      |
+| parakeet-tdt\_ctc-0.6b-ja-int8-onnx | 非ストリーミング | 日本語    | あり  | あり      | [modelscope](https://www.modelscope.cn/models/manyeyes/parakeet-tdt_ctc-0.6b-ja-int8-onnx) |
 
 ***
 
-> **Additional Notes**
+> **補足説明**
 >
-> - Summary of punctuation & timestamp support:
->   - ✅ **v2 English model**: punctuation, capitalization, timestamps
->   - ✅ **v3 multilingual model**: punctuation, capitalization, timestamps
->   - ✅ **CTC 110M English model**: punctuation, capitalization; timestamps via TDT decoder
->   - ✅ **CTC 0.6B Japanese model**: punctuation; timestamps via TDT decoder
-> - All ONNX models are suitable for edge and cloud deployment; int8 versions are smaller and faster
-> - Licenses: v2/v3 recommend CC-BY-4.0; CTC models mostly Apache 2.0 – check each model page
-> - The Japanese model’s TDT duration of 4 frames provides significant inference speedup; see NVIDIA official documentation for detailed performance metrics
+> - 句読点とタイムスタンプのサポート状況まとめ：
+>   - ✅ **v2 英語モデル**：句読点・大文字・タイムスタンプ
+>   - ✅ **v3 多言語モデル**：句読点・大文字・タイムスタンプ
+>   - ✅ **CTC 110M 英語モデル**：句読点・大文字、タイムスタンプは TDT デコーダ経由
+>   - ✅ **CTC 0.6B 日本語モデル**：句読点、タイムスタンプは TDT デコーダ経由
+> - すべての ONNX モデルはエッジおよびクラウド展開に適しており、int8 バージョンはより小型で高速
+> - ライセンス：v2/v3 は CC-BY-4.0 推奨、CTC モデルは主に Apache 2.0 – 各モデルページを確認
+> - 日本語モデルの TDT duration は 4 フレームで、大幅な推論高速化を実現。詳細なパフォーマンス指標は NVIDIA 公式ドキュメントを参照
