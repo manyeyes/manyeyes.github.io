@@ -544,7 +544,7 @@ manyspeech --help
 
 ダウンロード候補:
 
-- ModelScope ミラー: [manyspeech-cli-1.0.0-preview.9.19-win-x64.zip](https://modelscope.cn/models/manyeyes/manyspeech-cli/file/view/master/manyspeech-cli-1.0.0-preview.9.19-win-x64.zip)
+- ModelScope ミラー: [manyspeech-cli-1.0.0-preview.9.19-win-x64.zip](https://modelscope.cn/models/manyeyes/manyspeech-cli/resolve/master/manyspeech-cli-1.0.0-preview.9.19-win-x64.zip)
 - GitHub Releases: [manyspeech-cli-1.0.0-preview.9.19-win-x64.zip](https://github.com/manyeyes/manyeyes.github.io/releases/download/v1.0.0-preview.9.19/manyspeech-cli-1.0.0-preview.9.19-win-x64.zip)
 
 手順:
@@ -2119,19 +2119,21 @@ url: /manyspeech/ja/models/asr/k2.md
 
 ## ストリーミングモデル
 
-| モデル名                                                             | タイプ     | 対応言語 | 句読点 | タイムスタンプ | ダウンロード先                                                                                                                  |
-| ---------------------------------------------------------------- | ------- | ---- | --- | ------- | ------------------------------------------------------------------------------------------------------------------------ |
-| k2transducer-lstm-en-onnx-online-csukuangfj-20220903             | ストリーミング | 英語   | なし  | なし      | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-lstm-en-onnx-online-csukuangfj-20220903)             |
-| k2transducer-lstm-zh-onnx-online-csukuangfj-20221014             | ストリーミング | 中国語  | なし  | なし      | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-lstm-zh-onnx-online-csukuangfj-20221014)             |
-| k2transducer-zipformer-en-onnx-online-weijizhuang-20221202       | ストリーミング | 英語   | なし  | なし      | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-en-onnx-online-weijizhuang-20221202)       |
-| k2transducer-zipformer-en-onnx-online-zengwei-20230517           | ストリーミング | 英語   | なし  | なし      | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-en-onnx-online-zengwei-20230517)           |
-| k2transducer-zipformer-multi-zh-hans-onnx-online-20231212        | ストリーミング | 中国語  | なし  | なし      | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-multi-zh-hans-onnx-online-20231212)        |
-| k2transducer-zipformer-ko-onnx-online-johnbamma-20240612         | ストリーミング | 韓国語  | なし  | なし      | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-ko-onnx-online-johnbamma-20240612)         |
-| k2transducer-zipformer-ctc-small-zh-onnx-online-20250401         | ストリーミング | 中国語  | なし  | なし      | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-ctc-small-zh-onnx-online-20250401)         |
-| k2transducer-zipformer-large-zh-onnx-online-yuekai-20250630      | ストリーミング | 中国語  | なし  | なし      | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-large-zh-onnx-online-yuekai-20250630)      |
-| k2transducer-zipformer-xlarge-zh-onnx-online-yuekai-20250630     | ストリーミング | 中国語  | なし  | なし      | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-xlarge-zh-onnx-online-yuekai-20250630)     |
-| k2transducer-zipformer-ctc-large-zh-onnx-online-yuekai-20250630  | ストリーミング | 中国語  | なし  | なし      | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-ctc-large-zh-onnx-online-yuekai-20250630)  |
-| k2transducer-zipformer-ctc-xlarge-zh-onnx-online-yuekai-20250630 | ストリーミング | 中国語  | なし  | なし      | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-ctc-xlarge-zh-onnx-online-yuekai-20250630) |
+| モデル名                                                             | タイプ     | 対応言語   | 句読点 | タイムスタンプ | ダウンロード先                                                                                                                  |
+| ---------------------------------------------------------------- | ------- | ------ | --- | ------- | ------------------------------------------------------------------------------------------------------------------------ |
+| k2transducer-lstm-en-onnx-online-csukuangfj-20220903             | ストリーミング | 英語     | なし  | なし      | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-lstm-en-onnx-online-csukuangfj-20220903)             |
+| k2transducer-lstm-zh-onnx-online-csukuangfj-20221014             | ストリーミング | 中国語    | なし  | なし      | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-lstm-zh-onnx-online-csukuangfj-20221014)             |
+| k2transducer-zipformer-en-onnx-online-weijizhuang-20221202       | ストリーミング | 英語     | なし  | なし      | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-en-onnx-online-weijizhuang-20221202)       |
+| k2transducer-zipformer-en-onnx-online-zengwei-20230517           | ストリーミング | 英語     | なし  | なし      | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-en-onnx-online-zengwei-20230517)           |
+| k2transducer-zipformer-multi-zh-hans-onnx-online-20231212        | ストリーミング | 中国語    | なし  | なし      | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-multi-zh-hans-onnx-online-20231212)        |
+| k2transducer-zipformer-ko-onnx-online-johnbamma-20240612         | ストリーミング | 韓国語    | なし  | なし      | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-ko-onnx-online-johnbamma-20240612)         |
+| k2transducer-zipformer-ctc-small-zh-onnx-online-20250401         | ストリーミング | 中国語    | なし  | なし      | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-ctc-small-zh-onnx-online-20250401)         |
+| k2transducer-zipformer-large-zh-onnx-online-yuekai-20250630      | ストリーミング | 中国語    | なし  | なし      | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-large-zh-onnx-online-yuekai-20250630)      |
+| k2transducer-zipformer-xlarge-zh-onnx-online-yuekai-20250630     | ストリーミング | 中国語    | なし  | なし      | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-xlarge-zh-onnx-online-yuekai-20250630)     |
+| k2transducer-zipformer-ctc-large-zh-onnx-online-yuekai-20250630  | ストリーミング | 中国語    | なし  | なし      | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-ctc-large-zh-onnx-online-yuekai-20250630)  |
+| k2transducer-zipformer-ctc-xlarge-zh-onnx-online-yuekai-20250630 | ストリーミング | 中国語    | なし  | なし      | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-ctc-xlarge-zh-onnx-online-yuekai-20250630) |
+| k2transducer-zipformer-x-asr-zh-en-160ms-onnx-online-20260601    | ストリーミング | 中国語・英語 | 対応  | 非対応     | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-x-asr-zh-en-160ms-onnx-online-20260601)    |
+| k2transducer-zipformer-x-asr-zh-en-480ms-onnx-online-20260601    | ストリーミング | 中国語・英語 | 対応  | 非対応     | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-x-asr-zh-en-480ms-onnx-online-20260601)    |
 
 ## 非ストリーミングモデル
 

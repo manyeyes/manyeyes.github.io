@@ -173,6 +173,8 @@ SeACoParaformer是阿里巴巴语音实验室提出的新一代热词定制化�
 | k2transducer-zipformer-xlarge-zh-onnx-online-yuekai-20250630 | 流式 | 中文 | 否 | 否 | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-xlarge-zh-onnx-online-yuekai-20250630) |
 | k2transducer-zipformer-ctc-large-zh-onnx-online-yuekai-20250630 | 流式 | 中文 | 否 | 否 | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-ctc-large-zh-onnx-online-yuekai-20250630) |
 | k2transducer-zipformer-ctc-xlarge-zh-onnx-online-yuekai-20250630 | 流式 | 中文 | 否 | 否 | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-ctc-xlarge-zh-onnx-online-yuekai-20250630) |
+| k2transducer-zipformer-x-asr-zh-en-160ms-onnx-online-20260601 | 流式 | 中英文 | 是 | 否 | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-x-asr-zh-en-160ms-onnx-online-20260601) |
+| k2transducer-zipformer-x-asr-zh-en-480ms-onnx-online-20260601 | 流式 | 中英文 | 是 | 否 | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-x-asr-zh-en-480ms-onnx-online-20260601) |
 
 ### 非流式模型
 

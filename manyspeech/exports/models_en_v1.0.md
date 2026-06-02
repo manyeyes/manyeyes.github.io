@@ -166,6 +166,8 @@ SeACoParaformer is a next-generation non-autoregressive speech recognition model
 | k2transducer-zipformer-xlarge-zh-onnx-online-yuekai-20250630 | Streaming | Chinese | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-xlarge-zh-onnx-online-yuekai-20250630) |
 | k2transducer-zipformer-ctc-large-zh-onnx-online-yuekai-20250630 | Streaming | Chinese | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-ctc-large-zh-onnx-online-yuekai-20250630) |
 | k2transducer-zipformer-ctc-xlarge-zh-onnx-online-yuekai-20250630 | Streaming | Chinese | No | No | [modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-ctc-xlarge-zh-onnx-online-yuekai-20250630) |
+|k2transducer-zipformer-x-asr-zh-en-160ms-onnx-online-20260601|Streaming|Chinese & English|Yes|No|[modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-x-asr-zh-en-160ms-onnx-online-20260601)|
+|k2transducer-zipformer-x-asr-zh-en-480ms-onnx-online-20260601|Streaming|Chinese & English|Yes|No|[modelscope](https://www.modelscope.cn/models/manyeyes/k2transducer-zipformer-x-asr-zh-en-480ms-onnx-online-20260601)|
 
 ### Non-streaming Models
 
