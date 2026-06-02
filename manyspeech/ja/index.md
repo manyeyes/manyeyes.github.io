@@ -4,7 +4,7 @@
 
 > ネイティブでオフライン＆リアルタイムのストリーミング認識をサポート、クラウド不要・追加設定不要
 
-[クイックスタート](/cli/getting-started/) | [GitHub](https://github.com/manyeyes/ManySpeech)
+[クイックスタート](/ja/cli/getting-started/) | [GitHub](https://github.com/manyeyes/ManySpeech)
 
 ## Features
 

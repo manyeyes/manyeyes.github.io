@@ -2096,7 +2096,7 @@ Lightweight Local Speech AI
 
 > Native offline recognition, real-time streaming, no cloud required.
 
-[Get Started](/cli/getting-started/) | [GitHub](https://github.com/manyeyes/ManySpeech)
+[Get Started](/en/cli/getting-started/) | [GitHub](https://github.com/manyeyes/ManySpeech)
 
 ## Features
 
