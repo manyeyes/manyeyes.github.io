@@ -1,0 +1,11 @@
+{
+  "backToBlogList": "← Back to Blog List",
+  "prevPage": "← Previous",
+  "nextPage": "Next →",
+  "readMore": "Read More →",
+  "loading": "Loading...",
+  "blogTitle": "Blog",
+  "latestArticles": "Latest Articles",
+  "excerptDefault": "Click to read full article",
+  "noExcerpt": "No summary available"
+}

@@ -1,0 +1,9 @@
+[
+  {
+    "type": "file",
+    "name": "post-001",
+    "label": "2026-06-02 - X-ASR-zh-en: Lightweight High-Accuracy Bilingual Offline Streaming Speech Recognition Model",
+    "excerpt": "X-ASR-zh-en is an ultra-lightweight Chinese-English bilingual speech recognition model developed by Shanghai Jiao Tong University, Fudan University, and Huazhong University of Science and Technology. With only 0.16B parameters, it supports unified streaming/offline dual-mode inference, natively handles code-switching, automatic punctuation, and English case normalization. Pure CPU deployment, open-sourced under Apache 2.0, free for commercial use.",
+    "tags": ["ASR", "Speech Recognition", "Bilingual", "Open Source Model", "Lightweight Deployment"]
+  }
+]

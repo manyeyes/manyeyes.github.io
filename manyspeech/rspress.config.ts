@@ -3,18 +3,22 @@ import { defineConfig } from '@rspress/core';
 
 export default defineConfig({
   root: path.join(__dirname, 'docs'),
+  globalStyles: path.join(__dirname, 'styles/index.css'),
+  globalUIComponents: [
+    path.join(__dirname, 'components', 'BackButton.tsx'),   // 注册返回按钮组件
+  ],
   base: '/manyspeech/',
   llms: true, // 开启 SSG-MD
-  llmsUI: {
-    placement: 'outline', // 将按钮显示在右侧大纲面板中
-  },
+  // llmsUI: {
+  //   placement: 'outline', // 将按钮显示在右侧大纲面板中
+  // },
   // 顶层配置：所有语言共用
   icon: '/manyspeech/manyspeech-icon.webp',
   logo: {  
     light: '/manyspeech/manyspeech-light-logo.webp',
     dark: '/manyspeech/manyspeech-dark-logo.webp',
   },
-  
+  // themeDir: path.join(__dirname, 'theme'),
   themeConfig: {
     socialLinks: [
       {
@@ -26,7 +30,7 @@ export default defineConfig({
     // 全局页脚
     footer: {
       message:
-        '© 2026 ManySpeech, Powered by Rspress<br/>Site last updated 2026-05-26',
+        '© 2026 ManySpeech, Powered by Rspress<br/>Site last updated 2026-06-02',
     },
   },
   
@@ -67,6 +71,11 @@ export default defineConfig({
           head: true,
         },
       ],
+    },
+    resolve: {
+      alias: {
+        '@': path.join(__dirname, 'components'),
+      },
     },
   },
 });

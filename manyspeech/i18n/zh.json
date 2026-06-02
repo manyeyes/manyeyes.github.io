@@ -1,0 +1,11 @@
+{
+  "backToBlogList": "← 返回博客列表",
+  "prevPage": "← 上一页",
+  "nextPage": "下一页 →",
+  "readMore": "阅读全文 →",
+  "loading": "加载中...",
+  "blogTitle": "博客",
+  "latestArticles": "最新文章",
+  "excerptDefault": "点击阅读全文",
+  "noExcerpt": "暂无摘要"
+}
