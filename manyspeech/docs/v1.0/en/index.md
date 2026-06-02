@@ -8,7 +8,7 @@ hero:
   actions:
     - theme: brand
       text: Get Started
-      link: /cli/getting-started/
+      link: /en/cli/getting-started/
     - theme: alt
       text: GitHub
       link: https://github.com/manyeyes/ManySpeech

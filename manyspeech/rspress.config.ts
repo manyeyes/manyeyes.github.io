@@ -78,4 +78,9 @@ export default defineConfig({
       },
     },
   },
+  markdown: {
+    link: {
+      autoPrefix: true, // 开启自动前缀
+    },
+  },
 });
