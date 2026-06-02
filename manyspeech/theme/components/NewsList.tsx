@@ -18,12 +18,11 @@ const ArticleList = () => {
 
   // 获取基础路径和语言子路径
   const base = import.meta.env.BASE_URL || '/';
-  // const langPath = lang === 'zh' ? '' : `${lang}/`;
-  const langPath = lang;
-  const blogBaseUrl = `${base}/${langPath}/blog/`.replace(/\/+/g, '/');
+  const langPath = lang === 'zh' ? '' : `${lang}/`;
+  const blogBaseUrl = `${base}/${langPath}blog/`.replace(/\/+/g, '/');
 
   useEffect(() => {
-    const url = `${blogBaseUrl}_meta.json`.replace(/\/+/g, '/');
+    const url = `${base}/${lang}/blog/_meta.json`.replace(/\/+/g, '/');
     console.log('Loading articles from:', url);
 
     setLoading(true);

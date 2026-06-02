@@ -17,9 +17,8 @@ const BlogList: React.FC = () => {
   useEffect(() => {
     const base = import.meta.env.BASE_URL || '/';
     // 中文无语言前缀，其他语言添加前缀（如 en/）
-    // const langPath = lang === 'zh' ? '' : `${lang}/`;
-    const langPath = lang;
-    const url = `${base}/${langPath}/blog/_meta.json`.replace(/\/+/g, '/');
+    const langPath = lang === 'zh' ? '' : `${lang}/`;
+    const url = `${base}/${lang}/blog/_meta.json`.replace(/\/+/g, '/');
     console.log('BlogList fetching:', url);
 
     setLoading(true);
@@ -36,7 +35,7 @@ const BlogList: React.FC = () => {
           return {
             title,
             date,
-            link: `${base}/${langPath}/blog/${item.name}`,
+            link: `${base}/${langPath}blog/${item.name}`,
             excerpt: item.excerpt || i18n.noExcerpt,
             tags: item.tags || [],
           };
