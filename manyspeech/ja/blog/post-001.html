@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="ja">
+  <head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>X-ASR-zh-en：軽量高精度中英バイリンガル・オフライン＆ストリーミング音声認識モデル - ManySpeech</title>
+<script>{;const saved = localStorage.getItem('rspress-theme-appearance');const preferDark = window.matchMedia('(prefers-color-scheme: dark)').matches;const isDark = !saved || saved === 'auto' ? preferDark : saved === 'dark';document.documentElement.classList.toggle('dark', isDark);document.documentElement.classList.toggle('rp-dark', isDark);document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';}</script>
+<script>var _hmt=_hmt||[];(function(){var h=document.createElement("script");h.src="https://hm.baidu.com/hm.js?c5cc9be664702972dd979661253d614b";var d=document.getElementsByTagName("script")[0];d.parentNode.insertBefore(h,d);})();</script>
+<link href="/manyspeech/static/css/styles.dca152c6d6.css" rel="stylesheet">
+<script defer src="/manyspeech/static/js/styles.3cf4b83403.js"></script>
+<script defer src="/manyspeech/static/js/lib-react.12a014d3ef.js"></script>
+<script defer src="/manyspeech/static/js/lib-router.6c832d1f65.js"></script>
+<script defer src="/manyspeech/static/js/6702.512d08ecc0.js"></script>
+<script defer src="/manyspeech/static/js/index.a1c662e332.js"></script>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Rspress v2.0.12">
+<link rel="icon" href="/manyspeech/manyspeech-icon.webp">
+<meta property="og:type" content="website">
+<meta property="og:title" content="X-ASR-zh-en：軽量高精度中英バイリンガル・オフライン＆ストリーミング音声認識モデル - ManySpeech">
+<meta name="description" content="軽量なローカル音声認識ツール">
+<meta property="og:description" content="軽量なローカル音声認識ツール"></head>
+
+  <body>
+    <div id="__rspress_root"><link rel="preload" as="image" href="/manyspeech/manyspeech-light-logo.webp"/><link rel="preload" as="image" href="/manyspeech/manyspeech-dark-logo.webp"/><header class="rp-nav"><div class="rp-nav__left"><div class="rp-nav__title"><a href="/manyspeech/ja/" class="rp-nav__title__link rp-link"><div class="rp-nav__title__logo"><img src="/manyspeech/manyspeech-light-logo.webp" alt="logo" id="logo" class="rspress-logo rp-nav__title__logo-image rp-nav__title__logo-image--light"/><img src="/manyspeech/manyspeech-dark-logo.webp" alt="logo" id="logo" class="rspress-logo rp-nav__title__logo-image rp-nav__title__logo-image--dark"/></div></a></div></div><div class="rp-nav__right"><button class="rp-search-button"><div class="rp-search-button__content"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 20 21" class="rp-search-button__icon"><path fill="currentColor" d="M8.333 1.913A6.667 6.667 0 0 1 15 8.58c0 1.54-.525 2.957-1.402 4.085l4.49 4.492a.834.834 0 0 1-1.177 1.178l-4.491-4.49a6.64 6.64 0 0 1-4.087 1.402 6.667 6.667 0 0 1 0-13.334m0 1.667a5 5 0 1 0 0 10 5 5 0 0 0 0-10"></path></svg><span class="rp-search-button__word">検索</span></div><div class="rp-search-button__hotkey" style="opacity:0"><span></span><span>K</span></div></button><div class="rp-search-button--mobile"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 20 21"><path fill="currentColor" d="M8.333 1.913A6.667 6.667 0 0 1 15 8.58c0 1.54-.525 2.957-1.402 4.085l4.49 4.492a.834.834 0 0 1-1.177 1.178l-4.491-4.49a6.64 6.64 0 0 1-4.087 1.402 6.667 6.667 0 0 1 0-13.334m0 1.667a5 5 0 1 0 0 10 5 5 0 0 0 0-10"></path></svg></div><ul class="rp-nav-menu rp-nav-menu--right"><li class="rp-nav-menu__item"><a href="/manyspeech/ja/cli/getting-started/index.html" class="rp-nav-menu__item__container rp-link">CLIツール</a></li><li class="rp-nav-menu__item"><a href="/manyspeech/ja/models/getting-started/index.html" class="rp-nav-menu__item__container rp-link">モデルライブラリ</a></li><li class="rp-nav-menu__item rp-nav-menu__item--active"><a href="/manyspeech/ja/blog/index.html" class="rp-nav-menu__item__container rp-link">ブログ</a></li></ul><div class="rp-nav__others"><div class="rp-nav-menu__divider"></div><li class="rp-nav-menu__item"><div class="rp-nav-menu__item__container">日本語<svg width="1em" height="1em" viewBox="0 0 32 32" class="rp-nav-menu__item__icon"><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></div><ul class="rp-hover-group rp-hover-group--hidden rp-hover-group--center"><li class="rp-hover-group__item" style="padding-left:8px" data-depth="0"><a href="/manyspeech/en/blog/post-001.html" class="rp-hover-group__item__link rp-link" aria-label="English" lang="en" hrefLang="en" rel="alternate">English</a></li><li class="rp-hover-group__item" style="padding-left:8px" data-depth="0"><a href="/manyspeech/blog/post-001.html" class="rp-hover-group__item__link rp-link" aria-label="简体中文" lang="zh" hrefLang="zh" rel="alternate">简体中文</a></li><li class="rp-hover-group__item rp-hover-group__item--active" style="padding-left:8px" data-depth="0"><a href="/manyspeech/ja/blog/post-001.html" class="rp-hover-group__item__link rp-link" aria-label="日本語" lang="ja" hrefLang="ja" rel="alternate">日本語</a></li></ul></li><div class="rp-switch-appearance"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24" class="rp-switch-appearance__icon rp-switch-appearance__icon--sun"><path fill="currentColor" d="m7.001 15.848-1.226 1.226a.58.58 0 0 0 0 .818.58.58 0 0 0 .818 0l1.226-1.226a.58.58 0 0 0 0-.818.58.58 0 0 0-.818 0m-.352-8.735a.584.584 0 0 0 .825-.825L6.237 5.051a.584.584 0 0 0-.825.825zM5.011 11.07h-1.75a.584.584 0 0 0 0 1.167h1.75c.324 0 .584-.26.584-.583a.585.585 0 0 0-.584-.584m7.003-5.835c.324 0 .584-.26.584-.584V2.9a.58.58 0 0 0-.584-.584.58.58 0 0 0-.583.583V4.65c0 .323.262.584.583.584m5.616 1.621 1.226-1.225a.58.58 0 0 0 0-.818.58.58 0 0 0-.818 0l-1.226 1.225a.58.58 0 0 0 0 .818.576.576 0 0 0 .818 0m3.138 4.214h-1.75a.58.58 0 0 0-.584.584c0 .324.26.584.583.584h1.751a.584.584 0 1 0 0-1.167m-3.389 5.124a.584.584 0 0 0-.825.825l1.238 1.238a.584.584 0 0 0 .825-.826zm-5.365-9.795a5.256 5.256 0 0 0-5.257 5.258 5.256 5.256 0 0 0 5.257 5.257 5.256 5.256 0 0 0 5.257-5.257 5.256 5.256 0 0 0-5.257-5.258m0 11.675a.58.58 0 0 0-.583.583v1.751a.582.582 0 1 0 1.167 0v-1.75a.584.584 0 0 0-.584-.584"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" viewBox="0 0 19 19" class="rp-switch-appearance__icon rp-switch-appearance__icon--moon"><path fill="currentColor" d="M9.166 0a9.2 9.2 0 0 1 1.857.188.834.834 0 0 1 .042 1.623 4.47 4.47 0 1 0 5.457 5.457l.048-.135a.834.834 0 0 1 1.575.177q.186.902.188 1.856A9.168 9.168 0 1 1 9.166 0"></path></svg></div><div class="rp-social-links"><a href="https://github.com/manyeyes/manyspeech" target="_blank" rel="noopener noreferrer" class="rp-social-links__item"><div class="rp-social-links__icon"><div class="rp-social-links__icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12c0 5.303 3.438 9.8 8.205 11.385c.6.113.82-.258.82-.577c0-.285-.01-1.04-.015-2.04c-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729c1.205.084 1.838 1.236 1.838 1.236c1.07 1.835 2.809 1.305 3.495.998c.108-.776.417-1.305.76-1.605c-2.665-.3-5.466-1.332-5.466-5.93c0-1.31.465-2.38 1.235-3.22c-.135-.303-.54-1.523.105-3.176c0 0 1.005-.322 3.3 1.23c.96-.267 1.98-.399 3-.405c1.02.006 2.04.138 3 .405c2.28-1.552 3.285-1.23 3.285-1.23c.645 1.653.24 2.873.12 3.176c.765.84 1.23 1.91 1.23 3.22c0 4.61-2.805 5.625-5.475 5.92c.42.36.81 1.096.81 2.22c0 1.606-.015 2.896-.015 3.286c0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></div></div></a><ul class="rp-hover-group rp-hover-group--hidden rp-hover-group--right"></ul></div></div><button aria-label="mobile hamburger" class="rp-nav-hamburger rp-nav-hamburger__sm"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="none" viewBox="0 0 21 21"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.667" d="M3.645 5.225h13.333M3.645 10.225h13.333M3.645 15.225h13.333"></path></svg></button><button aria-label="mobile hamburger" class="rp-nav-hamburger rp-nav-hamburger__md"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="none" viewBox="0 0 21 21"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.667" d="M3.645 5.225h13.333M3.645 10.225h13.333M3.645 15.225h13.333"></path></svg><ul class="rp-hover-group rp-hover-group--hidden rp-hover-group--right"><div class="rp-nav-menu__others-mobile__container"><div class="rp-nav-hamburger__md__hover-group"><div class="rp-nav-screen-appearance"><div class="rp-nav-screen-appearance__left">テーマ</div><div class="rp-nav-screen-appearance__right"></div></div><div class="rp-nav-screen-langs"><div class="rp-nav-screen-langs__left">言語</div><div class="rp-nav-screen-langs__right">日本語<svg width="1em" height="1em" viewBox="0 0 32 32" class="rp-nav-screen-langs__icon "><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></div></div><div class="rp-nav-screen-langs-group" style="display:grid;grid-template-rows:0fr;transition:grid-template-rows 0.2s ease-out"><div class="rp-nav-screen-langs-group__inner"><a href="/manyspeech/en/blog/post-001.html" class="rp-nav-screen-langs-group__item rp-link" hrefLang="en" lang="en" rel="alternate">English</a><a href="/manyspeech/blog/post-001.html" class="rp-nav-screen-langs-group__item rp-link" hrefLang="zh" lang="zh" rel="alternate">简体中文</a><span class="rp-nav-screen-langs-group__item rp-nav-screen-langs-group__item--active" aria-current="page" aria-disabled="true">日本語</span></div></div><div class="rp-nav-screen-divider"></div><div class="rp-social-links"><a href="https://github.com/manyeyes/manyspeech" target="_blank" rel="noopener noreferrer" class="rp-social-links__item"><div class="rp-social-links__icon"><div class="rp-social-links__icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12c0 5.303 3.438 9.8 8.205 11.385c.6.113.82-.258.82-.577c0-.285-.01-1.04-.015-2.04c-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729c1.205.084 1.838 1.236 1.838 1.236c1.07 1.835 2.809 1.305 3.495.998c.108-.776.417-1.305.76-1.605c-2.665-.3-5.466-1.332-5.466-5.93c0-1.31.465-2.38 1.235-3.22c-.135-.303-.54-1.523.105-3.176c0 0 1.005-.322 3.3 1.23c.96-.267 1.98-.399 3-.405c1.02.006 2.04.138 3 .405c2.28-1.552 3.285-1.23 3.285-1.23c.645 1.653.24 2.873.12 3.176c.765.84 1.23 1.91 1.23 3.22c0 4.61-2.805 5.625-5.475 5.92c.42.36.81 1.096.81 2.22c0 1.606-.015 2.896-.015 3.286c0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></div></div></a><ul class="rp-hover-group rp-hover-group--hidden rp-hover-group--right"></ul></div></div></div></ul></button></div></header><div class="rp-doc-layout__menu"><div class="rp-sidebar-menu"><div class="rp-sidebar-menu__left"></div><button type="button" class="rp-sidebar-menu__right"><span class="rp-sidebar-menu__right__text">目次</span><svg width="14" height="14" class="rp-progress-circle"><circle cx="7" cy="7" r="6" stroke-linecap="round" fill="none" stroke="var(--rp-c-divider-light)" stroke-width="2"></circle><circle cx="7" cy="7" r="6" stroke-linecap="round" fill="none" stroke="var(--rp-c-brand)" stroke-width="2" stroke-dasharray="37.69911184307752" stroke-dashoffset="37.69911184307752" transform="rotate(-90 7 7)" style="transition:stroke-dashoffset 0.3s"></circle></svg><svg width="1em" height="1em" viewBox="0 0 32 32" class="rp-sidebar-menu__right__icon" style="transform:rotate(0deg);transition:transform 0.2s ease-out"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"></path></svg></button></div></div><div class="rp-doc-layout__container"><aside class="rp-doc-layout__sidebar-placeholder"></aside><div class="rp-doc-layout__doc"><main class="rp-doc-layout__doc-container"><div class="rp-doc rspress-doc"><!--$--><h1 class="rp-toc-include" id="x-asr-zh-en軽量高精度中英バイリンガルオフラインストリーミング音声認識モデル"><a href="#x-asr-zh-en軽量高精度中英バイリンガルオフラインストリーミング音声認識モデル" class="rp-header-anchor rp-link" aria-hidden="true">#</a>X-ASR-zh-en：軽量高精度中英バイリンガル・オフライン＆ストリーミング音声認識モデル<!-- --> </h1><div class="rp-not-doc rp-llms-container"><button class="rp-not-doc rp-llms-button rp-llms-copy-button"><div class="rp-llms-copy-button__icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-llms-copy-button__icon-success"><path fill="currentColor" d="m9.55 18-5.7-5.7 1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-llms-copy-button__icon-copy"><path fill="currentColor" d="M20 8v12H8V8zm0-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2"></path><path fill="currentColor" d="M4 16H2V4a2 2 0 0 1 2-2h12v2H4Z"></path></svg></div><span>Markdown をコピー</span></button><button class="rp-llms-button rp-llms-view-options__trigger "><svg width="1em" height="1em" viewBox="0 0 32 32" class="rp-llms-view-options__arrow "><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></button></div>
+<h2 class="rp-toc-include" id="一プロジェクト背景と開発チーム"><a href="#一プロジェクト背景と開発チーム" class="rp-header-anchor rp-link" aria-hidden="true">#</a>一、プロジェクト背景と開発チーム</h2>
+<h3 class="rp-toc-include" id="11-業界の開発背景"><a href="#11-業界の開発背景" class="rp-header-anchor rp-link" aria-hidden="true">#</a>1.1 業界の開発背景</h3>
+<p>ローカルでのオフライン音声対話、プライバシーを重視したリアルタイム文字起こし、中英バイリンガル混在音声認識といった主流のニーズに対して、既存のオープンソースASRモデルには多くの課題があります。パラメータ数の多いモデルはデプロイコストが高く軽量化が難しく、軽量モデルはバイリンガル精度の不足、ストリーミングとオフライン推論の非互換、汎化性能の弱さなどの問題を抱えています。これらの核心的な課題を解決するため、複数の大学の研究チームが連携して<strong>X-ASR-zh-en 中英バイリンガル・オフライン＆ストリーミング統一ASRモデル</strong>を開発しました。超軽量ボリューム、高精度、低遅延、両モード統一対応を特徴とし、学術研究と産業向け軽量実装の両方のニーズを満たし、開発者に低コストで低障壁なバイリンガル音声認識ソリューションを提供します。</p>
+<h3 class="rp-toc-include" id="12-開発チームとオープンソース宣言"><a href="#12-開発チームとオープンソース宣言" class="rp-header-anchor rp-link" aria-hidden="true">#</a>1.2 開発チームとオープンソース宣言</h3>
+<p><strong>開発機関</strong>：上海交通大学、上海創智学院が主導し、复旦大学、華中科技大学など複数の大学の研究力と連携して開発された産学連携による軽量音声認識のオープンソース成果です。</p>
+<p><strong>オープンソースライセンス</strong>：本モデルは <strong>Apache 2.0 ライセンス</strong> の下で正式に公開され、重み、ソースコード、デプロイリソースが完全にオープンです。<strong>個人学習、学術研究、無償での商用利用</strong> が可能で、追加の許諾は不要です。</p>
+<h2 class="rp-toc-include" id="二モデルの概要"><a href="#二モデルの概要" class="rp-header-anchor rp-link" aria-hidden="true">#</a>二、モデルの概要</h2>
+<p>X-ASR-zh-en は、Icefall、K2 フレームワークと Zipformer Transducer アーキテクチャを基に構築された軽量中英バイリンガル統一音声認識モデルです。<strong>100万時間</strong> のオープンおよび収集によるバイリンガル音声データで訓練され、パラメータ数はわずか <strong>0.16B</strong> という超小規模です。最大の特徴は <strong>単一モデルでストリーミング（リアルタイム）認識とオフライン高精度認識の両モードを統一推論</strong> できることで、重みやコードロジックの切り替えは不要です。</p>
+<p>モデルは多粒度の低遅延推論にネイティブ対応しており、160ms / 480ms / 960ms / 1920ms の4つの標準チャンクモードを提供します。また、中英混在認識、自動句読点付与、英文の大文字・小文字正規化をネイティブサポートしています。ONNX 量子化最適化により、CPU のみで低遅延推論が可能で、GPU やクラウドへのデータ送信は不要です。極限の軽量デプロイと高精度認識を両立しており、総合性能は同クラスの軽量オープンソースASRモデルを大きく上回ります。</p>
+<h2 class="rp-toc-include" id="三コアアーキテクチャと主要機能"><a href="#三コアアーキテクチャと主要機能" class="rp-header-anchor rp-link" aria-hidden="true">#</a>三、コアアーキテクチャと主要機能</h2>
+<h3 class="rp-toc-include" id="31-アーキテクチャの強み"><a href="#31-アーキテクチャの強み" class="rp-header-anchor rp-link" aria-hidden="true">#</a>3.1 アーキテクチャの強み</h3>
+<p>業界で先進的な Zipformer Transducer 効率的時系列モデリングアーキテクチャを採用しています。従来の CNN や RNN と比較して、長い時系列のコンテキストモデリング能力に優れ、長文音声や複雑環境下での認識誤差を効果的に低減できます。Icefall、K2 フレームワークによる精緻な訓練スケジューリングにより、収束安定性と中英バイリンガルの汎化能力が大幅に向上しており、極小パラメータで高精度な両モード推論を実現する基盤アーキテクチャとなっています。</p>
+<h3 class="rp-toc-include" id="32-主な機能"><a href="#32-主な機能" class="rp-header-anchor rp-link" aria-hidden="true">#</a>3.2 主な機能</h3>
+<ul>
+<li><strong>両モード統一推論</strong>：単一モデル・単一の重みで、リアルタイムストリーミング復号とオフライン一括復号の両方をネイティブサポート。あらゆる音声認識業務シナリオに対応。</li>
+<li><strong>多粒度低遅延対応</strong>：160ms、480ms、960ms、1920ms の4段階の推論チャンクを内蔵。超低遅延のライブ配信、標準的な会議文字起こし、長音声の一括認識など、異なる遅延要件のシナリオに柔軟に適応。</li>
+<li><strong>ネイティブ中英バイリンガル能力</strong>：統一バイリンガルモデリングにより、中英混在音声を高精度に認識。出力には自動で正しい句読点と英文の大文字・小文字が付与される。</li>
+<li><strong>ゼロ・コンピューティング依存デプロイ</strong>：0.16B の超軽量パラメータにより、CPU のみでの推論が可能。ONNX 量子化最適化により、エッジ端末からサーバーまで迅速な軽量デプロイが実現。</li>
+<li><strong>標準化されたオープンソースデプロイ</strong>：<a href="https://github.com/k2-fsa/sherpa-onnx" target="_blank" rel="noopener noreferrer" class="rp-link">Sherpa-ONNX</a> 公式デプロイエコシステムにネイティブ対応。完全な ONNX 推論ファイル、サーバースクリプト、テストツールが付属し、すぐに使えて拡張性も高い。</li>
+</ul>
+<h2 class="rp-toc-include" id="四コア性能データ業界ベンチマーク"><a href="#四コア性能データ業界ベンチマーク" class="rp-header-anchor rp-link" aria-hidden="true">#</a>四、コア性能データ（業界ベンチマーク）</h2>
+<p>本評価では全て貪欲探索復号（greedy search）を採用し、主評価指標として WER（単語誤り率）、CER（文字誤り率）を用います。数値が低いほど認識精度が高いことを示します。全てのテスト結果は再現可能な標準ベンチマークデータです。</p>
+<h3 class="rp-toc-include" id="41-汎用ベンチマークデータセット総合性能"><a href="#41-汎用ベンチマークデータセット総合性能" class="rp-header-anchor rp-link" aria-hidden="true">#</a>4.1 汎用ベンチマークデータセット総合性能</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>認識モード</th><th>チャンクサイズ</th><th>LibriSpeech-Clean</th><th>LibriSpeech-Other</th><th>GigaSpeech</th><th>WenetSpeech-Net</th><th>WenetSpeech-Meeting</th></tr></thead><tbody><tr><td>ストリーミング</td><td>160ms</td><td>3.91</td><td>10.17</td><td>10.97</td><td>9.45</td><td>12.04</td></tr><tr><td>ストリーミング</td><td>480ms</td><td>3.14</td><td>7.57</td><td>9.77</td><td>7.38</td><td>9.31</td></tr><tr><td>ストリーミング</td><td>960ms</td><td>3.12</td><td>7.22</td><td>9.62</td><td>6.96</td><td>8.84</td></tr><tr><td>ストリーミング</td><td>1920ms</td><td>2.84</td><td>6.47</td><td>9.46</td><td>6.42</td><td>8.03</td></tr><tr><td>オフライン</td><td>-</td><td><strong>2.69</strong></td><td><strong>5.76</strong></td><td><strong>9.23</strong></td><td><strong>5.96</strong></td><td><strong>7.20</strong></td></tr></tbody></table></div>
+<p><em>注：太字は当該テストでの最良精度。オフラインモードは全体最良結果。</em></p>
+<h3 class="rp-toc-include" id="42-主要オープンソースモデルとの比較"><a href="#42-主要オープンソースモデルとの比較" class="rp-header-anchor rp-link" aria-hidden="true">#</a>4.2 主要オープンソースモデルとの比較</h3>
+<p>統一されたベンチマーク条件下で、X-ASR-zh-en は 0.16B という超小パラメータながら、同クラスの軽量モデルを大きく上回る認識精度を達成し、大パラメータモデルとの性能差を劇的に縮めています。計算コスト、デプロイ障壁、認識精度の三点で極めてバランスの取れたモデルであり、実装面での優位性は顕著です。総合誤差値は5つの汎用データセットの平均結果で、数値が低いほど高性能です。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>順位</th><th>モデル名</th><th>パラメータ数</th><th>総合平均誤差</th><th>主な特徴</th></tr></thead><tbody><tr><td>1</td><td>Qwen3-ASR</td><td>1.7B</td><td>4.882</td><td>大パラメータ・高精度だが計算需要とデプロイコストが高い</td></tr><tr><td>2</td><td>Qwen3-ASR</td><td>0.6B</td><td>5.702</td><td>精度と計算量のバランスが比較的良好</td></tr><tr><td>3</td><td><strong>X-ASR-zh-en（オフライン）</strong></td><td><strong>0.16B</strong></td><td><strong>6.036</strong></td><td>超軽量・バイリンガル統一・GPU不要・全シナリオ対応</td></tr><tr><td>4</td><td>SenseVoice-small</td><td>0.234B</td><td>6.762</td><td>汎用シナリオ対応だがサイズが大きく精度は低い</td></tr><tr><td>5</td><td>VibeVoice-ASR</td><td>9B</td><td>9.792</td><td>超大パラメータ・実装障壁が非常に高い</td></tr></tbody></table></div>
+<h3 class="rp-toc-include" id="43-垂直領域別詳細性能中英バイリンガル"><a href="#43-垂直領域別詳細性能中英バイリンガル" class="rp-header-anchor rp-link" aria-hidden="true">#</a>4.3 垂直領域別詳細性能（中英バイリンガル）</h3>
+<p>GigaSpeechBench に基づき12の垂直細分化シナリオで評価を実施。多様な専門分野の音声認識をカバーし、専門用語の多いシナリオでも安定した性能を示し、垂直領域への適応力に優れています。</p>
+<h4 class="rp-toc-include" id="中国語シナリオ-垂直領域誤り率cer"><a href="#中国語シナリオ-垂直領域誤り率cer" class="rp-header-anchor rp-link" aria-hidden="true">#</a>中国語シナリオ 垂直領域誤り率（CER）</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>モード</th><th>チャンク</th><th>ARG</th><th>AIT</th><th>ART</th><th>BIO</th><th>ECM</th><th>ENG</th><th>ENT</th><th>FIN</th><th>HUM</th><th>LAW</th><th>MED</th><th>MIL</th></tr></thead><tbody><tr><td>オフライン</td><td>-</td><td><strong>6.56</strong></td><td><strong>4.54</strong></td><td><strong>2.77</strong></td><td><strong>5.04</strong></td><td><strong>2.99</strong></td><td><strong>2.32</strong></td><td><strong>6.02</strong></td><td><strong>1.94</strong></td><td><strong>7.64</strong></td><td><strong>4.20</strong></td><td><strong>2.90</strong></td><td><strong>1.68</strong></td></tr></tbody></table></div>
+<h4 class="rp-toc-include" id="英語シナリオ-垂直領域誤り率wer"><a href="#英語シナリオ-垂直領域誤り率wer" class="rp-header-anchor rp-link" aria-hidden="true">#</a>英語シナリオ 垂直領域誤り率（WER）</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>モード</th><th>チャンク</th><th>ARG</th><th>AIT</th><th>ART</th><th>BIO</th><th>ECM</th><th>ENG</th><th>ENT</th><th>FIN</th><th>HUM</th><th>LAW</th><th>MED</th><th>MIL</th></tr></thead><tbody><tr><td>オフライン</td><td>-</td><td><strong>4.09</strong></td><td><strong>8.28</strong></td><td><strong>6.73</strong></td><td><strong>5.48</strong></td><td>4.12</td><td><strong>4.30</strong></td><td><strong>12.30</strong></td><td><strong>4.94</strong></td><td><strong>6.17</strong></td><td><strong>10.41</strong></td><td><strong>5.35</strong></td><td><strong>5.61</strong></td></tr></tbody></table></div>
+<h2 class="rp-toc-include" id="五推論デプロイ"><a href="#五推論デプロイ" class="rp-header-anchor rp-link" aria-hidden="true">#</a>五、推論デプロイ</h2>
+<p>X-ASR-zh-en 公式推奨のランタイムは <a href="https://github.com/k2-fsa/sherpa-onnx" target="_blank" rel="noopener noreferrer" class="rp-link"><strong>Sherpa-ONNX</strong></a> です。本モデルはこのオープンソースデプロイエコシステムにネイティブ対応しており、完全な ONNX 推論ファイル、サーバースクリプト、テストツールが付属しています。プロフェッショナル開発者向けのプロジェクト統合、バッチ推論、WebSocket ストリーミングサービスなどのエンジニアリングシナリオに対応します。ユーザーのニーズに合わせて、公式標準デプロイ方法と軽量クイック体験方法の両方を提供します。</p>
+<h3 class="rp-toc-include" id="51-公式標準デプロイsherpa-onnx-によるエンジニアリングデプロイ"><a href="#51-公式標準デプロイsherpa-onnx-によるエンジニアリングデプロイ" class="rp-header-anchor rp-link" aria-hidden="true">#</a>5.1 公式標準デプロイ：Sherpa-ONNX によるエンジニアリングデプロイ</h3>
+<p>プロジェクトリポジトリには完全な Sherpa-ONNX デプロイリソースが含まれており、異なるチャンクサイズの ONNX エンコーダ・デコーダ・ジョイナーの重みファイル、および付属の推論スクリプトが用意されています。CPU のみでの軽量ストリーミングサービスのデプロイが可能で、リアルタイム音声認識サービスを迅速に構築でき、プロジェクトの二次開発や実サービスへの実装に適しています。</p>
+<h4 class="rp-toc-include" id="環境デプロイ手順"><a href="#環境デプロイ手順" class="rp-header-anchor rp-link" aria-hidden="true">#</a>環境デプロイ手順</h4>
+<p>プロジェクトリソースをダウンロード後、deployment ディレクトリに移動し、仮想環境を作成して依存パッケージをインストールします。</p>
+<div class="rp-codeblock language-bash"><div class="rp-codeblock__content"><div class="rp-codeblock__content__scroll-container rp-scrollbar rp-scrollbar--always"><pre class="shiki css-variables" style="background-color:var(--shiki-background);color:var(--shiki-foreground)" tabindex="0" data-lang="bash"><code><span class="line"><span style="color:var(--shiki-token-function)">cd</span><span style="color:var(--shiki-token-string)"> deployment</span></span>
+<span class="line"><span style="color:var(--shiki-token-function)">python</span><span style="color:var(--shiki-token-string)"> -m</span><span style="color:var(--shiki-token-string)"> venv</span><span style="color:var(--shiki-token-string)"> .venv</span></span>
+<span class="line"><span style="color:var(--shiki-token-function)">source</span><span style="color:var(--shiki-token-string)"> .venv/bin/activate</span></span>
+<span class="line"><span style="color:var(--shiki-token-function)">python</span><span style="color:var(--shiki-token-string)"> -m</span><span style="color:var(--shiki-token-string)"> pip</span><span style="color:var(--shiki-token-string)"> install</span><span style="color:var(--shiki-token-string)"> --upgrade</span><span style="color:var(--shiki-token-string)"> pip</span></span>
+<span class="line"><span style="color:var(--shiki-token-function)">python</span><span style="color:var(--shiki-token-string)"> -m</span><span style="color:var(--shiki-token-string)"> pip</span><span style="color:var(--shiki-token-string)"> install</span><span style="color:var(--shiki-token-string)"> -r</span><span style="color:var(--shiki-token-string)"> requirements.txt</span></span></code></pre></div><div class="rp-code-button-group"><button class="rp-code-button-group__button rp-code-wrap-button" title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrapped"><path fill="currentColor" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrap"><path fill="currentColor" d="M16 7H3V5h13zM3 19h13v-2H3zm19-7-4-3v2H3v2h15v2z"></path></svg></button><button class="rp-code-button-group__button rp-code-copy-button" title="コードをコピー"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--copy"><path fill="currentColor" d="M20 8v12H8V8zm0-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2"></path><path fill="currentColor" d="M4 16H2V4a2 2 0 0 1 2-2h12v2H4Z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--success"><path fill="currentColor" d="m9.55 18-5.7-5.7 1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z"></path></svg></button></div></div></div>
+<h4 class="rp-toc-include" id="ストリーミング推論サービスの起動"><a href="#ストリーミング推論サービスの起動" class="rp-header-anchor rp-link" aria-hidden="true">#</a>ストリーミング推論サービスの起動</h4>
+<p>160ms 低遅延モデルを例として、CPU ストリーミング認識サービスを起動します。ポート、スレッド数、復号パラメータはカスタマイズ可能です。</p>
+<div class="rp-codeblock language-bash"><div class="rp-codeblock__content"><div class="rp-codeblock__content__scroll-container rp-scrollbar rp-scrollbar--always"><pre class="shiki css-variables" style="background-color:var(--shiki-background);color:var(--shiki-foreground)" tabindex="0" data-lang="bash"><code><span class="line"><span style="color:var(--shiki-token-function)">python</span><span style="color:var(--shiki-token-string)"> infer_and_client/sherpa_streaming_server.py</span><span style="color:var(--shiki-foreground)"> \</span></span>
+<span class="line"><span style="color:var(--shiki-token-string)">  --host</span><span style="color:var(--shiki-token-constant)"> 0.0.0.0</span><span style="color:var(--shiki-foreground)"> \</span></span>
+<span class="line"><span style="color:var(--shiki-token-string)">  --port</span><span style="color:var(--shiki-token-constant)"> 8766</span><span style="color:var(--shiki-foreground)"> \</span></span>
+<span class="line"><span style="color:var(--shiki-token-string)">  --tokens</span><span style="color:var(--shiki-token-string)"> models/chunk-160ms-model/tokens.txt</span><span style="color:var(--shiki-foreground)"> \</span></span>
+<span class="line"><span style="color:var(--shiki-token-string)">  --encoder</span><span style="color:var(--shiki-token-string)"> models/chunk-160ms-model/encoder-160ms.onnx</span><span style="color:var(--shiki-foreground)"> \</span></span>
+<span class="line"><span style="color:var(--shiki-token-string)">  --decoder</span><span style="color:var(--shiki-token-string)"> models/chunk-160ms-model/decoder-160ms.onnx</span><span style="color:var(--shiki-foreground)"> \</span></span>
+<span class="line"><span style="color:var(--shiki-token-string)">  --joiner</span><span style="color:var(--shiki-token-string)"> models/chunk-160ms-model/joiner-160ms.onnx</span><span style="color:var(--shiki-foreground)"> \</span></span>
+<span class="line"><span style="color:var(--shiki-token-string)">  --provider</span><span style="color:var(--shiki-token-string)"> cpu</span><span style="color:var(--shiki-foreground)"> \</span></span>
+<span class="line"><span style="color:var(--shiki-token-string)">  --sample-rate</span><span style="color:var(--shiki-token-constant)"> 16000</span><span style="color:var(--shiki-foreground)"> \</span></span>
+<span class="line"><span style="color:var(--shiki-token-string)">  --feature-dim</span><span style="color:var(--shiki-token-constant)"> 80</span><span style="color:var(--shiki-foreground)"> \</span></span>
+<span class="line"><span style="color:var(--shiki-token-string)">  --num-threads</span><span style="color:var(--shiki-token-constant)"> 1</span><span style="color:var(--shiki-foreground)"> \</span></span>
+<span class="line"><span style="color:var(--shiki-token-string)">  --decoding-method</span><span style="color:var(--shiki-token-string)"> greedy_search</span><span style="color:var(--shiki-foreground)"> \</span></span>
+<span class="line"><span style="color:var(--shiki-token-string)">  --model-type</span><span style="color:var(--shiki-token-string)"> zipformer2</span><span style="color:var(--shiki-foreground)"> \</span></span>
+<span class="line"><span style="color:var(--shiki-token-string)">  --enable-endpoint-detection</span><span style="color:var(--shiki-token-constant)"> 0</span><span style="color:var(--shiki-foreground)"> \</span></span>
+<span class="line"><span style="color:var(--shiki-token-string)">  --text-format</span><span style="color:var(--shiki-token-string)"> none</span></span></code></pre></div><div class="rp-code-button-group"><button class="rp-code-button-group__button rp-code-wrap-button" title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrapped"><path fill="currentColor" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrap"><path fill="currentColor" d="M16 7H3V5h13zM3 19h13v-2H3zm19-7-4-3v2H3v2h15v2z"></path></svg></button><button class="rp-code-button-group__button rp-code-copy-button" title="コードをコピー"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--copy"><path fill="currentColor" d="M20 8v12H8V8zm0-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2"></path><path fill="currentColor" d="M4 16H2V4a2 2 0 0 1 2-2h12v2H4Z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--success"><path fill="currentColor" d="m9.55 18-5.7-5.7 1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z"></path></svg></button></div></div></div>
+<h4 class="rp-toc-include" id="音声ファイルを用いたテスト推論"><a href="#音声ファイルを用いたテスト推論" class="rp-header-anchor rp-link" aria-hidden="true">#</a>音声ファイルを用いたテスト推論</h4>
+<p>サービス起動後、クライアントスクリプトを使ってローカルの WAV 音声を読み込み、リアルタイムストリーミング推論をシミュレーションしてテストできます。</p>
+<div class="rp-codeblock language-bash"><div class="rp-codeblock__content"><div class="rp-codeblock__content__scroll-container rp-scrollbar rp-scrollbar--always"><pre class="shiki css-variables" style="background-color:var(--shiki-background);color:var(--shiki-foreground)" tabindex="0" data-lang="bash"><code><span class="line"><span style="color:var(--shiki-token-function)">python</span><span style="color:var(--shiki-token-string)"> infer_and_client/sherpa_streaming_client.py</span><span style="color:var(--shiki-foreground)"> \</span></span>
+<span class="line"><span style="color:var(--shiki-token-string)">  --server-uri</span><span style="color:var(--shiki-token-string)"> ws://127.0.0.1:8766</span><span style="color:var(--shiki-foreground)"> \</span></span>
+<span class="line"><span style="color:var(--shiki-token-string)">  --wav</span><span style="color:var(--shiki-token-string)"> /path/to/test.wav</span><span style="color:var(--shiki-foreground)"> \</span></span>
+<span class="line"><span style="color:var(--shiki-token-string)">  --chunk-ms</span><span style="color:var(--shiki-token-constant)"> 100</span><span style="color:var(--shiki-foreground)"> \</span></span>
+<span class="line"><span style="color:var(--shiki-token-string)">  --simulate-realtime</span><span style="color:var(--shiki-token-constant)"> 1</span></span></code></pre></div><div class="rp-code-button-group"><button class="rp-code-button-group__button rp-code-wrap-button" title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrapped"><path fill="currentColor" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrap"><path fill="currentColor" d="M16 7H3V5h13zM3 19h13v-2H3zm19-7-4-3v2H3v2h15v2z"></path></svg></button><button class="rp-code-button-group__button rp-code-copy-button" title="コードをコピー"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--copy"><path fill="currentColor" d="M20 8v12H8V8zm0-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2"></path><path fill="currentColor" d="M4 16H2V4a2 2 0 0 1 2-2h12v2H4Z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--success"><path fill="currentColor" d="m9.55 18-5.7-5.7 1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z"></path></svg></button></div></div></div>
+<h3 class="rp-toc-include" id="52-極簡推論manyspeech-cli-コマンドラインクイック体験"><a href="#52-極簡推論manyspeech-cli-コマンドラインクイック体験" class="rp-header-anchor rp-link" aria-hidden="true">#</a>5.2 極簡推論：ManySpeech-CLI コマンドライン（クイック体験）</h3>
+<p><strong><a href="https://github.com/manyeyes/ManySpeech" target="_blank" rel="noopener noreferrer" class="rp-link">ManySpeech</a></strong> はオープンソースの音声 AI モデル推論プロジェクトであり、汎用 ONNX 音声モデル推論 SDK として利用できます。開発者は二次開発や機能拡張が可能で、様々な軽量音声認識モデルの実装に適しています。<strong>ManySpeech-CLI</strong> は ManySpeech カーネルをベースにした軽量コマンドラインツールで、複雑な開発設定を取り除き、ゼロコンフィグで即座に使えることを目指しています。一般ユーザーがモデルの効果を簡単に試したり、開発者が日常的な機能検証を行うのに最適です。</p>
+<p>本ツールは X-ASR-zh-en の全モデルと完全互換性があり、マイクからのリアルタイム音声取り込み、ストリーミングリアルタイム復号、中英混在認識、自動句読点付与、大文字・小文字正規化をサポートします。重みの手動読み込みや複雑なエンジニアリングデプロイは不要で、モデル性能を素早く検証するための最適な軽量ソリューションです。</p>
+<h4 class="rp-toc-include" id="ターミナルでのリアルタイムマイク推論の使用方法"><a href="#ターミナルでのリアルタイムマイク推論の使用方法" class="rp-header-anchor rp-link" aria-hidden="true">#</a>ターミナルでのリアルタイムマイク推論の使用方法</h4>
+<p><a href="https://manyeyes.github.io/manyspeech/cli/getting-started/installation.html" target="_blank" rel="noopener noreferrer" class="rp-link">ManySpeech-CLI のインストール</a> 後、以下のコマンドを実行するだけで、低遅延リアルタイム中英バイリンガル音声認識が開始されます。</p>
+<div class="rp-codeblock language-bash"><div class="rp-codeblock__content"><div class="rp-codeblock__content__scroll-container rp-scrollbar rp-scrollbar--always"><pre class="shiki css-variables" style="background-color:var(--shiki-background);color:var(--shiki-foreground)" tabindex="0" data-lang="bash"><code><span class="line"><span style="color:var(--shiki-token-function)">manyspeech</span><span style="color:var(--shiki-token-string)"> asr</span><span style="color:var(--shiki-token-string)"> -t</span><span style="color:var(--shiki-token-string)"> online</span><span style="color:var(--shiki-token-string)"> -md</span><span style="color:var(--shiki-token-string)"> k2transducer-zipformer-x-asr-zh-en-480ms-onnx-online-20260601</span><span style="color:var(--shiki-token-string)"> -m</span><span style="color:var(--shiki-token-string)"> chunk</span><span style="color:var(--shiki-token-string)"> -i</span><span style="color:var(--shiki-token-string)"> mic</span></span></code></pre></div><div class="rp-code-button-group"><button class="rp-code-button-group__button rp-code-wrap-button" title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrapped"><path fill="currentColor" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrap"><path fill="currentColor" d="M16 7H3V5h13zM3 19h13v-2H3zm19-7-4-3v2H3v2h15v2z"></path></svg></button><button class="rp-code-button-group__button rp-code-copy-button" title="コードをコピー"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--copy"><path fill="currentColor" d="M20 8v12H8V8zm0-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2"></path><path fill="currentColor" d="M4 16H2V4a2 2 0 0 1 2-2h12v2H4Z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--success"><path fill="currentColor" d="m9.55 18-5.7-5.7 1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z"></path></svg></button></div></div></div>
+<h4 class="rp-toc-include" id="主要コマンドパラメータの説明"><a href="#主要コマンドパラメータの説明" class="rp-header-anchor rp-link" aria-hidden="true">#</a>主要コマンドパラメータの説明</h4>
+<ul>
+<li><strong>-t online</strong>：リアルタイムストリーミング推論モードを指定。マイクからのリアルタイム音声入力に適応し、低遅延出力を保証します。</li>
+<li><strong>-md k2transducer-zipformer-x-asr-zh-en-480ms-onnx-online-20260601</strong>：480ms 均衡版モデルをロード。認識精度と推論遅延のバランスが良く、ほとんどの日常・オフィスシナリオに適しています。</li>
+<li><strong>-m chunk</strong>：チャンクストリーミング推論機構を有効化。モデル本来の復号アーキテクチャに適合し、安定した認識を実現します。</li>
+<li><strong>-i mic</strong>：音声入力ソースとしてマイクを指定。リアルタイムで音声を収音し、即座に文字起こしします。</li>
+</ul>
+<p>コマンド実行後、ターミナルは継続的にマイク入力を監視し、中英混在音声認識、句読点補完、英文大文字・小文字正規化を自動で行います。一般ユーザーはモデル能力を簡単に体験でき、開発者は ManySpeech オープンソースカーネルをベースに二次開発し、モデル推論能力を自身のプロジェクトに迅速に統合できます。</p>
+<h2 class="rp-toc-include" id="六オンラインデモ体験"><a href="#六オンラインデモ体験" class="rp-header-anchor rp-link" aria-hidden="true">#</a>六、オンラインデモ体験</h2>
+<p>公式には Sherpa-ONNX を用いたオンライン体験デモが提供されています。ローカルデプロイや環境設定は不要で、ブラウザ上で直接 X-ASR-zh-en のバイリンガルストリーミング認識効果を体験でき、低遅延・高精度な認識能力を直感的に感じられます。</p>
+<p><strong>オンライン体験アドレス</strong>：<a href="https://stream-asr.sjtuxlance.com/" target="_blank" rel="noopener noreferrer" class="rp-link">https://stream-asr.sjtuxlance.com/</a></p>
+<p>また、プロジェクトにはデモ動画も含まれており、モデルのリアルタイム認識効果を視覚的に確認できます。ユーザーはモデルの全体的な性能や対話体験を素早く把握できます。</p>
+<h2 class="rp-toc-include" id="七オープンソース入手先"><a href="#七オープンソース入手先" class="rp-header-anchor rp-link" aria-hidden="true">#</a>七、オープンソース入手先</h2>
+<p>モデルは完全にオープンソースで公開されており、複数のプラットフォームで完全なリソースを配布しています。プロジェクトのソースコード、異なるチャンクサイズの ONNX モデル重み、デプロイスクリプト、テストケース、バイリンガルドキュメントなどすべてのファイルが含まれており、様々なネットワーク環境のユーザーがダウンロードして利用できます。</p>
+<ul>
+<li><strong><a href="https://github.com/Gilgamesh-J/X-ASR" target="_blank" rel="noopener noreferrer" class="rp-link">GitHub</a></strong>：プロジェクトの完全なソースコード、更新ログ、課題追跡、開発ドキュメント、訓練参考リソースを提供。深い開発やプロジェクトのフォローアップに適しています。</li>
+<li><strong><a href="https://huggingface.co/GilgameshWind/X-ASR-zh-en" target="_blank" rel="noopener noreferrer" class="rp-link">Hugging Face Hub</a></strong>：モデル重みをワンクリックでダウンロード可能。HF エコシステムでのデプロイに適合し、モデルカードやバージョン管理を提供。</li>
+<li><strong><a href="https://www.modelscope.ai/Gilgamesh-J/X-ASR-zh-en" target="_blank" rel="noopener noreferrer" class="rp-link">ModelScope</a></strong>：国内高速ミラーサイト。海外リソースへのアクセス制限を解決し、国内開発者のネットワーク環境に適応。</li>
+<li><strong><a href="https://huggingface.co/spaces/chenxie95/X-ASR" target="_blank" rel="noopener noreferrer" class="rp-link">Hugging Face Space</a></strong>：オンライン対話型体験スペース。軽量なオンラインテストが可能。</li>
+</ul>
+<h2 class="rp-toc-include" id="八謝辞と著作権"><a href="#八謝辞と著作権" class="rp-header-anchor rp-link" aria-hidden="true">#</a>八、謝辞と著作権</h2>
+<p>本モデルは <a href="https://github.com/k2-fsa/icefall" target="_blank" rel="noopener noreferrer" class="rp-link">Icefall</a>、K2、<a href="https://github.com/k2-fsa/sherpa-onnx" target="_blank" rel="noopener noreferrer" class="rp-link">Sherpa-ONNX</a> のオープンソースエコシステムを用いて訓練・デプロイされました。関連するオープンソースコミュニティの技術的支援に感謝いたします。モデルは Apache 2.0 ライセンスの下でオープンソースとして提供され、無償での商用利用および学術研究が許可されています。コミュニティによる反復的な改善や二次的なオープンソース化を歓迎します。</p><!--/$--></div><footer class="rp-doc-footer"><div class="rp-doc-footer__edit"></div><div class="rp-doc-footer__divider"></div><div class="rp-prev-next-page"><div class="rp-prev-next-page__placeholder"></div><div class="rp-prev-next-page__placeholder"></div></div></footer></main></div><aside class="rp-doc-layout__outline rp-scrollbar"><div class="rp-outline"><div class="rp-outline__title">目次<svg width="14" height="14" class="rp-progress-circle"><circle cx="7" cy="7" r="6" stroke-linecap="round" fill="none" stroke="var(--rp-c-divider-light)" stroke-width="2"></circle><circle cx="7" cy="7" r="6" stroke-linecap="round" fill="none" stroke="var(--rp-c-brand)" stroke-width="2" stroke-dasharray="37.69911184307752" stroke-dashoffset="37.69911184307752" transform="rotate(-90 7 7)" style="transition:stroke-dashoffset 0.3s"></circle></svg></div><nav class="rp-outline__toc rp-scrollbar"><a href="#一プロジェクト背景と開発チーム" class="rp-toc-item rp-link" title="一、プロジェクト背景と開発チーム" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">一、プロジェクト背景と開発チーム</span></a><a href="#11-業界の開発背景" class="rp-toc-item rp-link" title="1.1 業界の開発背景" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">1.1 業界の開発背景</span></a><a href="#12-開発チームとオープンソース宣言" class="rp-toc-item rp-link" title="1.2 開発チームとオープンソース宣言" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">1.2 開発チームとオープンソース宣言</span></a><a href="#二モデルの概要" class="rp-toc-item rp-link" title="二、モデルの概要" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">二、モデルの概要</span></a><a href="#三コアアーキテクチャと主要機能" class="rp-toc-item rp-link" title="三、コアアーキテクチャと主要機能" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">三、コアアーキテクチャと主要機能</span></a><a href="#31-アーキテクチャの強み" class="rp-toc-item rp-link" title="3.1 アーキテクチャの強み" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">3.1 アーキテクチャの強み</span></a><a href="#32-主な機能" class="rp-toc-item rp-link" title="3.2 主な機能" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">3.2 主な機能</span></a><a href="#四コア性能データ業界ベンチマーク" class="rp-toc-item rp-link" title="四、コア性能データ（業界ベンチマーク）" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">四、コア性能データ（業界ベンチマーク）</span></a><a href="#41-汎用ベンチマークデータセット総合性能" class="rp-toc-item rp-link" title="4.1 汎用ベンチマークデータセット総合性能" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">4.1 汎用ベンチマークデータセット総合性能</span></a><a href="#42-主要オープンソースモデルとの比較" class="rp-toc-item rp-link" title="4.2 主要オープンソースモデルとの比較" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">4.2 主要オープンソースモデルとの比較</span></a><a href="#43-垂直領域別詳細性能中英バイリンガル" class="rp-toc-item rp-link" title="4.3 垂直領域別詳細性能（中英バイリンガル）" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">4.3 垂直領域別詳細性能（中英バイリンガル）</span></a><a href="#中国語シナリオ-垂直領域誤り率cer" class="rp-toc-item rp-link" title="中国語シナリオ 垂直領域誤り率（CER）" style="padding-left:24px" data-depth="2"><span class="rp-toc-item__text rp-doc">中国語シナリオ 垂直領域誤り率（CER）</span></a><a href="#英語シナリオ-垂直領域誤り率wer" class="rp-toc-item rp-link" title="英語シナリオ 垂直領域誤り率（WER）" style="padding-left:24px" data-depth="2"><span class="rp-toc-item__text rp-doc">英語シナリオ 垂直領域誤り率（WER）</span></a><a href="#五推論デプロイ" class="rp-toc-item rp-link" title="五、推論デプロイ" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">五、推論デプロイ</span></a><a href="#51-公式標準デプロイsherpa-onnx-によるエンジニアリングデプロイ" class="rp-toc-item rp-link" title="5.1 公式標準デプロイ：Sherpa-ONNX によるエンジニアリングデプロイ" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">5.1 公式標準デプロイ：Sherpa-ONNX によるエンジニアリングデプロイ</span></a><a href="#環境デプロイ手順" class="rp-toc-item rp-link" title="環境デプロイ手順" style="padding-left:24px" data-depth="2"><span class="rp-toc-item__text rp-doc">環境デプロイ手順</span></a><a href="#ストリーミング推論サービスの起動" class="rp-toc-item rp-link" title="ストリーミング推論サービスの起動" style="padding-left:24px" data-depth="2"><span class="rp-toc-item__text rp-doc">ストリーミング推論サービスの起動</span></a><a href="#音声ファイルを用いたテスト推論" class="rp-toc-item rp-link" title="音声ファイルを用いたテスト推論" style="padding-left:24px" data-depth="2"><span class="rp-toc-item__text rp-doc">音声ファイルを用いたテスト推論</span></a><a href="#52-極簡推論manyspeech-cli-コマンドラインクイック体験" class="rp-toc-item rp-link" title="5.2 極簡推論：ManySpeech-CLI コマンドライン（クイック体験）" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">5.2 極簡推論：ManySpeech-CLI コマンドライン（クイック体験）</span></a><a href="#ターミナルでのリアルタイムマイク推論の使用方法" class="rp-toc-item rp-link" title="ターミナルでのリアルタイムマイク推論の使用方法" style="padding-left:24px" data-depth="2"><span class="rp-toc-item__text rp-doc">ターミナルでのリアルタイムマイク推論の使用方法</span></a><a href="#主要コマンドパラメータの説明" class="rp-toc-item rp-link" title="主要コマンドパラメータの説明" style="padding-left:24px" data-depth="2"><span class="rp-toc-item__text rp-doc">主要コマンドパラメータの説明</span></a><a href="#六オンラインデモ体験" class="rp-toc-item rp-link" title="六、オンラインデモ体験" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">六、オンラインデモ体験</span></a><a href="#七オープンソース入手先" class="rp-toc-item rp-link" title="七、オープンソース入手先" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">七、オープンソース入手先</span></a><a href="#八謝辞と著作権" class="rp-toc-item rp-link" title="八、謝辞と著作権" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">八、謝辞と著作権</span></a></nav><div class="rp-outline__divider"></div><div class="rp-outline__bottom"></div></div></aside></div><div class="back-to-list" style="text-align:right;margin:3rem 3rem 2rem"><a href="/manyspeech/ja/blog/" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.2rem 0.5rem;background-color:var(--rp-c-brand, #112dad);color:white;border-radius:9999px;text-decoration:none;font-weight:500;transition:all 0.2s ease;font-size:0.875rem">← ブログ一覧に戻る</a></div></div>
+    <div id="__rspress_modal_container"></div>
+  </body>
+</html>
