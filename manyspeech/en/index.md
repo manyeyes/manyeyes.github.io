@@ -1,8 +1,8 @@
 # ManySpeech
 
-Lightweight Local Speech AI
+Lightweight Local Speech Toolkit
 
-> Native offline recognition, real-time streaming, no cloud required.
+> Native offline recognition, real-time streaming, no cloud required, no extra configuration.
 
 [Get Started](/en/cli/getting-started/) | [GitHub](https://github.com/manyeyes/ManySpeech)
 

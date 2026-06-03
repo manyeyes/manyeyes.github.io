@@ -1,8 +1,8 @@
 # ManySpeech
 
-轻量本地语音AI
+轻量本地语音工具包
 
-> 原生支持离线识别、实时流式识别，无需云端、无需额外配置
+> 原生支持离线识别、实时流式识别，无需依赖云端、无需额外配置
 
 [快速开始](/cli/getting-started/) | [GitHub](https://github.com/manyeyes/ManySpeech)
 
