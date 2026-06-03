@@ -4,6 +4,7 @@
 - [API Overview](/manyspeech/api/index.md)
 - [所有博客](/manyspeech/blog/index.md)
 - [X-ASR-zh-en：轻量高精度中英双语离线流式语音识别模型](/manyspeech/blog/post-001.md)
+- [Fun-ASR-Nano-2512：千万小时真实语音训练的800M参数语音识别大模型](/manyspeech/blog/post-002.md)
 - [批量处理脚本](/manyspeech/cli/advanced/batch-processing.md)
 - [环境变量配置](/manyspeech/cli/advanced/environment-vars.md): 通过环境变量可以预设全局参数，避免每次输入。
 - [高级用法](/manyspeech/cli/advanced/index.md): 本章节介绍 ManySpeech-CLI 的高级配置和集成技巧。
