@@ -6,6 +6,7 @@ export default defineConfig({
   globalStyles: path.join(__dirname, 'styles/index.css'),
   globalUIComponents: [
     path.join(__dirname, 'components', 'BackButton.tsx'),   // 注册返回按钮组件
+    // path.join(__dirname, 'components', 'CommandPanel.tsx'), // 注册命令面板组件
   ],
   base: '/manyspeech/',
   llms: true, // 开启 SSG-MD

@@ -3,8 +3,9 @@ pageType: home
 
 hero:
   name: "ManySpeech"
-  text: "轻量本地语音AI"
-  tagline: 原生支持离线识别、实时流式识别，无需云端、无需额外配置
+  text: "轻量本地语音工具包"
+  tagline: 原生支持离线识别、实时流式识别，无需依赖云端、无需额外配置
+  
   actions:
     - theme: brand
       text: 快速开始
@@ -36,6 +37,7 @@ head:
   - [meta, { name: description, content: "ManySpeech 是一款免费开源的本地离线语音识别CLI工具，支持实时麦克风识别、音频文件转文字、自动生成SRT字幕，可直接被大模型、AI Agent调用，零配置开箱即用。" }]
 ---
 
+
 ## ✨ 功能亮点
 
 | 功能 | 说明 |
@@ -53,7 +55,7 @@ head:
 manyspeech asr -t online -i mic
 
 # 音频文件识别
-manyspeech asr -t offline -f test.wav
+manyspeech asr -t offline -i file -f test.wav
 ```
 
 > 完整文档请查看左侧导航栏

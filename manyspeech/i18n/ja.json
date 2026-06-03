@@ -7,5 +7,9 @@
   "blogTitle": "ブログ",
   "latestArticles": "最新記事",
   "excerptDefault": "クリックして全文を読む",
-  "noExcerpt": "要約なし"
+  "noExcerpt": "要約なし",
+  "terminalTitle": "ターミナル / コマンド",
+  "copy": "コピー",
+  "copied": "✓ コピー完了",
+  "outputText": "認識結果：こんにちは、世界！"
 }

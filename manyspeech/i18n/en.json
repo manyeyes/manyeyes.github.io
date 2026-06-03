@@ -7,5 +7,9 @@
   "blogTitle": "Blog",
   "latestArticles": "Latest Articles",
   "excerptDefault": "Click to read full article",
-  "noExcerpt": "No summary available"
+  "noExcerpt": "No summary available",
+  "terminalTitle": "Terminal / Command",
+  "copy": "Copy",
+  "copied": "✓ Copied",
+  "outputText": "Recognition Result: Hello, World!"
 }

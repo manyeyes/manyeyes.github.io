@@ -280,10 +280,17 @@ html[data-theme='dark']:root {
 
 /* 2.Hero首页大Logo：上下浮动 */
 .rp-home-hero__image img {
-  animation: logoFloat 3s ease-in-out infinite alternate;
+  /* animation: logoFloatRotate 3s ease-in-out infinite alternate; */
+  animation: logoFloatRotate 5s linear infinite alternate;
   /* animation: logoScale 2.4s ease-in-out infinite; */
   /* 让动画更柔和 */
   transition: transform 0.3s ease;
+}
+@media (max-width: 999px) {
+  .rp-home-hero__image img {
+    animation: none !important;
+    transform: none !important;
+  }
 }
 /* 鼠标放上去额外放大一点 */
 .rp-home-hero__image img:hover {
@@ -291,7 +298,7 @@ html[data-theme='dark']:root {
 }
 /* 定义上下浮动动画 */
 @keyframes logoFloat {
-  from { transform: translateY(0px); }
+  from { transform: translateY(12px); }
   to { transform: translateY(-12px); }
 }
 /* 可选：呼吸缩放效果 */
@@ -300,3 +307,27 @@ html[data-theme='dark']:root {
   50% {transform: scale(1.08);}
   100% {transform: scale(1);}
 }
+/* 新增：旋转动画 */
+@keyframes logoRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes logoRotate2 {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+/* 旋转+浮动 动画*/
+@keyframes logoFloatRotate {
+  0% {
+    transform: translateY(12px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-12px) rotate(360deg);
+  }
+}
+
+
+
+
+
+

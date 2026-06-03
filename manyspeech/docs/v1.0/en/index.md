@@ -3,8 +3,8 @@ pageType: home
 
 hero:
   name: "ManySpeech"
-  text: "Lightweight Local Speech AI"
-  tagline: Native offline recognition, real-time streaming, no cloud required.
+  text: "Lightweight Local Speech Toolkit"
+  tagline: Native offline recognition, real-time streaming, no cloud required, no extra configuration.
   actions:
     - theme: brand
       text: Get Started
