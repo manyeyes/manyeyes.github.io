@@ -193,7 +193,7 @@ This model is trained and deployed based on the [Icefall](https://github.com/k2-
 ## v1.0/en/blog/index.mdx
 
 ---
-title: 所有博客
+title: All Blogs
 pageType: custom
 ---
 import BlogList from '../../../../components/BlogList';

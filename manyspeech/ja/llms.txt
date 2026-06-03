@@ -2,6 +2,8 @@
 
 - [コマンド](/manyspeech/ja/api/commands.md)
 - [API 概要](/manyspeech/ja/api/index.md)
+- [すべてのブログ](/manyspeech/ja/blog/index.md)
+- [X-ASR-zh-en：軽量高精度中英バイリンガル・オフライン＆ストリーミング音声認識モデル](/manyspeech/ja/blog/post-001.md)
 - [バッチ処理スクリプト](/manyspeech/ja/cli/advanced/batch-processing.md)
 - [環境変数の設定](/manyspeech/ja/cli/advanced/environment-vars.md): 環境変数でグローバルパラメータを事前設定できます。
 - [高度な使い方](/manyspeech/ja/cli/advanced/index.md): この章では ManySpeech-CLI の高度な設定や統合テクニックを紹介します。 内容: 環境変数設定 - 環境変数でパラメータを事前設定バッチ処理スクリプト - 大量ファイルの自動処理パフォーマンス最適化 - 推論速度と精度のチューニング 適用シーン: CI/CD 統合大規模文字起こしサーバー運用カスタムワークフロー

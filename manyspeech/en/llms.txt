@@ -2,7 +2,7 @@
 
 - [Commands](/manyspeech/en/api/commands.md)
 - [API Overview](/manyspeech/en/api/index.md)
-- [所有博客](/manyspeech/en/blog/index.md)
+- [All Blogs](/manyspeech/en/blog/index.md)
 - [X-ASR-zh-en: Lightweight High-Accuracy Bilingual Offline Streaming Speech Recognition Model](/manyspeech/en/blog/post-001.md)
 - [Batch Processing Scripts](/manyspeech/en/cli/advanced/batch-processing.md)
 - [Environment Variables](/manyspeech/en/cli/advanced/environment-vars.md): Pre-set global parameters via environment variables.
