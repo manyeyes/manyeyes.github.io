@@ -1,10 +1,14 @@
 [
   {
-    "text": "コマンドラインツール",
+    "text": "CLIツール",
     "link": "/cli/getting-started/"
   },
   {
     "text": "モデルライブラリ",
     "link": "/models/getting-started/"
+  },
+  {
+    "text": "ブログ",
+    "link": "/blog/"
   }
 ]

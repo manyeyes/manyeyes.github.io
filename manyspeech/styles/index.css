@@ -277,3 +277,26 @@ html[data-theme='dark']:root {
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1.5rem;
 }
+
+/* 2.Hero首页大Logo：上下浮动 */
+.rp-home-hero__image img {
+  animation: logoFloat 3s ease-in-out infinite alternate;
+  /* animation: logoScale 2.4s ease-in-out infinite; */
+  /* 让动画更柔和 */
+  transition: transform 0.3s ease;
+}
+/* 鼠标放上去额外放大一点 */
+.rp-home-hero__image img:hover {
+  transform: scale(1.18);
+}
+/* 定义上下浮动动画 */
+@keyframes logoFloat {
+  from { transform: translateY(0px); }
+  to { transform: translateY(-12px); }
+}
+/* 可选：呼吸缩放效果 */
+@keyframes logoScale {
+  0% {transform: scale(1);}
+  50% {transform: scale(1.08);}
+  100% {transform: scale(1);}
+}

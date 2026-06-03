@@ -9,9 +9,6 @@ export default defineConfig({
   ],
   base: '/manyspeech/',
   llms: true, // 开启 SSG-MD
-  // llmsUI: {
-  //   placement: 'outline', // 将按钮显示在右侧大纲面板中
-  // },
   // 顶层配置：所有语言共用
   icon: '/manyspeech/manyspeech-icon.webp',
   logo: {  
@@ -32,6 +29,10 @@ export default defineConfig({
       message:
         '© 2026 ManySpeech, Powered by Rspress<br/>Site last updated 2026-06-02',
     },
+    // llmsUI: {           // 推荐使用 themeConfig 方式
+    //   placement: 'outline', // 按钮位置：'outline' 或 'nav'
+    //   viewOptions: ['markdownLink', 'chatgpt', 'claude'],
+    // },
   },
   
   // 语言配置
@@ -82,5 +83,8 @@ export default defineConfig({
     link: {
       autoPrefix: true, // 开启自动前缀
     },
+  },
+  search: {
+    versioned: true, // 👈 确保这个选项为 true
   },
 });
