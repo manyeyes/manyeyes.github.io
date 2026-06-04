@@ -2,7 +2,7 @@
 
 ## 一、项目背景与研发团队
 
-Fun-ASR-Nano-2512 模型是由 **通义实验室（Tongyi Lab）** 于 **2025 年 12 月** 正式发布的端到端语音识别轻量大模型。该系列基于数千万小时真实语音数据训练而成，具备强大的上下文理解能力和行业适应性。相关技术细节在论文 **《Fun-ASR Technical Report》**（arXiv:2509.12508，2025）中系统阐述，作者包括 Keyu An、Yanni Chen、Chong Deng、Changfeng Gao、Zhifu Gao、Bo Gong、Xiangang Li、Yabin Li、Xiang Lv、Yunjie Ji 等。
+Fun-ASR-Nano-2512 系列是由 **通义实验室（Tongyi Lab）** 于 **2025 年 12 月** 正式发布的端到端语音识别轻量大模型。该系列基于数千万小时真实语音数据训练而成，具备强大的上下文理解能力和行业适应性。相关技术细节在论文 **《Fun-ASR Technical Report》**（arXiv:2509.12508，2025）中系统阐述，作者包括 Keyu An、Yanni Chen、Chong Deng、Changfeng Gao、Zhifu Gao、Bo Gong、Xiangang Li、Yabin Li、Xiang Lv、Yunjie Ji 等。
 
 ## 二、模型整体概述
 
@@ -75,28 +75,36 @@ Fun-ASR-Nano-2512 模型是由 **通义实验室（Tongyi Lab）** 于 **2025 �
 
 ## 六、推理部署
 
-### 1. 官方推理（Python + funasr）
+### 1. 官方推理（PyTorch 原版）
+
+使用通义实验室官方发布的 PyTorch 模型（非 ONNX），需配合 `funasr` 库和 `remote_code`。
 
 ```python
 from funasr import AutoModel
 
+# 加载官方 PyTorch 模型
 model = AutoModel(
-    model="manyeyes/Fun-ASR-Nano-2512-LLM-int8-onnx",  # 或 MLT 版本
+    model="FunAudioLLM/Fun-ASR-Nano-2512",  # 或 FunAudioLLM/Fun-ASR-MLT-Nano-2512
     trust_remote_code=True,
+    remote_code="./model.py",  # 需从 GitHub 仓库获取 model.py
     device="cuda:0"  # 或 "cpu"
 )
 
 res = model.generate(
-    input="path/to/audio.wav",
+    input=["path/to/audio.mp3"],
     language="中文",          # MLT 版可省略或设为 "auto"
-    itn=True,
-    hotwords=["通义实验室"],
-    output_timestamp=True
+    itn=True,                 # 逆文本正则化
+    hotwords=["开放时间"],     # 热词列表
+    cache={}                  # 可选缓存
 )
 print(res[0]["text"])
 ```
 
-### 2. 极简推理：ManySpeech-CLI 命令行（快速体验）
+> **注意**：官方模型支持完整的标点恢复、时间戳（需在 `generate` 中设置 `output_timestamp=True`）、ITN 和热词功能。`remote_code` 需指向从 [Fun-ASR 仓库](https://github.com/FunAudioLLM/Fun-ASR) 下载的 `model.py`。
+
+### 2. 极简推理：ManySpeech-CLI 命令行（基于 ONNX）
+
+`manyspeech-cli` 封装了 ONNX 模型的下载、音频处理和输出格式化，无需编写代码即可快速体验。
 
 安装 `manyspeech-cli`：[安装指南](https://manyeyes.github.io/manyspeech/cli/getting-started/installation.html)
 
@@ -123,7 +131,7 @@ manyspeech asr -t offline -m chunk -i mic --model Fun-ASR-Nano-2512-LLM-int8-onn
 manyspeech asr -t 2pass -i mic --model Fun-ASR-Nano-2512-CTC-int8-onnx --model2 Fun-ASR-Nano-2512-LLM-int8-onnx
 ```
 
-> **参数说明**：`-i file` 必须配合 `-files "音频路径"`；`-i mic` 无需文件参数。首次运行自动下载模型并缓存。
+> **参数说明**：`-i file` 必须配合 `-files "音频路径"`；`-i mic` 无需文件参数。首次运行自动下载 ONNX 模型并缓存。
 > 如果使用的是绿色版，启动程序后，无需输入主命令 manyspeech, 直接以子命令开始即可，如：asr -t offline -m chunk -i mic --model Fun-ASR-Nano-2512-LLM-int8-onnx
 
 ## 七、开源获取渠道
@@ -147,7 +155,4 @@ manyspeech asr -t 2pass -i mic --model Fun-ASR-Nano-2512-CTC-int8-onnx --model2 
 }
 ```
 
-```
-
-此版本严格按您要求的八个章节组织，语言精炼，命令行用法完全正确。所有关键信息（双版本、性能、ONNX 模型列表、Python/CLI 用法）均已包含。
-```
+> **说明**：官方推理使用原始 PyTorch 模型，需依赖 `funasr` 库和 `remote_code`；ManySpeech-CLI 基于 ONNX 模型，提供更轻量便捷的体验。两者均可实现高精度语音识别。
