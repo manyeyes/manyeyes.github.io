@@ -34,15 +34,79 @@
 **安装步骤**：
 
 1. 解压到任意目录（例如 `D:\Tools\ManySpeech`）。
-
 2. 进入该目录，双击 `manyspeech-cli.exe` 即可运行。
 
    > 💡 **提示**：如需在任意位置打开 cmd 后直接调用 `manyspeech`，请将解压目录添加到系统 **PATH** 环境变量中（双击运行目录中的 `install.bat` 即可自动完成此操作）。如需干净卸载，运行 `uninstall.bat` 即可。
 
-3. 验证安装：
+## Linux 安装
+
+### 方式一：AppImage 单文件版
+
+1. 下载 `manyspeech-cli-1.0.0-preview.9.19-linux-x64.AppImage`
+
+   - [ModelScope 下载](https://modelscope.cn/models/manyeyes/manyspeech-cli/resolve/master/manyspeech-cli-1.0.0-preview.9.19-linux-x64.AppImage)
 
    ```bash
-   manyspeech --help
+   wget https://modelscope.cn/models/manyeyes/manyspeech-cli/resolve/master/manyspeech-cli-1.0.0-preview.9.19-linux-x64.tar.gz
    ```
 
-   如果显示帮助信息，说明安装成功。
+   - [GitHub 下载](https://github.com/manyeyes/manyeyes.github.io/releases/download/v1.0.0-preview.9.19/manyspeech-cli-1.0.0-preview.9.19-linux-x64.AppImage)
+
+   ```bash
+   wget https://github.com/manyeyes/manyeyes.github.io/releases/download/v1.0.0-preview.9.19/manyspeech-cli-1.0.0-preview.9.19-linux-x64.AppImage
+   ```
+
+2. 赋予可执行权限：
+   ```bash
+   chmod +x manyspeech-cli-1.0.0-preview.9.19-linux-x64.AppImage
+   ```
+
+3. 直接运行：
+
+   ```bash
+   ./manyspeech-cli-1.0.0-preview.9.19-linux-x64.AppImage
+   ```
+
+   > 📝 提示：如果系统缺少 FUSE 库，可添加 --appimage-extract 参数解压后运行，或使用 --help 查看其他选项。
+
+### 方式二：免安装绿色版
+
+1. 下载 `manyspeech-cli-1.0.0-preview.9.19-linux-x64.tar.gz`
+
+   - [ModelScope 下载](https://modelscope.cn/models/manyeyes/manyspeech-cli/resolve/master/manyspeech-cli-1.0.0-preview.9.19-linux-x64.tar.gz)
+
+   ```bash
+   wget https://modelscope.cn/models/manyeyes/manyspeech-cli/resolve/master/manyspeech-cli-1.0.0-preview.9.19-linux-x64.tar.gz
+   ```
+
+   - [GitHub 下载](https://github.com/manyeyes/manyeyes.github.io/releases/download/v1.0.0-preview.9.19/manyspeech-cli-1.0.0-preview.9.19-linux-x64.tar.gz)
+
+   ```bash
+   wget https://github.com/manyeyes/manyeyes.github.io/releases/download/v1.0.0-preview.9.19/manyspeech-cli-1.0.0-preview.9.19-linux-x64.tar.gz
+   ```
+
+2. 解压压缩包：
+   ```bash
+   tar -xzvf manyspeech-cli-1.0.0-preview.9.19-linux-x64.tar.gz
+   ```
+
+3. 进入解压后的目录：
+   ```bash
+   cd manyspeech-cli-1.0.0-preview.9.19-linux-x64
+   ```
+
+4. 为程序添加可执行权限并运行：
+   ```bash
+   chmod +x manyspeech-cli
+   ./manyspeech-cli
+   ```
+
+## 验证安装
+
+```bash
+manyspeech --help
+```
+
+如果显示帮助信息，说明安装成功。
+
+> 💡 **通用提示**：首次运行程序时，会自动下载所需的语音识别模型文件，请耐心等待并保持网络通畅。
