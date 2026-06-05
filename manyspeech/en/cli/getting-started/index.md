@@ -13,10 +13,12 @@ Welcome to ManySpeech-CLI! This guide will help you get up and running quickly.
 
 ## Usage Modes
 
-| Mode            | How to Start                         | Use Case                    |
-| --------------- | ------------------------------------ | --------------------------- |
-| **Interactive** | Double click exe or run `manyspeech` | Manual testing, exploration |
-| **CLI**         | `manyspeech <subcommand> [args]`     | Scripting, automation       |
+| Mode            | How to Start                             | Use Case                    |
+| --------------- | ---------------------------------------- | --------------------------- |
+| **Interactive** | Double click exe or run `manyspeech-cli` | Manual testing, exploration |
+| **CLI**         | `manyspeech <subcommand> [args]`         | Scripting, automation       |
+
+> 💡 **Note**: Interactive CLI mode. Enter commands in format: `<subcommand> [arguments]>` and follow prompts to invoke functions.
 
 ## Next Steps
 
