@@ -1,6 +1,6 @@
 # ManySpeech
 
-Lightweight Local Speech Processing Toolkit
+Lightweight Local<br/>Speech Processing Toolkit
 
 > Native offline recognition & real-time streaming recognition, no cloud dependency, zero-config startup
 
