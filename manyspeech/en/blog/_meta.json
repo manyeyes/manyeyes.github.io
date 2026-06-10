@@ -5,5 +5,19 @@
     "label": "2026-06-02 - X-ASR-zh-en: Lightweight High-Accuracy Bilingual Offline Streaming Speech Recognition Model",
     "excerpt": "X-ASR-zh-en is an ultra-lightweight Chinese-English bilingual speech recognition model developed by Shanghai Jiao Tong University, Fudan University, and Huazhong University of Science and Technology. With only 0.16B parameters, it supports unified streaming/offline dual-mode inference, natively handles code-switching, automatic punctuation, and English case normalization. Pure CPU deployment, open-sourced under Apache 2.0, free for commercial use.",
     "tags": ["ASR", "Speech Recognition", "Bilingual", "Open Source Model", "Lightweight Deployment"]
+  },
+  {
+    "type": "file",
+    "name": "post-002",
+    "label": "2026-06-04 - Fun-ASR-Nano-2512: An 800M Parameter Speech Recognition Model Trained on Tens of Millions of Hours of Real-World Speech",
+    "excerpt": "Fun-ASR-Nano-2512 is a lightweight end-to-end speech recognition model released by Tongyi Lab. With only 800M parameters, it is trained on tens of millions of hours of real speech, supports Chinese, English, Japanese, 7 dialects and 26 accents, and is natively adapted for far-field noisy recognition, music background lyrics recognition, and low-latency real-time transcription. It can be flexibly deployed on pure GPU/CPU, is open-source and commercially usable.",
+    "tags": ["ASR", "Speech Recognition", "End-to-End Model", "Multilingual", "Tongyi Lab", "Lightweight Deployment"]
+  },
+  {
+    "type": "file",
+    "name": "post-003",
+    "label": "2026-06-05 - FireRedASR2-AED: Lightweight High-Precision Chinese-English Bilingual Speech Recognition Model",
+    "excerpt": "FireRedASR2-AED is a second-generation industrial-grade speech recognition model developed by Xiaohongshu's FireRedTeam. With just over 1B parameters, it supports Mandarin, over 20 dialects/accents, English, and Chinese-English mixed input, natively supporting character-level timestamps and singing voice recognition. Achieves a CER of only 0.57% on AISHELL-1 and an average dialect CER of 11.67%. Official PyTorch models and community ONNX quantized versions are available, open-sourced under Apache 2.0 for commercial use.",
+    "tags": ["ASR", "Speech Recognition", "Chinese-English Bilingual", "Dialect Recognition", "FireRedTeam", "End-to-End Model", "Lightweight Deployment"]
   }
 ]

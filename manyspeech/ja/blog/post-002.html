@@ -1,0 +1,697 @@
+<!doctype html>
+<html lang="ja">
+  <head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fun-ASR-Nano-2512：数千万時間の実音声で学習した800Mパラメータの音声認識大規模モデル - ManySpeech</title>
+<script>{;const saved = localStorage.getItem('rspress-theme-appearance');const preferDark = window.matchMedia('(prefers-color-scheme: dark)').matches;const isDark = !saved || saved === 'auto' ? preferDark : saved === 'dark';document.documentElement.classList.toggle('dark', isDark);document.documentElement.classList.toggle('rp-dark', isDark);document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';}</script>
+<script>var _hmt=_hmt||[];(function(){var h=document.createElement("script");h.src="https://hm.baidu.com/hm.js?c5cc9be664702972dd979661253d614b";var d=document.getElementsByTagName("script")[0];d.parentNode.insertBefore(h,d);})();</script>
+<link href="/manyspeech/static/css/styles.dca152c6d6.css" rel="stylesheet">
+<script defer src="/manyspeech/static/js/styles.3cf4b83403.js"></script>
+<script defer src="/manyspeech/static/js/lib-react.12a014d3ef.js"></script>
+<script defer src="/manyspeech/static/js/lib-router.6c832d1f65.js"></script>
+<script defer src="/manyspeech/static/js/6702.512d08ecc0.js"></script>
+<script defer src="/manyspeech/static/js/index.a743dc1e03.js"></script>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Rspress v2.0.12">
+<link rel="icon" href="/manyspeech/manyspeech-icon.webp">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Fun-ASR-Nano-2512：数千万時間の実音声で学習した800Mパラメータの音声認識大規模モデル - ManySpeech">
+<meta name="description" content="軽量なローカル音声認識ツール">
+<meta property="og:description" content="軽量なローカル音声認識ツール"></head>
+
+  <body>
+    <div id="__rspress_root"><link rel="preload" as="image" href="/manyspeech/manyspeech-light-logo.webp"/><link rel="preload" as="image" href="/manyspeech/manyspeech-dark-logo.webp"/><header class="rp-nav"><div class="rp-nav__left"><div class="rp-nav__title"><a href="/manyspeech/ja/" class="rp-nav__title__link rp-link"><div class="rp-nav__title__logo"><img src="/manyspeech/manyspeech-light-logo.webp" alt="logo" id="logo" class="rspress-logo rp-nav__title__logo-image rp-nav__title__logo-image--light"/><img src="/manyspeech/manyspeech-dark-logo.webp" alt="logo" id="logo" class="rspress-logo rp-nav__title__logo-image rp-nav__title__logo-image--dark"/></div></a></div></div><div class="rp-nav__right"><button class="rp-search-button"><div class="rp-search-button__content"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 20 21" class="rp-search-button__icon"><path fill="currentColor" d="M8.333 1.913A6.667 6.667 0 0 1 15 8.58c0 1.54-.525 2.957-1.402 4.085l4.49 4.492a.834.834 0 0 1-1.177 1.178l-4.491-4.49a6.64 6.64 0 0 1-4.087 1.402 6.667 6.667 0 0 1 0-13.334m0 1.667a5 5 0 1 0 0 10 5 5 0 0 0 0-10"></path></svg><span class="rp-search-button__word">検索</span></div><div class="rp-search-button__hotkey" style="opacity:0"><span></span><span>K</span></div></button><div class="rp-search-button--mobile"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 20 21"><path fill="currentColor" d="M8.333 1.913A6.667 6.667 0 0 1 15 8.58c0 1.54-.525 2.957-1.402 4.085l4.49 4.492a.834.834 0 0 1-1.177 1.178l-4.491-4.49a6.64 6.64 0 0 1-4.087 1.402 6.667 6.667 0 0 1 0-13.334m0 1.667a5 5 0 1 0 0 10 5 5 0 0 0 0-10"></path></svg></div><ul class="rp-nav-menu rp-nav-menu--right"><li class="rp-nav-menu__item"><a href="/manyspeech/ja/cli/getting-started/index.html" class="rp-nav-menu__item__container rp-link">CLIツール</a></li><li class="rp-nav-menu__item"><a href="/manyspeech/ja/models/getting-started/index.html" class="rp-nav-menu__item__container rp-link">モデルライブラリ</a></li><li class="rp-nav-menu__item rp-nav-menu__item--active"><a href="/manyspeech/ja/blog/index.html" class="rp-nav-menu__item__container rp-link">ブログ</a></li></ul><div class="rp-nav__others"><div class="rp-nav-menu__divider"></div><li class="rp-nav-menu__item"><div class="rp-nav-menu__item__container">日本語<svg width="1em" height="1em" viewBox="0 0 32 32" class="rp-nav-menu__item__icon"><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></div><ul class="rp-hover-group rp-hover-group--hidden rp-hover-group--center"><li class="rp-hover-group__item" style="padding-left:8px" data-depth="0"><a href="/manyspeech/en/blog/post-002.html" class="rp-hover-group__item__link rp-link" aria-label="English" lang="en" hrefLang="en" rel="alternate">English</a></li><li class="rp-hover-group__item" style="padding-left:8px" data-depth="0"><a href="/manyspeech/blog/post-002.html" class="rp-hover-group__item__link rp-link" aria-label="简体中文" lang="zh" hrefLang="zh" rel="alternate">简体中文</a></li><li class="rp-hover-group__item rp-hover-group__item--active" style="padding-left:8px" data-depth="0"><a href="/manyspeech/ja/blog/post-002.html" class="rp-hover-group__item__link rp-link" aria-label="日本語" lang="ja" hrefLang="ja" rel="alternate">日本語</a></li></ul></li><div class="rp-switch-appearance"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24" class="rp-switch-appearance__icon rp-switch-appearance__icon--sun"><path fill="currentColor" d="m7.001 15.848-1.226 1.226a.58.58 0 0 0 0 .818.58.58 0 0 0 .818 0l1.226-1.226a.58.58 0 0 0 0-.818.58.58 0 0 0-.818 0m-.352-8.735a.584.584 0 0 0 .825-.825L6.237 5.051a.584.584 0 0 0-.825.825zM5.011 11.07h-1.75a.584.584 0 0 0 0 1.167h1.75c.324 0 .584-.26.584-.583a.585.585 0 0 0-.584-.584m7.003-5.835c.324 0 .584-.26.584-.584V2.9a.58.58 0 0 0-.584-.584.58.58 0 0 0-.583.583V4.65c0 .323.262.584.583.584m5.616 1.621 1.226-1.225a.58.58 0 0 0 0-.818.58.58 0 0 0-.818 0l-1.226 1.225a.58.58 0 0 0 0 .818.576.576 0 0 0 .818 0m3.138 4.214h-1.75a.58.58 0 0 0-.584.584c0 .324.26.584.583.584h1.751a.584.584 0 1 0 0-1.167m-3.389 5.124a.584.584 0 0 0-.825.825l1.238 1.238a.584.584 0 0 0 .825-.826zm-5.365-9.795a5.256 5.256 0 0 0-5.257 5.258 5.256 5.256 0 0 0 5.257 5.257 5.256 5.256 0 0 0 5.257-5.257 5.256 5.256 0 0 0-5.257-5.258m0 11.675a.58.58 0 0 0-.583.583v1.751a.582.582 0 1 0 1.167 0v-1.75a.584.584 0 0 0-.584-.584"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" viewBox="0 0 19 19" class="rp-switch-appearance__icon rp-switch-appearance__icon--moon"><path fill="currentColor" d="M9.166 0a9.2 9.2 0 0 1 1.857.188.834.834 0 0 1 .042 1.623 4.47 4.47 0 1 0 5.457 5.457l.048-.135a.834.834 0 0 1 1.575.177q.186.902.188 1.856A9.168 9.168 0 1 1 9.166 0"></path></svg></div><div class="rp-social-links"><a href="https://github.com/manyeyes/manyspeech" target="_blank" rel="noopener noreferrer" class="rp-social-links__item"><div class="rp-social-links__icon"><div class="rp-social-links__icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12c0 5.303 3.438 9.8 8.205 11.385c.6.113.82-.258.82-.577c0-.285-.01-1.04-.015-2.04c-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729c1.205.084 1.838 1.236 1.838 1.236c1.07 1.835 2.809 1.305 3.495.998c.108-.776.417-1.305.76-1.605c-2.665-.3-5.466-1.332-5.466-5.93c0-1.31.465-2.38 1.235-3.22c-.135-.303-.54-1.523.105-3.176c0 0 1.005-.322 3.3 1.23c.96-.267 1.98-.399 3-.405c1.02.006 2.04.138 3 .405c2.28-1.552 3.285-1.23 3.285-1.23c.645 1.653.24 2.873.12 3.176c.765.84 1.23 1.91 1.23 3.22c0 4.61-2.805 5.625-5.475 5.92c.42.36.81 1.096.81 2.22c0 1.606-.015 2.896-.015 3.286c0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></div></div></a><ul class="rp-hover-group rp-hover-group--hidden rp-hover-group--right"></ul></div></div><button aria-label="mobile hamburger" class="rp-nav-hamburger rp-nav-hamburger__sm"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="none" viewBox="0 0 21 21"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.667" d="M3.645 5.225h13.333M3.645 10.225h13.333M3.645 15.225h13.333"></path></svg></button><button aria-label="mobile hamburger" class="rp-nav-hamburger rp-nav-hamburger__md"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="none" viewBox="0 0 21 21"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.667" d="M3.645 5.225h13.333M3.645 10.225h13.333M3.645 15.225h13.333"></path></svg><ul class="rp-hover-group rp-hover-group--hidden rp-hover-group--right"><div class="rp-nav-menu__others-mobile__container"><div class="rp-nav-hamburger__md__hover-group"><div class="rp-nav-screen-appearance"><div class="rp-nav-screen-appearance__left">テーマ</div><div class="rp-nav-screen-appearance__right"></div></div><div class="rp-nav-screen-langs"><div class="rp-nav-screen-langs__left">言語</div><div class="rp-nav-screen-langs__right">日本語<svg width="1em" height="1em" viewBox="0 0 32 32" class="rp-nav-screen-langs__icon "><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></div></div><div class="rp-nav-screen-langs-group" style="display:grid;grid-template-rows:0fr;transition:grid-template-rows 0.2s ease-out"><div class="rp-nav-screen-langs-group__inner"><a href="/manyspeech/en/blog/post-002.html" class="rp-nav-screen-langs-group__item rp-link" hrefLang="en" lang="en" rel="alternate">English</a><a href="/manyspeech/blog/post-002.html" class="rp-nav-screen-langs-group__item rp-link" hrefLang="zh" lang="zh" rel="alternate">简体中文</a><span class="rp-nav-screen-langs-group__item rp-nav-screen-langs-group__item--active" aria-current="page" aria-disabled="true">日本語</span></div></div><div class="rp-nav-screen-divider"></div><div class="rp-social-links"><a href="https://github.com/manyeyes/manyspeech" target="_blank" rel="noopener noreferrer" class="rp-social-links__item"><div class="rp-social-links__icon"><div class="rp-social-links__icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12c0 5.303 3.438 9.8 8.205 11.385c.6.113.82-.258.82-.577c0-.285-.01-1.04-.015-2.04c-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729c1.205.084 1.838 1.236 1.838 1.236c1.07 1.835 2.809 1.305 3.495.998c.108-.776.417-1.305.76-1.605c-2.665-.3-5.466-1.332-5.466-5.93c0-1.31.465-2.38 1.235-3.22c-.135-.303-.54-1.523.105-3.176c0 0 1.005-.322 3.3 1.23c.96-.267 1.98-.399 3-.405c1.02.006 2.04.138 3 .405c2.28-1.552 3.285-1.23 3.285-1.23c.645 1.653.24 2.873.12 3.176c.765.84 1.23 1.91 1.23 3.22c0 4.61-2.805 5.625-5.475 5.92c.42.36.81 1.096.81 2.22c0 1.606-.015 2.896-.015 3.286c0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></div></div></a><ul class="rp-hover-group rp-hover-group--hidden rp-hover-group--right"></ul></div></div></div></ul></button></div></header><div class="rp-doc-layout__menu"><div class="rp-sidebar-menu"><div class="rp-sidebar-menu__left"></div><button type="button" class="rp-sidebar-menu__right"><span class="rp-sidebar-menu__right__text">目次</span><svg width="14" height="14" class="rp-progress-circle"><circle cx="7" cy="7" r="6" stroke-linecap="round" fill="none" stroke="var(--rp-c-divider-light)" stroke-width="2"></circle><circle cx="7" cy="7" r="6" stroke-linecap="round" fill="none" stroke="var(--rp-c-brand)" stroke-width="2" stroke-dasharray="37.69911184307752" stroke-dashoffset="37.69911184307752" transform="rotate(-90 7 7)" style="transition:stroke-dashoffset 0.3s"></circle></svg><svg width="1em" height="1em" viewBox="0 0 32 32" class="rp-sidebar-menu__right__icon" style="transform:rotate(0deg);transition:transform 0.2s ease-out"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"></path></svg></button></div></div><div class="rp-doc-layout__container"><aside class="rp-doc-layout__sidebar-placeholder"></aside><div class="rp-doc-layout__doc"><main class="rp-doc-layout__doc-container"><div class="rp-doc rspress-doc"><!--$--><h1 class="rp-toc-include" id="fun-asr-nano-2512数千万時間の実音声で学習した800mパラメータの音声認識大規模モデル"><a href="#fun-asr-nano-2512数千万時間の実音声で学習した800mパラメータの音声認識大規模モデル" class="rp-header-anchor rp-link" aria-hidden="true">#</a>Fun-ASR-Nano-2512：数千万時間の実音声で学習した800Mパラメータの音声認識大規模モデル<!-- --> </h1><div class="rp-not-doc rp-llms-container"><button class="rp-not-doc rp-llms-button rp-llms-copy-button"><div class="rp-llms-copy-button__icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-llms-copy-button__icon-success"><path fill="currentColor" d="m9.55 18-5.7-5.7 1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-llms-copy-button__icon-copy"><path fill="currentColor" d="M20 8v12H8V8zm0-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2"></path><path fill="currentColor" d="M4 16H2V4a2 2 0 0 1 2-2h12v2H4Z"></path></svg></div><span>Markdown をコピー</span></button><button class="rp-llms-button rp-llms-view-options__trigger "><svg width="1em" height="1em" viewBox="0 0 32 32" class="rp-llms-view-options__arrow "><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></button></div>
+<h2 class="rp-toc-include" id="一プロジェクト背景と開発チーム"><a href="#一プロジェクト背景と開発チーム" class="rp-header-anchor rp-link" aria-hidden="true">#</a>一、プロジェクト背景と開発チーム</h2>
+<p>Fun-ASR-Nano-2512シリーズは、<strong>通義実験室（Tongyi Lab）</strong> が <strong>2025年12月15日</strong> に正式公開したエンドツーエンド音声認識軽量モデルです。Fun-ASRファミリーの中でも、低計算リソースでの展開に特化した軽量化バージョンであり、認識精度を犠牲にすることなく、わずか800Mのパラメータで多様な音声シーンをカバーします。</p>
+<p>通義実験室のFunチームは、これまでに産業グレードのASRモデル <strong>Paraformer</strong>、軽量音声認識モデル <strong>SenseVoiceSmall</strong> など数多くの製品をオープンソース化してきました。Fun-ASR-Nanoのリリースは、「軽量＋多言語＋産業レベルの堅牢性」という技術方向における最新の取り組みです。</p>
+<p>中心的な研究論文「Fun-ASR Technical Report」はarXiv（2509.12508）にアップロードされており、2025年9月に初版が提出され、その後4回の改訂（v4は同年12月19日公開）を経て、データスケーリング、モデルサイズ拡張、LLM深層統合、強化学習など多角的な技術経路が詳述されています。著者は38名におよび、音声認識、大規模言語モデル、強化学習など複数の研究領域をカバーしています。</p>
+<h2 class="rp-toc-include" id="二モデル全体概要と言語能力"><a href="#二モデル全体概要と言語能力" class="rp-header-anchor rp-link" aria-hidden="true">#</a>二、モデル全体概要と言語能力</h2>
+<p>本シリーズには2つのコアバージョンがあり、いずれも <strong>8億（800M）パラメータ</strong> です：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th style="text-align:left">モデル名</th><th style="text-align:left">パラメータ数</th><th style="text-align:left">サポート言語範囲</th><th style="text-align:left">コア特徴</th></tr></thead><tbody><tr><td style="text-align:left"><strong>Fun-ASR-Nano-2512</strong></td><td style="text-align:left">800M</td><td style="text-align:left">中国語（7大方言＋26アクセント）、英語、日本語</td><td style="text-align:left">中国語方言・アクセント、音楽背景での歌詞認識、ラップ音声認識に深く最適化</td></tr><tr><td style="text-align:left"><strong>Fun-ASR-MLT-Nano-2512</strong></td><td style="text-align:left">800M</td><td style="text-align:left">31言語</td><td style="text-align:left">多言語の自由な切り替えと混在認識</td></tr></tbody></table></div>
+<p>全シリーズで低遅延リアルタイム文字起こし、句読点復元、タイムスタンプ出力をサポート。<strong>公式のPyTorchモデル</strong>を提供。コミュニティは公式モデルを基にONNX形式の最適化版も公開（「コミュニティによるデプロイ」節を参照）。クラウドGPUからエッジCPUまで柔軟にデプロイ可能。</p>
+<h3 class="rp-toc-include" id="21-fun-asr-nano-2512-特化版中国語方言アクセント英語日本語の多次元最適化"><a href="#21-fun-asr-nano-2512-特化版中国語方言アクセント英語日本語の多次元最適化" class="rp-header-anchor rp-link" aria-hidden="true">#</a>2.1 Fun-ASR-Nano-2512 特化版：中国語方言・アクセント・英語・日本語の多次元最適化</h3>
+<h4 class="rp-toc-include" id="211-七大方言"><a href="#211-七大方言" class="rp-header-anchor rp-link" aria-hidden="true">#</a>2.1.1 七大方言</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th style="text-align:left">方言</th><th style="text-align:left">地域分布</th><th style="text-align:left">音韻的特徴</th></tr></thead><tbody><tr><td style="text-align:left"><strong>呉語</strong></td><td style="text-align:left">上海、浙江、江蘇南部、安徽東南部など</td><td style="text-align:left">有声音声母と入声韻尾を保持、声調が複雑</td></tr><tr><td style="text-align:left"><strong>粤語</strong></td><td style="text-align:left">広東、広西一部、海外華人コミュニティ</td><td style="text-align:left">-p, -t, -kの入声韻尾を保持、声調は最大9つ</td></tr><tr><td style="text-align:left"><strong>閩語</strong></td><td style="text-align:left">福建、台湾、海南、潮汕、雷州半島</td><td style="text-align:left">軽唇帰重唇などの古音特徴を保持、文白異読が豊富</td></tr><tr><td style="text-align:left"><strong>客家語</strong></td><td style="text-align:left">広東、福建、江西、台湾の客家地域</td><td style="text-align:left">完全な入声韻尾と豊富な古漢語語彙を保持</td></tr><tr><td style="text-align:left"><strong>贛語</strong></td><td style="text-align:left">江西中北部、湖南東部、湖北一部</td><td style="text-align:left">古い有声音声母のうち破裂音・破擦音の多くは有気無声音</td></tr><tr><td style="text-align:left"><strong>湘語</strong></td><td style="text-align:left">湖南・湘江流域および周辺</td><td style="text-align:left">古い有声音声母体系を保持、尖団音の区別は地域により異なる</td></tr><tr><td style="text-align:left"><strong>晋語</strong></td><td style="text-align:left">山西大部分、陝西北部、内モンゴル中部</td><td style="text-align:left">入声を保持、複雑な連続変調現象</td></tr></tbody></table></div>
+<p>これら七大方言に対する <strong>平均認識精度は85％超</strong>。粤語・客家語などは90％以上を達成。これは「方言を考慮した音響モデリング」技術によるもので、そり舌音・平舌音の分布、前鼻音・後鼻音の差異、入声韻尾の保持度合いなど <strong>32次元の音声特徴空間</strong> を構築しています。</p>
+<h4 class="rp-toc-include" id="212-26種類の地方アクセント"><a href="#212-26種類の地方アクセント" class="rp-header-anchor rp-link" aria-hidden="true">#</a>2.1.2 26種類の地方アクセント</h4>
+<p>七大方言に加え、<strong>26種類の地方アクセントを含む中国語普通話</strong> に対しても特化学習を実施。これらのアクセントは中原官話区（河南）、西南官話区（四川・重慶・雲南・貴州・湖北）、西北官話区（陝西）、華南地区（広東・広西・福建・海南）、華東華北地区（山東・江蘇・浙江・河北など）に分布。特化学習により、アクセント環境下での <strong>文字誤り率を相対56.2％削減</strong>。<strong>15のアクセントで認識精度80％超</strong> を達成。</p>
+<h4 class="rp-toc-include" id="213-英語と日本語の認識"><a href="#213-英語と日本語の認識" class="rp-header-anchor rp-link" aria-hidden="true">#</a>2.1.3 英語と日本語の認識</h4>
+<p>英語・日本語のサポートは「聞こえる」だけでなく「正確に聞き取る」ことを重視：</p>
+<ul>
+<li><strong>英語</strong>：標準学術ベンチマークLibriSpeech-cleanで単語誤り率 <strong>1.76％</strong>。インド英語やシンガポール英語などの非標準アクセントも処理可能。</li>
+<li><strong>日本語</strong>：標準語および複数の地域方言をサポート。日本語特有のモーラや助詞連声などに対し最適化。</li>
+</ul>
+<p>モデルは <strong>中・英・日三者共同アライメント学習</strong> の統一アーキテクチャを採用。言語横断的な共有音響表現空間を確立し、中英混在や日英混在などの実環境に適応します。</p>
+<h3 class="rp-toc-include" id="22-fun-asr-mlt-nano-2512-多言語版の多次元最適化"><a href="#22-fun-asr-mlt-nano-2512-多言語版の多次元最適化" class="rp-header-anchor rp-link" aria-hidden="true">#</a>2.2 Fun-ASR-MLT-Nano-2512 多言語版の多次元最適化</h3>
+<h4 class="rp-toc-include" id="221-31言語サポート"><a href="#221-31言語サポート" class="rp-header-anchor rp-link" aria-hidden="true">#</a>2.2.1 31言語サポート</h4>
+<p>Fun-ASR-MLT-Nano-2512は31言語の音声認識をサポート。東アジア・東南アジア言語に重点を置き、言語の自由な切り替えと混在認識が可能。自動言語検出機能を内蔵し、言語指定なしで音声の言語を識別します。完全な言語リストは下表の通り（言語コード順）：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th style="text-align:left">言語名</th><th style="text-align:center">コード</th><th style="text-align:left">応用シーン</th></tr></thead><tbody><tr><td style="text-align:left">中国語普通話</td><td style="text-align:center">zh</td><td style="text-align:left">日常会話、会議録、映像字幕</td></tr><tr><td style="text-align:left">英語</td><td style="text-align:center">en</td><td style="text-align:left">国際交流、英語授業、ビジネス会議</td></tr><tr><td style="text-align:left">粤語</td><td style="text-align:center">yue</td><td style="text-align:left">広東語地域、粤語歌認識</td></tr><tr><td style="text-align:left">日本語</td><td style="text-align:center">ja</td><td style="text-align:left">日本語学習、アニメ字幕、日系企業会議</td></tr><tr><td style="text-align:left">韓国語</td><td style="text-align:center">ko</td><td style="text-align:left">韓国ドラマ字幕、韓国語学習</td></tr><tr><td style="text-align:left">スペイン語</td><td style="text-align:center">es</td><td style="text-align:left">西語圏交流、学習資料書き起こし</td></tr><tr><td style="text-align:left">フランス語</td><td style="text-align:center">fr</td><td style="text-align:left">フランス語授業、国際会議</td></tr><tr><td style="text-align:left">ドイツ語</td><td style="text-align:center">de</td><td style="text-align:left">ドイツ語学習、技術文書</td></tr><tr><td style="text-align:left">イタリア語</td><td style="text-align:center">it</td><td style="text-align:left">イタリア語学習、文化コンテンツ認識</td></tr><tr><td style="text-align:left">ロシア語</td><td style="text-align:center">ru</td><td style="text-align:left">ロシア語交流、技術文書、ニュース</td></tr><tr><td style="text-align:left">ポルトガル語</td><td style="text-align:center">pt</td><td style="text-align:left">ポルトガル語圏交流</td></tr><tr><td style="text-align:left">アラビア語</td><td style="text-align:center">ar</td><td style="text-align:left">中東地域交流、ニュース</td></tr><tr><td style="text-align:left">オランダ語</td><td style="text-align:center">nl</td><td style="text-align:left">オランダ語学習</td></tr><tr><td style="text-align:left">トルコ語</td><td style="text-align:center">tr</td><td style="text-align:left">トルコ語交流</td></tr><tr><td style="text-align:left">ポーランド語</td><td style="text-align:center">pl</td><td style="text-align:left">ポーランド語学習</td></tr><tr><td style="text-align:left">スウェーデン語</td><td style="text-align:center">sv</td><td style="text-align:left">スウェーデン語学習</td></tr><tr><td style="text-align:left">インドネシア語</td><td style="text-align:center">id</td><td style="text-align:left">インドネシア語交流、東南アジア業務</td></tr><tr><td style="text-align:left">フィリピノ語</td><td style="text-align:center">fil</td><td style="text-align:left">フィリピノ語交流</td></tr><tr><td style="text-align:left">マレー語</td><td style="text-align:center">ms</td><td style="text-align:left">マレー語交流</td></tr><tr><td style="text-align:left">ベトナム語</td><td style="text-align:center">vi</td><td style="text-align:left">ベトナム語交流</td></tr><tr><td style="text-align:left">タイ語</td><td style="text-align:center">th</td><td style="text-align:left">タイ語交流</td></tr><tr><td style="text-align:left">ヒンディー語</td><td style="text-align:center">hi</td><td style="text-align:left">ヒンディー語交流、南アジア業務</td></tr><tr><td style="text-align:left">ウルドゥー語</td><td style="text-align:center">ur</td><td style="text-align:left">ウルドゥー語交流</td></tr><tr><td style="text-align:left">ペルシャ語</td><td style="text-align:center">fa</td><td style="text-align:left">ペルシャ語交流</td></tr><tr><td style="text-align:left">ベンガル語</td><td style="text-align:center">bn</td><td style="text-align:left">ベンガル語交流</td></tr><tr><td style="text-align:left">ギリシャ語</td><td style="text-align:center">el</td><td style="text-align:left">ギリシャ語学習</td></tr><tr><td style="text-align:left">チェコ語</td><td style="text-align:center">cs</td><td style="text-align:left">チェコ語学習</td></tr><tr><td style="text-align:left">フィンランド語</td><td style="text-align:center">fi</td><td style="text-align:left">フィンランド語学習</td></tr><tr><td style="text-align:left">ハンガリー語</td><td style="text-align:center">hu</td><td style="text-align:left">ハンガリー語学習</td></tr><tr><td style="text-align:left">ルーマニア語</td><td style="text-align:center">ro</td><td style="text-align:left">ルーマニア語学習</td></tr><tr><td style="text-align:left">デンマーク語</td><td style="text-align:center">da</td><td style="text-align:left">デンマーク語学習</td></tr></tbody></table></div>
+<blockquote>
+<p><strong>言語コード注記</strong>：ISO 639-1に準拠。中国語普通話は「zh」、粤語は「yue」（モデル固有の識別子）。大文字小文字は区別しない。</p>
+</blockquote>
+<p><strong>自動言語検出性能</strong>：単一言語音声に対する認識精度は <strong>95％超</strong>。主流言語（中・英）では <strong>98％以上</strong>。混在音声での主要言語識別精度は約 <strong>90％</strong>。</p>
+<h2 class="rp-toc-include" id="三コアアーキテクチャとコア能力"><a href="#三コアアーキテクチャとコア能力" class="rp-header-anchor rp-link" aria-hidden="true">#</a>三、コアアーキテクチャとコア能力</h2>
+<h3 class="rp-toc-include" id="31-4コンポーネントエンドツーエンドアーキテクチャ"><a href="#31-4コンポーネントエンドツーエンドアーキテクチャ" class="rp-header-anchor rp-link" aria-hidden="true">#</a>3.1 4コンポーネントエンドツーエンドアーキテクチャ</h3>
+<ol>
+<li><strong>音響エンコーダ</strong>（200M）：生音声から音響特徴を抽出、時系列依存関係をモデル化。</li>
+<li><strong>CTCデコーダ</strong>：並列分岐。リアルタイム性と精度のバランスをとりつつ一次的な書き起こしを出力。</li>
+<li><strong>Adaptorモジュール</strong>：音声特徴空間とテキスト特徴空間を位置合わせ。音声とテキストのモダリティ間の表現ギャップを埋める。</li>
+<li><strong>LLMデコーダ</strong>（600M）：<strong>Qwen3-0.6B</strong> をベース。CTC出力に文脈意味情報を加えて高精度なテキスト生成を実行。</li>
+</ol>
+<p>この「軽量エンコーダ＋コンパクトデコーダ」設計により、総パラメータ数は <strong>0.8B</strong> に正確に制御されています。</p>
+<h3 class="rp-toc-include" id="32-llmとctcのデュアルブランチ設計"><a href="#32-llmとctcのデュアルブランチ設計" class="rp-header-anchor rp-link" aria-hidden="true">#</a>3.2 LLMとCTCのデュアルブランチ設計</h3>
+<ul>
+<li><strong>LLM拡張ブランチ</strong>：LLMデコーダを主出力とし、高い文脈理解力と幻覚抑制能力を持つ。</li>
+<li><strong>CTC軽量ブランチ</strong>：CTCデコーダを主出力とし、レイテンシ重視・計算リソースが制限された環境に適する。</li>
+</ul>
+<h3 class="rp-toc-include" id="33-アーキテクチャの革新"><a href="#33-アーキテクチャの革新" class="rp-header-anchor rp-link" aria-hidden="true">#</a>3.3 アーキテクチャの革新</h3>
+<ul>
+<li><strong>テキスト知識注入</strong>：音響エンコーダの事前学習時に、テキストLLMであるQwen3の層を用いて初期化。テキスト世界の言語学知識を音声表現学習に「注入」する。</li>
+<li><strong>RAGホットワード機構</strong>：推論時にドメイン固有のキーワードを動的に導入。<strong>最大1000以上</strong> のカスタムホットワードをサポートし、専門分野のキーワード認識精度を大幅に向上。</li>
+</ul>
+<h3 class="rp-toc-include" id="34-コア能力マトリクス"><a href="#34-コア能力マトリクス" class="rp-header-anchor rp-link" aria-hidden="true">#</a>3.4 コア能力マトリクス</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th style="text-align:left">能力項目</th><th style="text-align:left">説明</th></tr></thead><tbody><tr><td style="text-align:left"><strong>遠隔雑音下認識</strong></td><td style="text-align:left">会議室、車内、工場現場などで精度 <strong>93％</strong> に向上</td></tr><tr><td style="text-align:left"><strong>中国語方言・地方アクセント</strong></td><td style="text-align:left">7大方言＋26アクセントをサポート（2.1、2.2節参照）</td></tr><tr><td style="text-align:left"><strong>多言語自由切替</strong></td><td style="text-align:left">31言語をサポート、自動言語検出（2.4節参照）</td></tr><tr><td style="text-align:left"><strong>音楽背景歌詞認識</strong></td><td style="text-align:left">BGM下での音声認識性能を強化、正確な歌詞書き起こし</td></tr><tr><td style="text-align:left"><strong>句読点復元とITN</strong></td><td style="text-align:left">自動句読点付加、口語表現（数字・日付など）の書面形式変換</td></tr><tr><td style="text-align:left"><strong>タイムスタンプ出力</strong></td><td style="text-align:left">単語・文単位でのタイムスタンプ、字幕生成に便利</td></tr><tr><td style="text-align:left"><strong>ホットワード拡張</strong></td><td style="text-align:left"><strong>最大1000以上</strong> のカスタムホットワードをサポート、専門用語の認識精度向上</td></tr></tbody></table></div>
+<h2 class="rp-toc-include" id="四学習データと戦略"><a href="#四学習データと戦略" class="rp-header-anchor rp-link" aria-hidden="true">#</a>四、学習データと戦略</h2>
+<h3 class="rp-toc-include" id="41-データ規模"><a href="#41-データ規模" class="rp-header-anchor rp-link" aria-hidden="true">#</a>4.1 データ規模</h3>
+<p>事前学習には <strong>数千万時間</strong> の音声データを使用。無ラベル実音声とラベル付き音声-テキストペアを包含。教師あり微調整では <strong>数百万時間</strong> のマルチソースデータ（手動書き起こし、疑似ラベル、環境雑音拡張、TTS合成、模擬ストリーミング、ホットワードカスタマイズなど）を統合。</p>
+<h3 class="rp-toc-include" id="42-データソースとドメインカバレッジ"><a href="#42-データソースとドメインカバレッジ" class="rp-header-anchor rp-link" aria-hidden="true">#</a>4.2 データソースとドメインカバレッジ</h3>
+<p>事前学習の実音声は <strong>AI、EC、教育、交通</strong> などの垂直産業をカバー。ラベル付きペアは主に <strong>中国語と英語</strong> で構築。微調整フェーズでさらにカバレッジを拡大し、<strong>雑音ロバスト性、コードスイッチング、ホットワードカスタマイズ</strong> などの産業シーン向けにカスタマイズデータを合成。さらに、<strong>インターネット、テクノロジー、住宅改装、保険、畜産、自動車</strong> など十数業界の専門用語を網羅するため、<strong>億時間超</strong> の音声データで学習。</p>
+<h3 class="rp-toc-include" id="43-データ前処理とアノテーション戦略"><a href="#43-データ前処理とアノテーション戦略" class="rp-header-anchor rp-link" aria-hidden="true">#</a>4.3 データ前処理とアノテーション戦略</h3>
+<ul>
+<li><strong>アノテーション構築</strong>：Paraformer-V2、Whisper、SenseVoiceの3つの独立したASRシステムで並列疑似ラベルを生成し、コンセンサス機構で高信頼度の結果を選択。</li>
+<li><strong>データフィルタリング</strong>：VADを用いて無音区間や低品質音声を除去。</li>
+<li><strong>コンテキスト拡張</strong>：Qwen3で訓練テキストからキーワードを自動抽出し、コンテキストプロンプト付き訓練サンプルを構築。</li>
+<li><strong>データ拡張</strong>：<strong>11万時間のクリーン音声＋1万時間の雑音混合</strong> の拡張雑音データセットを別途構築。CosyVoice3 TTSでアクセント付き音声を合成し、クリーン音声に空港・駅など6種類の環境雑音を重畳。</li>
+</ul>
+<h3 class="rp-toc-include" id="44-方言アクセントデータの特化"><a href="#44-方言アクセントデータの特化" class="rp-header-anchor rp-link" aria-hidden="true">#</a>4.4 方言・アクセントデータの特化</h3>
+<p>方言は <strong>呉語・粤語・閩語・客家語・贛語・湘語・晋語</strong> の七大方言をカバー。アクセントは <strong>河南、陝西、湖北、四川、重慶、雲南、貴州、広東、広西</strong> など26地域。各カテゴリごとに専用の収集・アノテーションを実施。</p>
+<h3 class="rp-toc-include" id="45-学習戦略"><a href="#45-学習戦略" class="rp-header-anchor rp-link" aria-hidden="true">#</a>4.5 学習戦略</h3>
+<p><strong>三段階漸進的学習：</strong></p>
+<ol>
+<li><strong>大規模事前学習</strong>：数千万時間のデータで音響理解と言語-テキスト位置合わせを確立。</li>
+<li><strong>多段階教師あり微調整（SFT）</strong> ：数百万時間のマルチソースデータで産業シーン向けに細調整。</li>
+<li><strong>強化学習微調整（RLHF）</strong> ：<strong>FunRL</strong> フレームワークを使用。約10万の困難サンプルに対し、キーワード再現率、幻覚ペナルティ、言語一貫性などの報酬関数を設計し、幻覚率を大幅に低減。</li>
+</ol>
+<p><strong>特化学習：</strong></p>
+<ul>
+<li><strong>耐雑音学習</strong>：複雑雑音環境のテストセットで平均相対性能を約 <strong>13%</strong> 向上。</li>
+<li><strong>ストリーミング能力学習</strong>：ストリーミング復号を模擬した訓練データを構築し、訓練-推論のミスマッチを低減。</li>
+</ul>
+<h2 class="rp-toc-include" id="五コア性能データ"><a href="#五コア性能データ" class="rp-header-anchor rp-link" aria-hidden="true">#</a>五、コア性能データ</h2>
+<h3 class="rp-toc-include" id="51-オープンソースベンチマーク"><a href="#51-オープンソースベンチマーク" class="rp-header-anchor rp-link" aria-hidden="true">#</a>5.1 オープンソースベンチマーク</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th style="text-align:left">テストセット</th><th style="text-align:center">WER (%)</th><th style="text-align:left">説明</th></tr></thead><tbody><tr><td style="text-align:left">AIShell-1</td><td style="text-align:center">1.80</td><td style="text-align:left">中国語普通話学術ベンチマーク</td></tr><tr><td style="text-align:left">Fleurs-zh</td><td style="text-align:center">2.56</td><td style="text-align:left">多言語Fleursベンチマークの中語サブセット</td></tr><tr><td style="text-align:left">Librispeech-clean</td><td style="text-align:center">1.76</td><td style="text-align:left">英語学術ベンチマーク（クリーン分割）</td></tr><tr><td style="text-align:left">中国語方言テストセット</td><td style="text-align:center">28.18</td><td style="text-align:left">通義構築方言評価セット（粤語・呉語・閩南語など）</td></tr><tr><td style="text-align:left">遠隔雑音テストセット</td><td style="text-align:center">5.79</td><td style="text-align:left">模擬遠隔集音下での屋内音声認識</td></tr></tbody></table></div>
+<h3 class="rp-toc-include" id="52-産業実データセットでの性能"><a href="#52-産業実データセットでの性能" class="rp-header-anchor rp-link" aria-hidden="true">#</a>5.2 産業実データセットでの性能</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th style="text-align:left">産業テストシナリオ</th><th style="text-align:left">カバー内容</th></tr></thead><tbody><tr><td style="text-align:left">近距離標準</td><td style="text-align:left">高SN比、近接録音</td></tr><tr><td style="text-align:left">遠隔雑音</td><td style="text-align:left">会議室距離、車内雑音、工場現場</td></tr><tr><td style="text-align:left">複雑背景</td><td style="text-align:left">街中環境音、音楽干渉</td></tr><tr><td style="text-align:left">英語認識</td><td style="text-align:left">中英混在、英語のみの講演</td></tr><tr><td style="text-align:left">方言認識</td><td style="text-align:left">七大方言の総合評価</td></tr><tr><td style="text-align:left">地域アクセント</td><td style="text-align:left">26アクセント個別評価</td></tr><tr><td style="text-align:left">歌詞認識</td><td style="text-align:left">音楽背景での歌詞書き起こし</td></tr><tr><td style="text-align:left">ラップ認識</td><td style="text-align:left">高速・非標準韻律の音声書き起こし</td></tr></tbody></table></div>
+<p><strong>産業データセット平均WER：16.72％</strong>（2025年6月30日以降に収集されたYouTube/Bilibili映像および実録音に基づく。訓練-テストセットの重複を回避）。</p>
+<h3 class="rp-toc-include" id="53-モデル比較"><a href="#53-モデル比較" class="rp-header-anchor rp-link" aria-hidden="true">#</a>5.3 モデル比較</h3>
+<p><strong>中国語方言テストセット：</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th style="text-align:left">モデル</th><th style="text-align:center">パラメータ数</th><th style="text-align:center">WER (%)</th></tr></thead><tbody><tr><td style="text-align:left">Fun-ASR-Nano-2512</td><td style="text-align:center">0.8B</td><td style="text-align:center"><strong>28.18</strong></td></tr><tr><td style="text-align:left">GLM-ASR-Nano</td><td style="text-align:center">~0.8B</td><td style="text-align:center">54.21</td></tr><tr><td style="text-align:left">Whisper-large-v3</td><td style="text-align:center">~1.5B</td><td style="text-align:center">66.14</td></tr></tbody></table></div>
+<p><strong>遠隔雑音テストセット：</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th style="text-align:left">モデル</th><th style="text-align:center">パラメータ数</th><th style="text-align:center">WER (%)</th></tr></thead><tbody><tr><td style="text-align:left">Fun-ASR-Nano-2512</td><td style="text-align:center">0.8B</td><td style="text-align:center"><strong>5.79</strong></td></tr><tr><td style="text-align:left">Paraformer-v2</td><td style="text-align:center">~0.3B</td><td style="text-align:center">9.55</td></tr><tr><td style="text-align:left">Kimi-Audio</td><td style="text-align:center">~7B</td><td style="text-align:center">10.95</td></tr></tbody></table></div>
+<p><strong>産業データセット平均：</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th style="text-align:left">モデル</th><th style="text-align:center">パラメータ数</th><th style="text-align:center">平均 WER (%)</th></tr></thead><tbody><tr><td style="text-align:left">Fun-ASR-Nano-2512</td><td style="text-align:center">0.8B</td><td style="text-align:center"><strong>9.38</strong></td></tr><tr><td style="text-align:left">Seed-ASR</td><td style="text-align:center">~12B</td><td style="text-align:center">8.71</td></tr></tbody></table></div>
+<h3 class="rp-toc-include" id="54-方言アクセント評価"><a href="#54-方言アクセント評価" class="rp-header-anchor rp-link" aria-hidden="true">#</a>5.4 方言・アクセント評価</h3>
+<ul>
+<li>方言シナリオでの文字誤り率（CER）を <strong>相対56.2％削減</strong>（方言特化最適化なしのベースラインと比較）。</li>
+<li>5方言で認識精度 <strong>90％超</strong>、15方言/アクセントで <strong>80％超</strong>。</li>
+</ul>
+<h2 class="rp-toc-include" id="六推論デプロイ"><a href="#六推論デプロイ" class="rp-header-anchor rp-link" aria-hidden="true">#</a>六、推論・デプロイ</h2>
+<h3 class="rp-toc-include" id="1-公式推論pytorchオリジナル"><a href="#1-公式推論pytorchオリジナル" class="rp-header-anchor rp-link" aria-hidden="true">#</a>1. 公式推論（PyTorchオリジナル）</h3>
+<div class="rp-codeblock language-python"><div class="rp-codeblock__content"><div class="rp-codeblock__content__scroll-container rp-scrollbar rp-scrollbar--always"><pre class="shiki css-variables" style="background-color:var(--shiki-background);color:var(--shiki-foreground)" tabindex="0" data-lang="python"><code><span class="line"><span style="color:var(--shiki-token-keyword)">from</span><span style="color:var(--shiki-foreground)"> funasr </span><span style="color:var(--shiki-token-keyword)">import</span><span style="color:var(--shiki-foreground)"> AutoModel</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--shiki-foreground)">model </span><span style="color:var(--shiki-token-keyword)">=</span><span style="color:var(--shiki-token-function)"> AutoModel</span><span style="color:var(--shiki-token-punctuation)">(</span></span>
+<span class="line"><span style="color:var(--shiki-token-punctuation)">    model</span><span style="color:var(--shiki-token-keyword)">=</span><span style="color:var(--shiki-token-string-expression)">&quot;FunAudioLLM/Fun-ASR-Nano-2512&quot;</span><span style="color:var(--shiki-token-punctuation)">,  </span><span style="color:var(--shiki-token-comment)"># または Fun-ASR-MLT-Nano-2512</span></span>
+<span class="line"><span style="color:var(--shiki-token-punctuation)">    trust_remote_code</span><span style="color:var(--shiki-token-keyword)">=</span><span style="color:var(--shiki-token-constant)">True</span><span style="color:var(--shiki-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--shiki-token-punctuation)">    remote_code</span><span style="color:var(--shiki-token-keyword)">=</span><span style="color:var(--shiki-token-string-expression)">&quot;./model.py&quot;</span><span style="color:var(--shiki-token-punctuation)">,  </span><span style="color:var(--shiki-token-comment)"># GitHubリポジトリから取得</span></span>
+<span class="line"><span style="color:var(--shiki-token-punctuation)">    device</span><span style="color:var(--shiki-token-keyword)">=</span><span style="color:var(--shiki-token-string-expression)">&quot;cuda:0&quot;</span><span style="color:var(--shiki-token-comment)">            # または &quot;cpu&quot;</span></span>
+<span class="line"><span style="color:var(--shiki-token-punctuation)">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--shiki-foreground)">res </span><span style="color:var(--shiki-token-keyword)">=</span><span style="color:var(--shiki-foreground)"> model</span><span style="color:var(--shiki-token-punctuation)">.</span><span style="color:var(--shiki-token-function)">generate</span><span style="color:var(--shiki-token-punctuation)">(</span></span>
+<span class="line"><span style="color:var(--shiki-token-punctuation)">    input</span><span style="color:var(--shiki-token-keyword)">=</span><span style="color:var(--shiki-token-punctuation)">[</span><span style="color:var(--shiki-token-string-expression)">&quot;path/to/audio.mp3&quot;</span><span style="color:var(--shiki-token-punctuation)">],</span></span>
+<span class="line"><span style="color:var(--shiki-token-punctuation)">    language</span><span style="color:var(--shiki-token-keyword)">=</span><span style="color:var(--shiki-token-string-expression)">&quot;Chinese&quot;</span><span style="color:var(--shiki-token-punctuation)">,        </span><span style="color:var(--shiki-token-comment)"># MLT版は &quot;auto&quot;</span></span>
+<span class="line"><span style="color:var(--shiki-token-punctuation)">    itn</span><span style="color:var(--shiki-token-keyword)">=</span><span style="color:var(--shiki-token-constant)">True</span><span style="color:var(--shiki-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--shiki-token-punctuation)">    hotwords</span><span style="color:var(--shiki-token-keyword)">=</span><span style="color:var(--shiki-token-punctuation)">[</span><span style="color:var(--shiki-token-string-expression)">&quot;custom hotword&quot;</span><span style="color:var(--shiki-token-punctuation)">],</span></span>
+<span class="line"><span style="color:var(--shiki-token-punctuation)">    output_timestamp</span><span style="color:var(--shiki-token-keyword)">=</span><span style="color:var(--shiki-token-constant)">True</span></span>
+<span class="line"><span style="color:var(--shiki-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--shiki-token-function)">print</span><span style="color:var(--shiki-token-punctuation)">(res[</span><span style="color:var(--shiki-token-constant)">0</span><span style="color:var(--shiki-token-punctuation)">][</span><span style="color:var(--shiki-token-string-expression)">&quot;text&quot;</span><span style="color:var(--shiki-token-punctuation)">])</span></span></code></pre></div><div class="rp-code-button-group"><button class="rp-code-button-group__button rp-code-wrap-button" title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrapped"><path fill="currentColor" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrap"><path fill="currentColor" d="M16 7H3V5h13zM3 19h13v-2H3zm19-7-4-3v2H3v2h15v2z"></path></svg></button><button class="rp-code-button-group__button rp-code-copy-button" title="コードをコピー"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--copy"><path fill="currentColor" d="M20 8v12H8V8zm0-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2"></path><path fill="currentColor" d="M4 16H2V4a2 2 0 0 1 2-2h12v2H4Z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--success"><path fill="currentColor" d="m9.55 18-5.7-5.7 1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z"></path></svg></button></div></div></div>
+<blockquote>
+<p><strong>注</strong>：<code>remote_code</code> は <a href="https://github.com/FunAudioLLM/Fun-ASR" target="_blank" rel="noopener noreferrer" class="rp-link">Fun-ASR GitHubリポジトリ</a> からダウンロードした <code>model.py</code> を指す。公式モデルは句読点復元、タイムスタンプ、ITN、ホットワードの全機能をサポート。</p>
+</blockquote>
+<h3 class="rp-toc-include" id="2-コミュニティデプロイmanyspeech-cli"><a href="#2-コミュニティデプロイmanyspeech-cli" class="rp-header-anchor rp-link" aria-hidden="true">#</a>2. コミュニティデプロイ：ManySpeech-CLI</h3>
+<p>コミュニティが <strong>エクスポートしたONNXモデル</strong> をラップしたツール。コード不要で迅速に体験可能。</p>
+<h4 class="rp-toc-include" id="21-コミュニティエクスポートonnxモデル"><a href="#21-コミュニティエクスポートonnxモデル" class="rp-header-anchor rp-link" aria-hidden="true">#</a>2.1 コミュニティエクスポートONNXモデル</h4>
+<p>コミュニティが公式PyTorchモデルをONNX形式に変換し、<a href="https://www.modelscope.cn/models/manyeyes" target="_blank" rel="noopener noreferrer" class="rp-link">ModelScope manyeyesスペース</a> で公開。<strong>公式提供ではない</strong> が、コミュニティ検証済み。int8量子化に対応し、モデルサイズ約70％削減、GPUメモリ2.5GBまで低減可能。非ストリーミングだが、VADチャンク分割で準リアルタイム体験が可能。</p>
+<p><strong>中英日特化版ONNXモデル：</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th style="text-align:left">モデル名</th><th style="text-align:center">精度</th><th style="text-align:left">デコーダ</th></tr></thead><tbody><tr><td style="text-align:left">Fun-ASR-Nano-2512-LLM-onnx</td><td style="text-align:center">fp32</td><td style="text-align:left">LLM</td></tr><tr><td style="text-align:left">Fun-ASR-Nano-2512-LLM-int8-onnx</td><td style="text-align:center">int8</td><td style="text-align:left">LLM</td></tr><tr><td style="text-align:left">Fun-ASR-Nano-2512-LLM-split-adaptor-onnx</td><td style="text-align:center">fp32</td><td style="text-align:left">LLM</td></tr><tr><td style="text-align:left">Fun-ASR-Nano-2512-LLM-split-adaptor-int8-onnx</td><td style="text-align:center">int8</td><td style="text-align:left">LLM</td></tr><tr><td style="text-align:left">Fun-ASR-Nano-2512-CTC-onnx</td><td style="text-align:center">fp32</td><td style="text-align:left">CTC</td></tr><tr><td style="text-align:left">Fun-ASR-Nano-2512-CTC-int8-onnx</td><td style="text-align:center">int8</td><td style="text-align:left">CTC</td></tr></tbody></table></div>
+<p><strong>多言語版ONNXモデル：</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th style="text-align:left">モデル名</th><th style="text-align:center">精度</th><th style="text-align:left">デコーダ</th></tr></thead><tbody><tr><td style="text-align:left">Fun-ASR-MLT-Nano-2512-onnx</td><td style="text-align:center">fp32</td><td style="text-align:left">LLM</td></tr><tr><td style="text-align:left">Fun-ASR-MLT-Nano-2512-int8-onnx</td><td style="text-align:center">int8</td><td style="text-align:left">LLM</td></tr></tbody></table></div>
+<h4 class="rp-toc-include" id="22-manyspeech-cli-インストールと使用方法"><a href="#22-manyspeech-cli-インストールと使用方法" class="rp-header-anchor rp-link" aria-hidden="true">#</a>2.2 ManySpeech-CLI インストールと使用方法</h4>
+<p><strong>インストール</strong>：<a href="https://manyeyes.github.io/manyspeech/cli/getting-started/installation.html" target="_blank" rel="noopener noreferrer" class="rp-link">インストールガイド</a> 参照</p>
+<p><strong>ローカル音声ファイル認識：</strong></p>
+<div class="rp-codeblock language-cmd"><div class="rp-codeblock__content"><div class="rp-codeblock__content__scroll-container rp-scrollbar rp-scrollbar--always"><pre class="shiki css-variables" style="background-color:var(--shiki-background);color:var(--shiki-foreground)" tabindex="0" data-lang="cmd"><code><span class="line"><span style="color:var(--shiki-foreground)"># SRT字幕生成</span></span>
+<span class="line"><span style="color:var(--shiki-foreground)">manyspeech asr </span><span style="color:var(--shiki-token-keyword)">-</span><span style="color:var(--shiki-foreground)">t offline </span><span style="color:var(--shiki-token-keyword)">-</span><span style="color:var(--shiki-foreground)">m chunk </span><span style="color:var(--shiki-token-keyword)">--</span><span style="color:var(--shiki-foreground)">format srt </span><span style="color:var(--shiki-token-keyword)">--</span><span style="color:var(--shiki-foreground)">threads </span><span style="color:var(--shiki-token-constant)">2</span><span style="color:var(--shiki-token-keyword)"> -</span><span style="color:var(--shiki-foreground)">i file </span><span style="color:var(--shiki-token-keyword)">-</span><span style="color:var(--shiki-foreground)">files </span><span style="color:var(--shiki-token-string-expression)">&quot;lecture.wav&quot;</span><span style="color:var(--shiki-token-keyword)"> --</span><span style="color:var(--shiki-foreground)">model Fun</span><span style="color:var(--shiki-token-keyword)">-</span><span style="color:var(--shiki-foreground)">ASR</span><span style="color:var(--shiki-token-keyword)">-</span><span style="color:var(--shiki-foreground)">Nano</span><span style="color:var(--shiki-token-constant)">-2512</span><span style="color:var(--shiki-token-keyword)">-</span><span style="color:var(--shiki-foreground)">LLM</span><span style="color:var(--shiki-token-keyword)">-</span><span style="color:var(--shiki-foreground)">int8</span><span style="color:var(--shiki-token-keyword)">-</span><span style="color:var(--shiki-foreground)">onnx</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--shiki-foreground)"># 言語・ホットワード指定</span></span>
+<span class="line"><span style="color:var(--shiki-foreground)">manyspeech asr </span><span style="color:var(--shiki-token-keyword)">-</span><span style="color:var(--shiki-foreground)">t offline </span><span style="color:var(--shiki-token-keyword)">-</span><span style="color:var(--shiki-foreground)">m chunk </span><span style="color:var(--shiki-token-keyword)">-</span><span style="color:var(--shiki-foreground)">i file </span><span style="color:var(--shiki-token-keyword)">-</span><span style="color:var(--shiki-foreground)">files </span><span style="color:var(--shiki-token-string-expression)">&quot;meeting.wav&quot;</span><span style="color:var(--shiki-token-keyword)"> --</span><span style="color:var(--shiki-foreground)">model Fun</span><span style="color:var(--shiki-token-keyword)">-</span><span style="color:var(--shiki-foreground)">ASR</span><span style="color:var(--shiki-token-keyword)">-</span><span style="color:var(--shiki-foreground)">Nano</span><span style="color:var(--shiki-token-constant)">-2512</span><span style="color:var(--shiki-token-keyword)">-</span><span style="color:var(--shiki-foreground)">LLM</span><span style="color:var(--shiki-token-keyword)">-</span><span style="color:var(--shiki-foreground)">int8</span><span style="color:var(--shiki-token-keyword)">-</span><span style="color:var(--shiki-foreground)">onnx </span><span style="color:var(--shiki-token-keyword)">--</span><span style="color:var(--shiki-foreground)">language Chinese </span><span style="color:var(--shiki-token-keyword)">--</span><span style="color:var(--shiki-foreground)">hotwords </span><span style="color:var(--shiki-token-string-expression)">&quot;deep learning,Tongyi Lab&quot;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--shiki-foreground)"># スペイン語認識（多言語版は自動検出）</span></span>
+<span class="line"><span style="color:var(--shiki-foreground)">manyspeech asr </span><span style="color:var(--shiki-token-keyword)">-</span><span style="color:var(--shiki-foreground)">t offline </span><span style="color:var(--shiki-token-keyword)">-</span><span style="color:var(--shiki-foreground)">m chunk </span><span style="color:var(--shiki-token-keyword)">--</span><span style="color:var(--shiki-foreground)">format json </span><span style="color:var(--shiki-token-keyword)">-</span><span style="color:var(--shiki-foreground)">i file </span><span style="color:var(--shiki-token-keyword)">-</span><span style="color:var(--shiki-foreground)">files </span><span style="color:var(--shiki-token-string-expression)">&quot;audio.wav&quot;</span><span style="color:var(--shiki-token-keyword)"> --</span><span style="color:var(--shiki-foreground)">model Fun</span><span style="color:var(--shiki-token-keyword)">-</span><span style="color:var(--shiki-foreground)">ASR</span><span style="color:var(--shiki-token-keyword)">-</span><span style="color:var(--shiki-foreground)">MLT</span><span style="color:var(--shiki-token-keyword)">-</span><span style="color:var(--shiki-foreground)">Nano</span><span style="color:var(--shiki-token-constant)">-2512</span><span style="color:var(--shiki-token-keyword)">-</span><span style="color:var(--shiki-foreground)">int8</span><span style="color:var(--shiki-token-keyword)">-</span><span style="color:var(--shiki-foreground)">onnx</span></span></code></pre></div><div class="rp-code-button-group"><button class="rp-code-button-group__button rp-code-wrap-button" title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrapped"><path fill="currentColor" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrap"><path fill="currentColor" d="M16 7H3V5h13zM3 19h13v-2H3zm19-7-4-3v2H3v2h15v2z"></path></svg></button><button class="rp-code-button-group__button rp-code-copy-button" title="コードをコピー"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--copy"><path fill="currentColor" d="M20 8v12H8V8zm0-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2"></path><path fill="currentColor" d="M4 16H2V4a2 2 0 0 1 2-2h12v2H4Z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--success"><path fill="currentColor" d="m9.55 18-5.7-5.7 1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z"></path></svg></button></div></div></div>
+<p><strong>マイクリアルタイム認識：</strong></p>
+<div class="rp-codeblock language-cmd"><div class="rp-codeblock__content"><div class="rp-codeblock__content__scroll-container rp-scrollbar rp-scrollbar--always"><pre class="shiki css-variables" style="background-color:var(--shiki-background);color:var(--shiki-foreground)" tabindex="0" data-lang="cmd"><code><span class="line"><span style="color:var(--shiki-foreground)"># 準リアルタイムモード（チャンク処理）</span></span>
+<span class="line"><span style="color:var(--shiki-foreground)">manyspeech asr </span><span style="color:var(--shiki-token-keyword)">-</span><span style="color:var(--shiki-foreground)">t offline </span><span style="color:var(--shiki-token-keyword)">-</span><span style="color:var(--shiki-foreground)">m chunk </span><span style="color:var(--shiki-token-keyword)">-</span><span style="color:var(--shiki-foreground)">i mic </span><span style="color:var(--shiki-token-keyword)">--</span><span style="color:var(--shiki-foreground)">model Fun</span><span style="color:var(--shiki-token-keyword)">-</span><span style="color:var(--shiki-foreground)">ASR</span><span style="color:var(--shiki-token-keyword)">-</span><span style="color:var(--shiki-foreground)">Nano</span><span style="color:var(--shiki-token-constant)">-2512</span><span style="color:var(--shiki-token-keyword)">-</span><span style="color:var(--shiki-foreground)">CTC</span><span style="color:var(--shiki-token-keyword)">-</span><span style="color:var(--shiki-foreground)">int8</span><span style="color:var(--shiki-token-keyword)">-</span><span style="color:var(--shiki-foreground)">onnx</span></span></code></pre></div><div class="rp-code-button-group"><button class="rp-code-button-group__button rp-code-wrap-button" title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrapped"><path fill="currentColor" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrap"><path fill="currentColor" d="M16 7H3V5h13zM3 19h13v-2H3zm19-7-4-3v2H3v2h15v2z"></path></svg></button><button class="rp-code-button-group__button rp-code-copy-button" title="コードをコピー"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--copy"><path fill="currentColor" d="M20 8v12H8V8zm0-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2"></path><path fill="currentColor" d="M4 16H2V4a2 2 0 0 1 2-2h12v2H4Z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--success"><path fill="currentColor" d="m9.55 18-5.7-5.7 1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z"></path></svg></button></div></div></div>
+<blockquote>
+<p><strong>パラメータ注記</strong>：<code>-i file</code> は <code>-files &quot;音声パス&quot;</code> と併用必須。<code>-i mic</code> はファイル指定不要。初回起動時にONNXモデルを自動ダウンロード・キャッシュ。ポータブル版の場合、<code>manyspeech</code> 前置なしで <code>asr</code> サブコマンドから直接実行可。</p>
+</blockquote>
+<h2 class="rp-toc-include" id="七オープンソース入手先"><a href="#七オープンソース入手先" class="rp-header-anchor rp-link" aria-hidden="true">#</a>七、オープンソース入手先</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th style="text-align:left">リソース種別</th><th style="text-align:left">リンク</th></tr></thead><tbody><tr><td style="text-align:left">公式PyTorchモデル（ModelScope）</td><td style="text-align:left"><a href="https://www.modelscope.cn/models/FunAudioLLM/Fun-ASR-Nano-2512" target="_blank" rel="noopener noreferrer" class="rp-link">https://www.modelscope.cn/models/FunAudioLLM/Fun-ASR-Nano-2512</a></td></tr><tr><td style="text-align:left">公式PyTorchモデル（Hugging Face）</td><td style="text-align:left"><a href="https://huggingface.co/FunAudioLLM/Fun-ASR-Nano-2512" target="_blank" rel="noopener noreferrer" class="rp-link">https://huggingface.co/FunAudioLLM/Fun-ASR-Nano-2512</a></td></tr><tr><td style="text-align:left">コミュニティONNXモデルリポジトリ（ManyEyesスペース）</td><td style="text-align:left"><a href="https://www.modelscope.cn/models/manyeyes" target="_blank" rel="noopener noreferrer" class="rp-link">https://www.modelscope.cn/models/manyeyes</a></td></tr><tr><td style="text-align:left">ModelScopeオンラインデモ</td><td style="text-align:left"><a href="https://modelscope.cn/studios/FunAudioLLM/Fun-ASR-Nano" target="_blank" rel="noopener noreferrer" class="rp-link">https://modelscope.cn/studios/FunAudioLLM/Fun-ASR-Nano</a></td></tr><tr><td style="text-align:left">Hugging Face Spaceデモ</td><td style="text-align:left"><a href="https://huggingface.co/spaces/FunAudioLLM/Fun-ASR-Nano" target="_blank" rel="noopener noreferrer" class="rp-link">https://huggingface.co/spaces/FunAudioLLM/Fun-ASR-Nano</a></td></tr><tr><td style="text-align:left">プロジェクトホームページ</td><td style="text-align:left"><a href="https://funaudiollm.github.io/funasr" target="_blank" rel="noopener noreferrer" class="rp-link">https://funaudiollm.github.io/funasr</a></td></tr><tr><td style="text-align:left">論文リンク</td><td style="text-align:left"><a href="https://arxiv.org/abs/2509.12508" target="_blank" rel="noopener noreferrer" class="rp-link">https://arxiv.org/abs/2509.12508</a></td></tr><tr><td style="text-align:left">FunRL強化学習コード</td><td style="text-align:left"><a href="https://github.com/FunAudioLLM/Fun-ASR" target="_blank" rel="noopener noreferrer" class="rp-link">https://github.com/FunAudioLLM/Fun-ASR</a></td></tr></tbody></table></div>
+<h2 class="rp-toc-include" id="八謝辞とライセンス"><a href="#八謝辞とライセンス" class="rp-header-anchor rp-link" aria-hidden="true">#</a>八、謝辞とライセンス</h2>
+<p>通義実験室の研究チームのオープンソース貢献に感謝します。Fun-ASRシリーズは <strong>Apache 2.0ライセンス</strong> で公開されており、学術・商業目的で無料で使用できます。論文で引用する際は以下を参照してください：</p>
+<div class="rp-codeblock language-bibtex"><div class="rp-codeblock__content"><div class="rp-codeblock__content__scroll-container rp-scrollbar rp-scrollbar--always"><pre class="shiki css-variables" style="background-color:var(--shiki-background);color:var(--shiki-foreground)" tabindex="0" data-lang="bibtex"><code><span class="line"><span style="color:var(--shiki-token-keyword)">@article</span><span style="color:var(--shiki-foreground)">{</span><span style="color:var(--shiki-token-function)">an2025fun</span><span style="color:var(--shiki-foreground)">,</span></span>
+<span class="line"><span style="color:var(--shiki-token-function)">  title</span><span style="color:var(--shiki-token-keyword)">=</span><span style="color:var(--shiki-foreground)">{</span><span style="color:var(--shiki-foreground)">Fun-ASR Technical Report</span><span style="color:var(--shiki-foreground)">}</span><span style="color:var(--shiki-foreground)">,</span></span>
+<span class="line"><span style="color:var(--shiki-token-function)">  author</span><span style="color:var(--shiki-token-keyword)">=</span><span style="color:var(--shiki-foreground)">{</span><span style="color:var(--shiki-foreground)">An, Keyu and Chen, Yanni and Deng, Chong and Gao, Changfeng and Gao, Zhifu and Gong, Bo and Li, Xiangang and Li, Yabin and Lv, Xiang and Ji, Yunjie and others</span><span style="color:var(--shiki-foreground)">}</span><span style="color:var(--shiki-foreground)">,</span></span>
+<span class="line"><span style="color:var(--shiki-token-function)">  journal</span><span style="color:var(--shiki-token-keyword)">=</span><span style="color:var(--shiki-foreground)">{</span><span style="color:var(--shiki-foreground)">arXiv preprint arXiv:2509.12508</span><span style="color:var(--shiki-foreground)">}</span><span style="color:var(--shiki-foreground)">,</span></span>
+<span class="line"><span style="color:var(--shiki-token-function)">  year</span><span style="color:var(--shiki-token-keyword)">=</span><span style="color:var(--shiki-foreground)">{</span><span style="color:var(--shiki-foreground)">2025</span><span style="color:var(--shiki-foreground)">}</span></span>
+<span class="line"><span style="color:var(--shiki-foreground)">}</span></span></code></pre></div><div class="rp-code-button-group"><button class="rp-code-button-group__button rp-code-wrap-button" title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrapped"><path fill="currentColor" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrap"><path fill="currentColor" d="M16 7H3V5h13zM3 19h13v-2H3zm19-7-4-3v2H3v2h15v2z"></path></svg></button><button class="rp-code-button-group__button rp-code-copy-button" title="コードをコピー"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--copy"><path fill="currentColor" d="M20 8v12H8V8zm0-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2"></path><path fill="currentColor" d="M4 16H2V4a2 2 0 0 1 2-2h12v2H4Z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--success"><path fill="currentColor" d="m9.55 18-5.7-5.7 1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z"></path></svg></button></div></div></div>
+<blockquote>
+<p><strong>注</strong>：公式推論ではオリジナルPyTorchモデルを <code>funasr</code> ライブラリと <code>remote_code</code> で使用。コミュニティデプロイ（ManySpeech-CLI）はコミュニティエクスポートのONNXモデルをベースとし、より軽量で便利な体験を提供します。いずれも高精度な音声認識を実現します。</p>
+</blockquote><!--/$--></div><footer class="rp-doc-footer"><div class="rp-doc-footer__edit"></div><div class="rp-doc-footer__divider"></div><div class="rp-prev-next-page"><a href="/manyspeech/ja/blog/post-001.html" class="rp-prev-next-page__item rp-prev-next-page__prev rp-link"><span class="rp-prev-next-page__item__desc">前のページ</span><span class="rp-prev-next-page__item__title"><svg width="1em" height="1em" viewBox="0 0 32 32" class="rp-prev-next-page__icon rp-prev-next-page__rotate_180"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"></path></svg><span>2026-06-02 - X-ASR-zh-en：軽量かつ高精度な中英バイリンガル・オフライン＆ストリーミング音声認識モデル</span></span></a><a href="/manyspeech/ja/blog/post-003.html" class="rp-prev-next-page__item rp-prev-next-page__next rp-link"><span class="rp-prev-next-page__item__desc">次のページ</span><span class="rp-prev-next-page__item__title"><span>2026-06-05 - FireRedASR2-AED：軽量高精度中英バイリンガル音声認識モデル</span><svg width="1em" height="1em" viewBox="0 0 32 32" class="rp-prev-next-page__icon"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"></path></svg></span></a></div></footer></main></div><aside class="rp-doc-layout__outline rp-scrollbar"><div class="rp-outline"><div class="rp-outline__title">目次<svg width="14" height="14" class="rp-progress-circle"><circle cx="7" cy="7" r="6" stroke-linecap="round" fill="none" stroke="var(--rp-c-divider-light)" stroke-width="2"></circle><circle cx="7" cy="7" r="6" stroke-linecap="round" fill="none" stroke="var(--rp-c-brand)" stroke-width="2" stroke-dasharray="37.69911184307752" stroke-dashoffset="37.69911184307752" transform="rotate(-90 7 7)" style="transition:stroke-dashoffset 0.3s"></circle></svg></div><nav class="rp-outline__toc rp-scrollbar"><a href="#一プロジェクト背景と開発チーム" class="rp-toc-item rp-link" title="一、プロジェクト背景と開発チーム" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">一、プロジェクト背景と開発チーム</span></a><a href="#二モデル全体概要と言語能力" class="rp-toc-item rp-link" title="二、モデル全体概要と言語能力" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">二、モデル全体概要と言語能力</span></a><a href="#21-fun-asr-nano-2512-特化版中国語方言アクセント英語日本語の多次元最適化" class="rp-toc-item rp-link" title="2.1 Fun-ASR-Nano-2512 特化版：中国語方言・アクセント・英語・日本語の多次元最適化" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">2.1 Fun-ASR-Nano-2512 特化版：中国語方言・アクセント・英語・日本語の多次元最適化</span></a><a href="#211-七大方言" class="rp-toc-item rp-link" title="2.1.1 七大方言" style="padding-left:24px" data-depth="2"><span class="rp-toc-item__text rp-doc">2.1.1 七大方言</span></a><a href="#212-26種類の地方アクセント" class="rp-toc-item rp-link" title="2.1.2 26種類の地方アクセント" style="padding-left:24px" data-depth="2"><span class="rp-toc-item__text rp-doc">2.1.2 26種類の地方アクセント</span></a><a href="#213-英語と日本語の認識" class="rp-toc-item rp-link" title="2.1.3 英語と日本語の認識" style="padding-left:24px" data-depth="2"><span class="rp-toc-item__text rp-doc">2.1.3 英語と日本語の認識</span></a><a href="#22-fun-asr-mlt-nano-2512-多言語版の多次元最適化" class="rp-toc-item rp-link" title="2.2 Fun-ASR-MLT-Nano-2512 多言語版の多次元最適化" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">2.2 Fun-ASR-MLT-Nano-2512 多言語版の多次元最適化</span></a><a href="#221-31言語サポート" class="rp-toc-item rp-link" title="2.2.1 31言語サポート" style="padding-left:24px" data-depth="2"><span class="rp-toc-item__text rp-doc">2.2.1 31言語サポート</span></a><a href="#三コアアーキテクチャとコア能力" class="rp-toc-item rp-link" title="三、コアアーキテクチャとコア能力" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">三、コアアーキテクチャとコア能力</span></a><a href="#31-4コンポーネントエンドツーエンドアーキテクチャ" class="rp-toc-item rp-link" title="3.1 4コンポーネントエンドツーエンドアーキテクチャ" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">3.1 4コンポーネントエンドツーエンドアーキテクチャ</span></a><a href="#32-llmとctcのデュアルブランチ設計" class="rp-toc-item rp-link" title="3.2 LLMとCTCのデュアルブランチ設計" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">3.2 LLMとCTCのデュアルブランチ設計</span></a><a href="#33-アーキテクチャの革新" class="rp-toc-item rp-link" title="3.3 アーキテクチャの革新" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">3.3 アーキテクチャの革新</span></a><a href="#34-コア能力マトリクス" class="rp-toc-item rp-link" title="3.4 コア能力マトリクス" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">3.4 コア能力マトリクス</span></a><a href="#四学習データと戦略" class="rp-toc-item rp-link" title="四、学習データと戦略" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">四、学習データと戦略</span></a><a href="#41-データ規模" class="rp-toc-item rp-link" title="4.1 データ規模" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">4.1 データ規模</span></a><a href="#42-データソースとドメインカバレッジ" class="rp-toc-item rp-link" title="4.2 データソースとドメインカバレッジ" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">4.2 データソースとドメインカバレッジ</span></a><a href="#43-データ前処理とアノテーション戦略" class="rp-toc-item rp-link" title="4.3 データ前処理とアノテーション戦略" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">4.3 データ前処理とアノテーション戦略</span></a><a href="#44-方言アクセントデータの特化" class="rp-toc-item rp-link" title="4.4 方言・アクセントデータの特化" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">4.4 方言・アクセントデータの特化</span></a><a href="#45-学習戦略" class="rp-toc-item rp-link" title="4.5 学習戦略" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">4.5 学習戦略</span></a><a href="#五コア性能データ" class="rp-toc-item rp-link" title="五、コア性能データ" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">五、コア性能データ</span></a><a href="#51-オープンソースベンチマーク" class="rp-toc-item rp-link" title="5.1 オープンソースベンチマーク" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">5.1 オープンソースベンチマーク</span></a><a href="#52-産業実データセットでの性能" class="rp-toc-item rp-link" title="5.2 産業実データセットでの性能" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">5.2 産業実データセットでの性能</span></a><a href="#53-モデル比較" class="rp-toc-item rp-link" title="5.3 モデル比較" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">5.3 モデル比較</span></a><a href="#54-方言アクセント評価" class="rp-toc-item rp-link" title="5.4 方言・アクセント評価" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">5.4 方言・アクセント評価</span></a><a href="#六推論デプロイ" class="rp-toc-item rp-link" title="六、推論・デプロイ" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">六、推論・デプロイ</span></a><a href="#1-公式推論pytorchオリジナル" class="rp-toc-item rp-link" title="1. 公式推論（PyTorchオリジナル）" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">1. 公式推論（PyTorchオリジナル）</span></a><a href="#2-コミュニティデプロイmanyspeech-cli" class="rp-toc-item rp-link" title="2. コミュニティデプロイ：ManySpeech-CLI" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">2. コミュニティデプロイ：ManySpeech-CLI</span></a><a href="#21-コミュニティエクスポートonnxモデル" class="rp-toc-item rp-link" title="2.1 コミュニティエクスポートONNXモデル" style="padding-left:24px" data-depth="2"><span class="rp-toc-item__text rp-doc">2.1 コミュニティエクスポートONNXモデル</span></a><a href="#22-manyspeech-cli-インストールと使用方法" class="rp-toc-item rp-link" title="2.2 ManySpeech-CLI インストールと使用方法" style="padding-left:24px" data-depth="2"><span class="rp-toc-item__text rp-doc">2.2 ManySpeech-CLI インストールと使用方法</span></a><a href="#七オープンソース入手先" class="rp-toc-item rp-link" title="七、オープンソース入手先" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">七、オープンソース入手先</span></a><a href="#八謝辞とライセンス" class="rp-toc-item rp-link" title="八、謝辞とライセンス" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">八、謝辞とライセンス</span></a></nav><div class="rp-outline__divider"></div><div class="rp-outline__bottom"></div></div></aside></div><div class="back-to-list" style="text-align:right;margin:3rem 3rem 2rem"><a href="/manyspeech/ja/blog/" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.2rem 0.5rem;background-color:var(--rp-c-brand, #112dad);color:white;border-radius:9999px;text-decoration:none;font-weight:500;transition:all 0.2s ease;font-size:0.875rem">← ブログ一覧に戻る</a></div></div>
+    <div id="__rspress_modal_container"></div>
+  </body>
+</html>

@@ -1,0 +1,591 @@
+<!doctype html>
+<html lang="ja">
+  <head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FireRedASR2-AED：軽量高精度中英バイリンガル音声認識モデル - ManySpeech</title>
+<script>{;const saved = localStorage.getItem('rspress-theme-appearance');const preferDark = window.matchMedia('(prefers-color-scheme: dark)').matches;const isDark = !saved || saved === 'auto' ? preferDark : saved === 'dark';document.documentElement.classList.toggle('dark', isDark);document.documentElement.classList.toggle('rp-dark', isDark);document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';}</script>
+<script>var _hmt=_hmt||[];(function(){var h=document.createElement("script");h.src="https://hm.baidu.com/hm.js?c5cc9be664702972dd979661253d614b";var d=document.getElementsByTagName("script")[0];d.parentNode.insertBefore(h,d);})();</script>
+<link href="/manyspeech/static/css/styles.dca152c6d6.css" rel="stylesheet">
+<script defer src="/manyspeech/static/js/styles.3cf4b83403.js"></script>
+<script defer src="/manyspeech/static/js/lib-react.12a014d3ef.js"></script>
+<script defer src="/manyspeech/static/js/lib-router.6c832d1f65.js"></script>
+<script defer src="/manyspeech/static/js/6702.512d08ecc0.js"></script>
+<script defer src="/manyspeech/static/js/index.a743dc1e03.js"></script>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Rspress v2.0.12">
+<link rel="icon" href="/manyspeech/manyspeech-icon.webp">
+<meta property="og:type" content="website">
+<meta property="og:title" content="FireRedASR2-AED：軽量高精度中英バイリンガル音声認識モデル - ManySpeech">
+<meta name="description" content="軽量なローカル音声認識ツール">
+<meta property="og:description" content="軽量なローカル音声認識ツール"></head>
+
+  <body>
+    <div id="__rspress_root"><link rel="preload" as="image" href="/manyspeech/manyspeech-light-logo.webp"/><link rel="preload" as="image" href="/manyspeech/manyspeech-dark-logo.webp"/><header class="rp-nav"><div class="rp-nav__left"><div class="rp-nav__title"><a href="/manyspeech/ja/" class="rp-nav__title__link rp-link"><div class="rp-nav__title__logo"><img src="/manyspeech/manyspeech-light-logo.webp" alt="logo" id="logo" class="rspress-logo rp-nav__title__logo-image rp-nav__title__logo-image--light"/><img src="/manyspeech/manyspeech-dark-logo.webp" alt="logo" id="logo" class="rspress-logo rp-nav__title__logo-image rp-nav__title__logo-image--dark"/></div></a></div></div><div class="rp-nav__right"><button class="rp-search-button"><div class="rp-search-button__content"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 20 21" class="rp-search-button__icon"><path fill="currentColor" d="M8.333 1.913A6.667 6.667 0 0 1 15 8.58c0 1.54-.525 2.957-1.402 4.085l4.49 4.492a.834.834 0 0 1-1.177 1.178l-4.491-4.49a6.64 6.64 0 0 1-4.087 1.402 6.667 6.667 0 0 1 0-13.334m0 1.667a5 5 0 1 0 0 10 5 5 0 0 0 0-10"></path></svg><span class="rp-search-button__word">検索</span></div><div class="rp-search-button__hotkey" style="opacity:0"><span></span><span>K</span></div></button><div class="rp-search-button--mobile"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 20 21"><path fill="currentColor" d="M8.333 1.913A6.667 6.667 0 0 1 15 8.58c0 1.54-.525 2.957-1.402 4.085l4.49 4.492a.834.834 0 0 1-1.177 1.178l-4.491-4.49a6.64 6.64 0 0 1-4.087 1.402 6.667 6.667 0 0 1 0-13.334m0 1.667a5 5 0 1 0 0 10 5 5 0 0 0 0-10"></path></svg></div><ul class="rp-nav-menu rp-nav-menu--right"><li class="rp-nav-menu__item"><a href="/manyspeech/ja/cli/getting-started/index.html" class="rp-nav-menu__item__container rp-link">CLIツール</a></li><li class="rp-nav-menu__item"><a href="/manyspeech/ja/models/getting-started/index.html" class="rp-nav-menu__item__container rp-link">モデルライブラリ</a></li><li class="rp-nav-menu__item rp-nav-menu__item--active"><a href="/manyspeech/ja/blog/index.html" class="rp-nav-menu__item__container rp-link">ブログ</a></li></ul><div class="rp-nav__others"><div class="rp-nav-menu__divider"></div><li class="rp-nav-menu__item"><div class="rp-nav-menu__item__container">日本語<svg width="1em" height="1em" viewBox="0 0 32 32" class="rp-nav-menu__item__icon"><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></div><ul class="rp-hover-group rp-hover-group--hidden rp-hover-group--center"><li class="rp-hover-group__item" style="padding-left:8px" data-depth="0"><a href="/manyspeech/en/blog/post-003.html" class="rp-hover-group__item__link rp-link" aria-label="English" lang="en" hrefLang="en" rel="alternate">English</a></li><li class="rp-hover-group__item" style="padding-left:8px" data-depth="0"><a href="/manyspeech/blog/post-003.html" class="rp-hover-group__item__link rp-link" aria-label="简体中文" lang="zh" hrefLang="zh" rel="alternate">简体中文</a></li><li class="rp-hover-group__item rp-hover-group__item--active" style="padding-left:8px" data-depth="0"><a href="/manyspeech/ja/blog/post-003.html" class="rp-hover-group__item__link rp-link" aria-label="日本語" lang="ja" hrefLang="ja" rel="alternate">日本語</a></li></ul></li><div class="rp-switch-appearance"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24" class="rp-switch-appearance__icon rp-switch-appearance__icon--sun"><path fill="currentColor" d="m7.001 15.848-1.226 1.226a.58.58 0 0 0 0 .818.58.58 0 0 0 .818 0l1.226-1.226a.58.58 0 0 0 0-.818.58.58 0 0 0-.818 0m-.352-8.735a.584.584 0 0 0 .825-.825L6.237 5.051a.584.584 0 0 0-.825.825zM5.011 11.07h-1.75a.584.584 0 0 0 0 1.167h1.75c.324 0 .584-.26.584-.583a.585.585 0 0 0-.584-.584m7.003-5.835c.324 0 .584-.26.584-.584V2.9a.58.58 0 0 0-.584-.584.58.58 0 0 0-.583.583V4.65c0 .323.262.584.583.584m5.616 1.621 1.226-1.225a.58.58 0 0 0 0-.818.58.58 0 0 0-.818 0l-1.226 1.225a.58.58 0 0 0 0 .818.576.576 0 0 0 .818 0m3.138 4.214h-1.75a.58.58 0 0 0-.584.584c0 .324.26.584.583.584h1.751a.584.584 0 1 0 0-1.167m-3.389 5.124a.584.584 0 0 0-.825.825l1.238 1.238a.584.584 0 0 0 .825-.826zm-5.365-9.795a5.256 5.256 0 0 0-5.257 5.258 5.256 5.256 0 0 0 5.257 5.257 5.256 5.256 0 0 0 5.257-5.257 5.256 5.256 0 0 0-5.257-5.258m0 11.675a.58.58 0 0 0-.583.583v1.751a.582.582 0 1 0 1.167 0v-1.75a.584.584 0 0 0-.584-.584"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" viewBox="0 0 19 19" class="rp-switch-appearance__icon rp-switch-appearance__icon--moon"><path fill="currentColor" d="M9.166 0a9.2 9.2 0 0 1 1.857.188.834.834 0 0 1 .042 1.623 4.47 4.47 0 1 0 5.457 5.457l.048-.135a.834.834 0 0 1 1.575.177q.186.902.188 1.856A9.168 9.168 0 1 1 9.166 0"></path></svg></div><div class="rp-social-links"><a href="https://github.com/manyeyes/manyspeech" target="_blank" rel="noopener noreferrer" class="rp-social-links__item"><div class="rp-social-links__icon"><div class="rp-social-links__icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12c0 5.303 3.438 9.8 8.205 11.385c.6.113.82-.258.82-.577c0-.285-.01-1.04-.015-2.04c-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729c1.205.084 1.838 1.236 1.838 1.236c1.07 1.835 2.809 1.305 3.495.998c.108-.776.417-1.305.76-1.605c-2.665-.3-5.466-1.332-5.466-5.93c0-1.31.465-2.38 1.235-3.22c-.135-.303-.54-1.523.105-3.176c0 0 1.005-.322 3.3 1.23c.96-.267 1.98-.399 3-.405c1.02.006 2.04.138 3 .405c2.28-1.552 3.285-1.23 3.285-1.23c.645 1.653.24 2.873.12 3.176c.765.84 1.23 1.91 1.23 3.22c0 4.61-2.805 5.625-5.475 5.92c.42.36.81 1.096.81 2.22c0 1.606-.015 2.896-.015 3.286c0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></div></div></a><ul class="rp-hover-group rp-hover-group--hidden rp-hover-group--right"></ul></div></div><button aria-label="mobile hamburger" class="rp-nav-hamburger rp-nav-hamburger__sm"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="none" viewBox="0 0 21 21"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.667" d="M3.645 5.225h13.333M3.645 10.225h13.333M3.645 15.225h13.333"></path></svg></button><button aria-label="mobile hamburger" class="rp-nav-hamburger rp-nav-hamburger__md"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="none" viewBox="0 0 21 21"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.667" d="M3.645 5.225h13.333M3.645 10.225h13.333M3.645 15.225h13.333"></path></svg><ul class="rp-hover-group rp-hover-group--hidden rp-hover-group--right"><div class="rp-nav-menu__others-mobile__container"><div class="rp-nav-hamburger__md__hover-group"><div class="rp-nav-screen-appearance"><div class="rp-nav-screen-appearance__left">テーマ</div><div class="rp-nav-screen-appearance__right"></div></div><div class="rp-nav-screen-langs"><div class="rp-nav-screen-langs__left">言語</div><div class="rp-nav-screen-langs__right">日本語<svg width="1em" height="1em" viewBox="0 0 32 32" class="rp-nav-screen-langs__icon "><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></div></div><div class="rp-nav-screen-langs-group" style="display:grid;grid-template-rows:0fr;transition:grid-template-rows 0.2s ease-out"><div class="rp-nav-screen-langs-group__inner"><a href="/manyspeech/en/blog/post-003.html" class="rp-nav-screen-langs-group__item rp-link" hrefLang="en" lang="en" rel="alternate">English</a><a href="/manyspeech/blog/post-003.html" class="rp-nav-screen-langs-group__item rp-link" hrefLang="zh" lang="zh" rel="alternate">简体中文</a><span class="rp-nav-screen-langs-group__item rp-nav-screen-langs-group__item--active" aria-current="page" aria-disabled="true">日本語</span></div></div><div class="rp-nav-screen-divider"></div><div class="rp-social-links"><a href="https://github.com/manyeyes/manyspeech" target="_blank" rel="noopener noreferrer" class="rp-social-links__item"><div class="rp-social-links__icon"><div class="rp-social-links__icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12c0 5.303 3.438 9.8 8.205 11.385c.6.113.82-.258.82-.577c0-.285-.01-1.04-.015-2.04c-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729c1.205.084 1.838 1.236 1.838 1.236c1.07 1.835 2.809 1.305 3.495.998c.108-.776.417-1.305.76-1.605c-2.665-.3-5.466-1.332-5.466-5.93c0-1.31.465-2.38 1.235-3.22c-.135-.303-.54-1.523.105-3.176c0 0 1.005-.322 3.3 1.23c.96-.267 1.98-.399 3-.405c1.02.006 2.04.138 3 .405c2.28-1.552 3.285-1.23 3.285-1.23c.645 1.653.24 2.873.12 3.176c.765.84 1.23 1.91 1.23 3.22c0 4.61-2.805 5.625-5.475 5.92c.42.36.81 1.096.81 2.22c0 1.606-.015 2.896-.015 3.286c0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></div></div></a><ul class="rp-hover-group rp-hover-group--hidden rp-hover-group--right"></ul></div></div></div></ul></button></div></header><div class="rp-doc-layout__menu"><div class="rp-sidebar-menu"><div class="rp-sidebar-menu__left"></div><button type="button" class="rp-sidebar-menu__right"><span class="rp-sidebar-menu__right__text">目次</span><svg width="14" height="14" class="rp-progress-circle"><circle cx="7" cy="7" r="6" stroke-linecap="round" fill="none" stroke="var(--rp-c-divider-light)" stroke-width="2"></circle><circle cx="7" cy="7" r="6" stroke-linecap="round" fill="none" stroke="var(--rp-c-brand)" stroke-width="2" stroke-dasharray="37.69911184307752" stroke-dashoffset="37.69911184307752" transform="rotate(-90 7 7)" style="transition:stroke-dashoffset 0.3s"></circle></svg><svg width="1em" height="1em" viewBox="0 0 32 32" class="rp-sidebar-menu__right__icon" style="transform:rotate(0deg);transition:transform 0.2s ease-out"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"></path></svg></button></div></div><div class="rp-doc-layout__container"><aside class="rp-doc-layout__sidebar-placeholder"></aside><div class="rp-doc-layout__doc"><main class="rp-doc-layout__doc-container"><div class="rp-doc rspress-doc"><!--$--><h1 class="rp-toc-include" id="fireredasr2-aed軽量高精度中英バイリンガル音声認識モデル"><a href="#fireredasr2-aed軽量高精度中英バイリンガル音声認識モデル" class="rp-header-anchor rp-link" aria-hidden="true">#</a>FireRedASR2-AED：軽量高精度中英バイリンガル音声認識モデル<!-- --> </h1><div class="rp-not-doc rp-llms-container"><button class="rp-not-doc rp-llms-button rp-llms-copy-button"><div class="rp-llms-copy-button__icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-llms-copy-button__icon-success"><path fill="currentColor" d="m9.55 18-5.7-5.7 1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-llms-copy-button__icon-copy"><path fill="currentColor" d="M20 8v12H8V8zm0-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2"></path><path fill="currentColor" d="M4 16H2V4a2 2 0 0 1 2-2h12v2H4Z"></path></svg></div><span>Markdown をコピー</span></button><button class="rp-llms-button rp-llms-view-options__trigger "><svg width="1em" height="1em" viewBox="0 0 32 32" class="rp-llms-view-options__arrow "><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></button></div>
+<h2 class="rp-toc-include" id="一モデル概要"><a href="#一モデル概要" class="rp-header-anchor rp-link" aria-hidden="true">#</a>一、モデル概要</h2>
+<p>FireRedASR2-AEDは、小红书のFireRedTeamが発表した第2世代産業グレード音声認識モデルであり、統合システムFireRedASR2Sの中核ASRモジュールです。FireRedASR2シリーズの2つの変種のうち、AEDバージョンは <strong>Attention-based Encoder-Decoder（AED）</strong> アーキテクチャを採用しており、パラメータ数は約1B+です。これは、FireRedASR2-LLM（8B+パラメータ）大規模モデルの軽量な代替手段です。</p>
+<p>FireRedASR2は、初代FireRedASRをベースに認識精度を全面的に向上させ、優れたパフォーマンスと最適な効率の両方を異なるシーンで実現するように設計されています。</p>
+<h2 class="rp-toc-include" id="二コアアーキテクチャ設計"><a href="#二コアアーキテクチャ設計" class="rp-header-anchor rp-link" aria-hidden="true">#</a>二、コアアーキテクチャ設計</h2>
+<p>初代FireRedASR-AEDの技術文書（arXiv:2501.14350）に基づく、FireRedASR2-AEDの中核アーキテクチャは以下の通りです。</p>
+<h3 class="rp-toc-include" id="21-エンコーダ-デコーダ構造"><a href="#21-エンコーダ-デコーダ構造" class="rp-header-anchor rp-link" aria-hidden="true">#</a>2.1 エンコーダ-デコーダ構造</h3>
+<p><strong>Conformerエンコーダ＋Transformerデコーダ</strong> の古典的な組み合わせを採用：</p>
+<ul>
+<li><strong>Conformerエンコーダ</strong>：マルチヘッド自己注意機構と畳み込みモジュールを組み合わせることで、音声信号の大局的依存関係と局所的な音響特徴の詳細なモデリングを両立。</li>
+<li><strong>Transformerデコーダ</strong>：交差注意機構を介して効率的な系列変換を実現し、自己回帰デコードをサポート。</li>
+</ul>
+<h3 class="rp-toc-include" id="22-サブサンプリング戦略"><a href="#22-サブサンプリング戦略" class="rp-header-anchor rp-link" aria-hidden="true">#</a>2.2 サブサンプリング戦略</h3>
+<p>エンコーダ前端は <strong>2層の畳み込み（ストライド2、カーネルサイズ3）</strong> により入力音声をサブサンプリングし、時間分解能を10msから40msに低減。重要な音響情報を保持しつつ計算複雑性を効果的に削減します。</p>
+<h3 class="rp-toc-include" id="23-トークナイゼーション戦略"><a href="#23-トークナイゼーション戦略" class="rp-header-anchor rp-link" aria-hidden="true">#</a>2.3 トークナイゼーション戦略</h3>
+<p><strong>ハイブリッドトークナイゼーション戦略</strong> を採用：中国語は文字レベル、英語はByte Pair Encoding（BPE）を使用。<strong>総語彙サイズ7,832</strong> であり、中英混合入力の認識シーンに自然に対応します。</p>
+<h3 class="rp-toc-include" id="24-入力長の制限公式仕様"><a href="#24-入力長の制限公式仕様" class="rp-header-anchor rp-link" aria-hidden="true">#</a>2.4 入力長の制限（公式仕様）</h3>
+<ul>
+<li><strong>FireRedASR2-AED</strong>：最大 <strong>60秒</strong> の音声入力をサポート。60秒を超えると幻覚が発生する可能性があり、200秒を超えると位置エンコーディングエラーが発生します。</li>
+<li><strong>FireRedASR2-LLM</strong>：最大 <strong>40秒</strong> の音声入力をサポート（より長い入力は未テスト）。</li>
+</ul>
+<h2 class="rp-toc-include" id="三学習データと戦略"><a href="#三学習データと戦略" class="rp-header-anchor rp-link" aria-hidden="true">#</a>三、学習データと戦略</h2>
+<p>初代FireRedASR-AEDの技術文書（arXiv:2501.14350）によると、学習データは以下の通りです。</p>
+<ul>
+<li><strong>普通話コーパス</strong>：約 <strong>70,000時間</strong> の専門家による書き起こし高品質音声データ。主に人手アノテーション。</li>
+<li><strong>英語データ</strong>：約 <strong>11,000時間</strong> の補足学習データ。バイリンガル認識能力を確保。</li>
+</ul>
+<p>学習にはプログレッシブ正則化戦略を採用し、DropoutとSpecAugmentを徐々に導入して収束の安定性を確保しています。</p>
+<h2 class="rp-toc-include" id="四コア性能と比較優位性"><a href="#四コア性能と比較優位性" class="rp-header-anchor rp-link" aria-hidden="true">#</a>四、コア性能と比較優位性</h2>
+<h3 class="rp-toc-include" id="41-公式評価概要"><a href="#41-公式評価概要" class="rp-header-anchor rp-link" aria-hidden="true">#</a>4.1 公式評価概要</h3>
+<p>FireRedASR2は <strong>24の公開テストセット</strong> で包括的に評価され、普通話（4）、方言/アクセント（19）、歌声（1）をカバーしています。公式評価結果は以下の通りです。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>モデル</th><th>全シーン平均CER(%)</th><th>普通話平均CER(%)</th><th>方言平均CER(%)</th></tr></thead><tbody><tr><td><strong>FireRedASR2-LLM</strong></td><td><strong>9.67</strong></td><td><strong>2.89</strong></td><td><strong>11.55</strong></td></tr><tr><td><strong>FireRedASR2-AED</strong></td><td><strong>9.80</strong></td><td><strong>3.05</strong></td><td><strong>11.67</strong></td></tr><tr><td>Doubao-ASR</td><td>12.98</td><td>3.69</td><td>15.39</td></tr><tr><td>Qwen3-ASR-1.7B</td><td>10.12</td><td>3.76</td><td>11.85</td></tr><tr><td>Fun-ASR</td><td>10.92</td><td>4.16</td><td>12.76</td></tr><tr><td>Fun-ASR-Nano-2512</td><td>-</td><td>4.55</td><td>15.07</td></tr></tbody></table></div>
+<h3 class="rp-toc-include" id="42-普通話テストセット4詳細結果"><a href="#42-普通話テストセット4詳細結果" class="rp-header-anchor rp-link" aria-hidden="true">#</a>4.2 普通話テストセット（4）詳細結果</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>ID</th><th>テストセット</th><th>FireRedASR2-LLM</th><th>FireRedASR2-AED</th><th>Doubao-ASR</th><th>Qwen3-ASR</th><th>Fun-ASR</th></tr></thead><tbody><tr><td>1</td><td>aishell1</td><td>0.64</td><td><strong>0.57</strong></td><td>1.52</td><td>1.48</td><td>1.64</td></tr><tr><td>2</td><td>aishell2</td><td>2.15</td><td>2.51</td><td>2.77</td><td>2.71</td><td>2.38</td></tr><tr><td>3</td><td>ws-net</td><td>4.44</td><td>4.57</td><td>5.73</td><td>4.97</td><td>6.85</td></tr><tr><td>4</td><td>ws-meeting</td><td>4.32</td><td>4.53</td><td>4.74</td><td>5.88</td><td>5.78</td></tr></tbody></table></div>
+<h3 class="rp-toc-include" id="43-方言アクセントテストセット19詳細結果"><a href="#43-方言アクセントテストセット19詳細結果" class="rp-header-anchor rp-link" aria-hidden="true">#</a>4.3 方言/アクセントテストセット（19）詳細結果</h3>
+<blockquote>
+<p>注：ws = WenetSpeech、md = MagicData、conv = 会話、daily = 日常</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>ID</th><th>テストセット（方言/アクセント）</th><th>FRASR2-LLM</th><th>FRASR2-AED</th><th>Doubao-ASR</th><th>Qwen3-ASR</th><th>Fun-ASR</th></tr></thead><tbody><tr><td>5</td><td>kespeech（8方言総合）</td><td>3.08</td><td>3.60</td><td>5.38</td><td>5.10</td><td>5.36</td></tr><tr><td>6</td><td>ws-yue-short（粤語短）</td><td>5.14</td><td>5.15</td><td>10.51</td><td>5.82</td><td>7.34</td></tr><tr><td>7</td><td>ws-yue-long（粤語長）</td><td>8.71</td><td>8.54</td><td>11.39</td><td>8.85</td><td>10.14</td></tr><tr><td>8</td><td>ws-chuan-easy（四川話簡単）</td><td>10.90</td><td>10.60</td><td>11.33</td><td>11.99</td><td>12.46</td></tr><tr><td>9</td><td>ws-chuan-hard（四川話困難）</td><td>20.71</td><td>21.35</td><td>20.77</td><td>21.63</td><td>22.49</td></tr><tr><td>10</td><td>md-heavy</td><td>7.42</td><td>7.43</td><td>7.69</td><td>8.02</td><td>9.13</td></tr><tr><td>11</td><td>md-yue-conv（粤語会話）</td><td>12.23</td><td>11.66</td><td>26.25</td><td>9.76</td><td>33.71</td></tr><tr><td>12</td><td>md-yue-daily（粤語日常）</td><td>3.61</td><td>3.35</td><td>12.82</td><td>3.66</td><td>2.69</td></tr><tr><td>13</td><td>md-yue-vehicle（粤語車載）</td><td>4.50</td><td>4.83</td><td>8.66</td><td>4.28</td><td>6.00</td></tr><tr><td>14</td><td>md-chuan-conv（四川話会話）</td><td>13.18</td><td>13.07</td><td>11.77</td><td>14.35</td><td>14.01</td></tr><tr><td>15</td><td>md-chuan-daily（四川話日常）</td><td>4.90</td><td>5.17</td><td>3.90</td><td>4.93</td><td>3.98</td></tr><tr><td>16</td><td>md-shanghai-conv（上海話会話）</td><td>28.70</td><td>27.02</td><td>45.15</td><td>29.77</td><td>25.49</td></tr><tr><td>17</td><td>md-shanghai-daily（上海話日常）</td><td>24.94</td><td>24.18</td><td>44.06</td><td>23.93</td><td>12.55</td></tr><tr><td>18</td><td>md-wu（呉語）</td><td>7.15</td><td>7.14</td><td>7.70</td><td>7.57</td><td>10.63</td></tr><tr><td>19</td><td>md-zhengzhou-conv（鄭州話会話）</td><td>10.20</td><td>10.65</td><td>9.83</td><td>9.55</td><td>10.85</td></tr><tr><td>20</td><td>md-zhengzhou-daily（鄭州話日常）</td><td>5.80</td><td>6.26</td><td>5.77</td><td>5.88</td><td>6.29</td></tr><tr><td>21</td><td>md-wuhan（武漢話）</td><td>9.60</td><td>10.81</td><td>9.94</td><td>10.22</td><td>4.34</td></tr><tr><td>22</td><td>md-tianjin（天津話）</td><td>15.45</td><td>15.30</td><td>15.79</td><td>16.16</td><td>19.27</td></tr><tr><td>23</td><td>md-changsha（長沙話）</td><td>23.18</td><td>25.64</td><td>23.76</td><td>23.70</td><td>25.66</td></tr></tbody></table></div>
+<h3 class="rp-toc-include" id="44-歌声テストセット1"><a href="#44-歌声テストセット1" class="rp-header-anchor rp-link" aria-hidden="true">#</a>4.4 歌声テストセット（1）</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>ID</th><th>テストセット</th><th>FRASR2-LLM</th><th>FRASR2-AED</th><th>Doubao-ASR</th><th>Qwen3-ASR</th><th>Fun-ASR</th></tr></thead><tbody><tr><td>24</td><td>opencpop（中国語歌声）</td><td><strong>1.12</strong></td><td><strong>1.17</strong></td><td>4.36</td><td>2.57</td><td>3.05</td></tr></tbody></table></div>
+<h3 class="rp-toc-include" id="45-サポートされる方言アクセントのリスト公式完全リスト"><a href="#45-サポートされる方言アクセントのリスト公式完全リスト" class="rp-header-anchor rp-link" aria-hidden="true">#</a>4.5 サポートされる方言/アクセントのリスト（公式完全リスト）</h3>
+<p>FireRedASR2-AEDは <strong>20以上の中国方言/アクセント</strong> をサポートします。公式に挙げられている具体的なものは以下の通りです。</p>
+<blockquote>
+<p>粤語（香港と広東）、四川話、上海話、呉語、閩南語、安徽話、福建話、甘粛話、貴州話、河北話、河南話、湖北話、湖南話、江西話、遼寧話、寧夏話、陝西話、山西話、山東話、天津話、雲南話など。</p>
+</blockquote>
+<h2 class="rp-toc-include" id="五onnxモデルシリーズと推論デプロイコミュニティデプロイ"><a href="#五onnxモデルシリーズと推論デプロイコミュニティデプロイ" class="rp-header-anchor rp-link" aria-hidden="true">#</a>五、ONNXモデルシリーズと推論デプロイ（コミュニティデプロイ）</h2>
+<h3 class="rp-toc-include" id="51-コミュニティ提供のonnxモデルmanyeyes"><a href="#51-コミュニティ提供のonnxモデルmanyeyes" class="rp-header-anchor rp-link" aria-hidden="true">#</a>5.1 コミュニティ提供のONNXモデル（manyeyes）</h3>
+<p>C#エコシステムやクロスプラットフォームデプロイのニーズに応えるため、コミュニティ開発者 <strong>manyeyes</strong> がFireRedASR2-AEDをONNX形式にエクスポートしました。これらのONNXモデルはFireRedTeam公式によるものではなく、manyeyesコミュニティが提供するサードパーティ版であり、ModelScopeプラットフォームで公開されています。すべてのモデルは文字レベルのタイムスタンプ出力をサポートし、INT8量子化による最適化が施されており、デプロイのハードルを大幅に下げています。</p>
+<p><strong>完全なONNXモデルリスト</strong>（出典：<a href="https://modelscope.cn/profile/manyeyes?tab=model%EF%BC%89%EF%BC%9A" target="_blank" rel="noopener noreferrer" class="rp-link">https://modelscope.cn/profile/manyeyes?tab=model）：</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>モデル名</th><th>精度</th><th>サイズ</th><th>タイムスタンプ</th><th>特徴</th></tr></thead><tbody><tr><td>fireredasr2-aed-large-zh-en-onnx-offline-20260212</td><td>FP32</td><td>4.73GB</td><td>サポート</td><td>ベースONNX版</td></tr><tr><td>fireredasr2-aed-large-zh-en-int8-onnx-offline-20260212</td><td>INT8</td><td>1.76GB</td><td>サポート</td><td>INT8量子化、サイズ約62％削減</td></tr><tr><td>fireredasr2-aed-large-zh-en-onnx-selfcrosskv-offline-20260212</td><td>FP32</td><td>4.73GB</td><td>サポート</td><td>KVキャッシュ最適化</td></tr><tr><td>fireredasr2-aed-large-zh-en-int8-onnx-selfcrosskv-offline-20260212</td><td>INT8</td><td>1.76GB</td><td>サポート</td><td>INT8量子化＋KVキャッシュ最適化</td></tr><tr><td>fireredasr2-aed-large-zh-en-int8-onnx-selfcrosskvstack-offline-20260212</td><td>INT8</td><td>1.76GB</td><td>サポート</td><td>INT8量子化＋KVキャッシュ最適化＋パラメータ統合</td></tr></tbody></table></div>
+<h3 class="rp-toc-include" id="52-manyspeech-cli-ワンコマンドラインツール"><a href="#52-manyspeech-cli-ワンコマンドラインツール" class="rp-header-anchor rp-link" aria-hidden="true">#</a>5.2 manyspeech-cli ワンコマンドラインツール</h3>
+<p>manyspeech-cliはmanyeyesコミュニティが開発した、インストール不要のローカルコマンドライン音声認識ツールです。ローカル音声ファイル認識、マイクリアルタイムストリーミング、SRT字幕生成、JSONなど複数形式の出力をサポートします。manyspeech-cliは上記のONNXモデルを統合しており、ユーザーは以下のコマンド一つでオフライン認識と字幕生成を実行できます。</p>
+<div class="rp-codeblock language-bash"><div class="rp-codeblock__content"><div class="rp-codeblock__content__scroll-container rp-scrollbar rp-scrollbar--always"><pre class="shiki css-variables" style="background-color:var(--shiki-background);color:var(--shiki-foreground)" tabindex="0" data-lang="bash"><code><span class="line"><span style="color:var(--shiki-token-function)">manyspeech</span><span style="color:var(--shiki-token-string)"> asr</span><span style="color:var(--shiki-token-string)"> -t</span><span style="color:var(--shiki-token-string)"> offline</span><span style="color:var(--shiki-token-string)"> --model</span><span style="color:var(--shiki-token-string)"> fireredasr2-aed-large-zh-en-int8-onnx-selfcrosskv-offline-20260212</span><span style="color:var(--shiki-token-string)"> -m</span><span style="color:var(--shiki-token-string)"> chunk</span><span style="color:var(--shiki-token-string)"> --format</span><span style="color:var(--shiki-token-string)"> srt</span><span style="color:var(--shiki-token-string)"> --threads</span><span style="color:var(--shiki-token-constant)"> 2</span><span style="color:var(--shiki-token-string)"> -i</span><span style="color:var(--shiki-token-string)"> file</span><span style="color:var(--shiki-token-string)"> -f</span><span style="color:var(--shiki-token-string-expression)"> &quot;/path/to/0.wav&quot;</span></span></code></pre></div><div class="rp-code-button-group"><button class="rp-code-button-group__button rp-code-wrap-button" title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrapped"><path fill="currentColor" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrap"><path fill="currentColor" d="M16 7H3V5h13zM3 19h13v-2H3zm19-7-4-3v2H3v2h15v2z"></path></svg></button><button class="rp-code-button-group__button rp-code-copy-button" title="コードをコピー"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--copy"><path fill="currentColor" d="M20 8v12H8V8zm0-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2"></path><path fill="currentColor" d="M4 16H2V4a2 2 0 0 1 2-2h12v2H4Z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--success"><path fill="currentColor" d="m9.55 18-5.7-5.7 1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z"></path></svg></button></div></div></div>
+<p>実際の実行例（31秒音声、SRT字幕出力）：</p>
+<div class="rp-codeblock language-txt"><div class="rp-codeblock__content"><div class="rp-codeblock__content__scroll-container rp-scrollbar rp-scrollbar--always"><pre class="shiki css-variables" style="background-color:var(--shiki-background);color:var(--shiki-foreground)" tabindex="0" data-lang="txt"><code><span class="line"><span>0</span></span>
+<span class="line"><span>00:00:00,490 -&gt; 00:00:03,820</span></span>
+<span class="line"><span>毎年、除夜の鐘が鳴るとき、</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>1</span></span>
+<span class="line"><span>00:00:03,820 -&gt; 00:00:06,850</span></span>
+<span class="line"><span>私はいつも目を閉じて、静かに願い事をします。</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>2</span></span>
+<span class="line"><span>00:00:06,850 -&gt; 00:00:10,980</span></span>
+<span class="line"><span>時には新年の目標を自分に課すこともあります。</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>3</span></span>
+<span class="line"><span>00:00:10,990 -&gt; 00:00:14,280</span></span>
+<span class="line"><span>また、除夜の鐘を聞くと、</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>4</span></span>
+<span class="line"><span>00:00:14,280 -&gt; 00:00:17,130</span></span>
+<span class="line"><span>心に一抹の憾念がわいてきます。</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>5</span></span>
+<span class="line"><span>00:00:17,200 -&gt; 00:00:20,370</span></span>
+<span class="line"><span>時が経つのはこんなにも早いのかと感慨にふけり、</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>6</span></span>
+<span class="line"><span>00:00:20,370 -&gt; 00:00:24,420</span></span>
+<span class="line"><span>去年の願いがまだ叶えられていないことに気づきます。それでもなお、</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>7</span></span>
+<span class="line"><span>00:00:24,570 -&gt; 00:00:28,230</span></span>
+<span class="line"><span>歳月の洗礼を経て、私は成長し、成熟しました。</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>8</span></span>
+<span class="line"><span>00:00:28,230 -&gt; 00:00:31,120</span></span>
+<span class="line"><span>現実の全てに勇敢に向き合うことを学びました。</span></span></code></pre></div><div class="rp-code-button-group"><button class="rp-code-button-group__button rp-code-wrap-button" title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrapped"><path fill="currentColor" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrap"><path fill="currentColor" d="M16 7H3V5h13zM3 19h13v-2H3zm19-7-4-3v2H3v2h15v2z"></path></svg></button><button class="rp-code-button-group__button rp-code-copy-button" title="コードをコピー"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--copy"><path fill="currentColor" d="M20 8v12H8V8zm0-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2"></path><path fill="currentColor" d="M4 16H2V4a2 2 0 0 1 2-2h12v2H4Z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--success"><path fill="currentColor" d="m9.55 18-5.7-5.7 1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z"></path></svg></button></div></div></div>
+<h2 class="rp-toc-include" id="六クイックスタートガイド公式デプロイ"><a href="#六クイックスタートガイド公式デプロイ" class="rp-header-anchor rp-link" aria-hidden="true">#</a>六、クイックスタートガイド（公式デプロイ）</h2>
+<blockquote>
+<p>以下はFireRedASR2S公式コードリポジトリ（GitHub: FireRedTeam/FireRedASR2S）に基づき、公式PyTorchモデルを使用します。</p>
+</blockquote>
+<h3 class="rp-toc-include" id="61-環境準備"><a href="#61-環境準備" class="rp-header-anchor rp-link" aria-hidden="true">#</a>6.1 環境準備</h3>
+<div class="rp-codeblock language-bash"><div class="rp-codeblock__content"><div class="rp-codeblock__content__scroll-container rp-scrollbar rp-scrollbar--always"><pre class="shiki css-variables" style="background-color:var(--shiki-background);color:var(--shiki-foreground)" tabindex="0" data-lang="bash"><code><span class="line"><span style="color:var(--shiki-token-comment)"># Python環境の作成（Python 3.10が必要）</span></span>
+<span class="line"><span style="color:var(--shiki-token-function)">conda</span><span style="color:var(--shiki-token-string)"> create</span><span style="color:var(--shiki-token-string)"> --name</span><span style="color:var(--shiki-token-string)"> fireredasr2s</span><span style="color:var(--shiki-token-string)"> python=</span><span style="color:var(--shiki-token-constant)">3.10</span></span>
+<span class="line"><span style="color:var(--shiki-token-function)">conda</span><span style="color:var(--shiki-token-string)"> activate</span><span style="color:var(--shiki-token-string)"> fireredasr2s</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--shiki-token-comment)"># 公式リポジトリのクローン</span></span>
+<span class="line"><span style="color:var(--shiki-token-function)">git</span><span style="color:var(--shiki-token-string)"> clone</span><span style="color:var(--shiki-token-string)"> https://github.com/FireRedTeam/FireRedASR2S.git</span></span>
+<span class="line"><span style="color:var(--shiki-token-function)">cd</span><span style="color:var(--shiki-token-string)"> FireRedASR2S</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--shiki-token-comment)"># 依存関係のインストール</span></span>
+<span class="line"><span style="color:var(--shiki-token-function)">pip</span><span style="color:var(--shiki-token-string)"> install</span><span style="color:var(--shiki-token-string)"> -r</span><span style="color:var(--shiki-token-string)"> requirements.txt</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--shiki-token-comment)"># 環境変数の設定</span></span>
+<span class="line"><span style="color:var(--shiki-token-keyword)">export</span><span style="color:var(--shiki-foreground)"> PATH</span><span style="color:var(--shiki-token-keyword)">=</span><span style="color:var(--shiki-foreground)">$PWD/fireredasr2s/:$PATH</span></span>
+<span class="line"><span style="color:var(--shiki-token-keyword)">export</span><span style="color:var(--shiki-foreground)"> PYTHONPATH</span><span style="color:var(--shiki-token-keyword)">=</span><span style="color:var(--shiki-foreground)">$PWD/:$PYTHONPATH</span></span></code></pre></div><div class="rp-code-button-group"><button class="rp-code-button-group__button rp-code-wrap-button" title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrapped"><path fill="currentColor" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrap"><path fill="currentColor" d="M16 7H3V5h13zM3 19h13v-2H3zm19-7-4-3v2H3v2h15v2z"></path></svg></button><button class="rp-code-button-group__button rp-code-copy-button" title="コードをコピー"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--copy"><path fill="currentColor" d="M20 8v12H8V8zm0-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2"></path><path fill="currentColor" d="M4 16H2V4a2 2 0 0 1 2-2h12v2H4Z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--success"><path fill="currentColor" d="m9.55 18-5.7-5.7 1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z"></path></svg></button></div></div></div>
+<h3 class="rp-toc-include" id="62-モデルのダウンロード公式pytorchモデル"><a href="#62-モデルのダウンロード公式pytorchモデル" class="rp-header-anchor rp-link" aria-hidden="true">#</a>6.2 モデルのダウンロード（公式PyTorchモデル）</h3>
+<p><strong>国内ユーザー（ModelScope推奨）</strong>：</p>
+<div class="rp-codeblock language-bash"><div class="rp-codeblock__content"><div class="rp-codeblock__content__scroll-container rp-scrollbar rp-scrollbar--always"><pre class="shiki css-variables" style="background-color:var(--shiki-background);color:var(--shiki-foreground)" tabindex="0" data-lang="bash"><code><span class="line"><span style="color:var(--shiki-token-function)">modelscope</span><span style="color:var(--shiki-token-string)"> download</span><span style="color:var(--shiki-token-string)"> --model</span><span style="color:var(--shiki-token-string)"> xukaituo/FireRedASR2-AED</span><span style="color:var(--shiki-token-string)"> --local_dir</span><span style="color:var(--shiki-token-string)"> ./pretrained_models/FireRedASR2-AED</span></span></code></pre></div><div class="rp-code-button-group"><button class="rp-code-button-group__button rp-code-wrap-button" title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrapped"><path fill="currentColor" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrap"><path fill="currentColor" d="M16 7H3V5h13zM3 19h13v-2H3zm19-7-4-3v2H3v2h15v2z"></path></svg></button><button class="rp-code-button-group__button rp-code-copy-button" title="コードをコピー"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--copy"><path fill="currentColor" d="M20 8v12H8V8zm0-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2"></path><path fill="currentColor" d="M4 16H2V4a2 2 0 0 1 2-2h12v2H4Z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--success"><path fill="currentColor" d="m9.55 18-5.7-5.7 1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z"></path></svg></button></div></div></div>
+<p><strong>国際ユーザー（Hugging Face）</strong>：</p>
+<div class="rp-codeblock language-bash"><div class="rp-codeblock__content"><div class="rp-codeblock__content__scroll-container rp-scrollbar rp-scrollbar--always"><pre class="shiki css-variables" style="background-color:var(--shiki-background);color:var(--shiki-foreground)" tabindex="0" data-lang="bash"><code><span class="line"><span style="color:var(--shiki-token-function)">huggingface-cli</span><span style="color:var(--shiki-token-string)"> download</span><span style="color:var(--shiki-token-string)"> FireRedTeam/FireRedASR2-AED</span><span style="color:var(--shiki-token-string)"> --local-dir</span><span style="color:var(--shiki-token-string)"> ./pretrained_models/FireRedASR2-AED</span></span></code></pre></div><div class="rp-code-button-group"><button class="rp-code-button-group__button rp-code-wrap-button" title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrapped"><path fill="currentColor" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrap"><path fill="currentColor" d="M16 7H3V5h13zM3 19h13v-2H3zm19-7-4-3v2H3v2h15v2z"></path></svg></button><button class="rp-code-button-group__button rp-code-copy-button" title="コードをコピー"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--copy"><path fill="currentColor" d="M20 8v12H8V8zm0-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2"></path><path fill="currentColor" d="M4 16H2V4a2 2 0 0 1 2-2h12v2H4Z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--success"><path fill="currentColor" d="m9.55 18-5.7-5.7 1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z"></path></svg></button></div></div></div>
+<h3 class="rp-toc-include" id="63-音声フォーマット要件"><a href="#63-音声フォーマット要件" class="rp-header-anchor rp-link" aria-hidden="true">#</a>6.3 音声フォーマット要件</h3>
+<p>公式モデルは <strong>16kHz、16-bit、モノラル、PCM WAV</strong> フォーマットのみをサポートします。変換にはFFmpegを使用してください。</p>
+<div class="rp-codeblock language-bash"><div class="rp-codeblock__content"><div class="rp-codeblock__content__scroll-container rp-scrollbar rp-scrollbar--always"><pre class="shiki css-variables" style="background-color:var(--shiki-background);color:var(--shiki-foreground)" tabindex="0" data-lang="bash"><code><span class="line"><span style="color:var(--shiki-token-function)">ffmpeg</span><span style="color:var(--shiki-token-string)"> -i</span><span style="color:var(--shiki-token-string)"> input.mp3</span><span style="color:var(--shiki-token-string)"> -ar</span><span style="color:var(--shiki-token-constant)"> 16000</span><span style="color:var(--shiki-token-string)"> -ac</span><span style="color:var(--shiki-token-constant)"> 1</span><span style="color:var(--shiki-token-string)"> -acodec</span><span style="color:var(--shiki-token-string)"> pcm_s16le</span><span style="color:var(--shiki-token-string)"> -f</span><span style="color:var(--shiki-token-string)"> wav</span><span style="color:var(--shiki-token-string)"> output.wav</span></span></code></pre></div><div class="rp-code-button-group"><button class="rp-code-button-group__button rp-code-wrap-button" title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrapped"><path fill="currentColor" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrap"><path fill="currentColor" d="M16 7H3V5h13zM3 19h13v-2H3zm19-7-4-3v2H3v2h15v2z"></path></svg></button><button class="rp-code-button-group__button rp-code-copy-button" title="コードをコピー"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--copy"><path fill="currentColor" d="M20 8v12H8V8zm0-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2"></path><path fill="currentColor" d="M4 16H2V4a2 2 0 0 1 2-2h12v2H4Z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--success"><path fill="currentColor" d="m9.55 18-5.7-5.7 1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z"></path></svg></button></div></div></div>
+<h3 class="rp-toc-include" id="64-基本使用法asrモジュールpython-api"><a href="#64-基本使用法asrモジュールpython-api" class="rp-header-anchor rp-link" aria-hidden="true">#</a>6.4 基本使用法：ASRモジュール（Python API）</h3>
+<p>ASRモジュールのみを呼び出して音声認識を実行し、文字レベルタイムスタンプを出力します。</p>
+<div class="rp-codeblock language-python"><div class="rp-codeblock__content"><div class="rp-codeblock__content__scroll-container rp-scrollbar rp-scrollbar--always"><pre class="shiki css-variables" style="background-color:var(--shiki-background);color:var(--shiki-foreground)" tabindex="0" data-lang="python"><code><span class="line"><span style="color:var(--shiki-token-keyword)">from</span><span style="color:var(--shiki-foreground)"> fireredasr2s</span><span style="color:var(--shiki-token-punctuation)">.</span><span style="color:var(--shiki-foreground)">fireredasr2 </span><span style="color:var(--shiki-token-keyword)">import</span><span style="color:var(--shiki-foreground)"> FireRedAsr2</span><span style="color:var(--shiki-token-punctuation)">,</span><span style="color:var(--shiki-foreground)"> FireRedAsr2Config</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--shiki-token-comment)"># ASRパラメータの設定</span></span>
+<span class="line"><span style="color:var(--shiki-foreground)">asr_config </span><span style="color:var(--shiki-token-keyword)">=</span><span style="color:var(--shiki-token-function)"> FireRedAsr2Config</span><span style="color:var(--shiki-token-punctuation)">(</span></span>
+<span class="line"><span style="color:var(--shiki-token-punctuation)">    use_gpu</span><span style="color:var(--shiki-token-keyword)">=</span><span style="color:var(--shiki-token-constant)">True</span><span style="color:var(--shiki-token-punctuation)">,           </span><span style="color:var(--shiki-token-comment)"># GPUを使用するか</span></span>
+<span class="line"><span style="color:var(--shiki-token-punctuation)">    use_half</span><span style="color:var(--shiki-token-keyword)">=</span><span style="color:var(--shiki-token-constant)">False</span><span style="color:var(--shiki-token-punctuation)">,         </span><span style="color:var(--shiki-token-comment)"># 半精度を使用するか</span></span>
+<span class="line"><span style="color:var(--shiki-token-punctuation)">    beam_size</span><span style="color:var(--shiki-token-keyword)">=</span><span style="color:var(--shiki-token-constant)">3</span><span style="color:var(--shiki-token-punctuation)">,            </span><span style="color:var(--shiki-token-comment)"># ビームサーチ幅</span></span>
+<span class="line"><span style="color:var(--shiki-token-punctuation)">    nbest</span><span style="color:var(--shiki-token-keyword)">=</span><span style="color:var(--shiki-token-constant)">1</span><span style="color:var(--shiki-token-punctuation)">,                </span><span style="color:var(--shiki-token-comment)"># 返す最良候補数</span></span>
+<span class="line"><span style="color:var(--shiki-token-punctuation)">    decode_max_len</span><span style="color:var(--shiki-token-keyword)">=</span><span style="color:var(--shiki-token-constant)">0</span><span style="color:var(--shiki-token-punctuation)">,       </span><span style="color:var(--shiki-token-comment)"># 最大デコード長（0=自動）</span></span>
+<span class="line"><span style="color:var(--shiki-token-punctuation)">    softmax_smoothing</span><span style="color:var(--shiki-token-keyword)">=</span><span style="color:var(--shiki-token-constant)">1.25</span><span style="color:var(--shiki-token-punctuation)">, </span><span style="color:var(--shiki-token-comment)"># Softmax平滑化係数</span></span>
+<span class="line"><span style="color:var(--shiki-token-punctuation)">    aed_length_penalty</span><span style="color:var(--shiki-token-keyword)">=</span><span style="color:var(--shiki-token-constant)">0.6</span><span style="color:var(--shiki-token-punctuation)">, </span><span style="color:var(--shiki-token-comment)"># 長さペナルティ係数</span></span>
+<span class="line"><span style="color:var(--shiki-token-punctuation)">    eos_penalty</span><span style="color:var(--shiki-token-keyword)">=</span><span style="color:var(--shiki-token-constant)">1.0</span><span style="color:var(--shiki-token-punctuation)">,        </span><span style="color:var(--shiki-token-comment)"># 終端記号ペナルティ</span></span>
+<span class="line"><span style="color:var(--shiki-token-punctuation)">    return_timestamp</span><span style="color:var(--shiki-token-keyword)">=</span><span style="color:var(--shiki-token-constant)">True</span><span style="color:var(--shiki-token-comment)">   # 文字レベルタイムスタンプを返す</span></span>
+<span class="line"><span style="color:var(--shiki-token-punctuation)">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--shiki-token-comment)"># モデルのロード</span></span>
+<span class="line"><span style="color:var(--shiki-foreground)">model </span><span style="color:var(--shiki-token-keyword)">=</span><span style="color:var(--shiki-foreground)"> FireRedAsr2</span><span style="color:var(--shiki-token-punctuation)">.</span><span style="color:var(--shiki-token-function)">from_pretrained</span><span style="color:var(--shiki-token-punctuation)">(</span><span style="color:var(--shiki-token-string-expression)">&quot;aed&quot;</span><span style="color:var(--shiki-token-punctuation)">, </span><span style="color:var(--shiki-token-string-expression)">&quot;./pretrained_models/FireRedASR2-AED&quot;</span><span style="color:var(--shiki-token-punctuation)">, asr_config)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--shiki-token-comment)"># 認識の実行</span></span>
+<span class="line"><span style="color:var(--shiki-foreground)">results </span><span style="color:var(--shiki-token-keyword)">=</span><span style="color:var(--shiki-foreground)"> model</span><span style="color:var(--shiki-token-punctuation)">.</span><span style="color:var(--shiki-token-function)">transcribe</span><span style="color:var(--shiki-token-punctuation)">([</span><span style="color:var(--shiki-token-string-expression)">&quot;utt1&quot;</span><span style="color:var(--shiki-token-punctuation)">, </span><span style="color:var(--shiki-token-string-expression)">&quot;utt2&quot;</span><span style="color:var(--shiki-token-punctuation)">], [</span><span style="color:var(--shiki-token-string-expression)">&quot;test1.wav&quot;</span><span style="color:var(--shiki-token-punctuation)">, </span><span style="color:var(--shiki-token-string-expression)">&quot;test2.wav&quot;</span><span style="color:var(--shiki-token-punctuation)">])</span></span>
+<span class="line"><span style="color:var(--shiki-token-keyword)">for</span><span style="color:var(--shiki-foreground)"> res </span><span style="color:var(--shiki-token-keyword)">in</span><span style="color:var(--shiki-foreground)"> results</span><span style="color:var(--shiki-token-punctuation)">:</span></span>
+<span class="line"><span style="color:var(--shiki-token-function)">    print</span><span style="color:var(--shiki-token-punctuation)">(</span><span style="color:var(--shiki-token-keyword)">f</span><span style="color:var(--shiki-token-string-expression)">&quot;テキスト: </span><span style="color:var(--shiki-token-constant)">{</span><span style="color:var(--shiki-token-punctuation)">res[</span><span style="color:var(--shiki-token-string-expression)">&#x27;text&#x27;</span><span style="color:var(--shiki-token-punctuation)">]</span><span style="color:var(--shiki-token-constant)">}</span><span style="color:var(--shiki-token-string-expression)">&quot;</span><span style="color:var(--shiki-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--shiki-token-function)">    print</span><span style="color:var(--shiki-token-punctuation)">(</span><span style="color:var(--shiki-token-keyword)">f</span><span style="color:var(--shiki-token-string-expression)">&quot;信頼度: </span><span style="color:var(--shiki-token-constant)">{</span><span style="color:var(--shiki-token-punctuation)">res[</span><span style="color:var(--shiki-token-string-expression)">&#x27;confidence&#x27;</span><span style="color:var(--shiki-token-punctuation)">]</span><span style="color:var(--shiki-token-constant)">}</span><span style="color:var(--shiki-token-string-expression)">&quot;</span><span style="color:var(--shiki-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--shiki-token-function)">    print</span><span style="color:var(--shiki-token-punctuation)">(</span><span style="color:var(--shiki-token-keyword)">f</span><span style="color:var(--shiki-token-string-expression)">&quot;文字レベルタイムスタンプ: </span><span style="color:var(--shiki-token-constant)">{</span><span style="color:var(--shiki-token-punctuation)">res[</span><span style="color:var(--shiki-token-string-expression)">&#x27;timestamp&#x27;</span><span style="color:var(--shiki-token-punctuation)">]</span><span style="color:var(--shiki-token-constant)">}</span><span style="color:var(--shiki-token-string-expression)">&quot;</span><span style="color:var(--shiki-token-punctuation)">)</span><span style="color:var(--shiki-token-comment)">  # 形式: [(&#x27;你&#x27;, 0.42, 0.66), ...]</span></span></code></pre></div><div class="rp-code-button-group"><button class="rp-code-button-group__button rp-code-wrap-button" title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrapped"><path fill="currentColor" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrap"><path fill="currentColor" d="M16 7H3V5h13zM3 19h13v-2H3zm19-7-4-3v2H3v2h15v2z"></path></svg></button><button class="rp-code-button-group__button rp-code-copy-button" title="コードをコピー"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--copy"><path fill="currentColor" d="M20 8v12H8V8zm0-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2"></path><path fill="currentColor" d="M4 16H2V4a2 2 0 0 1 2-2h12v2H4Z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--success"><path fill="currentColor" d="m9.55 18-5.7-5.7 1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z"></path></svg></button></div></div></div>
+<h3 class="rp-toc-include" id="65-高度な使用法統合システムvadlidpunc搭載"><a href="#65-高度な使用法統合システムvadlidpunc搭載" class="rp-header-anchor rp-link" aria-hidden="true">#</a>6.5 高度な使用法：統合システム（VAD＋LID＋Punc搭載）</h3>
+<p>音声活動検出、言語識別、音声認識、句読点予測を自動的に一貫して実行します。</p>
+<div class="rp-codeblock language-python"><div class="rp-codeblock__content"><div class="rp-codeblock__content__scroll-container rp-scrollbar rp-scrollbar--always"><pre class="shiki css-variables" style="background-color:var(--shiki-background);color:var(--shiki-foreground)" tabindex="0" data-lang="python"><code><span class="line"><span style="color:var(--shiki-token-keyword)">from</span><span style="color:var(--shiki-foreground)"> fireredasr2s </span><span style="color:var(--shiki-token-keyword)">import</span><span style="color:var(--shiki-foreground)"> FireRedAsr2System</span><span style="color:var(--shiki-token-punctuation)">,</span><span style="color:var(--shiki-foreground)"> FireRedAsr2SystemConfig</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--shiki-token-comment)"># デフォルト設定で初期化（VAD、LID、ASR、Puncモジュールを自動ロード）</span></span>
+<span class="line"><span style="color:var(--shiki-foreground)">asr_system_config </span><span style="color:var(--shiki-token-keyword)">=</span><span style="color:var(--shiki-token-function)"> FireRedAsr2SystemConfig</span><span style="color:var(--shiki-token-punctuation)">()</span><span style="color:var(--shiki-foreground)"> </span></span>
+<span class="line"><span style="color:var(--shiki-foreground)">asr_system </span><span style="color:var(--shiki-token-keyword)">=</span><span style="color:var(--shiki-token-function)"> FireRedAsr2System</span><span style="color:var(--shiki-token-punctuation)">(asr_system_config)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--shiki-token-comment)"># 単一の音声ファイルを処理</span></span>
+<span class="line"><span style="color:var(--shiki-foreground)">result </span><span style="color:var(--shiki-token-keyword)">=</span><span style="color:var(--shiki-foreground)"> asr_system</span><span style="color:var(--shiki-token-punctuation)">.</span><span style="color:var(--shiki-token-function)">process</span><span style="color:var(--shiki-token-punctuation)">(</span><span style="color:var(--shiki-token-string-expression)">&quot;test.wav&quot;</span><span style="color:var(--shiki-token-punctuation)">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--shiki-token-function)">print</span><span style="color:var(--shiki-token-punctuation)">(</span><span style="color:var(--shiki-token-keyword)">f</span><span style="color:var(--shiki-token-string-expression)">&quot;完全なテキスト: </span><span style="color:var(--shiki-token-constant)">{</span><span style="color:var(--shiki-token-punctuation)">result[</span><span style="color:var(--shiki-token-string-expression)">&#x27;text&#x27;</span><span style="color:var(--shiki-token-punctuation)">]</span><span style="color:var(--shiki-token-constant)">}</span><span style="color:var(--shiki-token-string-expression)">&quot;</span><span style="color:var(--shiki-token-punctuation)">)</span><span style="color:var(--shiki-token-comment)">          # 句読点付きテキスト</span></span>
+<span class="line"><span style="color:var(--shiki-token-function)">print</span><span style="color:var(--shiki-token-punctuation)">(</span><span style="color:var(--shiki-token-keyword)">f</span><span style="color:var(--shiki-token-string-expression)">&quot;文レベル情報: </span><span style="color:var(--shiki-token-constant)">{</span><span style="color:var(--shiki-token-punctuation)">result[</span><span style="color:var(--shiki-token-string-expression)">&#x27;sentences&#x27;</span><span style="color:var(--shiki-token-punctuation)">]</span><span style="color:var(--shiki-token-constant)">}</span><span style="color:var(--shiki-token-string-expression)">&quot;</span><span style="color:var(--shiki-token-punctuation)">)</span><span style="color:var(--shiki-token-comment)">   # 各文の開始・終了時間、言語、信頼度</span></span>
+<span class="line"><span style="color:var(--shiki-token-function)">print</span><span style="color:var(--shiki-token-punctuation)">(</span><span style="color:var(--shiki-token-keyword)">f</span><span style="color:var(--shiki-token-string-expression)">&quot;VADセグメント: </span><span style="color:var(--shiki-token-constant)">{</span><span style="color:var(--shiki-token-punctuation)">result[</span><span style="color:var(--shiki-token-string-expression)">&#x27;vad_segments_ms&#x27;</span><span style="color:var(--shiki-token-punctuation)">]</span><span style="color:var(--shiki-token-constant)">}</span><span style="color:var(--shiki-token-string-expression)">&quot;</span><span style="color:var(--shiki-token-punctuation)">)</span><span style="color:var(--shiki-token-comment)"> # 音声セグメントの開始・終了時間（ミリ秒）</span></span>
+<span class="line"><span style="color:var(--shiki-token-function)">print</span><span style="color:var(--shiki-token-punctuation)">(</span><span style="color:var(--shiki-token-keyword)">f</span><span style="color:var(--shiki-token-string-expression)">&quot;文字レベルタイムスタンプ: </span><span style="color:var(--shiki-token-constant)">{</span><span style="color:var(--shiki-token-punctuation)">result[</span><span style="color:var(--shiki-token-string-expression)">&#x27;words&#x27;</span><span style="color:var(--shiki-token-punctuation)">]</span><span style="color:var(--shiki-token-constant)">}</span><span style="color:var(--shiki-token-string-expression)">&quot;</span><span style="color:var(--shiki-token-punctuation)">)</span><span style="color:var(--shiki-token-comment)">       # 各文字の開始・終了時間</span></span></code></pre></div><div class="rp-code-button-group"><button class="rp-code-button-group__button rp-code-wrap-button" title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrapped"><path fill="currentColor" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrap"><path fill="currentColor" d="M16 7H3V5h13zM3 19h13v-2H3zm19-7-4-3v2H3v2h15v2z"></path></svg></button><button class="rp-code-button-group__button rp-code-copy-button" title="コードをコピー"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--copy"><path fill="currentColor" d="M20 8v12H8V8zm0-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2"></path><path fill="currentColor" d="M4 16H2V4a2 2 0 0 1 2-2h12v2H4Z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--success"><path fill="currentColor" d="m9.55 18-5.7-5.7 1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z"></path></svg></button></div></div></div>
+<h3 class="rp-toc-include" id="66-コマンドラインツール公式cli"><a href="#66-コマンドラインツール公式cli" class="rp-header-anchor rp-link" aria-hidden="true">#</a>6.6 コマンドラインツール（公式CLI）</h3>
+<p>FireRedASR2Sはコマンドラインツール <code>fireredasr2s-cli</code> を提供し、バッチ処理をサポートします。</p>
+<div class="rp-codeblock language-bash"><div class="rp-codeblock__content"><div class="rp-codeblock__content__scroll-container rp-scrollbar rp-scrollbar--always"><pre class="shiki css-variables" style="background-color:var(--shiki-background);color:var(--shiki-foreground)" tabindex="0" data-lang="bash"><code><span class="line"><span style="color:var(--shiki-token-comment)"># 単一または複数の音声ファイルを処理し、JSONL形式で結果を出力</span></span>
+<span class="line"><span style="color:var(--shiki-token-function)">fireredasr2s-cli</span><span style="color:var(--shiki-token-string)"> --wav_paths</span><span style="color:var(--shiki-token-string-expression)"> &quot;hello_zh.wav&quot;</span><span style="color:var(--shiki-token-string-expression)"> &quot;hello_en.wav&quot;</span><span style="color:var(--shiki-token-string)"> --outdir</span><span style="color:var(--shiki-token-string)"> output</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--shiki-token-comment)"># 結果の表示</span></span>
+<span class="line"><span style="color:var(--shiki-token-function)">cat</span><span style="color:var(--shiki-token-string)"> output/result.jsonl</span></span></code></pre></div><div class="rp-code-button-group"><button class="rp-code-button-group__button rp-code-wrap-button" title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrapped"><path fill="currentColor" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrap"><path fill="currentColor" d="M16 7H3V5h13zM3 19h13v-2H3zm19-7-4-3v2H3v2h15v2z"></path></svg></button><button class="rp-code-button-group__button rp-code-copy-button" title="コードをコピー"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--copy"><path fill="currentColor" d="M20 8v12H8V8zm0-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2"></path><path fill="currentColor" d="M4 16H2V4a2 2 0 0 1 2-2h12v2H4Z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--success"><path fill="currentColor" d="m9.55 18-5.7-5.7 1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z"></path></svg></button></div></div></div>
+<p>出力例：</p>
+<div class="rp-codeblock language-json"><div class="rp-codeblock__content"><div class="rp-codeblock__content__scroll-container rp-scrollbar rp-scrollbar--always"><pre class="shiki css-variables" style="background-color:var(--shiki-background);color:var(--shiki-foreground)" tabindex="0" data-lang="json"><code><span class="line"><span style="color:var(--shiki-foreground)">{</span><span style="color:var(--shiki-token-keyword)">&quot;uttid&quot;</span><span style="color:var(--shiki-token-punctuation)">:</span><span style="color:var(--shiki-token-string-expression)"> &quot;hello_zh&quot;</span><span style="color:var(--shiki-token-punctuation)">,</span><span style="color:var(--shiki-token-keyword)"> &quot;text&quot;</span><span style="color:var(--shiki-token-punctuation)">:</span><span style="color:var(--shiki-token-string-expression)"> &quot;こんにちは世界。&quot;</span><span style="color:var(--shiki-token-punctuation)">,</span><span style="color:var(--shiki-token-keyword)"> &quot;sentences&quot;</span><span style="color:var(--shiki-token-punctuation)">:</span><span style="color:var(--shiki-foreground)"> [{</span><span style="color:var(--shiki-token-keyword)">&quot;start_ms&quot;</span><span style="color:var(--shiki-token-punctuation)">:</span><span style="color:var(--shiki-token-constant)"> 440</span><span style="color:var(--shiki-token-punctuation)">,</span><span style="color:var(--shiki-token-keyword)"> &quot;end_ms&quot;</span><span style="color:var(--shiki-token-punctuation)">:</span><span style="color:var(--shiki-token-constant)"> 1820</span><span style="color:var(--shiki-token-punctuation)">,</span><span style="color:var(--shiki-token-keyword)"> &quot;text&quot;</span><span style="color:var(--shiki-token-punctuation)">:</span><span style="color:var(--shiki-token-string-expression)"> &quot;こんにちは世界。&quot;</span><span style="color:var(--shiki-token-punctuation)">,</span><span style="color:var(--shiki-token-keyword)"> &quot;asr_confidence&quot;</span><span style="color:var(--shiki-token-punctuation)">:</span><span style="color:var(--shiki-token-constant)"> 0.868</span><span style="color:var(--shiki-token-punctuation)">,</span><span style="color:var(--shiki-token-keyword)"> &quot;lang&quot;</span><span style="color:var(--shiki-token-punctuation)">:</span><span style="color:var(--shiki-token-string-expression)"> &quot;zh mandarin&quot;</span><span style="color:var(--shiki-token-punctuation)">,</span><span style="color:var(--shiki-token-keyword)"> &quot;lang_confidence&quot;</span><span style="color:var(--shiki-token-punctuation)">:</span><span style="color:var(--shiki-token-constant)"> 0.999</span><span style="color:var(--shiki-foreground)">}]</span><span style="color:var(--shiki-token-punctuation)">,</span><span style="color:var(--shiki-token-keyword)"> &quot;vad_segments_ms&quot;</span><span style="color:var(--shiki-token-punctuation)">:</span><span style="color:var(--shiki-foreground)"> [[</span><span style="color:var(--shiki-token-constant)">440</span><span style="color:var(--shiki-token-punctuation)">,</span><span style="color:var(--shiki-token-constant)"> 1820</span><span style="color:var(--shiki-foreground)">]]</span><span style="color:var(--shiki-token-punctuation)">,</span><span style="color:var(--shiki-token-keyword)"> &quot;dur_s&quot;</span><span style="color:var(--shiki-token-punctuation)">:</span><span style="color:var(--shiki-token-constant)"> 2.32</span><span style="color:var(--shiki-token-punctuation)">,</span><span style="color:var(--shiki-token-keyword)"> &quot;words&quot;</span><span style="color:var(--shiki-token-punctuation)">:</span><span style="color:var(--shiki-foreground)"> [{</span><span style="color:var(--shiki-token-keyword)">&quot;start_ms&quot;</span><span style="color:var(--shiki-token-punctuation)">:</span><span style="color:var(--shiki-token-constant)"> 540</span><span style="color:var(--shiki-token-punctuation)">,</span><span style="color:var(--shiki-token-keyword)"> &quot;end_ms&quot;</span><span style="color:var(--shiki-token-punctuation)">:</span><span style="color:var(--shiki-token-constant)"> 700</span><span style="color:var(--shiki-token-punctuation)">,</span><span style="color:var(--shiki-token-keyword)"> &quot;text&quot;</span><span style="color:var(--shiki-token-punctuation)">:</span><span style="color:var(--shiki-token-string-expression)"> &quot;こ&quot;</span><span style="color:var(--shiki-foreground)">}</span><span style="color:var(--shiki-token-punctuation)">,</span><span style="color:var(--shiki-foreground)"> {</span><span style="color:var(--shiki-token-keyword)">&quot;start_ms&quot;</span><span style="color:var(--shiki-token-punctuation)">:</span><span style="color:var(--shiki-token-constant)"> 700</span><span style="color:var(--shiki-token-punctuation)">,</span><span style="color:var(--shiki-token-keyword)"> &quot;end_ms&quot;</span><span style="color:var(--shiki-token-punctuation)">:</span><span style="color:var(--shiki-token-constant)"> 1100</span><span style="color:var(--shiki-token-punctuation)">,</span><span style="color:var(--shiki-token-keyword)"> &quot;text&quot;</span><span style="color:var(--shiki-token-punctuation)">:</span><span style="color:var(--shiki-token-string-expression)"> &quot;ん&quot;</span><span style="color:var(--shiki-foreground)">}</span><span style="color:var(--shiki-token-punctuation)">,</span><span style="color:var(--shiki-foreground)"> {</span><span style="color:var(--shiki-token-keyword)">&quot;start_ms&quot;</span><span style="color:var(--shiki-token-punctuation)">:</span><span style="color:var(--shiki-token-constant)"> 1100</span><span style="color:var(--shiki-token-punctuation)">,</span><span style="color:var(--shiki-token-keyword)"> &quot;end_ms&quot;</span><span style="color:var(--shiki-token-punctuation)">:</span><span style="color:var(--shiki-token-constant)"> 1300</span><span style="color:var(--shiki-token-punctuation)">,</span><span style="color:var(--shiki-token-keyword)"> &quot;text&quot;</span><span style="color:var(--shiki-token-punctuation)">:</span><span style="color:var(--shiki-token-string-expression)"> &quot;に&quot;</span><span style="color:var(--shiki-foreground)">}</span><span style="color:var(--shiki-token-punctuation)">,</span><span style="color:var(--shiki-foreground)"> {</span><span style="color:var(--shiki-token-keyword)">&quot;start_ms&quot;</span><span style="color:var(--shiki-token-punctuation)">:</span><span style="color:var(--shiki-token-constant)"> 1300</span><span style="color:var(--shiki-token-punctuation)">,</span><span style="color:var(--shiki-token-keyword)"> &quot;end_ms&quot;</span><span style="color:var(--shiki-token-punctuation)">:</span><span style="color:var(--shiki-token-constant)"> 1765</span><span style="color:var(--shiki-token-punctuation)">,</span><span style="color:var(--shiki-token-keyword)"> &quot;text&quot;</span><span style="color:var(--shiki-token-punctuation)">:</span><span style="color:var(--shiki-token-string-expression)"> &quot;ちは&quot;</span><span style="color:var(--shiki-foreground)">}]</span><span style="color:var(--shiki-token-punctuation)">,</span><span style="color:var(--shiki-token-keyword)"> &quot;wav_path&quot;</span><span style="color:var(--shiki-token-punctuation)">:</span><span style="color:var(--shiki-token-string-expression)"> &quot;assets/hello_zh.wav&quot;</span><span style="color:var(--shiki-foreground)">}</span></span></code></pre></div><div class="rp-code-button-group"><button class="rp-code-button-group__button rp-code-wrap-button" title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrapped"><path fill="currentColor" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrap"><path fill="currentColor" d="M16 7H3V5h13zM3 19h13v-2H3zm19-7-4-3v2H3v2h15v2z"></path></svg></button><button class="rp-code-button-group__button rp-code-copy-button" title="コードをコピー"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--copy"><path fill="currentColor" d="M20 8v12H8V8zm0-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2"></path><path fill="currentColor" d="M4 16H2V4a2 2 0 0 1 2-2h12v2H4Z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--success"><path fill="currentColor" d="m9.55 18-5.7-5.7 1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z"></path></svg></button></div></div></div>
+<h3 class="rp-toc-include" id="67-tensorrt-llm高速化"><a href="#67-tensorrt-llm高速化" class="rp-header-anchor rp-link" aria-hidden="true">#</a>6.7 TensorRT-LLM高速化</h3>
+<p>FireRedASR2-AEDはTensorRT-LLM推論高速化をサポートしています。AISHELL-1テストセットにおいて、単一のH20 GPUでPyTorchベースライン比 <strong>12.7倍</strong> の速度向上を実現しています。</p>
+<h2 class="rp-toc-include" id="七オープンソース入手先"><a href="#七オープンソース入手先" class="rp-header-anchor rp-link" aria-hidden="true">#</a>七、オープンソース入手先</h2>
+<ul>
+<li><strong>オープンソースライセンス</strong>：Apache-2.0</li>
+<li><strong>コードリポジトリ</strong>：<a href="https://github.com/FireRedTeam/FireRedASR2S" target="_blank" rel="noopener noreferrer" class="rp-link">https://github.com/FireRedTeam/FireRedASR2S</a></li>
+<li><strong>技術論文</strong>：<a href="https://arxiv.org/abs/2603.10420" target="_blank" rel="noopener noreferrer" class="rp-link">https://arxiv.org/abs/2603.10420</a></li>
+<li><strong>オンラインデモ</strong>：<a href="https://huggingface.co/spaces/FireRedTeam/FireRedASR" target="_blank" rel="noopener noreferrer" class="rp-link">https://huggingface.co/spaces/FireRedTeam/FireRedASR</a></li>
+<li><strong>公式モデル（PyTorch）</strong> ：ModelScopeで <code>xukaituo/FireRedASR2-AED</code> を検索 | Hugging Face: <code>FireRedTeam/FireRedASR2-AED</code></li>
+<li><strong>コミュニティONNXモデル（manyeyes）</strong> ：ModelScopeプラットフォームで <code>manyeyes</code> を検索 | プロジェクトページ：<a href="https://modelscope.cn/profile/manyeyes?tab=model" target="_blank" rel="noopener noreferrer" class="rp-link">https://modelscope.cn/profile/manyeyes?tab=model</a></li>
+<li><strong>manyspeech-cliツール</strong>：<a href="https://modelscope.cn/models/manyeyes/manyspeech-cli" target="_blank" rel="noopener noreferrer" class="rp-link">https://modelscope.cn/models/manyeyes/manyspeech-cli</a></li>
+</ul>
+<h2 class="rp-toc-include" id="八適用シーン"><a href="#八適用シーン" class="rp-header-anchor rp-link" aria-hidden="true">#</a>八、適用シーン</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>シーン</th><th>推奨理由</th></tr></thead><tbody><tr><td>リアルタイム字幕</td><td>文字レベルタイムスタンプ＋ストリーミングVAD</td></tr><tr><td>音声検索/コマンド</td><td>中英混在入力＋20以上の方言</td></tr><tr><td>会議録音書き起こし</td><td>歌声/音楽フィルタリング（mVAD）</td></tr><tr><td>エッジデプロイ</td><td>1B+軽量パラメータ＋INT8量子化</td></tr><tr><td>歌声・歌詞認識</td><td>opencpopテストセットでCERわずか1.17％</td></tr><tr><td>オフライン字幕生成</td><td>manyspeech-cliでワンコマンドSRT出力</td></tr></tbody></table></div><!--/$--></div><footer class="rp-doc-footer"><div class="rp-doc-footer__edit"></div><div class="rp-doc-footer__divider"></div><div class="rp-prev-next-page"><a href="/manyspeech/ja/blog/post-002.html" class="rp-prev-next-page__item rp-prev-next-page__prev rp-link"><span class="rp-prev-next-page__item__desc">前のページ</span><span class="rp-prev-next-page__item__title"><svg width="1em" height="1em" viewBox="0 0 32 32" class="rp-prev-next-page__icon rp-prev-next-page__rotate_180"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"></path></svg><span>2026-06-04 - Fun-ASR-Nano-2512：数千万時間の実音声で学習した800Mパラメータの音声認識大規模モデル</span></span></a><div class="rp-prev-next-page__placeholder"></div></div></footer></main></div><aside class="rp-doc-layout__outline rp-scrollbar"><div class="rp-outline"><div class="rp-outline__title">目次<svg width="14" height="14" class="rp-progress-circle"><circle cx="7" cy="7" r="6" stroke-linecap="round" fill="none" stroke="var(--rp-c-divider-light)" stroke-width="2"></circle><circle cx="7" cy="7" r="6" stroke-linecap="round" fill="none" stroke="var(--rp-c-brand)" stroke-width="2" stroke-dasharray="37.69911184307752" stroke-dashoffset="37.69911184307752" transform="rotate(-90 7 7)" style="transition:stroke-dashoffset 0.3s"></circle></svg></div><nav class="rp-outline__toc rp-scrollbar"><a href="#一モデル概要" class="rp-toc-item rp-link" title="一、モデル概要" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">一、モデル概要</span></a><a href="#二コアアーキテクチャ設計" class="rp-toc-item rp-link" title="二、コアアーキテクチャ設計" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">二、コアアーキテクチャ設計</span></a><a href="#21-エンコーダ-デコーダ構造" class="rp-toc-item rp-link" title="2.1 エンコーダ-デコーダ構造" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">2.1 エンコーダ-デコーダ構造</span></a><a href="#22-サブサンプリング戦略" class="rp-toc-item rp-link" title="2.2 サブサンプリング戦略" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">2.2 サブサンプリング戦略</span></a><a href="#23-トークナイゼーション戦略" class="rp-toc-item rp-link" title="2.3 トークナイゼーション戦略" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">2.3 トークナイゼーション戦略</span></a><a href="#24-入力長の制限公式仕様" class="rp-toc-item rp-link" title="2.4 入力長の制限（公式仕様）" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">2.4 入力長の制限（公式仕様）</span></a><a href="#三学習データと戦略" class="rp-toc-item rp-link" title="三、学習データと戦略" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">三、学習データと戦略</span></a><a href="#四コア性能と比較優位性" class="rp-toc-item rp-link" title="四、コア性能と比較優位性" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">四、コア性能と比較優位性</span></a><a href="#41-公式評価概要" class="rp-toc-item rp-link" title="4.1 公式評価概要" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">4.1 公式評価概要</span></a><a href="#42-普通話テストセット4詳細結果" class="rp-toc-item rp-link" title="4.2 普通話テストセット（4）詳細結果" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">4.2 普通話テストセット（4）詳細結果</span></a><a href="#43-方言アクセントテストセット19詳細結果" class="rp-toc-item rp-link" title="4.3 方言/アクセントテストセット（19）詳細結果" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">4.3 方言/アクセントテストセット（19）詳細結果</span></a><a href="#44-歌声テストセット1" class="rp-toc-item rp-link" title="4.4 歌声テストセット（1）" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">4.4 歌声テストセット（1）</span></a><a href="#45-サポートされる方言アクセントのリスト公式完全リスト" class="rp-toc-item rp-link" title="4.5 サポートされる方言/アクセントのリスト（公式完全リスト）" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">4.5 サポートされる方言/アクセントのリスト（公式完全リスト）</span></a><a href="#五onnxモデルシリーズと推論デプロイコミュニティデプロイ" class="rp-toc-item rp-link" title="五、ONNXモデルシリーズと推論デプロイ（コミュニティデプロイ）" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">五、ONNXモデルシリーズと推論デプロイ（コミュニティデプロイ）</span></a><a href="#51-コミュニティ提供のonnxモデルmanyeyes" class="rp-toc-item rp-link" title="5.1 コミュニティ提供のONNXモデル（manyeyes）" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">5.1 コミュニティ提供のONNXモデル（manyeyes）</span></a><a href="#52-manyspeech-cli-ワンコマンドラインツール" class="rp-toc-item rp-link" title="5.2 manyspeech-cli ワンコマンドラインツール" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">5.2 manyspeech-cli ワンコマンドラインツール</span></a><a href="#六クイックスタートガイド公式デプロイ" class="rp-toc-item rp-link" title="六、クイックスタートガイド（公式デプロイ）" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">六、クイックスタートガイド（公式デプロイ）</span></a><a href="#61-環境準備" class="rp-toc-item rp-link" title="6.1 環境準備" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">6.1 環境準備</span></a><a href="#62-モデルのダウンロード公式pytorchモデル" class="rp-toc-item rp-link" title="6.2 モデルのダウンロード（公式PyTorchモデル）" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">6.2 モデルのダウンロード（公式PyTorchモデル）</span></a><a href="#63-音声フォーマット要件" class="rp-toc-item rp-link" title="6.3 音声フォーマット要件" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">6.3 音声フォーマット要件</span></a><a href="#64-基本使用法asrモジュールpython-api" class="rp-toc-item rp-link" title="6.4 基本使用法：ASRモジュール（Python API）" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">6.4 基本使用法：ASRモジュール（Python API）</span></a><a href="#65-高度な使用法統合システムvadlidpunc搭載" class="rp-toc-item rp-link" title="6.5 高度な使用法：統合システム（VAD＋LID＋Punc搭載）" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">6.5 高度な使用法：統合システム（VAD＋LID＋Punc搭載）</span></a><a href="#66-コマンドラインツール公式cli" class="rp-toc-item rp-link" title="6.6 コマンドラインツール（公式CLI）" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">6.6 コマンドラインツール（公式CLI）</span></a><a href="#67-tensorrt-llm高速化" class="rp-toc-item rp-link" title="6.7 TensorRT-LLM高速化" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">6.7 TensorRT-LLM高速化</span></a><a href="#七オープンソース入手先" class="rp-toc-item rp-link" title="七、オープンソース入手先" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">七、オープンソース入手先</span></a><a href="#八適用シーン" class="rp-toc-item rp-link" title="八、適用シーン" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">八、適用シーン</span></a></nav><div class="rp-outline__divider"></div><div class="rp-outline__bottom"></div></div></aside></div><div class="back-to-list" style="text-align:right;margin:3rem 3rem 2rem"><a href="/manyspeech/ja/blog/" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.2rem 0.5rem;background-color:var(--rp-c-brand, #112dad);color:white;border-radius:9999px;text-decoration:none;font-weight:500;transition:all 0.2s ease;font-size:0.875rem">← ブログ一覧に戻る</a></div></div>
+    <div id="__rspress_modal_container"></div>
+  </body>
+</html>

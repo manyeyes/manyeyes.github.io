@@ -4,6 +4,8 @@
 - [API Overview](/manyspeech/en/api/index.md)
 - [All Blogs](/manyspeech/en/blog/index.md)
 - [X-ASR-zh-en: Lightweight High-Accuracy Bilingual Offline Streaming Speech Recognition Model](/manyspeech/en/blog/post-001.md)
+- [Fun-ASR-Nano-2512: An 800M Parameter Speech Recognition Model Trained on Tens of Millions of Hours of Real-World Speech](/manyspeech/en/blog/post-002.md)
+- [FireRedASR2-AED: Lightweight High-Precision Chinese-English Bilingual Speech Recognition Model](/manyspeech/en/blog/post-003.md)
 - [Batch Processing Scripts](/manyspeech/en/cli/advanced/batch-processing.md)
 - [Environment Variables](/manyspeech/en/cli/advanced/environment-vars.md): Pre-set global parameters via environment variables.
 - [Advanced Usage](/manyspeech/en/cli/advanced/index.md): This section covers advanced configuration and integration techniques.
