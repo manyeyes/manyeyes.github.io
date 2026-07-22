@@ -9,7 +9,7 @@
       <pubDate>Wed, 22 Jul 2026 12:05:39 +08:00</pubDate>
       <sparkle:version>1.0.1</sparkle:version>
       <sparkle:shortVersionString>1.0.1</sparkle:shortVersionString>
-      <enclosure url="https://github.com/manyeyes/manyeyes.github.io/releases/download/v1.0.1/ManySpeech_Setup.exe" sparkle:version="1.0.1" sparkle:shortVersionString="1.0.1" length="32070584" sparkle:os="windows" type="application/x-msdos-program" sparkle:criticalUpdate="false" sparkle:signature="HYP8mjFXcm0WejcGAuHGwjF1uZyKazCTjQymVkaE5HVHbtNClfNawmrPii6tqkAE3Y020CWDoxosLMnkF8iyDw==" />
+      <enclosure url="https://github.com/manyeyes/manyeyes.github.io/releases/download/v1.0.1/ManySpeech_Setup.exe" sparkle:version="1.0.1" sparkle:shortVersionString="1.0.1" length="32070584" sparkle:os="windows" type="application/x-msdos-program" sparkle:criticalUpdate="false" sparkle:signature="EYFpA7g4D2cDe7qsKPpbiSCl42iVQP4nZD07gfZK7nNZvyM5KuvSQsDuWciRdVr5RoTFjxLiwixkfjiQVGffBQ==" />
     </item>
   </channel>
 </rss>
