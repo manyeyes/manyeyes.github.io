@@ -5,11 +5,11 @@
     <description>Most recent changes with links to updates</description>
     <language>en</language>
     <item>
-      <title>Application 1.0.0</title>
+      <title>Application 1.0.1</title>
       <pubDate>Tue, 21 Jul 2026 23:19:57 +08:00</pubDate>
-      <sparkle:version>1.0.0</sparkle:version>
-      <sparkle:shortVersionString>1.0.0</sparkle:shortVersionString>
-      <enclosure url="https://github.com/manyeyes/manyeyes.github.io/releases/download/v1.0.0/ManySpeech_Setup.exe" sparkle:version="1.0.0" sparkle:shortVersionString="1.0.0" length="31492817" sparkle:os="windows" type="application/x-msdos-program" sparkle:criticalUpdate="false" sparkle:signature="dIlduHrG0TM77S5aYIfGyxZrpDPpvTiX4GOmiT5LlZyqzF1ITEr4qc5mL+dlC1PpyEUJQ3noF/JMy5VjNqE/Dw==" />
+      <sparkle:version>1.0.1</sparkle:version>
+      <sparkle:shortVersionString>1.0.1</sparkle:shortVersionString>
+      <enclosure url="https://github.com/manyeyes/manyeyes.github.io/releases/download/v1.0.1/ManySpeech_Setup.exe" sparkle:version="1.0.1" sparkle:shortVersionString="1.0.1" length="31492817" sparkle:os="windows" type="application/x-msdos-program" sparkle:criticalUpdate="false" sparkle:signature="dIlduHrG0TM77S5aYIfGyxZrpDPpvTiX4GOmiT5LlZyqzF1ITEr4qc5mL+dlC1BpyEUJQ3noF/JMy5VjNqE/Dw==" />
     </item>
   </channel>
 </rss>
