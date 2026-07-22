@@ -6,10 +6,10 @@
     <language>en</language>
     <item>
       <title>Application 1.0.1</title>
-      <pubDate>Tue, 21 Jul 2026 23:19:57 +08:00</pubDate>
+      <pubDate>Wed, 22 Jul 2026 12:05:39 +08:00</pubDate>
       <sparkle:version>1.0.1</sparkle:version>
       <sparkle:shortVersionString>1.0.1</sparkle:shortVersionString>
-      <enclosure url="https://github.com/manyeyes/manyeyes.github.io/releases/download/v1.0.1/ManySpeech_Setup.exe" sparkle:version="1.0.1" sparkle:shortVersionString="1.0.1" length="31492817" sparkle:os="windows" type="application/x-msdos-program" sparkle:criticalUpdate="false" sparkle:signature="dIlduHrG0TM77S5aYIfGyxZrpDPpvTiX4GOmiT5LlZyqzF1ITEr4qc5mL+dlC1BpyEUJQ3noF/JMy5VjNqE/Dw==" />
+      <enclosure url="https://github.com/manyeyes/manyeyes.github.io/releases/download/v1.0.1/ManySpeech_Setup.exe" sparkle:version="1.0.1" sparkle:shortVersionString="1.0.1" length="32070584" sparkle:os="windows" type="application/x-msdos-program" sparkle:criticalUpdate="false" sparkle:signature="HYP8mjFXcm0WejcGAuHGwjF1uZyKazCTjQymVkaE5HVHbtNClfNawmrPii6tqkAE3Y020CWDoxosLMnkF8iyDw==" />
     </item>
   </channel>
 </rss>
