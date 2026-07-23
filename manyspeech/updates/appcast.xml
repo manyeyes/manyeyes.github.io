@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
+  <channel>
+    <title>Application</title>
+    <description>Most recent changes with links to updates</description>
+    <language>en</language>
+    <item>
+      <title>Application 1.0.1</title>
+      <pubDate>Wed, 22 Jul 2026 12:05:39 +08:00</pubDate>
+      <sparkle:version>1.0.1</sparkle:version>
+      <sparkle:shortVersionString>1.0.1</sparkle:shortVersionString>
+      <enclosure url="https://github.com/manyeyes/manyeyes.github.io/releases/download/v1.0.1/ManySpeech_Setup.exe" sparkle:version="1.0.1" sparkle:shortVersionString="1.0.1" length="32063636" sparkle:os="windows" type="application/x-msdos-program" sparkle:criticalUpdate="false" sparkle:signature="IPH2r/PB9eWtB7mx2wHRLE+xawOh3+ah1UCztWeKQsZP9esxgtErgj62SzbyayUYQ3eVesw7HjyE23FO208ADQ==" />
+    </item>
+  </channel>
+</rss>
