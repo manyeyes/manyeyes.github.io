@@ -849,19 +849,6 @@ FireRedASR2-AED已支持TensorRT-LLM推理加速。在AISHELL-1测试集上，�
 
 ---
 
-## v1.0/zh/blog/index.mdx
-
----
-title: 所有博客
-pageType: custom
----
-import BlogList from '../../../../components/BlogList';
-
-<BlogList />
-
-
----
-
 ## v1.0/zh/blog/post-004.md
 
 # cohere-transcribe：2B参数高性能多语种语音识别模型
@@ -1012,6 +999,19 @@ cohere-transcribe 由 Cohere Labs 团队开源发布，采用 **Apache 2.0许可
 }
 ```
 > **说明**：官方原版为PyTorch权重；社区ONNX量化版本为第三方导出，适合低算力设备离线部署。模型本身仅负责语音转文字，时间戳、说话人分离、自动语种检测等能力需要上层应用额外开发。
+
+---
+
+## v1.0/zh/blog/index.mdx
+
+---
+title: 所有博客
+pageType: custom
+---
+import BlogList from '../../../../components/BlogList';
+
+<BlogList />
+
 
 ---
 
