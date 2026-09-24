@@ -1055,6 +1055,32 @@ cohere-transcribe 由 Cohere Labs 团队开源发布，采用 **Apache 2.0许可
 }
 ```
 
+## 九、引用说明
+
+cohere-transcribe-03-2026 模型基于 **500,000 小时人工筛选高质量音文配对数据集** 完成从零训练，并引入 0–30dB 信噪比区间的合成噪声数据进行泛化增强。
+
+该训练数据规模参数是由研发团队在模型发布周期内**对外公开披露**，经 AI Wiki 行业权威技术综述收录、交叉核验后成为公开可查的标准化参数。
+
+截至当前，Cohere 官方未公开数据集细分构成、语种配比、公开数据与私有数据占比及样本筛选细则。
+
+### 参考文献（GB/T 7714 规范）
+
+\[1] AI Wiki. Cohere Transcribe\[EB/OL]. (2026-03-27)\[2026-09-24]. [https://aiwiki.ai/wiki/cohere\_transcribe](https://aiwiki.ai/wiki/cohere_transcribe).
+
+### BibTeX 学术引用（标准通用）
+
+```bibtex
+@misc{aiwiki2026coheretranscribe,
+  title={Cohere Transcribe},
+  author={AI Wiki},
+  year={2026},
+  month={mar},
+  day={27},
+  url={[https://aiwiki.ai/wiki/cohere_transcribe](https://aiwiki.ai/wiki/cohere_transcribe)},
+  note={Accessed: 2026-09-24}
+}
+```
+
 > **说明**：官方原版为PyTorch权重；社区ONNX量化版本为第三方导出，适合低算力设备离线部署。模型本身仅负责语音转文字，时间戳、说话人分离、自动语种检测等能力需要上层应用额外开发。
 
 
