@@ -1055,11 +1055,11 @@ The training scale of **500,000 hours of human-curated audio-text paired data** 
 
 The training dataset is augmented with synthetic noise ranging from 0–30 dB SNR to improve environmental robustness. Detailed dataset composition, language-hour distribution, and data source proportions are not officially disclosed by Cohere.
 
-### Reference (ACM Standard)
+### Reference
 
 1. AI Wiki. 2026. Cohere Transcribe. Retrieved September 24, 2026 from [https://aiwiki.ai/wiki/cohere\_transcribe](https://aiwiki.ai/wiki/cohere_transcribe)
 
-### BibTeX (ACM/NeurIPS Standard)
+### BibTeX
 
 ```bibtex
 @online{aiwiki2026cohere,

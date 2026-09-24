@@ -1005,10 +1005,10 @@ cohere-transcribe-03-2026 模型基于 **500,000 小时人工筛选高质量音�
 
 截至当前，Cohere 官方未公开数据集细分构成、语种配比、公开数据与私有数据占比及样本筛选细则。
 
-### 参考文献（GB/T 7714 规范）
+### 参考文献
 [1] AI Wiki. Cohere Transcribe[EB/OL]. (2026-03-27)[2026-09-24]. [https://aiwiki.ai/wiki/cohere_transcribe](https://aiwiki.ai/wiki/cohere_transcribe).
 
-### BibTeX 学术引用（标准通用）
+### BibTeX 学术引用
 ```bibtex
 @misc{aiwiki2026coheretranscribe,
   title={Cohere Transcribe},

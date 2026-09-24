@@ -1047,7 +1047,7 @@ cohere-transcribe-03-2026 の学習に用いられた**50万時間の精選音�
 
 \[1] AI Wiki. Cohere Transcribe\[EB/OL]. 2026-03-27. 閲覧 2026-09-24. [https://aiwiki.ai/wiki/cohere\_transcribe](https://aiwiki.ai/wiki/cohere_transcribe).
 
-### BibTeX (ACM/NeurIPS Standard)
+### BibTeX
 
 ```bibtex
 @online{aiwiki2026cohere,
