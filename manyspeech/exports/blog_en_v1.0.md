@@ -5,7 +5,7 @@ title: "X-ASR-zh-en: Lightweight High-Accuracy Bilingual Offline Streaming Speec
 date: "2026-06-02"
 tags: ["ASR", "Speech Recognition", "Bilingual", "Open Source Model", "Lightweight Deployment"]
 excerpt: "X-ASR-zh-en is an ultra-lightweight Chinese-English bilingual speech recognition model developed by Shanghai Jiao Tong University, Fudan University, and Huazhong University of Science and Technology. With only 0.16B parameters, it supports unified streaming/offline dual-mode inference, natively handles code-switching, automatic punctuation, and English case normalization. Pure CPU deployment, open-sourced under Apache 2.0, free for commercial use."
-sidebar: false
+sidebar: true
 ---
 
 # X-ASR-zh-en: Lightweight High-Accuracy Bilingual Offline Streaming Speech Recognition Model
@@ -197,7 +197,7 @@ title: "Fun-ASR-Nano-2512: An 800M Parameter Speech Recognition Model Trained on
 date: "2026-06-04"
 tags: ["ASR", "Speech Recognition", "Multilingual", "Open Source Model", "Tongyi Lab", "End-to-End Model"]
 excerpt: "Fun-ASR-Nano-2512 is a lightweight end-to-end speech recognition model developed by Tongyi Lab. With only 800M parameters, it is trained on tens of millions of hours of real speech, supports Chinese, English, Japanese, 7 dialects and 26 accents, and is natively adapted for far-field noisy recognition, music background lyrics recognition, and low-latency real-time transcription. It can be flexibly deployed on pure GPU/CPU, is open-source and commercially usable, and delivers performance comparable to larger models."
-sidebar: false
+sidebar: true
 ---
 
 # Fun-ASR-Nano-2512: An 800M Parameter Speech Recognition Model Trained on Tens of Millions of Hours of Real-World Speech
@@ -537,7 +537,7 @@ title: "FireRedASR2-AED: Lightweight High-Precision Chinese-English Bilingual Sp
 date: "2026-06-05"
 tags: ["ASR", "Speech Recognition", "Chinese-English Bilingual", "Open Source Model", "FireRedTeam", "End-to-End Model", "Dialect Recognition"]
 excerpt: "FireRedASR2-AED is a second-generation industrial-grade speech recognition model developed by the FireRedTeam at Xiaohongshu. With just over 1B parameters, it is built on the Conformer-Transformer architecture, supports Mandarin, over 20 dialects/accents, English, and Chinese-English mixed input. It natively supports character-level timestamps and singing voice recognition. Achieves a CER of only 0.57% on AISHELL-1 and an average dialect CER of 11.67%. Official PyTorch models and community ONNX quantized versions are available, enabling flexible deployment on CPU/GPU. Open-source and commercially usable."
-sidebar: false
+sidebar: true
 ---
 
 # FireRedASR2-AED: Lightweight High-Precision Chinese-English Bilingual Speech Recognition Model

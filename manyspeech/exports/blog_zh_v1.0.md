@@ -5,7 +5,7 @@ title: "X-ASR-zh-en：轻量高精度中英双语离线流式语音识别模型"
 date: "2026-06-02"
 tags: ["ASR", "语音识别", "中英双语", "开源模型", "轻量化部署"]
 excerpt: "X-ASR-zh-en 是由上海交通大学联合复旦、华科等高校研发的超轻量中英双语语音识别模型。仅 0.16B 参数量，支持流式/离线双模式统一推理，原生适配中英混杂识别、自动标点与大小写规整。纯 CPU 部署，基于 Apache 2.0 开源，免费商用。"
-sidebar: false
+sidebar: true
 ---
 
 # X-ASR-zh-en：轻量高精度中英双语离线流式语音识别模型
@@ -203,7 +203,7 @@ title: "Fun-ASR-Nano-2512：千万小时真实语音训练的800M参数语音识
 date: "2026-06-04"
 tags: ["ASR", "语音识别", "多语言", "开源模型", "通义实验室", "端到端模型"]
 excerpt: "Fun-ASR-Nano-2512 是由通义实验室推出的端到端语音识别轻量大模型。仅 800M 参数量，基于数千万小时真实语音训练，支持中、英、日及7种方言、26种口音，原生适配远场高噪识别、音乐背景歌词识别与低延迟实时转录。纯 GPU/CPU 灵活部署，开源可商用，性能媲美更大规模模型。"
-sidebar: false
+sidebar: true
 ---
 
 # Fun-ASR-Nano-2512：千万小时真实语音训练的800M参数语音识别大模型
@@ -541,7 +541,7 @@ title: "FireRedASR2-AED：轻量高精度中英双语语音识别模型"
 date: "2026-06-05"
 tags: ["ASR", "语音识别", "中英双语", "开源模型", "FireRedTeam", "端到端模型", "方言识别"]
 excerpt: "FireRedASR2-AED 是由小红书FireRedTeam推出的第二代工业级语音识别模型。仅1B+参数量，基于Conformer-Transformer架构，支持普通话、20余种方言/口音、英语及中英混输，原生支持字级时间戳与歌声识别。在AISHELL-1上CER仅0.57%，方言平均CER 11.67%，提供PyTorch官方模型及社区ONNX量化版本，支持CPU/GPU灵活部署，开源可商用。"
-sidebar: false
+sidebar: true
 ---
 
 # FireRedASR2-AED：轻量高精度中英双语语音识别模型
