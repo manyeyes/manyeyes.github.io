@@ -5,11 +5,11 @@
     <description>Most recent changes with links to updates</description>
     <language>en</language>
     <item>
-      <title>ManySpeech 1.0.6</title>
-      <pubDate>Thu, 08 Oct 2026 00:03:23 +08:00</pubDate>
-      <sparkle:version>1.0.6</sparkle:version>
-      <sparkle:shortVersionString>1.0.6</sparkle:shortVersionString>
-      <enclosure url="https://github.com/manyeyes/manyeyes.github.io/releases/download/v1.0.6/manyspeech-1.0.6-win-x64-setup.exe" sparkle:version="1.0.6" sparkle:shortVersionString="1.0.6" length="35398771" sparkle:os="windows" type="application/x-msdos-program" sparkle:criticalUpdate="false" sparkle:signature="oBwoUprQC3t6WUmyOKbPZCa4vdKsr4oFeRXG1kCSB8Rx2BZXC2W15uVCu200nrkQmHU1jH7BrYt7RijJtywrCg==" />
+      <title>ManySpeech 1.0.7</title>
+      <pubDate>Sun, 11 Oct 2026 11:33:33 +08:00</pubDate>
+      <sparkle:version>1.0.7</sparkle:version>
+      <sparkle:shortVersionString>1.0.7</sparkle:shortVersionString>
+      <enclosure url="https://github.com/manyeyes/manyeyes.github.io/releases/download/v1.0.7/manyspeech-1.0.7-win-x64-setup.exe" sparkle:version="1.0.7" sparkle:shortVersionString="1.0.7" length="35740035" sparkle:os="windows" type="application/x-msdos-program" sparkle:criticalUpdate="false" sparkle:signature="vV4fk+DuPFJS2fknEFeKSqOBiNlR4+S9jgDAr4iqw9G8+NboThrjm8wEQitdcgZwkf7It2yzU9QQLzCcTLGgAQ==" />
     </item>
   </channel>
 </rss>
